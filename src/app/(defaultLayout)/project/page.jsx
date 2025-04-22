@@ -7,8 +7,8 @@ const page = () => {
         <div>
             <BreadCumb
                 addclass="breadcumb-wrapper pb-0 bg-theme2"
-                Title1="LET'S SEE"
-                title2="MY WORKS"
+                Title1="VEAMOS"
+                title2="MIS TRABAJOS"
             ></BreadCumb>
             <Project3></Project3>            
         </div>

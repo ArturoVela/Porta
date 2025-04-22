@@ -22,7 +22,6 @@ const Project2 = () => {
 
       const [active, setActive] = useState('all');    
 
-
       const projectContent = [
         {
             title:'Caña Wasky', 
@@ -31,7 +30,8 @@ const Project2 = () => {
             img:'/assets/images/portfolio/portfolio1_1.jpg',
             tag:'Sistema ventas, Interfaz de usuario (UI)',
             year:'( 2025 )',              
-            category:'Ventas'           
+            category:'Ventas',
+            slug: 'cana-wasky'           
         },
         {
             title:'Pachas café', 
@@ -40,7 +40,8 @@ const Project2 = () => {
             img:'/assets/images/portfolio/portfolio1_2.jpg',
             tag:'Dieseño web, Interfaz de usuario (UI)',
             year:'( 2024 )',              
-            category:'Web'   
+            category:'Web',
+            slug: 'pachas-cafe-web'   
         },
         {
             title:'Municipio de Rioja', 
@@ -49,7 +50,8 @@ const Project2 = () => {
             img:'/assets/images/portfolio/portfolio1_3.jpg',
             tag:'Dieseño web, Interfaz de usuario (UI)',
             year:'( 2022 )',              
-            category:'Web'                
+            category:'Web',
+            slug: 'municipio-de-rioja'                
         },
         {
             title:'Discord', 
@@ -58,7 +60,8 @@ const Project2 = () => {
             img:'/assets/images/portfolio/portfolio1_4.jpg',
             tag:'Discord, Interfaz de usuario (UI)',
             year:'( 2018 - 2025 )',              
-            category:'Discord'    
+            category:'Discord',
+            slug: 'discord'    
         }      
   ];   
 
@@ -86,7 +89,7 @@ const Project2 = () => {
                     <div className="portfolio-wrap">
                         <div className="portfolio-details">
                             <h3 className="portfolio-title">
-                                <Link href="/project/project-details">{item.title}</Link>
+                                <Link href={`/project/${item.slug}`}>{item.title}</Link>
                                 <span className="portfolio-pagination">{item.number}</span>
                             </h3>
                             <p className="portfolio-desc">{item.content} </p>
@@ -96,11 +99,11 @@ const Project2 = () => {
                             </div>
                         </div>
                         <div className="portfolio-thumb">
-                            <Link href="/project/project-details">
+                            <Link href={`/project/${item.slug}`}>
                             <Image src={item.img} alt="img" width={602} height={401}   />
                             </Link>
                             <div className="portfolio-thumb-view">
-                                <Link href="/project/project-details" className="lightbox-image" data-fancybox="gallery">
+                                <Link href={`/project/${item.slug}`} className="lightbox-image" data-fancybox="gallery">
                                 <Image src="/assets/images/icons/eye.svg" alt="img" width={36} height={36}   />
                                 </Link>
                             </div>
