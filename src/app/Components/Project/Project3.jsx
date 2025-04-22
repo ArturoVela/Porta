@@ -31,7 +31,7 @@ const projectContent = [
     },
     {
         addclass:'col-lg-12',
-        img:'/assets/images/portfolio/portfolio3_3.jpg',
+        img:'/assets/images/portfolio/portfolio3_3_dc.jpg',
         title:'Discord ',
         category:'Branding',
         slug: 'discord'

@@ -8,8 +8,8 @@ const ProjectDetails = () => {
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-12">
-                            <span className="sub-title">Página web</span>
-                            <h2 className="sec-title mb-0">Página Web para Pacha's Café</h2>
+                            <span className="sub-title">Servidor Discord</span>
+                            <h2 className="sec-title mb-0">Servidor Discord 100% Administrable</h2>
                         </div>
                     </div>
                 </div>
@@ -22,25 +22,25 @@ const ProjectDetails = () => {
                             <ul className="info-items xs-py-30">
                                 <li className="item">
                                     <span className="title">Cliente:</span>
-                                    <span className="text">Freddy Ramirez</span>
+                                    <span className="text">@navyfz</span>
                                 </li>
                                 <li className="item">
                                     <span className="title">Publicado:</span>
-                                    <span className="text">15 Agosto, 2024</span>
+                                    <span className="text">15 Enero, 2025</span>
                                 </li>
                                 <li className="item">
                                     <span className="title">Tecnología:</span>
-                                    <span className="text">HTML, CSS, JavaScript</span>
+                                    <span className="text">Discord.js </span>
                                 </li>
                                 <li className="item">
                                     <span className="title">Categorías:</span>
-                                    <span className="text">Diseño web, Marketing digital</span>
+                                    <span className="text">Administración de comunidades, Automatización</span>
                                 </li>
                                 <li className="btn-wrap mt--20 sm-mt-0">
-                                    <a className="circle-btn tp-hover-btn btn" href="https://pachas-arturovelas-projects.vercel.app/" target="_blank" rel="noopener noreferrer">
+                                    <a className="circle-btn tp-hover-btn btn" href="https://discord.gg/mnMkUXC5vK" target="_blank" rel="noopener noreferrer">
                                         <span className="link-effect">
                                             <span className="effect-1">Visitar Sitio</span>
-                                            <span className="effect-1">Visitar Sitio</span>
+                                            <span className="effect-1">De Discord</span>
                                         </span>
                                         <img src="/assets/images/icons/arrow-left-top.svg" alt="" />
                                         <i className="btn-circle-dot"></i>
@@ -52,7 +52,7 @@ const ProjectDetails = () => {
                     <div className="row details-thumb">
                         <div className="col-xl-12">
                             <div className="project-inner-thumb mb-50 wow img-custom-anim-top">
-                                <Image className="w-100" src="/assets/images/portfolio/details-thumb_pachaweb.jpg" alt="Página principal Pacha's Café" width={1320} height={850} />
+                                <Image className="w-100" src="/assets/images/portfolio/details-thumb_dc.jpg" alt="Panel de control del servidor" width={1320} height={850} />
                             </div>
                         </div>
                     </div>
@@ -60,53 +60,50 @@ const ProjectDetails = () => {
                         <div className="col-lg-6">
                             <div className="project-area mb-50">
                                 <h3 className="title mb-20">Resumen del Proyecto</h3>
-                                <p className="text">Desarrollo de un sitio web moderno y responsive para la cadena de cafeterías Pacha's Café incluyendo:</p>
+                                <p className="text">Desarrollo de un servidor Discord completamente personalizado con:</p>
                                 <ul className="challenge-area_list">
-                                    <li>Diseño responsive adaptado a móviles</li>
-                                    <li>Integración de menú digital interactivo</li>
-                                    <li>Sistema de reservas online</li>
-                                    <li>Optimización SEO básica</li>
+                                    <li>Sistema de moderación automatizado</li>
+                                    <li>Bots con más de 50 comandos personalizados</li>
+                                    <li>Gestión automática de roles y permisos</li>
+                                    <li>Sistema de logs y auditoría</li>
                                 </ul>
                             </div>
                             <div className="challenge-area mb-50">
                                 <h3 className="title mb-20">Retos Principales</h3>
                                 <p className="text mb-40">Desafíos técnicos superados:</p>
                                 <ul className="challenge-area_list">
-                                    <li>Compatibilidad cross-browser</li>
-                                    <li>Optimización de rendimiento</li>
-                                    <li>Diseño adaptable a diferentes dispositivos</li>
+                                    <li>Manejo de alta concurrencia de usuarios</li>
+                                    <li>Integración de múltiples bots</li>
+                                    <li>Protección contra raids y spam</li>
                                 </ul>
                             </div>
                         </div>
                         <div className="col-lg-6">
                             <h3 className="title mb-20">Características</h3>
-                            <p className="text mb-45 mt-60 md-mt-0">Principales funcionalidades implementadas:</p>
+                            <p className="text mb-45 mt-60 md-mt-0">Funcionalidades clave implementadas:</p>
                             <ul className="challenge-area_list">
-                                <li>Galeria interactiva de productos</li>
-                                <li>Mapa de ubicación de locales</li>
-                                <li>Formulario de contacto integrado</li>
-                                <li>Blog con recetas y novedades</li>
-                                
+                                <li>Moderación automática 24/7</li>
+                                <li>Sistema de tickets de soporte</li>
+                                <li>Roles por reacción</li>
+                                <li>Logs detallados de actividad</li>
                             </ul>
-                            <p> </p>
                             <figure className="thumb lg-mb-0 md-mb-30">
-                                
-                                <Image src="/assets/images/portfolio/portfolio4_1_pacha.jpg" alt="Versión móvil del sitio" width={648} height={320} />
+                                <Image src="/assets/images/portfolio/portfolio4_1_dc.jpg" alt="Interfaz de bots" width={648} height={320} />
                             </figure>
                         </div>
                         
                         <div className="col-lg-12">
                             <div className="results-area">
                                 <h3 className="mb-20">Resultados Obtenidos</h3>
-                                <p className="text mb-40">Impacto del nuevo sitio web:</p>
+                                <p className="text mb-40">Impacto de la implementación:</p>
                                 <ul className="results-area_list">
-                                    <li>+200% de tráfico orgánico</li>
-                                    <li>40% aumento en compras online</li>
-                                    <li>Reducción de 30% en tasa de rebote</li>
-                                    <li>Mejora en tiempo de carga (1.8s)</li>
+                                    <li>+500 miembros activos</li>
+                                    <li>90% reducción en moderación manual</li>
+                                    <li>Respuesta automática a 85% de consultas</li>
+                                    <li>0 incidentes de spam/raids</li>
                                 </ul>
                                 <figure className="result-thumb mt-60 mb-60">
-                                    <Image src="/assets/images/portfolio/details-thumb-2_pachaweb.jpg" alt="Estadísticas de rendimiento" width={1320} height={650} />
+                                    <Image src="/assets/images/portfolio/details-thumb-2_dc.jpg" alt="Estadísticas de actividad" width={1320} height={650} />
                                 </figure>
                             </div>
                         </div>

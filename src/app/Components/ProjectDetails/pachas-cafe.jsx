@@ -36,16 +36,7 @@ const ProjectDetails = () => {
                                     <span className="title">Categorías:</span>
                                     <span className="text">Sistema de ventas, Control de inventario</span>
                                 </li>
-                                <li className="btn-wrap mt--20 sm-mt-0">
-                                    <a className="circle-btn tp-hover-btn btn" href="project.html">
-                                        <span className="link-effect">
-                                            <span className="effect-1">Live Site</span>
-                                            <span className="effect-1">Live Site</span>
-                                        </span>
-                                        <img src="/assets/images/icons/arrow-left-top.svg" alt="" />
-                                        <i className="btn-circle-dot"></i>
-                                    </a>
-                                </li>
+                                
                             </ul>
                         </div>
                     </div>

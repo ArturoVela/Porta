@@ -7,7 +7,7 @@ const Footer1 = () => {
             <div className="container">
                 <div className="row justify-content-center text-center">
                     <div className="col-xl-12">
-                        <h2 className="big-title mb-50">Vamos  <Image src="/assets/images/contact/man-2_1.jpg" alt="img" width={120} height={120}   /> Hablar</h2>
+                        <h2 className="big-title mb-50">Vamos  <Image src="/assets/images/footer.svg" alt="img" width={120} height={120}   /> Hablar</h2>
                     </div>
                     <div className="col-xl-12">
                         <div className="contact-mail">
