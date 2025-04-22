@@ -38,29 +38,36 @@ const HeroBanner2 = () => {
                 <div className="hero-social">
                     <div className="parallax-wrap">
                         <div className="parallax-element">
-                            <a className="facebook" href="#">
+                            <a className="facebook" href="https://www.facebook.com/ArTuRoVeLaXD" target="_blank">
                             <i className="bi bi-facebook"></i>
                             </a>
                         </div>
                     </div>
                     <div className="parallax-wrap">
                         <div className="parallax-element">
-                            <a className="twitter" href="#">
+                            <a className="twitter" href="https://twitter.com/" target="_blank">
                             <i className="bi bi-twitter"></i>
                             </a>
                         </div>
                     </div>
                     <div className="parallax-wrap">
                         <div className="parallax-element">
-                            <a className="instagram" href="#">
+                            <a className="instagram" href="https://www.instagram.com/icchfinsa/" target="_blank">
                             <i className="bi bi-instagram"></i>
                             </a>
                         </div>
                     </div>
                     <div className="parallax-wrap">
                         <div className="parallax-element">
-                            <a className="dribbble" href="#">
+                            <a className="Linkedin" href="https://www.linkedin.com/in/arturo-vela-aa81242ba/" target="_blank">
                             <i className="bi bi-linkedin"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div className="parallax-wrap">
+                        <div className="parallax-element">
+                            <a className="Discord" href="https://discord.gg/mnMkUXC5vK" target="_blank">
+                            <i className="bi bi-discord"></i>
                             </a>
                         </div>
                     </div>

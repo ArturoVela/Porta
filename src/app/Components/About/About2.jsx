@@ -4,15 +4,16 @@ import Link from "next/link";
 const About2 = () => {
 
     const aboutContent = {
-        title1:"I'm a",
-        title2:'creative designer',
-        title3:'& developer based in London.',
-        content:'I love designing in the browser but I work a lot with Figma and other design tools as well. I specialize in creating unique visual identities for digital products.',
-        btnname:'Explore More',
-        btnurl:'/project',
-        title4:'A PHOTO OF ME',
-        img:'/assets/images/about/about_1-1.jpg',        
-      }
+        title1: "Soy un",
+        title2: 'ingeniero en sistemas',
+        title3: 'y desarrollador web de Perú.',
+        content: 'Me encanta crear experiencias digitales limpias, accesibles y funcionales. Trabajo con Next.js, Tailwind y Node.js, y también realizo moderación en comunidades de Discord. Actualmente estoy explorando el desarrollo de servicios tipo SaaS.',
+        btnname: 'Ver proyectos',
+        btnurl: '/project',
+        title4: 'UNA FOTO MÍA',
+        img: '/assets/images/about/about_1-1.jpg',
+      };
+      
 
     return (
         <section className="about-area space bg-theme2" id="about-area-1">

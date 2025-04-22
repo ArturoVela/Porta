@@ -4,10 +4,10 @@ import Link from "next/link";
 const Experience = () => {
 
     const experiencetContent = [
-        {name:'TCS Interactive — Dubai', position:'UX/UI Design Lead', year:'2024 - Present'},
-        {name:'Realgate — Hurghada', position:'Digital Art Director', year:'2021 - 2022'},
-        {name:'BPG Possible — Dubai', position:'Creative Designer', year:'2019 - 2020'},
-        {name:'PCC Advertising — Doha', position:'Senior Web Designer', year:'2017 - 2018'}
+        {name:'Caña Wasky - Perú', position:'Diseñador Ventas', year:'2025-1 - Presente'},
+        {name:'K y F Products', position:'Administrador de ventas', year:'2024-7 - 2024-9'},
+        {name:'Pachas Café - Perú', position:'Diseñador Web', year:'2024-3 - 2024-5'},
+        {name:'Discord - Servidores', position:'Admin - Moderador', year:'2018 - Presente'} 
       ];  
 
     return (
@@ -16,12 +16,12 @@ const Experience = () => {
                 <div className="row">
                     <div className="col-xl-12">
                         <div className="title-area">
-                            <h2 className="sec-title mb-0" data-title="(2017 - 2023)">Work <span className="font2">Experience</span></h2>
+                            <h2 className="sec-title mb-0" data-title="(2018 - 2025)">Experiencia de <span className="font2">Trabajo</span></h2>
                             <div className="btn-wrap btn-bounce-1">
                                 <Link href="/project" className="link-btn">
                                     <span className="link-effect">
-                                        <span className="effect-1">Know More</span>
-                                        <span className="effect-1">Know More</span>
+                                        <span className="effect-1">Más información</span>
+                                        <span className="effect-1">Más información</span>
                                     </span>
                                     <Image src="/assets/images/icons/arrow-left-top.svg" alt="img" width={10} height={26}   />
                                 </Link>

@@ -4,11 +4,11 @@ const Skill2 = () => {
 
     const skilltContent = [
         {img:'/assets/images/skill/skill-1.png', skillname:'Photoshop'},
-        {img:'/assets/images/skill/skill-2.png', skillname:'Adobe Xd'},
-        {img:'/assets/images/skill/skill-3.png', skillname:'Wordpress'},
+        {img:'/assets/images/skill/skill-2.png', skillname:'Illustrator'},
+        {img:'/assets/images/skill/skill-3.png', skillname:'CSS3'},
         {img:'/assets/images/skill/skill-4.png', skillname:'HTML5'},
-        {img:'/assets/images/skill/skill-5.png', skillname:'Bootstrap'},
-        {img:'/assets/images/skill/skill-6.png', skillname:'InvisionApp'},
+        {img:'/assets/images/skill/skill-5.png', skillname:'Next.js'},
+        {img:'/assets/images/skill/skill-6.png', skillname:'Discord'},
       ];  
 
 
@@ -18,7 +18,7 @@ const Skill2 = () => {
                 <div className="row">
                     <div className="col-xl-12">
                         <div className="title-area">
-                            <h2 className="sec-title text-center">I craft wonderful <span className="font2">digital experiences</span> <br/> for brands</h2>
+                            <h2 className="sec-title text-center">Hago maravillosas <span className="font2">experiencias digitales</span> <br/> para las marcas</h2>
                         </div>
                     </div>
                 </div>

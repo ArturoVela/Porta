@@ -7,20 +7,16 @@ const Project2 = () => {
 
     const categoryMenu = [
         {
-          title: 'Branding App',
-          category: 'Branding',
+          title: 'Ventas App',
+          category: 'Ventas',
         },
         {
-          title: 'Mockup',
-          category: 'Mockup',
+          title: 'Web',
+          category: 'Web',
         },
         {
-          title: 'Landing Page',
-          category: 'Landing',
-        },
-        {
-            title: 'Website',
-            category: 'Website',
+            title: 'Discord',
+            category: 'Discord',
           },        
       ];
 
@@ -29,54 +25,54 @@ const Project2 = () => {
 
       const projectContent = [
         {
-            title:'UX Consulting', 
+            title:'Caña Wasky', 
             number:'01/04', 
-            content:'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
+            content:'istema de ventas a medida para Caña Wasky. Optimiza la gestión y el crecimiento de este negocio único.',
             img:'/assets/images/portfolio/portfolio1_1.jpg',
-            tag:'Website Design, User Interface (UI)',
-            year:'( 2024 )',              
-            category:'Branding'           
+            tag:'Sistema ventas, Interfaz de usuario (UI)',
+            year:'( 2025 )',              
+            category:'Ventas'           
         },
         {
-            title:'Small Figures', 
+            title:'Pachas café', 
             number:'02/04', 
-            content:'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
+            content:"Página web impactante para Pacha's Café. Descubre su delicioso mundo, menú y ubicación en línea.",
             img:'/assets/images/portfolio/portfolio1_2.jpg',
-            tag:'Website Design, User Interface (UI)',
-            year:'( 2023 )',              
-            category:'Mockup'   
-        },
-        {
-            title:'Business Apps', 
-            number:'03/04', 
-            content:'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
-            img:'/assets/images/portfolio/portfolio1_3.jpg',
-            tag:'Website Design, User Interface (UI)',
-            year:'( 2022 )',              
-            category:'Landing'                
-        },
-        {
-            title:'Figma Design', 
-            number:'04/04', 
-            content:'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
-            img:'/assets/images/portfolio/portfolio1_4.jpg',
-            tag:'Website Design, User Interface (UI)',
+            tag:'Dieseño web, Interfaz de usuario (UI)',
             year:'( 2024 )',              
-            category:'Website'    
+            category:'Web'   
+        },
+        {
+            title:'Municipio de Rioja', 
+            number:'03/04', 
+            content:'Propuesta web innovadora para el Municipio de Rioja. Busco modernizar su presencia digital y facilitar la interacción ciudadana.',
+            img:'/assets/images/portfolio/portfolio1_3.jpg',
+            tag:'Dieseño web, Interfaz de usuario (UI)',
+            year:'( 2022 )',              
+            category:'Web'                
+        },
+        {
+            title:'Discord', 
+            number:'04/04', 
+            content:'Creo y administro servidores eficientes, implementando moderación experta para plataformas como Discord. ¡Comunidades en línea organizadas y seguras garantizadas!',
+            img:'/assets/images/portfolio/portfolio1_4.jpg',
+            tag:'Discord, Interfaz de usuario (UI)',
+            year:'( 2018 - 2025 )',              
+            category:'Discord'    
         }      
   ];   
 
     return (
         <section className="portfolio-area space overflow-hidden">
         <div className="portfolio-title text-center">
-            <h2 className="big-title">Awesome <span className="font2 xs-d-none">Portfolio</span></h2>
+            <h2 className="big-title">Impresionante <span className="font2 xs-d-none">Portafolio</span></h2>
         </div>
         <div className="container">
             <div className="row mb-50 sm-mb-30">
                 <div className="col-lg-12 d-flex flex-column flex-lg-row align-items-center justify-content-between">
-                    <div className="portfolio-text md-mb-20 mb-lg-0">Selected work * <span> (2020-2024)</span></div>
+                    <div className="portfolio-text md-mb-20 mb-lg-0">Trabajos seleccionados * <span> (2018-2025)</span></div>
                     <ul className="portfolio-filter">
-                        <li className={active === 'all' ? 'active' : ''} onClick={() => setActive('all')} data-filter="*"> All Case </li>
+                        <li className={active === 'all' ? 'active' : ''} onClick={() => setActive('all')} data-filter="*"> Todos los casos </li>
                         {categoryMenu.map((item, index) => (
                          <li onClick={() => setActive(item.category)} className={active === item.category ? 'active' : ''} key={index} > {item.title} </li>
                         ))}                       
@@ -118,8 +114,8 @@ const Project2 = () => {
                     <div className="btn-wrap btn-bounce-1 mt-35">
                         <Link className="circle-btn tp-hover-btn btn" href="/project">
                             <span className="link-effect">
-                                <span className="effect-1">Explore More</span>
-                                <span className="effect-1">Explore More</span>
+                                <span className="effect-1">Más información</span>
+                                <span className="effect-1">Más información</span>
                             </span>
                             <Image src="/assets/images/icons/arrow-left-top.svg" alt="img" width={10} height={10}   />
                             <i className="btn-circle-dot"></i>
