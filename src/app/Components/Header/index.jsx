@@ -67,8 +67,8 @@ export default function Header({ variant }) {
                   <div className="btn-wrap fade_right">
                       <Link href="/project" className="link-btn" >
                           <span className="link-effect">
-                              <span className="effect-1">Lets Talk</span>
-                              <span className="effect-1">Lets Talk</span>
+                              <span className="effect-1">Hablemos</span>
+                              <span className="effect-1">Mi portafolio</span>
                           </span>
                           <Image src="/assets/images/icons/arrow-left-top.svg" alt="img" width={10} height={26}   />
                       </Link>

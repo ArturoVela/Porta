@@ -27,7 +27,7 @@
 }
 
 :root {
-    --theme-color: #DDB166;
+    --theme-color: #9528cf;
     --title-color: var(--white-color);
     --body-color: var(--gray-color);
     --black-color: #171717;
@@ -35,7 +35,7 @@
     --gray-color: #AAAAAA;
     --white-color: #ffffff;
     --light-color: #9fa2ad;
-    --yellow-color: #FFB539;
+    --yellow-color: #b158e0;
     --success-color: #28a745;
     --error-color: #dc3545;
     --border-color: rgba(255, 255, 255, 0.10);
