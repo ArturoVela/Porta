@@ -35,35 +35,43 @@ const Testimonail2 = ({addclass}) => {
       };
   
       const testomonialContent = [
-          {
-              subtitle:'Design Quality', 
-              content:'On the other hand, we denounce with and who are so beguiled and demoralized by the pleasure of the moment, so blinded by desire',
-              img:'/assets/images/testimonial/testi-1_1.jpg',
-              name:'Jack Babu',
-              title:'Envato customer',               
-          },
-          {
-            subtitle:'UI/UX Quality', 
-            content:'On the other hand, we denounce with and who are so beguiled and demoralized by the pleasure of the moment, so blinded by desire',
-            img:'/assets/images/testimonial/testi-1_2.jpg',
-            name:'Shoko Mugikura',
-            title:'Envato customer',  
-          },
-          {
-            subtitle:'Design Quality', 
-            content:'On the other hand, we denounce with and who are so beguiled and demoralized by the pleasure of the moment, so blinded by desire',
-            img:'/assets/images/testimonial/testi-1_1.jpg',
-            name:'Jack Babu',
-            title:'Envato customer',               
+        {
+          subtitle: 'Servidor y Moderación', 
+          content: 'Arturo creó y configuró por completo mi servidor de Discord. Desde entonces, lo ha moderado de forma impecable. La mejor experiencia que he tenido con alguien del rubro.',
+          img: '/assets/images/testimonial/testi-1_1.jpg',
+          name: 'Navy',
+          title: 'Owner - Comunidad Discord',
         },
         {
-          subtitle:'UI/UX Quality', 
-          content:'On the other hand, we denounce with and who are so beguiled and demoralized by the pleasure of the moment, so blinded by desire',
-          img:'/assets/images/testimonial/testi-1_2.jpg',
-          name:'Shoko Mugikura',
-          title:'Envato customer',  
-        }      
-    ];   
+          subtitle: 'Configuración y Gestión', 
+          content: 'Gracias a Arturo, mi comunidad en Discord funciona de maravilla. Él se encargó de todo el setup inicial y la moderación sigue siendo de calidad hasta hoy.',
+          img: '/assets/images/testimonial/testi-1_2.jpg',
+          name: 'AceSilver',
+          title: 'Founder - Comunidad Discord',
+        },
+        {
+          subtitle: 'Configuración y Gestión', 
+          content: 'Algunas palabras',
+          img: '/assets/images/testimonial/testi-1_3.jpg',
+          name: 'hardwarejavix',
+          title: 'Owner - Comunidad Discord',
+        },
+        {
+          subtitle: 'Diseño Web', 
+          content: 'Algunas palabras',
+          img: '/assets/images/testimonial/testi-1_4.jpg',
+          name: 'Freddy Reamirez',
+          title: "Fundador - Pacha's Café",
+        },
+        {
+          subtitle: 'Sistema de Ventas', 
+          content: 'Algunas palabras',
+          img: '/assets/images/testimonial/testi-1_5.jpg',
+          name: 'Freddy Reamirez - Karlita Alberca',
+          title: 'Fundadores - Caña Wasky',
+        }
+      ];
+         
 
     return (
         <section className={addclass}>
@@ -71,7 +79,7 @@ const Testimonail2 = ({addclass}) => {
             <div className="row">
                 <div className="col-xl-12">
                     <div className="title-area">
-                        <h2 className="sec-title text-center">The best customers say <br/> <span className="font2 wow text-anim-left">about me</span></h2>
+                    <h2 className="sec-title text-center">Lo que dicen <br/> <span className="font2 wow text-anim-left">quienes han trabajado conmigo</span></h2>
                     </div>
                 </div>
             </div>

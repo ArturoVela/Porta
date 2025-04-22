@@ -67067,3 +67067,11 @@ a.text-theme:hover,
 .faq-area .accordion.active .acc-content{
     display: block;
 }
+
+
+
+/* Puedes agregar esto a tu archivo de estilos */
+.sidebar__cat-list .active {
+    color: --theme-color; /* Reemplaza con tu color primario */
+    font-weight: bold;
+}

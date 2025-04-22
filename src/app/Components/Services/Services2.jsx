@@ -5,12 +5,52 @@ import Link from 'next/link';
 const Services2 = () => {
 
     const serviceContent = [
-        {title:'Web <br> Development', icon:'/assets/images/service/web.svg', service1:'Wordpress', service2:'Brand', service3:'Laravel', img:'/assets/images/service/service-1_1.jpg', addclass:'service-title'},
-        {title:'Application <br> Design', icon:'/assets/images/service/app.svg', service1:'Wordpress', service2:'Brand', service3:'Laravel', img:'/assets/images/service/service-1_2.jpg', addclass:'service-title mr-25'},
-        {title:'UI/UX Mobile <br> Design', icon:'/assets/images/service/ui_ux.svg', service1:'Wordpress', service2:'Brand', service3:'Laravel', img:'/assets/images/service/service-1_3.jpg', addclass:'service-title mr-5'},
-        {title:'Brand <br> Identity', icon:'/assets/images/service/brand.svg', service1:'Wordpress', service2:'Brand', service3:'Laravel', img:'/assets/images/service/service-1_4.jpg', addclass:'service-title mr-75'},
-        {title:'Digital <br> Marketing', icon:'/assets/images/service/digital.svg', service1:'Wordpress', service2:'Brand', service3:'Laravel', img:'/assets/images/service/service-1_5.jpg', addclass:'service-title mr-40'},
-      ]; 
+        {
+          title: 'Desarrollo <br> Web',
+          icon: '/assets/images/service/web.svg',
+          service1: 'Next.js',
+          service2: 'Node.js',
+          service3: 'Css3 y HTML5',
+          img: '/assets/images/service/service-1_1.jpg',
+          addclass: 'service-title mr-10',
+        },
+        {
+          title: 'Moderación <br> Discord',
+          icon: '/assets/images/service/brand.svg',
+          service1: 'Gestión de roles',
+          service2: 'Automod y bots',
+          service3: 'Comunidades seguras',
+          img: '/assets/images/service/service-1_2.jpg',
+          addclass: 'service-title mr--10',
+        },
+        {
+          title: 'Diseño <br> UI/UX',
+          icon: '/assets/images/service/ui_ux.svg',
+          service1: 'Ps / Ai',
+          service2: 'Diseño responsive',
+          service3: 'Prototipos funcionales',
+          img: '/assets/images/service/service-1_3.jpg',
+          addclass: 'service-title mr-60',
+        },
+        {
+          title: 'Edición <br> VS Code',
+          icon: '/assets/images/service/app.svg',
+          service1: 'Productividad',
+          service2: 'Snippets',
+          service3: 'Utilidades',
+          img: '/assets/images/service/service-1_4.jpg',
+          addclass: 'service-title mr-40',
+        },
+        {
+          title: 'Proyectos <br> como Servicio',
+          icon: '/assets/images/service/digital.svg',
+          service1: 'MVPs rápidos',
+          service2: 'Despliegue Vercel',
+          service3: 'SaaS en desarrollo',
+          img: '/assets/images/service/service-1_5.jpg',
+          addclass: 'service-title mr--40',
+        },
+      ];
 
     return (
         <section className="service-area space bg-theme2">
@@ -18,7 +58,7 @@ const Services2 = () => {
             <div className="row">
                 <div className="col-xl-12">
                     <div className="title-area">
-                        <h2 className="sec-title text-center">I offer a wide <span className="font2 wow text-anim-left">variety of services</span> in <br/> the generative space</h2>
+                      <h2 className="sec-title text-center"> Ofrezco una <span className="font2 wow text-anim-left">amplia variedad de servicios</span> en <br/> el entorno digital y tecnológico</h2>
                     </div>
                 </div>
             </div>

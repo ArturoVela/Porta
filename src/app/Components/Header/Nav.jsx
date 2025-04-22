@@ -71,27 +71,10 @@ export default function Nav({ setMobileToggle }) {
         Pricios
         </Link>
       </li>         
-      <li className="menu-item-has-children">
+      <li >
         <Link href="/blog" onClick={() => setMobileToggle(false)}>
           Blog
         </Link>
-        <DropDown>
-          <ul>
-            <li>
-              <Link href="/blog" onClick={() => setMobileToggle(false)}>
-                Blog
-              </Link>
-            </li>           
-            <li>
-              <Link
-                href="/blog/blog-details"
-                onClick={() => setMobileToggle(false)}
-              >
-                Detalle de Blog
-              </Link>
-            </li>
-          </ul>
-        </DropDown>
       </li>
       <li>
         <Link href="/contact" onClick={() => setMobileToggle(false)}>

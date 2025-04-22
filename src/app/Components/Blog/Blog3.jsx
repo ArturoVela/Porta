@@ -9,10 +9,11 @@ const Blog3 = () => {
                         <div className="row gx-35 lg-gx-25 gy-35 flex-lg-row flex-column-reverse">
                             <div className="col-lg-8">
                                 <div className="blog__details-wrap">
+                                    
                                     <div className="single-blog-box">
                                         <a className="meta" href="#"> Branding . 20 April, 2024 </a>
                                         <h3 className="blog-title">
-                                            <Link href="/blog/blog-details">10 things nobody told you about being a web and mobile designer</Link>
+                                            <Link href="/blog/blog-details">10 cosas que nadie te contó sobre ser diseñador web y móvil</Link>
                                         </h3>
                                         <figure className="blog-thumb"><Image src="/assets/images/blog/blogs-1_1.jpg" alt="img" width={798} height={448}   /></figure>
                                         <div className="blog-content">
@@ -31,6 +32,7 @@ const Blog3 = () => {
                                             </Link>
                                         </div>
                                     </div>
+
                                     <div className="single-blog-box">
                                         <a className="meta" href="#"> Marketing . 20 April, 2024 </a>
                                         <h3 className="blog-title">
@@ -50,6 +52,7 @@ const Blog3 = () => {
                                             </Link>
                                         </div>
                                     </div>
+
                                     <div className="single-blog-box">
                                         <a className="meta" href="#"> Creative . 20 April, 2024 </a>
                                         <h3 className="blog-title">

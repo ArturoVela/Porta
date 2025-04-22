@@ -54,7 +54,7 @@ const Brand1 = () => {
                     <div className="row">
                         <div className="col-xl-12">
                             <div className="title-area text-center mb-120 lg-mb-90 md-mb-80 vxs-mb-60">
-                                <h6 className="title mb-0">More than <span className="color1">200+ companies</span> trusted us worldwid</h6>
+                                 <h6 className="title mb-0">Más de <span className="color1">3+ empresas</span> confían en mí</h6>
                             </div>
                         </div>
                     </div>
