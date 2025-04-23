@@ -14,7 +14,7 @@ const Brand2 = () => {
         arrows: false,
         swipeToSlide: true,
         autoplay: true,
-        autoplaySpeed: 2000,        
+        autoplaySpeed: 1000,        
         responsive: [
           {
             breakpoint: 1399,
@@ -39,54 +39,54 @@ const Brand2 = () => {
     const brandContent = [
         {
             img: '/assets/images/brands/brand-1_1.png',
-            href: 'https://www.tensorflow.org/',
-            alt: 'TensorFlow'
+            href: 'https://www.instagram.com/canawasky/',
+            alt: 'Caña Wasky'
         },
         {
             img: '/assets/images/brands/brand-1_2.png',
-            href: 'https://pytorch.org/',
-            alt: 'PyTorch'
+            href: 'https://www.instagram.com/pachascafe/',
+            alt: "Pacha's Café"
         },
         {
             img: '/assets/images/brands/brand-1_3.png',
-            href: 'https://keras.io/',
-            alt: 'Keras'
+            href: 'https://discord.gg/mnMkUXC5vK',
+            alt: 'Dc Duolingo'
         },
         {
             img: '/assets/images/brands/brand-1_4.png',
-            href: 'https://scikit-learn.org/',
-            alt: 'Scikit-learn'
+            href: 'https://discord.gg/7RqFxUeKh2',
+            alt: "Dc 𝒜𝒸𝑒'𝓈 𝓈𝑒𝒸𝓉.   🌺"
         },
-        {
-            img: '/assets/images/brands/brand-1_5.png',
-            href: 'https://numpy.org/',
-            alt: 'NumPy'
-        },
+        // {
+        //     img: '/assets/images/brands/brand-1_5.png',
+        //     href: 'https://numpy.org/',
+        //     alt: 'NumPy'
+        // },
         {
             img: '/assets/images/brands/brand-1_1.png',
-            href: 'https://pandas.pydata.org/',
-            alt: 'Pandas'
+            href: 'https://www.instagram.com/canawasky/',
+            alt: 'Caña Wasky'
         },
         {
             img: '/assets/images/brands/brand-1_2.png',
-            href: 'https://matplotlib.org/',
-            alt: 'Matplotlib'
+            href: 'https://www.instagram.com/pachascafe/',
+            alt: "Pacha's Café"
         },
         {
             img: '/assets/images/brands/brand-1_3.png',
-            href: 'https://opencv.org/',
-            alt: 'OpenCV'
+            href: 'https://discord.gg/mnMkUXC5vK',
+            alt: 'Dc Duolingo'
         },
         {
             img: '/assets/images/brands/brand-1_4.png',
-            href: 'https://jupyter.org/',
-            alt: 'Jupyter'
+            href: 'https://discord.gg/7RqFxUeKh2',
+            alt: "Dc 𝒜𝒸𝑒'𝓈 𝓈𝑒𝒸𝓉.   🌺"
         },
-        {
-            img: '/assets/images/brands/brand-1_5.png',
-            href: 'https://www.python.org/',
-            alt: 'Python'
-        },
+        // {
+        //     img: '/assets/images/brands/brand-1_5.png',
+        //     href: 'https://www.python.org/',
+        //     alt: 'Python'
+        // },
     ];   
 
     return (
@@ -99,7 +99,7 @@ const Brand2 = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="sponsors-outer">
+                    <div className="sponsors-outer" >
                         <ul className="brands-carousel owl-carousel owl-theme cs_slider_gap_30"> 
                         <Slider {...settings}>
                         {brandContent.map((item, i) => (
@@ -114,7 +114,8 @@ const Brand2 = () => {
                                         src={item.img} 
                                         alt={item.alt} 
                                         width={147} 
-                                        height={147}   
+                                        height={147}
+                                           
                                     />
                                     <Image 
                                         src={item.img} 
