@@ -1,6 +1,7 @@
 "use client"
 import Image from "next/image";
 import Slider from "react-slick";
+import Link from "next/link";
 
 const Brand2 = () => {
 
@@ -9,11 +10,11 @@ const Brand2 = () => {
         infinite: true,
         speed: 600,
         slidesToShow: 5,
-        slidesToScroll: 1,
+        slidesToScroll: 2,
         arrows: false,
         swipeToSlide: true,
         autoplay: true,
-        autoplaySpeed: 4000,        
+        autoplaySpeed: 2000,        
         responsive: [
           {
             breakpoint: 1399,
@@ -33,20 +34,60 @@ const Brand2 = () => {
             }
           }
         ]
-      };  
+    };  
 
     const brandContent = [
-        {img:'/assets/images/brands/brand-1_1.png'},
-        {img:'/assets/images/brands/brand-1_2.png'},
-        {img:'/assets/images/brands/brand-1_3.png'},
-        {img:'/assets/images/brands/brand-1_4.png'},
-        {img:'/assets/images/brands/brand-1_5.png'},
-        {img:'/assets/images/brands/brand-1_1.png'},
-        {img:'/assets/images/brands/brand-1_2.png'},
-        {img:'/assets/images/brands/brand-1_3.png'},
-        {img:'/assets/images/brands/brand-1_4.png'},
-        {img:'/assets/images/brands/brand-1_5.png'},
-      ];   
+        {
+            img: '/assets/images/brands/brand-1_1.png',
+            href: 'https://www.tensorflow.org/',
+            alt: 'TensorFlow'
+        },
+        {
+            img: '/assets/images/brands/brand-1_2.png',
+            href: 'https://pytorch.org/',
+            alt: 'PyTorch'
+        },
+        {
+            img: '/assets/images/brands/brand-1_3.png',
+            href: 'https://keras.io/',
+            alt: 'Keras'
+        },
+        {
+            img: '/assets/images/brands/brand-1_4.png',
+            href: 'https://scikit-learn.org/',
+            alt: 'Scikit-learn'
+        },
+        {
+            img: '/assets/images/brands/brand-1_5.png',
+            href: 'https://numpy.org/',
+            alt: 'NumPy'
+        },
+        {
+            img: '/assets/images/brands/brand-1_1.png',
+            href: 'https://pandas.pydata.org/',
+            alt: 'Pandas'
+        },
+        {
+            img: '/assets/images/brands/brand-1_2.png',
+            href: 'https://matplotlib.org/',
+            alt: 'Matplotlib'
+        },
+        {
+            img: '/assets/images/brands/brand-1_3.png',
+            href: 'https://opencv.org/',
+            alt: 'OpenCV'
+        },
+        {
+            img: '/assets/images/brands/brand-1_4.png',
+            href: 'https://jupyter.org/',
+            alt: 'Jupyter'
+        },
+        {
+            img: '/assets/images/brands/brand-1_5.png',
+            href: 'https://www.python.org/',
+            alt: 'Python'
+        },
+    ];   
 
     return (
         <section className="brand-area space-bottom bg-theme2">
@@ -54,7 +95,7 @@ const Brand2 = () => {
                     <div className="row">
                         <div className="col-xl-12">
                             <div className="title-area text-center mb-120 lg-mb-90 md-mb-80 vxs-mb-60">
-                                <h6 className="title mb-0">Más de <span className="color1">3+ empresas</span> confían en mí</h6>
+                                <h6 className="title mb-0">Más de <span className="color1">4+ empresas</span> confían en mí</h6>
                             </div>
                         </div>
                     </div>
@@ -63,13 +104,28 @@ const Brand2 = () => {
                         <Slider {...settings}>
                         {brandContent.map((item, i) => (
                             <li key={i} className="brand-item">
-                                <a className="image" href="#">
-                                <Image src={item.img} alt="img" width={147} height={147}   />
-                                <Image src={item.img} alt="img" width={147} height={147}   />
-                                </a>
+                                <Link 
+                                    href={item.href} 
+                                    target="_blank" 
+                                    rel="noopener noreferrer" 
+                                    className="image"
+                                >
+                                    <Image 
+                                        src={item.img} 
+                                        alt={item.alt} 
+                                        width={147} 
+                                        height={147}   
+                                    />
+                                    <Image 
+                                        src={item.img} 
+                                        alt={item.alt} 
+                                        width={147} 
+                                        height={147}   
+                                    />
+                                </Link>
                             </li>
-                            ))}
-                             </Slider>
+                        ))}
+                        </Slider>
                         </ul>
                     </div>
                 </div>

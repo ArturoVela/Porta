@@ -5,50 +5,23 @@ import Link from "next/link";
 
 const allPosts = [
     {
+        id: 9995,
+        slug: "Tesis-arroz-22-04-2025",
+        title: "Avance de Tesis: Modelo Predictivo de Rendimiento de Arroz con Satélite y Datos Climáticos",
+        category: "Investigación I",
+        date: "22 abril, 2025",
+        image: "/assets/images/blog/tesis-arroz.jpg",
+        excerpt: "Primeros resultados de mi investigación para predecir rendimiento de arroz en Tarapoto usando imágenes satelitales NDVI y datos climáticos históricos.",
+    },
+    {
         id: 9996,
         slug: "discord-para-negocios",
         title: "Cómo usar Discord para tu negocio o comunidad online",
         category: "Comunidades",
-        date: "30 April, 2024",
-        image: "/assets/images/blog/blogs-1_1.jpg",
+        date: "21 April, 2024",
+        image: "/assets/images/blog/blogs-1_1-discord.jpg",
         excerpt: "Discord no es solo para gamers. Hoy es una herramienta clave para comunidades, soporte y networking. Aprende a sacarle provecho.",
-    },
-    {
-        id: 9997,
-        slug: "vscode-setup",
-        title: "Mi configuración perfecta de VS Code para desarrollo web",
-        category: "Desarrollo",
-        date: "21 April, 2024",
-        image: "/assets/images/blog/blogs-1_2.jpg",
-        excerpt: "Extensiones, temas, atajos y configuraciones que me ayudan a trabajar más rápido y mejor en cada proyecto.",
-    },
-    {
-        id: 9998,
-        slug: "freelance-consejos",
-        title: "Consejos que ojalá hubiera sabido antes de empezar como freelancer",
-        category: "Negocios",
-        date: "21 April, 2024",
-        image: "/assets/images/blog/blogs-1_3.jpg",
-        excerpt: "Lo bueno, lo malo y lo inesperado del mundo freelance. Experiencias reales que pueden ayudarte a empezar con el pie derecho.",
-    },
-    {
-        id: 9999,
-        slug: "saas-ideas",
-        title: "Ideas simples para empezar tu propio producto SaaS en 2024",
-        category: "Emprendimiento",
-        date: "21 April, 2024",
-        image: "/assets/images/blog/blogs-1_4.jpg",
-        excerpt: "¿Quieres empezar en el mundo de los servicios como producto? Aquí tienes ideas que puedes lanzar sin un equipo gigante.",
-    },
-    {
-        id: 10000,
-        slug: "hyprland-setup",
-        title: "Mi setup con Hyprland en Linux: minimalismo y poder al máximo",
-        category: "Productividad",
-        date: "21 April, 2024",
-        image: "/assets/images/blog/blogs-1_5.jpg",
-        excerpt: "Te muestro cómo configuré mi entorno con Hyprland, Zsh y VS Code en Linux para ser ultra eficiente.",
-    },
+    }
 ];
 
 

@@ -15,25 +15,25 @@ const projectContent = [
         category:'Sistema de Ventas',
         slug: 'pachas-cafe-web'
     },   
-    {
-        addclass:'col-lg-5',
-        img:'/assets/images/portfolio/portfolio3_1.jpg',
-        title:'Illustrator Graphics',
-        category:'Designing',
-        slug: 'illustrator-graphics'
-    },
-    {
-        addclass:'col-lg-7',
-        img:'/assets/images/portfolio/portfolio3_2.jpg',
-        title:'Figma Design',
-        category:'Application',
-        slug: 'figma-design'
-    },
+    // {
+    //     addclass:'col-lg-5',
+    //     img:'/assets/images/portfolio/portfolio3_1.jpg',
+    //     title:'Illustrator Graphics',
+    //     category:'Designing',
+    //     slug: 'illustrator-graphics'
+    // },
+    // {
+    //     addclass:'col-lg-7',
+    //     img:'/assets/images/portfolio/portfolio3_2.jpg',
+    //     title:'Figma Design',
+    //     category:'Application',
+    //     slug: 'figma-design'
+    // },
     {
         addclass:'col-lg-12',
         img:'/assets/images/portfolio/portfolio3_3_dc.jpg',
         title:'Discord ',
-        category:'Branding',
+        category:'Servidor Discord',
         slug: 'discord'
     },
     {
@@ -45,7 +45,7 @@ const projectContent = [
     },
     {
         addclass:'col-lg-5 text-lg-end',
-        img:'/assets/images/portfolio/portfolio3_5.jpg',
+        img:'/assets/images/portfolio/portfolio3_5_rioja.jpg',
         title:'Municipalidad de Rioja ',
         category:'Pagina web',
         slug: 'municipalidad-de-rioja'

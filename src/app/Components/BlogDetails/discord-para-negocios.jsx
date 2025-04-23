@@ -28,7 +28,7 @@ const BlogDetails = () => {
                             <li className="item">
                                 <div className="info">
                                     <span className="title">Publicado</span>
-                                    <span className="text">30 April, 2025</span>
+                                    <span className="text">21 April, 2025</span>
                                 </div>
                             </li>
                             <li className="item">
@@ -41,7 +41,7 @@ const BlogDetails = () => {
                     </div>
                 </div>
                 <div className="blog-details-thumb mb-50">
-                    <Image className="w-100" src="/assets/images/blog/blog-details1.jpg" alt="img" width={1910} height={846} />
+                    <Image className="w-100" src="/assets/images/blog/blog-details1-discord.jpg" alt="img" width={1910} height={846} />
                 </div>
                 <div className="container">
                     <div className="blog__details-content">
@@ -58,7 +58,7 @@ const BlogDetails = () => {
                                 </blockquote>
                                 <h3 className="title mb-25">Ventajas de usar Discord para tu negocio o comunidad</h3>
                                 <p className="mb-60">Puedes crear canales por temática, usar bots para automatizar tareas, organizar eventos en vivo por voz o video, y generar roles para segmentar miembros y otorgar permisos específicos.</p>
-                                <figure className="details-thumb mb-60"><Image className="br-10" src="/assets/images/blog/blog-details2.jpg" alt="img" width={1320} height={650} /></figure>
+                                <figure className="details-thumb mb-60"><Image className="br-10" src="/assets/images/blog/blog-details2-discord.jpg" alt="img" width={1320} height={650} /></figure>
                                 <h3 className="title mb-25">Cómo empezar en Discord paso a paso</h3>
                                 <ul className="challenge_list">
                                     <li>Crea un servidor y dale una identidad visual</li>
