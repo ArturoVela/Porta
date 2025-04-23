@@ -7,7 +7,7 @@ const Pricing3 = () => {
         <div className="container">
             <div className="row">
                 <div className="col-xl-12 text-center">
-                    <h2 className="big-title mb-0 mt--20 wow img-custom-anim-left">PRICING <span className="font2">PLAN</span></h2>
+                    <h2 className="big-title mb-0 mt--20 wow img-custom-anim-left">PLANES DE <span className="font2">PRECIOS</span></h2>
                 </div>
             </div>
         </div>
@@ -16,58 +16,148 @@ const Pricing3 = () => {
         <section className="pricing-area space-bottom bg-theme2">
                 <div className="container">
                     <div className="row gx-30 gy-30">
+                        {/* WEB */}
+                        {/* Plan Inicial */}
+                        <h3 className="title mb-20">Páginas web</h3>
                         <div className="col-lg-4 col-md-6">
                             <PricingCard
                                 addclass="pricing-item"
-                                title="Sliver Pack"
-                                price="100.00"
-                                time="Per/Month"
-                                btnname="Start My Project Now"
-                                btnurl="/pricing"
+                                title="Web Básica"
+                                price="800"
+
+                                time="Pago único"
+                                btnname="Iniciar Proyecto"
+                                btnurl="/contact"
                                 FeatureList={[
-                                    "Free customer support",
-                                    "Free installation",
-                                    "20+ predesigned templates",
-                                    "Free back-up",
-                                    "World class support"
+                                    "Hasta 5 páginas principales",
+                                    "Diseño adaptable a móviles",
+                                    "Formulario de contacto simple",
+                                    "Galeria de imágenes básica",
+                                    "Optimización velocidad básica",
+                                    "Mapa de ubicación integrado",
+                                    "Soporte por 2 semanas",
+                                    "Entrega en 1 semana"
                                 ]}
                             ></PricingCard>
                         </div>
+
+                        {/* Plan Estándar */}
                         <div className="col-lg-4 col-md-6">
                             <PricingCard
                             addclass="pricing-item upper"
-                            title="Gold Pack"
-                            price="200.00"
-                            time="Per/Month"
-                            btnname="Start My Project Now"
-                            btnurl="/pricing"
+                            title="Web Profesional"
+                            price="1,500"
+                            time="Pago único"
+                            btnname="Quiero este plan"
+                            btnurl="/contact"
                             FeatureList={[
-                                "Free customer support",
-                                "Free installation",
-                                "20+ predesigned templates",
-                                "Free back-up",
-                                "World class support"
+                                "Todo el Plan Básico +",
+                                "Hasta 10 páginas",
+                                "Diseño personalizado",
+                                "Integración con WhatsApp",
+                                "Sección de blog básico",
+                                "Slider de imágenes",
+                                "SEO básico inicial",
+                                "Soporte por 1 meses"
                             ]}
                         ></PricingCard>
                         </div>
-                        <div className="col-lg-4 col-md-6">
 
+                        {/* Plan Avanzado */}
+                        <div className="col-lg-4 col-md-6">
                             <PricingCard
                                 addclass="pricing-item"
-                                title="Platinum Pack"
-                                price="300.00"
-                                time="Per/Month"
-                                btnname="Start My Project Now"
-                                btnurl="/pricing"
+                                title="Web Premium"
+                                price="2,500"
+
+                                time="Pago único"
+                                btnname="Contactar ahora"
+                                btnurl="/contact"
                                 FeatureList={[
-                                    "Free customer support",
-                                    "Free installation",
-                                    "20+ predesigned templates",
-                                    "Free back-up",
-                                    "World class support"
+                                    "Hasta 15 páginas",
+                                    "Diseño premium responsive",
+                                    "Formularios avanzados",
+                                    "Integración con redes sociales",
+                                    "Blog profesional",
+                                    "SEO básico continuo",
+                                    "Galeria multimedia",
+                                    "Soporte por 3 meses"
                                 ]}
                             ></PricingCard>
+                        </div>
+                        {/* DISCORD */}
+                        {/* Plan Inicial */}
+                        <h3 className="title mb-20">Creación de servidores de discord</h3>
+                        <div className="col-lg-4 col-md-6">
+                            <PricingCard
+                                addclass="pricing-item"
+                                title="Plan Inicial"
+                                price="80"
+                                time="Pago único"
+                                btnname="Solicitar ahora"
+                                btnurl="/contact"
+                                FeatureList={[
+                                    "Servidor básico (hasta 10 canales)",
+                                    "Roles predefinidos ",
+                                    "Categorías organizadas",
+                                    "Bot de bienvenida y moderación",
+                                    "Icono y banner personalizados",
+                                    "Guía de uso básica",
+                                    "Soporte por correo durante 3 días",
+                                    "Entrega en 48 horas"
+                                ]}
+                            ></PricingCard>
+                        </div>
 
+                        {/* Plan Comunidad */}
+                        <div className="col-lg-4 col-md-6">
+                            <PricingCard
+                                addclass="pricing-item upper"
+                                title="Plan Comunidad"
+                                price="150"
+                                time="Pago único"
+                                btnname="Quiero este plan"
+                                btnurl="/contact"
+                                FeatureList={[
+                                    "Todo el Plan Inicial +",
+                                    "Hasta 30 canales organizados",
+                                    "Roles con permisos avanzados",
+                                    "Bots personalizados (MEE6, Dyno, etc.)",
+                                    "Automatización de tareas básicas",
+                                    "Panel de reglas y anuncios",
+                                    "Integración con redes sociales",
+                                    "Soporte extendido por 7 días"
+                                ]}
+                            ></PricingCard>
+                        </div>
+
+                        {/* Plan Gaming / Empresarial */}
+                        <div className="col-lg-4 col-md-6">
+                            <PricingCard
+                                addclass="pricing-item"
+                                title="Servidor Premium"
+                                price="Desde 250"
+                                time="Pago según proyecto"
+                                btnname="Cotizar ahora"
+                                btnurl="/contact"
+                                FeatureList={[
+                                    "Configuración totalmente personalizada",
+                                    "Más de 50 canales y múltiples categorías",
+                                    "Sistema de niveles y economía con bots",
+                                    "Integración con Twitch, YouTube o sitios web",
+                                    "Configuración de eventos, sorteos, tickets",
+                                    "Dashboard de administración (opcional)",
+                                    "Automatización avanzada",
+                                    "Soporte técnico durante 30 días"
+                                ]}
+                            ></PricingCard>
+                        </div>
+                     </div>
+
+                     <div className="row mt-50">
+                        <div className="col-lg-12 text-center">
+                            <p className="note-text">* Precios en Soles Peruanos (PEN). No incluye dominio ni hosting. 
+                            Tiempos de entrega aproximados. Garantía de 7 días.</p>
                         </div>
                      </div>
                 </div>

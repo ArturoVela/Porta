@@ -11,8 +11,9 @@ const Services2 = () => {
           service1: 'Next.js',
           service2: 'Node.js',
           service3: 'Css3 y HTML5',
-          img: '/assets/images/service/service-1_1.jpg',
+          saber: 'Mas información',
           addclass: 'service-title mr-10',
+          slug: 'desarrollo-web'
         },
         {
           title: 'Moderación <br> Discord',
@@ -20,8 +21,9 @@ const Services2 = () => {
           service1: 'Gestión de roles',
           service2: 'Automod y bots',
           service3: 'Comunidades seguras',
-          img: '/assets/images/service/service-1_2.jpg',
+          saber: 'Mas información',
           addclass: 'service-title mr--10',
+          slug: 'moderacion-discord'
         },
         {
           title: 'Diseño <br> UI/UX',
@@ -29,8 +31,9 @@ const Services2 = () => {
           service1: 'Ps / Ai',
           service2: 'Diseño responsive',
           service3: 'Prototipos funcionales',
-          img: '/assets/images/service/service-1_3.jpg',
+          saber: 'Mas información',
           addclass: 'service-title mr-60',
+          slug: 'diseno-ui-ux'
         },
         {
           title: 'Edición <br> VS Code',
@@ -38,8 +41,9 @@ const Services2 = () => {
           service1: 'Productividad',
           service2: 'Snippets',
           service3: 'Utilidades',
-          img: '/assets/images/service/service-1_4.jpg',
+          saber: 'Mas información',
           addclass: 'service-title mr-40',
+          slug: 'edicion-vscode'
         },
         {
           title: 'Proyectos <br> como Servicio',
@@ -47,10 +51,11 @@ const Services2 = () => {
           service1: 'MVPs rápidos',
           service2: 'Despliegue Vercel',
           service3: 'SaaS en desarrollo',
-          img: '/assets/images/service/service-1_5.jpg',
+          saber: 'Mas información',
           addclass: 'service-title mr--40',
+          slug: 'proyectos-como-servicio'
         },
-      ];
+    ];
 
     return (
         <section className="service-area space bg-theme2">
@@ -69,23 +74,49 @@ const Services2 = () => {
                         <div key={i} className="service-item hover-reveal-item">
                             <div className="service-inner">
                                 <div className="service-left">
-                                    <div className="service-icon"><Image src={item.icon} alt="img" width={70} height={70}   /></div>
-                                    <h3 className={item.addclass}><Link href="/service/service-details">{parse(item.title)}</Link></h3>
+                                    <div className="service-icon">
+                                        <Image 
+                                            src={item.icon} 
+                                            alt={item.title.replace('<br>', ' ')} 
+                                            width={70} 
+                                            height={70} 
+                                        />
+                                    </div>
+                                    <h3 className={item.addclass}>
+                                        <Link href={`/service/${item.slug}`}>{parse(item.title)}</Link>
+                                    </h3>
                                     <ul className="service-list">
-                                         <li>+ {item.service1}</li>
+                                        <li>+ {item.service1}</li>
                                         <li>+ {item.service2}</li>
                                         <li>+ {item.service3}</li>
                                     </ul>
+                                    
                                 </div>
                                 <div className="service-btn-wrapper">
-                                    <Link className="service-btn" href="/service/service-details">
-                                        <span><i className="bi bi-arrow-up-right"></i><i className="bi bi-arrow-up-right"></i></span>
+                                  
+                                    <Link className="service-btn" href={`/service/${item.slug}`}>
+                                        <span>
+                                            <i className="bi bi-arrow-up-right"></i>
+                                            <i className="bi bi-arrow-up-right"></i>
+                                        </span>
                                     </Link>
                                 </div>
                             </div>
-                            <div className="hover-reveal-bg" data-background="assets/images/service/service-1_1.jpg"></div>
+                            <div 
+                            
+                                className="hover-reveal-bg"
+                                style={{
+                                    backgroundImage: `url(${item.img})`,
+                                    backgroundSize: 'cover',
+                                    backgroundPosition: 'center'
+                                }}
+                            >
+                              
+
+                            </div>
                         </div>
                         ))}
+                        
                     </div>
                 </div>
             </div>
