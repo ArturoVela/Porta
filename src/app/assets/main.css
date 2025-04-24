@@ -7604,7 +7604,7 @@ a.text-theme:hover,
         font-size: 20px
     }
     .hero-style1 .hero-thumb {
-        margin: 30px 0
+        margin: 30px 0;
     }
 }
 
@@ -7823,7 +7823,7 @@ a.text-theme:hover,
 
 .hero-style2 .hero-thumb-wrapper .hero-thumb img {
     max-width: inherit;
-    margin-left: -70px
+    margin-left: -70px;
 }
 
 @media(max-width: 991px) {
@@ -67089,5 +67089,3 @@ a.text-theme:hover,
       drop-shadow(0 0 5px rgba(0, 0, 0, 0.137))
       drop-shadow(0 0 10px rgba(255, 255, 255, 0.103));
   }
-
-
