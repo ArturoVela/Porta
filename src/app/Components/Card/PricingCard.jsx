@@ -5,7 +5,7 @@ const PricingCard = ({title,price,time,btnname,btnurl,FeatureList,addclass}) => 
         <div className={addclass}>
         <h5 className="pricing-title">{title}</h5>
         <div className="price-item-wrap">
-            <h2 className="pricing-item_price"><span className="currency">s/ </span>{price}</h2>
+            <h2 className="pricing-item_price"><span className="currency"> (s/)</span>{price}</h2>
             <span className="duration">{time}</span>
         </div>
         <div className="pricing-btn pt-30 pb-30 mb-30 mt-30">
