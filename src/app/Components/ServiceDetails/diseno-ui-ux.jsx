@@ -19,27 +19,27 @@ const ServiceDetails = () => {
     const faqContent = [
         {
             title: '¿Qué diferencia hay entre UI y UX?', 
-            content: 'UI (Interfaz de Usuario) se centra en el diseño visual y la estética, mientras que UX (Experiencia de Usuario) se enfoca en cómo el usuario interactúa con el producto. Trabajo ambos aspectos para crear productos digitales completos y efectivos.'              
+            content: 'UI (Interfaz de Usuario) se centra en el diseño visual y la estética, mientras que UX (Experiencia de Usuario) se enfoca en cómo el usuario interactúa con el producto. Estoy aprendiendo ambos aspectos para crear experiencias digitales más completas.'              
         },
         {
             title: '¿Qué incluye un proyecto de diseño UI/UX?', 
-            content: 'El servicio incluye: investigación de usuarios, wireframes, prototipos interactivos, diseño visual, pruebas de usabilidad, guía de estilos, y entrega de assets listos para desarrollo.'
+            content: 'Aunque estoy recién empezando, trato de aplicar investigación básica de usuarios, wireframes simples y prototipos. Todo es parte del proceso de aprendizaje.' 
         },
         {
             title: '¿Qué herramientas de diseño utilizas?', 
-            content: 'Trabajo principalmente con Figma para diseño y prototipado, Adobe XD para algunos proyectos específicos, y herramientas complementarias como Photoshop e Illustrator para gráficos personalizados.'              
+            content: 'Uso Figma principalmente para practicar diseño y prototipado. También estoy explorando otras herramientas como Adobe XD, Photoshop e Illustrator.'              
         },
         {
             title: '¿Cuánto dura un proyecto de diseño UI/UX?', 
-            content: 'Los tiempos varían según la complejidad: Landing pages (1 semana), sitios web completos (2-3 semanas), aplicaciones complejas (4-6 semanas). Cada proyecto recibe un cronograma detallado.'              
+            content: 'Todavía no tengo mucha experiencia, así que cada proyecto es diferente. Me tomo el tiempo necesario para aprender y mejorar con cada uno.'              
         },
         {
             title: '¿Realizas pruebas de usabilidad?', 
-            content: 'Sí, implemento pruebas de usabilidad en diferentes etapas del proyecto: pruebas de wireframes, tests A/B, pruebas de prototipos y evaluaciones heurísticas para garantizar la mejor experiencia de usuario.'              
+            content: 'Estoy aprendiendo a hacer pruebas de usabilidad simples, como mostrar mis diseños a amigos o conocidos para recibir retroalimentación.'              
         },
         {
             title: '¿Cómo es el proceso de diseño?', 
-            content: '1) Investigación y análisis de usuarios, 2) Arquitectura de información, 3) Wireframes y flujos de usuario, 4) Diseño visual y UI, 5) Prototipos interactivos, 6) Pruebas y refinamiento, 7) Entrega de archivos finales.'              
+            content: 'Sigo una versión básica del proceso: 1) Investigo un poco sobre el usuario, 2) Hago wireframes, 3) Diseño en Figma, 4) Comparto para recibir feedback, 5) Mejoro y entrego.'              
         }
     ]; 
 
@@ -65,16 +65,24 @@ const ServiceDetails = () => {
                                     <div className="service__details-thumb">
                                         <Image src="/assets/images/service/service-details1.jpg" alt="Diseño UI/UX" width={796} height={496} />
                                     </div>
-                                    <p className="mb-25">Como diseñador UI/UX, me especializo en crear experiencias digitales intuitivas y atractivas. Combino principios de diseño moderno con las mejores prácticas de usabilidad para desarrollar interfaces que no solo se ven bien, sino que también funcionan de manera excepcional.</p>
-                                    <p className="mb-55">Mi enfoque se centra en entender las necesidades del usuario y los objetivos del negocio para crear soluciones que satisfagan ambos aspectos, resultando en productos digitales exitosos y fáciles de usar.</p>
+                                    <p className="mb-25">
+                                        Como diseñador UI/UX junior, estoy dando mis primeros pasos en el mundo del diseño digital. Me encanta aprender y experimentar con formas de hacer que las interfaces sean más amigables y visualmente atractivas.
+                                    </p>
+                                    <p className="mb-55">
+                                        Aunque estoy recién empezando, me esfuerzo por entender lo que el usuario necesita y cómo hacer que las soluciones digitales sean lo más útiles y claras posible.
+                                    </p>
                                     <div className="service__details-content">
                                         <h3 className="title">Diseño centrado en el usuario</h3>
-                                        <p className="mb-35">Cada proyecto comienza con una profunda investigación de usuarios y análisis de necesidades. Utilizo metodologías probadas de diseño centrado en el usuario para crear interfaces que resuelven problemas reales y mejoran la experiencia del usuario.</p>
+                                        <p className="mb-35">
+                                            Estoy aprendiendo a aplicar metodologías de diseño centrado en el usuario. Me interesa mucho investigar y entender qué necesitan las personas para diseñar algo que realmente les sirva y les guste.
+                                        </p>
                                         <div className="service__details-thumb mb-55">
                                             <Image src="/assets/images/service/service-details2.jpg" alt="Proceso de diseño" width={796} height={496} />
                                         </div>
                                         <h3 className="title">Metodología y Herramientas</h3>
-                                        <p className="mb-35">Trabajo con las últimas herramientas y tecnologías de diseño UI/UX, incluyendo Figma, Adobe XD y otras herramientas especializadas. Mi proceso iterativo asegura que cada detalle esté cuidadosamente considerado y probado.</p>
+                                        <p className="mb-35">
+                                            Uso herramientas como Figma y Adobe XD para practicar y mejorar mis habilidades. Cada nuevo proyecto es una oportunidad para aprender algo nuevo y afinar mi forma de trabajar.
+                                        </p>
                                         <div className="video-wrap">
                                             <div className="jarallax" data-background="/assets/images/service/service-details3.jpg"></div>
                                         </div>
@@ -139,7 +147,7 @@ const ServiceDetails = () => {
                                                     <div className="icon">
                                                         <Image src="/assets/images/service/location-icon.png" alt="Discord" width={35} height={35} />
                                                     </div>
-                                                    <span className="text">Discord<br/>@maldadpurpura @navyfz</span>
+                                                    <span className="text">Discord<br/>@maldadpurpura  <br></br>@navyfz</span>
                                                 </li>
                                             </ul>
                                         </div>

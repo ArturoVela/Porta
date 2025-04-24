@@ -19,27 +19,27 @@ const ServiceDetails = () => {
     const faqContent = [
         {
             title: '¿Cuánto tiempo toma desarrollar un sitio web?', 
-            content: 'El tiempo varía según la complejidad: landing pages (1-2 semanas), sitios corporativos (2-4 semanas), e-commerce o aplicaciones web complejas (1-3 meses). Cada proyecto recibe un cronograma detallado al inicio.'              
+            content: 'El tiempo depende de la complejidad del proyecto. Como desarrollador junior, me enfoco en proyectos pequeños a medianos, los cuales pueden tomar desde una semana hasta un mes según los requerimientos.'              
         },
         {
             title: '¿Qué incluye el servicio de desarrollo web?', 
-            content: 'El servicio incluye: diseño responsive, optimización SEO básica, integración de analytics, formularios funcionales, optimización de rendimiento, pruebas de calidad y 1 mes de soporte post-lanzamiento.'
+            content: 'El servicio incluye: diseño responsive básico, integración de formularios funcionales, optimización ligera de rendimiento y pruebas básicas de calidad. Siempre busco seguir aprendiendo y mejorar en cada proyecto.'
         },
         {
             title: '¿Qué tecnologías utilizas en tus desarrollos?', 
-            content: 'Principalmente trabajo con Next.js y React para el frontend, Node.js para backend, MongoDB/PostgreSQL para bases de datos, y Tailwind CSS/Bootstrap para estilos. Todas las tecnologías se eligen según las necesidades específicas del proyecto.'              
+            content: 'Trabajo con Next.js y React para el frontend, y estoy aprendiendo Node.js y bases de datos como MongoDB. También utilizo Tailwind CSS para estilos. Estoy en constante aprendizaje para adaptarme a las necesidades del cliente.'              
         },
         {
             title: '¿Ofreces mantenimiento web?', 
-            content: 'Sí, ofrezco planes de mantenimiento mensual que incluyen: actualizaciones de seguridad, respaldos, correcciones de errores, actualizaciones de contenido y soporte técnico por email/WhatsApp.'              
+            content: 'Sí, ofrezco mantenimiento básico como correcciones menores, actualizaciones de contenido y soporte por email/WhatsApp. Siempre estoy disponible para ayudarte mientras aprendo más en el camino.'              
         },
         {
             title: '¿Puedo actualizar el contenido de mi web por mi cuenta?', 
-            content: 'Sí, implemento sistemas de gestión de contenido (CMS) que te permiten actualizar textos, imágenes y otros contenidos fácilmente. Además, proporciono capacitación para que puedas gestionar tu sitio.'              
+            content: 'Sí, implemento soluciones simples que permiten al cliente modificar contenido básico. También brindo orientación personalizada para facilitar el manejo del sitio.'              
         },
         {
             title: '¿Cómo es el proceso de inicio de un proyecto?', 
-            content: '1) Reunión inicial para entender requisitos, 2) Propuesta técnica y presupuesto, 3) 50% de adelanto para iniciar, 4) Desarrollo con revisiones periódicas, 5) Pruebas finales y capacitación, 6) Lanzamiento y soporte inicial.'              
+            content: '1) Conversamos sobre lo que necesitas, 2) Propongo una solución simple y clara, 3) Acuerdo inicial con presupuesto, 4) Desarrollo paso a paso con retroalimentación, 5) Revisión final y entrega, 6) Apoyo inicial después del lanzamiento.'              
         }
     ]; 
 
@@ -65,16 +65,16 @@ const ServiceDetails = () => {
                                     <div className="service__details-thumb">
                                         <Image src="/assets/images/service/service-details1.jpg" alt="Desarrollo Web" width={796} height={496} />
                                     </div>
-                                    <p className="mb-25">Como desarrollador web fullstack, me especializo en crear soluciones web modernas y eficientes. Utilizo las últimas tecnologías y mejores prácticas para asegurar que cada proyecto sea robusto, escalable y fácil de mantener.</p>
-                                    <p className="mb-55">Mi enfoque se centra en crear experiencias web excepcionales que no solo se vean bien, sino que también funcionen de manera óptima. Cada proyecto se desarrolla pensando en la velocidad, la seguridad y la experiencia del usuario.</p>
+                                    <p className="mb-25">Como desarrollador web fullstack junior, estoy dando mis primeros pasos en la creación de soluciones web modernas. Me esfuerzo por aplicar buenas prácticas y aprender con cada proyecto.</p>
+                                    <p className="mb-55">Mi enfoque está en crear sitios funcionales que sean accesibles y eficientes, siempre priorizando la experiencia del usuario mientras desarrollo mis habilidades.</p>
                                     <div className="service__details-content">
                                         <h3 className="title">Proceso de desarrollo basado en metodologías probadas</h3>
-                                        <p className="mb-35">Mi proceso de desarrollo web está fundamentado en años de experiencia y las mejores prácticas de la industria. Desde la planificación inicial hasta el despliegue final, cada fase está cuidadosamente ejecutada para garantizar resultados excepcionales.</p>
+                                        <p className="mb-35">Aunque estoy empezando en el mundo del desarrollo web, aplico procesos organizados y metódicos para asegurar que cada fase del desarrollo esté bien planificada y ejecutada.</p>
                                         <div className="service__details-thumb mb-55">
                                             <Image src="/assets/images/service/service-details2.jpg" alt="Proceso de desarrollo" width={796} height={496} />
                                         </div>
                                         <h3 className="title">Especialización y Metodología de Trabajo</h3>
-                                        <p className="mb-35">Me especializo en desarrollo web fullstack utilizando tecnologías modernas como Next.js, React, Node.js y bases de datos SQL/NoSQL. Mi metodología ágil asegura entregas continuas y comunicación constante con el cliente.</p>
+                                        <p className="mb-35">Me estoy especializando en tecnologías como Next.js, React y Node.js. Trabajo bajo una metodología ágil, aprendiendo de cada experiencia y manteniendo una comunicación constante con el cliente.</p>
                                         <div className="video-wrap">
                                             <div className="jarallax" data-background="/assets/images/service/service-details3.jpg"></div>
                                         </div>
@@ -139,7 +139,7 @@ const ServiceDetails = () => {
                                                     <div className="icon">
                                                         <Image src="/assets/images/service/location-icon.png" alt="Discord" width={35} height={35} />
                                                     </div>
-                                                    <span className="text">Discord<br/>@maldadpurpura @navyfz</span>
+                                                    <span className="text">Discord<br/>@maldadpurpura  <br></br>@navyfz</span>
                                                 </li>
                                             </ul>
                                         </div>

@@ -139,7 +139,7 @@ const ServiceDetails = () => {
                                                     <div className="icon">
                                                         <Image src="/assets/images/service/location-icon.png" alt="Discord" width={35} height={35} />
                                                     </div>
-                                                    <span className="text">Discord<br/>@maldadpurpura @navyfz</span>
+                                                    <span className="text">Discord<br/>@maldadpurpura  <br></br>@navyfz</span>
                                                 </li>
                                             </ul>
                                         </div>

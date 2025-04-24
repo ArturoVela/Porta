@@ -11,7 +11,7 @@ const About2 = () => {
         btnname: 'Ver proyectos',
         btnurl: '/project',
         title4: 'UNA FOTO MÍA',
-        img: '/assets/images/about/about_1-1.jpg',
+        img: '/assets/images/about/about_1-1.png',
       };
       
 

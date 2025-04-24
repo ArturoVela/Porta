@@ -65,10 +65,19 @@ export default function Header({ variant }) {
             <div className="cs_main_header_right">
             <div className="header-button">
                   <div className="btn-wrap fade_right">
-                      <Link href="/project" className="link-btn" >
+                      <Link href="https://github.com/ArturoVela" className="link-btn" target='_blank' >
                           <span className="link-effect">
-                              <span className="effect-1">Hablemos</span>
-                              <span className="effect-1">Mi portafolio</span>
+                              <span className="effect-1">Github</span>
+                              <span className="effect-1">Github</span>
+                          </span>
+                          <Image src="/assets/images/icons/arrow-left-top.svg" alt="img" width={10} height={26}   />
+                      </Link>
+                  </div>
+                  <div className="btn-wrap fade_right">
+                      <Link href="https://www.linkedin.com/in/arturo-vela-aa81242ba/"  className="link-btn" target='_blank'>
+                          <span className="link-effect">
+                              <span className="effect-1">LinkedIn</span>
+                              <span className="effect-1">LinkedIn</span>
                           </span>
                           <Image src="/assets/images/icons/arrow-left-top.svg" alt="img" width={10} height={26}   />
                       </Link>

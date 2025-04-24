@@ -18,28 +18,28 @@ const ServiceDetails = () => {
 
     const faqContent = [
         {
-            title: '¿Qué es “Proyectos como Servicio”?', 
-            content: 'Es un modelo donde desarrollo y gestiono tu proyecto digital de principio a fin, desde la idea inicial hasta el despliegue y mantenimiento, para que tú solo te enfoques en tu negocio.'              
+            title: '¿Qué son mis "Proyectos como Servicio"?', 
+            content: 'Es mi iniciativa para aplicar mis conocimientos prácticos desarrollando proyectos reales. Trabajo bajo supervisión de mentores, entregando soluciones básicas mientras aprendo mejores prácticas de desarrollo.'              
         },
         {
-            title: '¿Qué tipo de proyectos puedo solicitar?', 
-            content: 'Puedes solicitar MVPs (productos mínimos viables), plataformas web, sistemas internos, aplicaciones SaaS, landing pages, automatizaciones y soluciones personalizadas según tus necesidades.'
+            title: '¿Qué tipo de proyectos puedo desarrollar?', 
+            content: 'Actualmente puedo crear landing pages simples, sitios web estáticos, pequeños sistemas CRUD y aplicaciones básicas. Estoy aprendiendo a manejar proyectos más complejos gradualmente.'
         },
         {
             title: '¿Incluye soporte y mantenimiento?', 
-            content: 'Sí, todos los proyectos incluyen soporte técnico y mantenimiento durante el primer mes. Luego puedes optar por planes mensuales de soporte y mejoras continuas.'              
+            content: 'Ofrezco soporte básico durante 2 semanas post-entrega mientras aprendo sobre mantenimiento de proyectos. Para necesidades complejas, trabajo con la guía de desarrolladores más experimentados.'              
         },
         {
-            title: '¿Cómo es el proceso de trabajo?', 
-            content: '1) Reunión inicial y levantamiento de requerimientos, 2) Propuesta técnica y cronograma, 3) Desarrollo iterativo con entregas parciales, 4) Pruebas y ajustes, 5) Despliegue y capacitación, 6) Soporte post-lanzamiento.'              
+            title: '¿Cómo es tu proceso de trabajo?', 
+            content: '1) Reunión para entender requerimientos básicos, 2) Investigación y planificación con ayuda de tutores, 3) Desarrollo en sprints cortos con revisiones periódicas, 4) Pruebas guiadas, 5) Entrega con documentación de lo aprendido'              
         },
         {
             title: '¿Puedo pedir cambios durante el desarrollo?', 
-            content: 'Sí, el proceso es flexible y permite ajustes durante el desarrollo. Se priorizan los cambios según el impacto y el cronograma acordado.'              
+            content: 'Sí, pero cambios complejos pueden requerir más tiempo ya que los implemento como parte de mi aprendizaje. Priorizamos cambios que sean buenos ejercicios prácticos para mi crecimiento.'              
         },
         {
-            title: '¿Qué tecnologías utilizas?', 
-            content: 'Trabajo con tecnologías modernas como Next.js, Node.js, React, bases de datos SQL/NoSQL, y despliegue en plataformas como Vercel, AWS o DigitalOcean, según lo que mejor se adapte a tu proyecto.'              
+            title: '¿Qué tecnologías usas actualmente?', 
+            content: 'Principalmente HTML/CSS/JavaScript básico, React iniciando con Next.js, y Firebase para bases de datos simples. Estoy aprendiendo Node.js y SQL paralelamente.'              
         }
     ]; 
 
@@ -63,18 +63,18 @@ const ServiceDetails = () => {
                             <div className="col-lg-8">
                                 <div className="service__details-wrap">
                                     <div className="service__details-thumb">
-                                        <Image src="/assets/images/service/service-details1.jpg" alt="Proyectos como Servicio" width={796} height={496} />
+                                        <Image src="/assets/images/service/service-details1.jpg" alt="Proyectos de aprendizaje" width={796} height={496} />
                                     </div>
-                                    <p className="mb-25">Ofrezco el desarrollo integral de proyectos digitales bajo demanda, ideal para emprendedores, empresas y startups que buscan soluciones rápidas, escalables y personalizadas sin preocuparse por la gestión técnica.</p>
-                                    <p className="mb-55">Me encargo de todo el ciclo de vida del proyecto: desde la conceptualización, desarrollo, pruebas, despliegue y soporte, asegurando calidad, comunicación constante y cumplimiento de plazos.</p>
+                                    <p className="mb-25">Estoy comenzando a desarrollar proyectos prácticos como parte de mi formación, ideal para pequeñas necesidades digitales donde podamos aprender y crecer juntos. Perfecto para prototipos iniciales y proyectos de baja complejidad.</p>
+                                    <p className="mb-55">Trabajo bajo la mentoría de desarrolladores experimentados, asegurando calidad en mis entregas mientras aprendo sobre gestión completa de proyectos, desde el diseño hasta el despliegue básico.</p>
                                     <div className="service__details-content">
-                                        <h3 className="title">Desarrollo y gestión de proyectos llave en mano</h3>
-                                        <p className="mb-35">Transformo tus ideas en productos digitales funcionales, utilizando metodologías ágiles y tecnologías modernas. Recibes entregas periódicas, acceso a avances y la tranquilidad de contar con un solo responsable técnico.</p>
+                                        <h3 className="title">Desarrollo Guiado de Proyectos</h3>
+                                        <p className="mb-35">Transformo tus ideas en productos funcionales simples, aplicando lo que aprendo en tiempo real. Cada proyecto incluye documentación de mi proceso de aprendizaje y mejores prácticas que voy incorporando.</p>
                                         <div className="service__details-thumb mb-55">
-                                            <Image src="/assets/images/service/service-details2.jpg" alt="Gestión de Proyectos" width={796} height={496} />
+                                            <Image src="/assets/images/service/service-details2.jpg" alt="Proyectos básicos" width={796} height={496} />
                                         </div>
-                                        <h3 className="title">Metodología y Tecnologías</h3>
-                                        <p className="mb-35">Trabajo con metodologías ágiles, comunicación transparente y herramientas colaborativas. El stack tecnológico se adapta a cada proyecto para garantizar escalabilidad, seguridad y facilidad de mantenimiento.</p>
+                                        <h3 className="title">Metodología de Aprendizaje</h3>
+                                        <p className="mb-35">Utilizo metodologías ágiles adaptadas a mi nivel, con énfasis en revisiones constantes y pair programming con mentores. El stack tecnológico se limita a lo que domino actualmente, priorizando calidad sobre complejidad.</p>
                                         <div className="video-wrap">
                                             <div className="jarallax" data-background="/assets/images/service/service-details3.jpg"></div>
                                         </div>
@@ -139,7 +139,7 @@ const ServiceDetails = () => {
                                                     <div className="icon">
                                                         <Image src="/assets/images/service/location-icon.png" alt="Discord" width={35} height={35} />
                                                     </div>
-                                                    <span className="text">Discord<br/>@maldadpurpura @navyfz</span>
+                                                    <span className="text">Discord<br/>@maldadpurpura  <br></br>@navyfz</span>
                                                 </li>
                                             </ul>
                                         </div>

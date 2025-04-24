@@ -51,7 +51,7 @@ const Testimonail2 = ({addclass}) => {
         },
         {
           subtitle: 'Configuración y Gestión', 
-          content: 'Algunas palabras',
+          content: 'Estoy muy agradecido a Arturo, ayuda muchisimo en la comunidad y propone siempre mejoras para que el servidor mejore y estoy muy contento',
           img: '/assets/images/testimonial/testi-1_3.jpg',
           name: 'hardwarejavix',
           title: 'Owner - Comunidad Discord',
