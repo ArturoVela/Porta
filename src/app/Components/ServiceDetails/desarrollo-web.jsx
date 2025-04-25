@@ -63,7 +63,7 @@ const ServiceDetails = () => {
                             <div className="col-lg-8">
                                 <div className="service__details-wrap">
                                     <div className="service__details-thumb">
-                                        <Image src="/assets/images/service/service-details1.jpg" alt="Desarrollo Web" width={796} height={496} />
+                                        <Image src="/assets/images/service/service-details1-web.jpg" alt="Desarrollo Web" width={796} height={496} />
                                     </div>
                                     <p className="mb-25">Como desarrollador web fullstack junior, estoy dando mis primeros pasos en la creación de soluciones web modernas. Me esfuerzo por aplicar buenas prácticas y aprender con cada proyecto.</p>
                                     <p className="mb-55">Mi enfoque está en crear sitios funcionales que sean accesibles y eficientes, siempre priorizando la experiencia del usuario mientras desarrollo mis habilidades.</p>
@@ -71,12 +71,12 @@ const ServiceDetails = () => {
                                         <h3 className="title">Proceso de desarrollo basado en metodologías probadas</h3>
                                         <p className="mb-35">Aunque estoy empezando en el mundo del desarrollo web, aplico procesos organizados y metódicos para asegurar que cada fase del desarrollo esté bien planificada y ejecutada.</p>
                                         <div className="service__details-thumb mb-55">
-                                            <Image src="/assets/images/service/service-details2.jpg" alt="Proceso de desarrollo" width={796} height={496} />
+                                            <Image src="/assets/images/service/service-details2-web.jpg" alt="Proceso de desarrollo" width={796} height={496} />
                                         </div>
                                         <h3 className="title">Especialización y Metodología de Trabajo</h3>
                                         <p className="mb-35">Me estoy especializando en tecnologías como Next.js, React y Node.js. Trabajo bajo una metodología ágil, aprendiendo de cada experiencia y manteniendo una comunicación constante con el cliente.</p>
                                         <div className="video-wrap">
-                                            <div className="jarallax" data-background="/assets/images/service/service-details3.jpg"></div>
+                                            <div className="jarallax" data-background="/assets/images/service/service-details3-web.jpg"></div>
                                         </div>
                                     </div>
                                 </div>

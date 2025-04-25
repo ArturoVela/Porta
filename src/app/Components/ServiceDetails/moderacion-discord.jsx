@@ -63,7 +63,7 @@ const ServiceDetails = () => {
                             <div className="col-lg-8">
                                 <div className="service__details-wrap">
                                     <div className="service__details-thumb">
-                                        <Image src="/assets/images/service/service-details1.jpg" alt="Moderación Discord" width={796} height={496} />
+                                        <Image src="/assets/images/service/service-details1-dc.jpg" alt="Moderación Discord" width={796} height={496} loading="lazy" />
                                     </div>
                                     <p className="mb-25">Como moderador experimentado de Discord, me especializo en crear y mantener comunidades seguras y activas. Implemento sistemas automatizados y estrategias de moderación efectivas para garantizar una experiencia positiva para todos los miembros.</p>
                                     <p className="mb-55">Mi enfoque se centra en construir comunidades saludables donde los usuarios puedan interactuar de manera segura y divertida, mientras mantenemos un ambiente libre de toxicidad y comportamientos inadecuados.</p>
@@ -71,12 +71,12 @@ const ServiceDetails = () => {
                                         <h3 className="title">Gestión profesional de comunidades Discord</h3>
                                         <p className="mb-35">Ofrezco un servicio integral de moderación que incluye configuración de bots, sistemas de verificación, gestión de roles, y estrategias de crecimiento comunitario. Cada servidor recibe atención personalizada según sus necesidades específicas.</p>
                                         <div className="service__details-thumb mb-55">
-                                            <Image src="/assets/images/service/service-details2.jpg" alt="Gestión de Discord" width={796} height={496} />
+                                            <Image src="/assets/images/service/service-details2-dc.jpg" alt="Gestión de Discord" width={796} height={496} loading="lazy" />
                                         </div>
                                         <h3 className="title">Herramientas y Metodología de Moderación</h3>
                                         <p className="mb-35">Utilizo una combinación de bots de moderación avanzados y estrategias manuales para mantener el orden. Implemento sistemas de tickets, niveles de usuario, y eventos comunitarios para mantener el engagement.</p>
                                         <div className="video-wrap">
-                                            <div className="jarallax" data-background="/assets/images/service/service-details3.jpg"></div>
+                                            <div className="jarallax" data-background="/assets/images/service/service-details3-dc.jpg" loading="lazy"></div>
                                         </div>
                                     </div>
                                 </div>

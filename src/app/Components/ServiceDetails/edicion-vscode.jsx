@@ -63,7 +63,7 @@ const ServiceDetails = () => {
                             <div className="col-lg-8">
                                 <div className="service__details-wrap">
                                     <div className="service__details-thumb">
-                                        <Image src="/assets/images/service/service-details1.jpg" alt="Aprendiendo VS Code" width={796} height={496} />
+                                        <Image src="/assets/images/service/service-details1-vs.jpg" alt="Aprendiendo VS Code" width={796} height={496} loading="lazy" />
                                     </div>
                                     <p className="mb-25">Como desarrollador junior entusiasta, estoy aprendiendo a personalizar VS Code y quiero compartir contigo lo que he descubierto hasta ahora. Mi objetivo es ayudarte a crear un entorno de trabajo más cómodo mientras aprendemos juntos.</p>
                                     <p className="mb-55">Estoy explorando diferentes configuraciones y extensiones que pueden hacer nuestra codificación más eficiente. Aunque todavía estoy aprendiendo, puedo mostrarte las herramientas básicas que me han ayudado en mis primeros proyectos.</p>
@@ -71,12 +71,12 @@ const ServiceDetails = () => {
                                         <h3 className="title">Mis Primeros Pasos en Personalización</h3>
                                         <p className="mb-35">Estoy experimentando con configuraciones básicas de VS Code. He aprendido a cambiar temas, instalar extensiones útiles y crear algunos atajos simples. ¡Acompáñame en este proceso de aprendizaje!</p>
                                         <div className="service__details-thumb mb-55">
-                                            <Image src="/assets/images/service/service-details2.jpg" alt="Configuración básica" width={796} height={496} />
+                                            <Image src="/assets/images/service/service-details2-vs.jpg" alt="Configuración básica" width={796} height={496} loading="lazy" />
                                         </div>
                                         <h3 className="title">Descubriendo Funcionalidades</h3>
                                         <p className="mb-35">Actualmente estoy explorando cómo integrar herramientas básicas de desarrollo y sistemas de control de versiones. Compartiré contigo los flujos de trabajo simples que he implementado con éxito en mis proyectos iniciales.</p>
                                         <div className="video-wrap">
-                                            <div className="jarallax" data-background="/assets/images/service/service-details3.jpg"></div>
+                                            <div className="jarallax" data-background="/assets/images/service/service-details3-vs.jpg" loading="lazy"></div>
                                         </div>
                                     </div>
                                 </div>

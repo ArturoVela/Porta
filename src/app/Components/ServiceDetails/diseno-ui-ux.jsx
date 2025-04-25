@@ -63,7 +63,7 @@ const ServiceDetails = () => {
                             <div className="col-lg-8">
                                 <div className="service__details-wrap">
                                     <div className="service__details-thumb">
-                                        <Image src="/assets/images/service/service-details1.jpg" alt="Diseño UI/UX" width={796} height={496} />
+                                        <Image src="/assets/images/service/service-details1-ux.jpg" alt="Diseño UI/UX" width={796} height={496} loading="lazy"/>
                                     </div>
                                     <p className="mb-25">
                                         Como diseñador UI/UX junior, estoy dando mis primeros pasos en el mundo del diseño digital. Me encanta aprender y experimentar con formas de hacer que las interfaces sean más amigables y visualmente atractivas.
@@ -77,14 +77,14 @@ const ServiceDetails = () => {
                                             Estoy aprendiendo a aplicar metodologías de diseño centrado en el usuario. Me interesa mucho investigar y entender qué necesitan las personas para diseñar algo que realmente les sirva y les guste.
                                         </p>
                                         <div className="service__details-thumb mb-55">
-                                            <Image src="/assets/images/service/service-details2.jpg" alt="Proceso de diseño" width={796} height={496} />
+                                            <Image src="/assets/images/service/service-details2-ux.jpg" alt="Proceso de diseño" width={796} height={496} loading="lazy"/>
                                         </div>
                                         <h3 className="title">Metodología y Herramientas</h3>
                                         <p className="mb-35">
                                             Uso herramientas como Figma y Adobe XD para practicar y mejorar mis habilidades. Cada nuevo proyecto es una oportunidad para aprender algo nuevo y afinar mi forma de trabajar.
                                         </p>
                                         <div className="video-wrap">
-                                            <div className="jarallax" data-background="/assets/images/service/service-details3.jpg"></div>
+                                            <div className="jarallax" data-background="/assets/images/service/service-details3-ux.jpg" loading="lazy"></div>
                                         </div>
                                     </div>
                                 </div>

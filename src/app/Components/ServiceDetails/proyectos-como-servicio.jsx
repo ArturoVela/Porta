@@ -63,7 +63,7 @@ const ServiceDetails = () => {
                             <div className="col-lg-8">
                                 <div className="service__details-wrap">
                                     <div className="service__details-thumb">
-                                        <Image src="/assets/images/service/service-details1.jpg" alt="Proyectos de aprendizaje" width={796} height={496} />
+                                        <Image src="/assets/images/service/service-details1-ass.jpg" alt="Proyectos de aprendizaje" width={796} height={496} loading="lazy"/>
                                     </div>
                                     <p className="mb-25">Estoy comenzando a desarrollar proyectos prácticos como parte de mi formación, ideal para pequeñas necesidades digitales donde podamos aprender y crecer juntos. Perfecto para prototipos iniciales y proyectos de baja complejidad.</p>
                                     <p className="mb-55">Trabajo bajo la mentoría de desarrolladores experimentados, asegurando calidad en mis entregas mientras aprendo sobre gestión completa de proyectos, desde el diseño hasta el despliegue básico.</p>
@@ -71,12 +71,12 @@ const ServiceDetails = () => {
                                         <h3 className="title">Desarrollo Guiado de Proyectos</h3>
                                         <p className="mb-35">Transformo tus ideas en productos funcionales simples, aplicando lo que aprendo en tiempo real. Cada proyecto incluye documentación de mi proceso de aprendizaje y mejores prácticas que voy incorporando.</p>
                                         <div className="service__details-thumb mb-55">
-                                            <Image src="/assets/images/service/service-details2.jpg" alt="Proyectos básicos" width={796} height={496} />
+                                            <Image src="/assets/images/service/service-details2-ass.jpg" alt="Proyectos básicos" width={796} height={496} loading="lazy"/>
                                         </div>
                                         <h3 className="title">Metodología de Aprendizaje</h3>
                                         <p className="mb-35">Utilizo metodologías ágiles adaptadas a mi nivel, con énfasis en revisiones constantes y pair programming con mentores. El stack tecnológico se limita a lo que domino actualmente, priorizando calidad sobre complejidad.</p>
                                         <div className="video-wrap">
-                                            <div className="jarallax" data-background="/assets/images/service/service-details3.jpg"></div>
+                                            <div className="jarallax" data-background="/assets/images/service/service-details3-ass.jpg" loading="lazy"></div>
                                         </div>
                                     </div>
                                 </div>

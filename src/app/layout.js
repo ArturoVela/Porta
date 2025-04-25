@@ -37,23 +37,17 @@ export default function RootLayout({ children }) {
       <head>
         <meta name="author" content="Arturo Vela" />
         <link rel="icon" href="/favicon.ico" sizes="any" />
-
-        {/* Meta etiquetas Open Graph */}
         <meta property="og:title" content={metadata.openGraph.title} />
         <meta property="og:description" content={metadata.openGraph.description} />
         <meta property="og:url" content={metadata.openGraph.url} />
         <meta property="og:image" content={metadata.openGraph.image} />
         <meta property="og:type" content={metadata.openGraph.type} />
-
-        {/* Meta etiquetas para Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={metadata.openGraph.title} />
         <meta name="twitter:description" content={metadata.openGraph.description} />
         <meta name="twitter:image" content={metadata.openGraph.image} />
-
-        {/* Meta etiquetas adicionales para otras plataformas */}
         <meta property="og:site_name" content="Arturo Vela - Portafolio Profesional" />
-        <meta name="theme-color" content="#000000" /> {/* Color para navegadores y plataformas */}
+        <meta name="theme-color" content="#000000" />
       </head>
       <body className={`${manrope.variable} ${playfair_display.variable}`}>
         {children}
