@@ -13,7 +13,7 @@ const projectContent = [
         img:'/assets/images/portfolio/portfolio3_6_pacha.jpg',
         title:"Pacha's Café",
         category:'Sistema de Ventas',
-        slug: 'pachas-cafe-web'
+        slug: 'pachas-cafe'
     },   
     // {
     //     addclass:'col-lg-5',

@@ -51,7 +51,7 @@ const Project2 = () => {
             tag:'Dieseño web, Interfaz de usuario (UI)',
             year:'( 2022 )',              
             category:'Web',
-            slug: 'municipio-de-rioja'                
+            slug: 'municipalidad-de-rioja'                
         },
         {
             title:'Discord', 
