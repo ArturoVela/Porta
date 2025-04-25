@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 const BlogDetails = () => {
     return (
@@ -37,9 +38,26 @@ const BlogDetails = () => {
                                     <span className="text">8 min</span>
                                 </div>
                             </li>
+                            <div className="about_content">
+                                <p className="about-text wow text-anim-left mt-50 vxs-mt-30"> </p>
+                                <div className="btn-wrap btn-bounce-1 home-circle-btn">
+                                    <Link className="circle-btn btn gsap-magnetic" href='https://1drv.ms/b/s!AhTBs2k3EIAxjsdX2G-vrZa9PEsKQQ?e=XMTisa' target="_blank">
+                                        <span className="link-effect">
+                                            <span className="effect-1">Leer más</span>
+                                            <span className="effect-1">Leer más</span>
+                                        </span>
+                                        <Image src="/assets/images/icons/arrow-left-top.svg" alt="img" width={10} height={10}   />
+                                    </Link>
+                                </div>
+                            </div>
+
+                            
+                           
                         </ul>
                     </div>
+                   
                 </div>
+                
                 <div className="blog-details-thumb mb-50">
                     <Image className="w-100" src="/assets/images/blog/blog-details1-tesis-22-04-2025.jpg" alt="img" width={1910} height={846} />
                 </div>
@@ -81,9 +99,11 @@ const BlogDetails = () => {
                                 
                                 <p className="mt-30 mb-60">Esta investigación representa un avance significativo en la aplicación de tecnologías de inteligencia artificial para la agricultura de precisión, ofreciendo una herramienta valiosa para la gestión agrícola y la seguridad alimentaria.</p>
                                 <h3 className="title mb-25 mt-60">Anotaciones del Docente</h3>
+                                
                                 <figure className="details-thumb mb-60"><Image className="br-10" src="/assets/images/blog/blog-details3-tesis-22-04-2025.jpg" alt="img" width={1320} height={650} /></figure>
-
+                                
                             </div>
+                            
                         </div>
                     </div>
                 </div>

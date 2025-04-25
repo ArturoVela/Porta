@@ -76,7 +76,7 @@ const Project3 = () => {
                                         <div className="portfolio-wraper-3">
                                             <div className="portfolio-thumb style-2 wow img-custom-anim-left">
                                                 <Link href={`/project/${item.slug}`}>
-                                                    <img alt="portfolio" src={item.img} />
+                                                    <img alt="portfolio" src={item.img} loading="lazy" />
                                                 </Link>
                                                 <div className="portfolio-thumb-view">
                                                     <Link href={`/project/${item.slug}`} className="lightbox-image" data-fancybox="gallery">

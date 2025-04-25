@@ -80,7 +80,7 @@ const Blog3 = () => {
                                             <Link href={`/blog/${post.slug}`}>{post.title}</Link>
                                         </h3>
                                         <figure className="blog-thumb">
-                                            <Image src={post.image} alt={post.title} width={798} height={448} />
+                                            <Image src={post.image} alt={post.title} width={798} height={448} loading="lazy"/>
                                         </figure>
                                         <div className="blog-content">
                                             <p className="blog-text">{post.excerpt}</p>
@@ -158,7 +158,7 @@ const Blog3 = () => {
                                             <div key={post.id} className="sidebar__post-item">
                                                 <div className="sidebar__post-thumb">
                                                     <Link href={`/blog/${post.slug}`}>
-                                                        <Image src={post.image} alt={post.title} width={100} height={100} />
+                                                        <Image src={post.image} alt={post.title} width={100} height={100} loading="lazy"/>
                                                     </Link>
                                                 </div>
                                                 <div className="sidebar__post-content">
