@@ -43,7 +43,7 @@ const ProjectDetails = () => {
                     <div className="row details-thumb">
                         <div className="col-xl-12">
                             <div className="project-inner-thumb mb-50 wow img-custom-anim-top">
-                                <Image className="w-100" src="/assets/images/portfolio/details-thumb_pacha.jpg" alt="Dashboard Pacha's Café" width={1320} height={850} />
+                                <Image className="w-100" src="/assets/images/portfolio/details-thumb_pacha.jpg" alt="Dashboard Pacha's Café" width={1320} height={850} loading="lazy"/>
                             </div>
                         </div>
                     </div>
@@ -79,7 +79,7 @@ const ProjectDetails = () => {
                             </ul>
                             <p>  </p>
                             <figure className="thumb lg-mb-0 md-mb-30">
-                                <Image src="/assets/images/portfolio/portfolio4_1_pacha.jpg" alt="App Móvil Pacha's Café" width={648} height={320} />
+                                <Image src="/assets/images/portfolio/portfolio4_1_pacha.jpg" alt="App Móvil Pacha's Café" width={648} height={320} loading="lazy"/>
                             </figure>
                         </div>
                         <div className="col-lg-12">
@@ -92,7 +92,7 @@ const ProjectDetails = () => {
                                     <li>50% aumento en pedidos online</li>
                                 </ul>
                                 <figure className="result-thumb mt-60 mb-60">
-                                    <Image src="/assets/images/portfolio/details-thumb-2_pacha.jpg" alt="Analíticas Pacha's Café" width={1320} height={650} />
+                                    <Image src="/assets/images/portfolio/details-thumb-2_pacha.jpg" alt="Analíticas Pacha's Café" width={1320} height={650} loading="lazy"/>
                                 </figure>
                             </div>
                         </div>

@@ -52,7 +52,7 @@ const ProjectDetails = () => {
                     <div className="row details-thumb">
                         <div className="col-xl-12">
                             <div className="project-inner-thumb mb-50 wow img-custom-anim-top">
-                                <Image className="w-100" src="/assets/images/portfolio/details-thumb_pachaweb.jpg" alt="Página principal Pacha's Café" width={1320} height={850} />
+                                <Image className="w-100" src="/assets/images/portfolio/details-thumb_pachaweb.jpg" alt="Página principal Pacha's Café" width={1320} height={850} loading="lazy" />
                             </div>
                         </div>
                     </div>
@@ -91,7 +91,7 @@ const ProjectDetails = () => {
                             <p> </p>
                             <figure className="thumb lg-mb-0 md-mb-30">
                                 
-                                <Image src="/assets/images/portfolio/portfolio4_1_pacha.jpg" alt="Versión móvil del sitio" width={648} height={320} />
+                                <Image src="/assets/images/portfolio/portfolio4_1_pacha.jpg" alt="Versión móvil del sitio" width={648} height={320} loading="lazy"/>
                             </figure>
                         </div>
                         
@@ -106,7 +106,7 @@ const ProjectDetails = () => {
                                     <li>Mejora en tiempo de carga (1.8s)</li>
                                 </ul>
                                 <figure className="result-thumb mt-60 mb-60">
-                                    <Image src="/assets/images/portfolio/details-thumb-2_pachaweb.jpg" alt="Estadísticas de rendimiento" width={1320} height={650} />
+                                    <Image src="/assets/images/portfolio/details-thumb-2_pachaweb.jpg" alt="Estadísticas de rendimiento" width={1320} height={650} loading="lazy"/>
                                 </figure>
                             </div>
                         </div>
