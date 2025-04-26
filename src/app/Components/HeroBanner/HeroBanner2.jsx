@@ -6,7 +6,7 @@ const HeroBanner2 = () => {
     const heroContent = {
         number:'+51 963 653 154',
         title1:'¡Hola!',
-     // title2:'Yo soy',
+        title2:'',
         title:'ARTURO VELA',
         title3:'velaarturo70@gmail.com',
         img:'/assets/images/hero/hero-img.png',
