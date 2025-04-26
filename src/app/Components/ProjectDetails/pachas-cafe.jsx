@@ -92,7 +92,7 @@ const ProjectDetails = () => {
                                     <li>50% aumento en pedidos online</li>
                                 </ul>
                                 <figure className="result-thumb mt-60 mb-60">
-                                    <Image src="/assets/images/portfolio/details-thumb-2_pacha.jpg" alt="Analíticas Pacha's Café" width={1320} height={650} loading="lazy"/>
+                                    <Image src="/assets/images/portfolio/details-thumb-2_pacha.jpg" alt="Analíticas Pacha's Café" width={1320} height={850} loading="lazy"/>
                                 </figure>
                             </div>
                         </div>

@@ -87,6 +87,7 @@ const ProjectDetails = () => {
                                 <li>Roles por reacción</li>
                                 <li>Logs detallados de actividad</li>
                             </ul>
+                            <p> </p>
                             <figure className="thumb lg-mb-0 md-mb-30">
                                 <Image src="/assets/images/portfolio/portfolio4_1_dc.jpg" alt="Interfaz de bots" width={648} height={320} loading="lazy"/>
                             </figure>
@@ -103,7 +104,7 @@ const ProjectDetails = () => {
                                     <li>0 incidentes de spam/raids</li>
                                 </ul>
                                 <figure className="result-thumb mt-60 mb-60">
-                                    <Image src="/assets/images/portfolio/details-thumb-2_dc.jpg" alt="Estadísticas de actividad" width={1320} height={650} loading="lazy" />
+                                    <Image src="/assets/images/portfolio/details-thumb-2_dc.jpg" alt="Estadísticas de actividad" width={1320} height={850} loading="lazy" />
                                 </figure>
                             </div>
                         </div>

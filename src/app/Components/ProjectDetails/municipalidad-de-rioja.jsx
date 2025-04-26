@@ -87,8 +87,9 @@ const ProjectDetails = () => {
                                 <li>Directorio de autoridades y áreas</li>
                                 <li>Sección de transparencia pública</li>
                             </ul>
+                            <p> </p>
                             <figure className="thumb lg-mb-0 md-mb-30">
-                                <Image src="/assets/images/portfolio/portfolio4_1_muni.jpg" alt="Versión móvil del sitio" width={648} height={320} loading="lazy"/>
+                                <Image src="/assets/images/portfolio/portfolio4_1_muni.jpg" alt="Versión móvil del sitio" width={648} height={420} loading="lazy"/>
                             </figure>
                         </div>
                         
@@ -103,7 +104,7 @@ const ProjectDetails = () => {
                                     <li>4.8/5 en satisfacción usuaria</li>
                                 </ul>
                                 <figure className="result-thumb mt-60 mb-60">
-                                    <Image src="/assets/images/portfolio/details-thumb-2_muni.jpg" alt="Estadísticas de uso" width={1320} height={650} loading="lazy" />
+                                    <Image src="/assets/images/portfolio/details-thumb-2_muni.jpg" alt="Estadísticas de uso" width={1320} height={850} loading="lazy" />
                                 </figure>
                             </div>
                         </div>

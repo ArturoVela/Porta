@@ -90,7 +90,7 @@ const ProjectDetails = () => {
                                     <li>65% optimización en tiempo de gestión</li>
                                 </ul>
                                 <figure className="result-thumb mt-60 mb-60">
-                                    <Image src="/assets/images/portfolio/details-thumb-2_cana.jpg" alt="Analíticas Caña Wasky" width={1320} height={650} loading="lazy"/>
+                                    <Image src="/assets/images/portfolio/details-thumb-2_cana.jpg" alt="Analíticas Caña Wasky" width={1320} height={850} loading="lazy"/>
                                 </figure>
                             </div>
                         </div>
