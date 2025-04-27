@@ -82,7 +82,7 @@ const HeroBanner2 = () => {
                             
                             <h1 className="hero-title wow img-custom-anim-left" data-wow-delay="0.1s" data-wow-duration="1.5s">{heroContent.title} 
                             <div className="btn-wrap fade_right">
-                                <Link href="https://1drv.ms/b/s!AhTBs2k3EIAxjthfmoaQGB-VJxbvKA?e=jyDFsy"  className="link-btn">
+                                <Link href="https://1drv.ms/b/s!AhTBs2k3EIAxjthfmoaQGB-VJxbvKA?e=jyDFsy"  target="_blank" className="link-btn">
                                     <span className="link-effect">
                                         <span className="effect-1">{heroContent.title7}</span>
                                         <span className="effect-1">{heroContent.title7}</span>

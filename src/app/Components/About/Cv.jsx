@@ -31,7 +31,7 @@ const About2 = () => {
                             <div className="about_content">
                                 <p className="about-text wow text-anim-left mt-50 vxs-mt-30">{aboutContent.content}</p>
                                 <div className="btn-wrap btn-bounce-1 home-circle-btn">
-                                    <Link className="circle-btn btn gsap-magnetic" href={aboutContent.btnurl}>
+                                    <Link className="circle-btn btn gsap-magnetic" href={aboutContent.btnurl} target="_blank">
                                         <span className="link-effect">
                                             <span className="effect-1">{aboutContent.btnname}</span>
                                             <span className="effect-1">{aboutContent.btnname}</span>
