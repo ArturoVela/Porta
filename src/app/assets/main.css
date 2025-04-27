@@ -67084,6 +67084,7 @@ a.text-theme:hover,
 
 
 .about-img-1-1 img {
+    border-radius: 10px;
     mask-image: linear-gradient(black 85%, transparent);
     filter: 
       drop-shadow(0 0 5px rgba(0, 0, 0, 0.137))

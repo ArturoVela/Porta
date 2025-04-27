@@ -4,14 +4,13 @@ import Link from "next/link";
 const About2 = () => {
 
     const aboutContent = {
-        title1: "Soy un",
-        title2: 'ingeniero en sistemas',
-        title3: 'y desarrollador web de Perú.',
-        content: 'Me encanta crear experiencias digitales limpias, accesibles y funcionales. Trabajo con Next.js, Tailwind y Node.js, y también realizo moderación en comunidades de Discord. Actualmente estoy explorando el desarrollo de servicios tipo SaaS.',
-        btnname: 'Ver proyectos',
-        btnurl: '/project',
-        title4: 'UNA FOTO MÍA',
-        img: '/assets/images/about/about_1-1.jpg',
+        title1: "Descarga mi",
+        title2: 'curriculum vitae',
+        title3: 'y conoce mis proyectos.',
+        content: "Soy desarrollador web, enfocado en crear sitios web responsivos, accesibles y optimizados. Trabajo con tecnologías como Next.js, Tailwind y Node.js. He trabajado directamente con clientes y actualmente estoy explorando el desarrollo de servicios SaaS.",
+        btnname: 'Descargar CV',
+        btnurl: 'https://1drv.ms/b/s!AhTBs2k3EIAxjthfmoaQGB-VJxbvKA?e=jyDFsy',
+        img: '/assets/images/about/about_1-1-cv.jpg',
       };
       
 
@@ -19,6 +18,12 @@ const About2 = () => {
         <section className="about-area space bg-theme2" id="about-area-1">
         <div className="container">
             <div className="row align-items-center">
+                <p> </p>
+                <div className="col-lg-5">
+                    <div className="about-img-1-1 img-custom-anim-right wow" data-wow-delay="0.1s" data-wow-duration="1.5s">
+                    <Image src={aboutContent.img} alt="img" width={536} height={656}   />
+                    </div>
+                </div>
                 <div className="col-lg-7">
                     <div className="about-content-wrap ">
                         <div className="title-area mb-0">
@@ -35,17 +40,11 @@ const About2 = () => {
                                     </Link>
                                 </div>
                             </div>
-                            <div className="img-btn mt-50">
-                                <a href="#">{aboutContent.title4} <Image src="/assets/images/icons/btn-right-arrow.svg" alt="img" width={64} height={26}   /></a>
-                            </div>
+                            
                         </div>
                     </div>
                 </div>
-                <div className="col-lg-5">
-                    <div className="about-img-1-1 img-custom-anim-right wow" data-wow-delay="0.1s" data-wow-duration="1.5s">
-                    <Image src={aboutContent.img} alt="img" width={536} height={656}   />
-                    </div>
-                </div>
+                
             </div>
         </div>
     </section>

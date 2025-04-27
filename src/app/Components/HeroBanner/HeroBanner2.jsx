@@ -1,18 +1,20 @@
 import Image from "next/image";
+import Link from "next/link";
+import React from "react";
 
 const HeroBanner2 = () => {
 
 
     const heroContent = {
         number:'+51 963 653 154',
-        title1:'¡Hola!',
-        title2:'',
+        title2:' ',
         title:'ARTURO VELA',
         title3:'velaarturo70@gmail.com',
         img:'/assets/images/hero/hero-img.png',
         content:'Soy ingeniero en sistemas y desarrollador web enfocado en crear soluciones prácticas, seguras y visualmente atractivas, combinando tecnología con diseño funcional.',
         title5:'ING. SISTEMAS',
         title6:'Con sede en perú',
+        title7:'Curriculum',
       }
 
     return (
@@ -77,8 +79,18 @@ const HeroBanner2 = () => {
                 <div className="hero-style1">
                     <div className="row">
                         <div className="col-lg-12">
-                            <p className="hero-sub_title">{heroContent.title1} <Image src="/assets/images/hero/hand.png" alt="img" width={40} height={40}   />{heroContent.title2}</p>
-                            <h1 className="hero-title wow img-custom-anim-left" data-wow-delay="0.1s" data-wow-duration="1.5s">{heroContent.title}</h1>
+                            
+                            <h1 className="hero-title wow img-custom-anim-left" data-wow-delay="0.1s" data-wow-duration="1.5s">{heroContent.title} 
+                            <div className="btn-wrap fade_right">
+                                <Link href="https://1drv.ms/b/s!AhTBs2k3EIAxjthfmoaQGB-VJxbvKA?e=jyDFsy"  className="link-btn">
+                                    <span className="link-effect">
+                                        <span className="effect-1">{heroContent.title7}</span>
+                                        <span className="effect-1">{heroContent.title7}</span>
+                                    </span>
+                                    <Image src="/assets/images/icons/arrow-left-top.svg" alt="img" width={10} height={26}   />
+                                </Link>
+                            </div>
+                            </h1>
                             <div className="row align-items-center justify-content-center">
                                 <div className="col-lg-4">
                                     <div className="contact_mail">
