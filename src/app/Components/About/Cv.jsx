@@ -21,7 +21,7 @@ const About2 = () => {
                 <p> </p>
                 <div className="col-lg-5">
                     <div className="about-img-1-1 img-custom-anim-right wow" data-wow-delay="0.1s" data-wow-duration="1.5s">
-                    <Image src={aboutContent.img} alt="img" width={536} height={656}   />
+                    <Image src={aboutContent.img} alt="img" width={536} height={776}   />
                     </div>
                 </div>
                 <div className="col-lg-7">

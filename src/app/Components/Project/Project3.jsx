@@ -9,6 +9,20 @@ const projectContent = [
         slug: 'cana-wasky'
     },
     {
+        addclass:'col-lg-7',
+        img:'/assets/images/portfolio/portfolio3_4_pachaweb.jpg',
+        title:"Pacha's Café",
+        category:'Pagina web',
+        slug: 'pachas-cafe-web'
+    },
+    {
+        addclass:'col-lg-5',
+        img:'/assets/images/portfolio/portfolio3_5_rioja.jpg',
+        title:'Municipalidad de Rioja ',
+        category:'Pagina web',
+        slug: 'municipalidad-de-rioja'
+    },
+    {
         addclass:'col-lg-12',
         img:'/assets/images/portfolio/portfolio3_6_pacha.jpg',
         title:"Pacha's Café",
@@ -35,21 +49,7 @@ const projectContent = [
         title:'Discord ',
         category:'Servidor Discord',
         slug: 'discord'
-    },
-    {
-        addclass:'col-lg-7',
-        img:'/assets/images/portfolio/portfolio3_4_pachaweb.jpg',
-        title:"Pacha's Café",
-        category:'Pagina web',
-        slug: 'pachas-cafe-web'
-    },
-    {
-        addclass:'col-lg-5 text-lg-end',
-        img:'/assets/images/portfolio/portfolio3_5_rioja.jpg',
-        title:'Municipalidad de Rioja ',
-        category:'Pagina web',
-        slug: 'municipalidad-de-rioja'
-    },
+    }
 ];
 
 const Project3 = () => {
