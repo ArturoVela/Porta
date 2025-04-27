@@ -17,8 +17,7 @@ const page = () => {
             <Experience2></Experience2>
             <Faq1></Faq1>
 
-            {/* <Award1></Award1> 
-             en un furuto poner premios  */}
+            <Award1></Award1> 
 
             <Testimonail2
                 addclass="testimonial-area space bg-theme2"
