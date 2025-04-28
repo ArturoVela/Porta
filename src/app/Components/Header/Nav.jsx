@@ -23,6 +23,11 @@ export default function Nav({ setMobileToggle }) {
               Curriculum Vitae
               </Link>
             </li>
+            <li>
+              <Link href="/eventos" onClick={() => setMobileToggle(false)}>
+              Eventos
+              </Link>
+            </li>
             </ul>  
         </DropDown>          
       </li>       

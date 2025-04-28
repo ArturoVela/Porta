@@ -1,5 +1,5 @@
 import About3 from '@/app/Components/About/About3';
-import Award1 from '@/app/Components/Award/Award1';
+import Eventos from '@/app/Components/Eventos/Eventos';
 import Brand2 from '@/app/Components/Brand/Brand2';
 import Counter1 from '@/app/Components/Counter/Counter1';
 import Experience2 from '@/app/Components/Experience/Experience';
@@ -17,7 +17,7 @@ const page = () => {
             <Experience2></Experience2>
             <Faq1></Faq1>
 
-            <Award1></Award1> 
+            <Eventos></Eventos> 
 
             <Testimonail2
                 addclass="testimonial-area space bg-theme2"
