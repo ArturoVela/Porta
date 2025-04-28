@@ -19,7 +19,7 @@ const projectContent = [
        
     {
         addclass:'col-lg-5',
-        img:'/assets/images/portfolio/portfolio3_1.jpg',
+        img:'/assets/images/eventos/eventos1-1-xpertus.jpg',
         title:'Xpertus glexrobotics',
         category:'Robótica',
         slug: 'xpertus-glexrobotics'
@@ -57,7 +57,7 @@ const Eventos2 = () => {
                                         <div className="portfolio-wraper-3">
                                             <div className="portfolio-thumb style-2 wow img-custom-anim-left">
                                                 <Link href={`/eventos/${item.slug}`}>
-                                                    <img alt="portfolio" src={item.img} loading="lazy" />
+                                                    <img alt="Eventos" src={item.img} loading="lazy" style={{ borderRadius: '20px' }}/>
                                                 </Link>
                                                 <div className="portfolio-thumb-view">
                                                     <Link href={`/eventos/${item.slug}`} className="lightbox-image" data-fancybox="gallery">

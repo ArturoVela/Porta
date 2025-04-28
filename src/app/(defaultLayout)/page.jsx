@@ -21,9 +21,9 @@ const page = () => {
            <Project2></Project2> 
            <Brand1></Brand1>      
            <Services2></Services2> 
-           {/* <Pricing2
+           <Pricing2
                 addclass="pricing-area space"
-            ></Pricing2>   */}
+            ></Pricing2>  
              <Testimonail2
                 addclass="testimonial-area space bg-theme2"
             ></Testimonail2>   

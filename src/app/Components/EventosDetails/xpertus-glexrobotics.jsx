@@ -51,9 +51,17 @@ const ProjectDetails = () => {
                     </div>
                     <div className="row details-thumb">
                         <div className="col-xl-12">
-                            <div className="project-inner-thumb mb-50 wow img-custom-anim-top">
-                                <Image className="w-100" src="/assets/images/portfolio/details-thumb.jpg" alt="Exposición Robótica Tarapoto" width={1320} height={850} loading="lazy" />
+                        <div className="project-inner-thumb mb-50 wow img-custom-anim-top">
+                        <div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden', maxWidth: '100%' }}>
+                                <iframe 
+                                    style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 0 }}
+                                    src="https://www.youtube.com/embed/-zD2eUmQJ-w"
+                                    title="Exposición Robótica Tarapoto"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                    allowFullScreen
+                                ></iframe>
                             </div>
+                        </div>
                         </div>
                     </div>
                     <div className="row justify-content-between">
@@ -88,9 +96,9 @@ const ProjectDetails = () => {
                                 <li>Networking con expertos </li>
                             </ul>
                             <p> </p>
-                            <figure className="thumb lg-mb-0 md-mb-30">
+                            {/* <figure className="thumb lg-mb-0 md-mb-30">
                                 <Image src="/assets/images/portfolio/portfolio4_1.jpg" alt="Exposición robótica móvil" width={648} height={420} loading="lazy" />
-                            </figure>
+                            </figure> */}
                         </div>
 
                         <div className="col-lg-12">
@@ -104,7 +112,15 @@ const ProjectDetails = () => {
                                     <li>Reconocimiento por participación destacada</li>
                                 </ul>
                                 <figure className="result-thumb mt-60 mb-60">
-                                    <Image src="/assets/images/portfolio/details-thumb-2.jpg" alt="Resultados exposición robótica" width={1320} height={850} loading="lazy" />
+                                    <div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden', maxWidth: '100%' }}>
+                                        <iframe 
+                                            style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 0 }}
+                                            src="https://www.youtube.com/embed/_zpYOGV0vYM"
+                                            title="YouTube Shorts - Exposición Robótica"
+                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                            allowFullScreen
+                                        ></iframe>
+                                    </div>
                                 </figure>
                             </div>
                         </div>

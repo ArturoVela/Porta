@@ -10,7 +10,7 @@ const HeroBanner2 = () => {
         title2:' ',
         title:'ARTURO VELA',
         title3:'velaarturo70@gmail.com',
-        img:'/assets/images/hero/hero-img.png',
+        img:'/assets/images/hero/hero-img.jpg',
         content:'Soy ingeniero en sistemas y desarrollador web enfocado en crear soluciones prácticas, seguras y visualmente atractivas, combinando tecnología con diseño funcional.',
         title5:'ING. SISTEMAS',
         title6:'Con sede en perú',
@@ -99,7 +99,7 @@ const HeroBanner2 = () => {
                                 </div>
                                 <div className="col-lg-4">
                                     <div className="hero-thumb text-center">
-                                    <Image src={heroContent.img} alt="img" width={360} height={240}   />
+                                    <Image src={heroContent.img} alt="img" width={360} height={240}   style={{ borderRadius: '30px' }}/>
                                     </div>
                                 </div>
                                 <div className="col-lg-4">
