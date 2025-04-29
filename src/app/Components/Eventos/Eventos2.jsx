@@ -19,7 +19,7 @@ const projectContent = [
        
     {
         addclass:'col-lg-5',
-        img:'/assets/images/eventos/eventos1-1-xpertus.jpg',
+        img:'/assets/images/eventos/Eventos1-1-xpertus.jpg',
         title:'Xpertus glexrobotics',
         category:'Robótica',
         slug: 'xpertus-glexrobotics'
