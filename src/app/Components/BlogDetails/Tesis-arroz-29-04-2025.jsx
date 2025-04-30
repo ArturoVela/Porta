@@ -7,6 +7,16 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 
+// Constantes reutilizables
+const AUTHOR_NAME = "Arturo Vela";
+const POST_DATE = "29 abril, 2025";
+const READ_TIME = "6 min";
+const COVER_IMAGE = "/assets/images/blog/blog-details1-tesis-29-04-2025.jpg";
+const INTERVIEW_IMAGE = "/assets/images/blog/blog-details3-tesis-22-04-2025.jpg";
+const AUTHOR_THUMB = "/assets/images/blog/thumb.jpg";
+const DOWNLOAD_LINK = "https://1drv.ms/b/s!AhTBs2k3EIAxjsdX2G-vrZa9PEsKQQ?e=XMTisa";
+const ARROW_ICON = "/assets/images/icons/arrow-left-top.svg";
+
 export default async function BlogDetails() {
   const comments = await getComments();
   return (
@@ -30,49 +40,37 @@ export default async function BlogDetails() {
             <ul className="info-items xs-py-30 space-bottom">
               <li className="item">
                 <div className="thumb">
-                  <Image
-                    src="/assets/images/blog/thumb.jpg"
-                    alt="img"
-                    width={75}
-                    height={75}
-                  />
+                  <Image src={AUTHOR_THUMB} alt="img" width={75} height={75} />
                 </div>
                 <div className="info">
                   <span className="title">Escrito por</span>
-                  <span className="text">Arturo Vela</span>
+                  <span className="text">{AUTHOR_NAME}</span>
                 </div>
               </li>
               <li className="item">
                 <div className="info">
                   <span className="title">Publicado</span>
-                  <span className="text">29 abril, 2025</span>
+                  <span className="text">{POST_DATE}</span>
                 </div>
               </li>
               <li className="item">
                 <div className="info">
                   <span className="title">Lectura</span>
-                  <span className="text">6 min</span>
+                  <span className="text">{READ_TIME}</span>
                 </div>
               </li>
               <div className="about_content">
                 <p className="about-text wow text-anim-left mt-50 vxs-mt-30"> </p>
                 <div className="btn-wrap btn-bounce-1 home-circle-btn">
-                  {/* <Link
-                    className="circle-btn btn gsap-magnetic"
-                    href="https://1drv.ms/b/s!AhTBs2k3EIAxjsdX2G-vrZa9PEsKQQ?e=XMTisa"
-                    target="_blank"
-                  >
+                  {/* 
+                  <Link className="circle-btn btn gsap-magnetic" href={DOWNLOAD_LINK} target="_blank">
                     <span className="link-effect">
                       <span className="effect-1">Leer más</span>
                       <span className="effect-1">Leer más</span>
                     </span>
-                    <Image
-                      src="/assets/images/icons/arrow-left-top.svg"
-                      alt="img"
-                      width={10}
-                      height={10}
-                    />
-                  </Link> */}
+                    <Image src={ARROW_ICON} alt="img" width={10} height={10} />
+                  </Link> 
+                  */}
                 </div>
               </div>
             </ul>
@@ -80,13 +78,7 @@ export default async function BlogDetails() {
         </div>
 
         <div className="blog-details-thumb mb-50">
-          <Image
-            className="w-100"
-            src="/assets/images/blog/tesis-arroz.jpg"
-            alt="img"
-            width={1910}
-            height={846}
-          />
+          <Image className="w-100" src={COVER_IMAGE} alt="img" width={1910} height={846} />
         </div>
 
         <div className="container">
@@ -131,13 +123,7 @@ export default async function BlogDetails() {
 
                 <h3 className="title mb-25 mt-60">Anotaciones del Docente</h3>
                 <figure className="details-thumb mb-60">
-                  <Image
-                    className="br-10"
-                    src="/assets/images/blog/blog-details3-tesis-22-04-2025.jpg"
-                    alt="img"
-                    width={1320}
-                    height={650}
-                  />
+                  <Image className="br-10" src={INTERVIEW_IMAGE} alt="img" width={1320} height={650} />
                 </figure>
               </div>
 

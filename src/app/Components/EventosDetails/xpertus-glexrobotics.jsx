@@ -1,15 +1,29 @@
 import Image from "next/image";
 import Link from "next/link";
 
-const ProjectDetails = () => {
+// Constantes reutilizables
+const EVENT_TITLE = "1º Exposición de Robótica e Inteligencia Artificial - Tarapoto, Perú";
+const EVENT_SUBTITLE = "Evento Tecnológico";
+const ORGANIZER = "Glex Robotics";
+const EVENT_DATE = "25 Abril, 2025";
+const TOPICS = "Robótica, Inteligencia Artificial, Innovación Tecnológica";
+const CATEGORIES = "Tecnología, Educación, Innovación";
+const WEBSITE_URL = "https://glexrobotics.com/";
+const ICON_ARROW = "/assets/images/icons/arrow-left-top.svg";
+
+// Videos
+const VIDEO_MAIN = "https://www.youtube.com/embed/-zD2eUmQJ-w";
+const VIDEO_RESULT = "https://www.youtube.com/embed/_zpYOGV0vYM";
+
+const Eventodetail = () => {
     return (
         <div>
             <section className="breadcumb-wrapper text-center pb-0 bg-theme2">
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-12">
-                            <span className="sub-title">Evento Tecnológico</span>
-                            <h2 className="sec-title mb-0">1º Exposición de Robótica e Inteligencia Artificial - Tarapoto, Perú</h2>
+                            <span className="sub-title">{EVENT_SUBTITLE}</span>
+                            <h2 className="sec-title mb-0">{EVENT_TITLE}</h2>
                         </div>
                     </div>
                 </div>
@@ -22,53 +36,63 @@ const ProjectDetails = () => {
                             <ul className="info-items xs-py-30">
                                 <li className="item">
                                     <span className="title">Organizador:</span>
-                                    <span className="text">Glex Robotics</span>
+                                    <span className="text">{ORGANIZER}</span>
                                 </li>
                                 <li className="item">
                                     <span className="title">Fecha:</span>
-                                    <span className="text">25 Abril, 2025</span>
+                                    <span className="text">{EVENT_DATE}</span>
                                 </li>
                                 <li className="item">
                                     <span className="title">Temáticas:</span>
-                                    <span className="text">Robótica, Inteligencia Artificial, Innovación Tecnológica</span>
+                                    <span className="text">{TOPICS}</span>
                                 </li>
                                 <li className="item">
                                     <span className="title">Categorías:</span>
-                                    <span className="text">Tecnología, Educación, Innovación</span>
+                                    <span className="text">{CATEGORIES}</span>
                                 </li>
                                 <li className="btn-wrap mt--20 sm-mt-0">
-                                    <a className="circle-btn tp-hover-btn btn" href="https://glexrobotics.com/" target="_blank" rel="noopener noreferrer">
+                                    <a
+                                        className="circle-btn tp-hover-btn btn"
+                                        href={WEBSITE_URL}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                    >
                                         <span className="link-effect">
                                             <span className="effect-1">Conocer Más</span>
                                             <span className="effect-1">Conocer Más</span>
                                         </span>
-                                        <img src="/assets/images/icons/arrow-left-top.svg" alt="" />
+                                        <img src={ICON_ARROW} alt="" />
                                         <i className="btn-circle-dot"></i>
                                     </a>
                                 </li>
                             </ul>
                         </div>
                     </div>
+
                     <div className="row details-thumb">
                         <div className="col-xl-12">
-                        <div className="project-inner-thumb mb-50 wow img-custom-anim-top">
-                        <div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden', maxWidth: '100%' }}>
-                                <iframe 
-                                    style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 0 }}
-                                    src="https://www.youtube.com/embed/-zD2eUmQJ-w"
-                                    title="Exposición Robótica Tarapoto"
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                    allowFullScreen
-                                ></iframe>
+                            <div className="project-inner-thumb mb-50 wow img-custom-anim-top">
+                                <div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden', maxWidth: '100%' }}>
+                                    <iframe
+                                        style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 0 }}
+                                        src={VIDEO_MAIN}
+                                        title="Exposición Robótica Tarapoto"
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                        allowFullScreen
+                                    ></iframe>
+                                </div>
                             </div>
                         </div>
-                        </div>
                     </div>
+
                     <div className="row justify-content-between">
                         <div className="col-lg-6">
                             <div className="project-area mb-50">
                                 <h3 className="title mb-20">Sobre la Exposición</h3>
-                                <p className="text">Participación en la 1º Exposición de Robótica e Inteligencia Artificial, evento que reunió a entusiastas, profesionales y estudiantes para compartir avances tecnológicos.</p>
+                                <p className="text">
+                                    Participación en la 1º Exposición de Robótica e Inteligencia Artificial, evento que reunió a entusiastas,
+                                    profesionales y estudiantes para compartir avances tecnológicos.
+                                </p>
                                 <ul className="challenge-area_list">
                                     <li>Demostraciones de robots autónomos</li>
                                     <li>Presentación de proyectos de IA aplicada</li>
@@ -76,6 +100,7 @@ const ProjectDetails = () => {
                                     <li>Intercambio de experiencias académicas</li>
                                 </ul>
                             </div>
+
                             <div className="challenge-area mb-50">
                                 <h3 className="title mb-20">Desafíos Durante el Evento</h3>
                                 <p className="text mb-40">Desafíos enfrentados en la preparación y participación:</p>
@@ -86,6 +111,7 @@ const ProjectDetails = () => {
                                 </ul>
                             </div>
                         </div>
+
                         <div className="col-lg-6">
                             <h3 className="title mb-20">Momentos Clave</h3>
                             <p className="text mb-45 mt-60 md-mt-0">Principales actividades y experiencias:</p>
@@ -93,12 +119,9 @@ const ProjectDetails = () => {
                                 <li>Competencias de robots seguidores de línea</li>
                                 <li>Exhibiciones de robots bailarines</li>
                                 <li>Conferencias sobre inteligencia artificial educativa</li>
-                                <li>Networking con expertos </li>
+                                <li>Networking con expertos</li>
                             </ul>
-                            <p> </p>
-                            {/* <figure className="thumb lg-mb-0 md-mb-30">
-                                <Image src="/assets/images/portfolio/portfolio4_1.jpg" alt="Exposición robótica móvil" width={648} height={420} loading="lazy" />
-                            </figure> */}
+                            {/* Imagen opcional comentada */}
                         </div>
 
                         <div className="col-lg-12">
@@ -113,9 +136,9 @@ const ProjectDetails = () => {
                                 </ul>
                                 <figure className="result-thumb mt-60 mb-60">
                                     <div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden', maxWidth: '100%' }}>
-                                        <iframe 
+                                        <iframe
                                             style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 0 }}
-                                            src="https://www.youtube.com/embed/_zpYOGV0vYM"
+                                            src={VIDEO_RESULT}
                                             title="YouTube Shorts - Exposición Robótica"
                                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                             allowFullScreen
@@ -124,7 +147,6 @@ const ProjectDetails = () => {
                                 </figure>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -132,4 +154,4 @@ const ProjectDetails = () => {
     );
 };
 
-export default ProjectDetails;
+export default Eventodetail;

@@ -1,7 +1,20 @@
 import Image from "next/image";
 import Link from "next/link";
 
-const ProjectDetails = () => {
+// Constantes reutilizables
+const EVENT_TITLE = "Proceso de Producción - Fábrica de Chocolates Orquídea Tarapoto";
+const COMPANY_NAME = "Chocolates Orquídea";
+const LOCATION = "Tarapoto, Perú";
+const PRODUCTS = "Chocolate artesanal, Derivados del cacao";
+const CATEGORIES = "Producción, Agroindustria, Chocolate";
+const WEBSITE_URL = "https://chocolatesorquidea.com/";
+
+const ICON_ARROW = "/assets/images/icons/arrow-left-top.svg";
+const IMG_MAIN = "/assets/images/portfolio/details-thumb_muni.jpg";
+const IMG_SIDE = "/assets/images/portfolio/portfolio4_1_muni.jpg";
+const IMG_BOTTOM = "/assets/images/portfolio/details-thumb-2_muni.jpg";
+
+const Eventodetail = () => {
     return (
         <div>
             <section className="breadcumb-wrapper text-center pb-0 bg-theme2">
@@ -9,7 +22,7 @@ const ProjectDetails = () => {
                     <div className="row">
                         <div className="col-lg-12">
                             <span className="sub-title">Visita Industrial</span>
-                            <h2 className="sec-title mb-0">Proceso de Producción - Fábrica de Chocolates Orquídea Tarapoto</h2>
+                            <h2 className="sec-title mb-0">{EVENT_TITLE}</h2>
                         </div>
                     </div>
                 </div>
@@ -22,45 +35,62 @@ const ProjectDetails = () => {
                             <ul className="info-items xs-py-30">
                                 <li className="item">
                                     <span className="title">Empresa:</span>
-                                    <span className="text">Chocolates Orquídea</span>
+                                    <span className="text">{COMPANY_NAME}</span>
                                 </li>
                                 <li className="item">
                                     <span className="title">Ubicación:</span>
-                                    <span className="text">Tarapoto, Perú</span>
+                                    <span className="text">{LOCATION}</span>
                                 </li>
                                 <li className="item">
                                     <span className="title">Productos:</span>
-                                    <span className="text">Chocolate artesanal, Derivados del cacao</span>
+                                    <span className="text">{PRODUCTS}</span>
                                 </li>
                                 <li className="item">
                                     <span className="title">Categorías:</span>
-                                    <span className="text">Producción, Agroindustria, Chocolate</span>
+                                    <span className="text">{CATEGORIES}</span>
                                 </li>
                                 <li className="btn-wrap mt--20 sm-mt-0">
-                                    <a className="circle-btn tp-hover-btn btn" href="https://chocolatesorquidea.com/" target="_blank" rel="noopener noreferrer">
+                                    <a
+                                        className="circle-btn tp-hover-btn btn"
+                                        href={WEBSITE_URL}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                    >
                                         <span className="link-effect">
                                             <span className="effect-1">Visitar Web</span>
                                             <span className="effect-1">Visitar Web</span>
                                         </span>
-                                        <img src="/assets/images/icons/arrow-left-top.svg" alt="" />
+                                        <img src={ICON_ARROW} alt="" />
                                         <i className="btn-circle-dot"></i>
                                     </a>
                                 </li>
                             </ul>
                         </div>
                     </div>
+
                     <div className="row details-thumb">
                         <div className="col-xl-12">
                             <div className="project-inner-thumb mb-50 wow img-custom-anim-top">
-                                <Image className="w-100" src="/assets/images/portfolio/details-thumb_muni.jpg" alt="Fábrica Chocolates Orquídea" width={1320} height={850} loading="lazy" />
+                                <Image
+                                    className="w-100"
+                                    src={IMG_MAIN}
+                                    alt="Fábrica Chocolates Orquídea"
+                                    width={1320}
+                                    height={850}
+                                    loading="lazy"
+                                />
                             </div>
                         </div>
                     </div>
+
                     <div className="row justify-content-between">
                         <div className="col-lg-6">
                             <div className="project-area mb-50">
                                 <h3 className="title mb-20">Sobre la Fábrica</h3>
-                                <p className="text">Visita a la fábrica de Chocolates Orquídea, donde se pudo observar el proceso artesanal de elaboración de chocolate, combinando técnicas tradicionales con tecnología moderna.</p>
+                                <p className="text">
+                                    Visita a la fábrica de Chocolates Orquídea, donde se pudo observar el proceso artesanal
+                                    de elaboración de chocolate, combinando técnicas tradicionales con tecnología moderna.
+                                </p>
                                 <ul className="challenge-area_list">
                                     <li>Proceso de tostado y molienda mecanizado</li>
                                     <li>Envasado manual meticuloso</li>
@@ -79,6 +109,7 @@ const ProjectDetails = () => {
                                 </ul>
                             </div>
                         </div>
+
                         <div className="col-lg-6">
                             <h3 className="title mb-20">Aspectos Destacados</h3>
                             <p className="text mb-45 mt-60 md-mt-0">Características notables de la producción:</p>
@@ -88,9 +119,14 @@ const ProjectDetails = () => {
                                 <li>Planes de modernización</li>
                                 <li>Compromiso con la calidad artesanal</li>
                             </ul>
-                            <p> </p>
                             <figure className="thumb lg-mb-0 md-mb-30">
-                                <Image src="/assets/images/portfolio/portfolio4_1_muni.jpg" alt="Proceso chocolate Orquídea" width={648} height={420} loading="lazy" />
+                                <Image
+                                    src={IMG_SIDE}
+                                    alt="Proceso chocolate Orquídea"
+                                    width={648}
+                                    height={420}
+                                    loading="lazy"
+                                />
                             </figure>
                         </div>
 
@@ -105,11 +141,16 @@ const ProjectDetails = () => {
                                     <li>Expansión de la capacidad productiva</li>
                                 </ul>
                                 <figure className="result-thumb mt-60 mb-60">
-                                    <Image src="/assets/images/portfolio/details-thumb-2_muni.jpg" alt="Instalaciones Chocolates Orquídea" width={1320} height={850} loading="lazy" />
+                                    <Image
+                                        src={IMG_BOTTOM}
+                                        alt="Instalaciones Chocolates Orquídea"
+                                        width={1320}
+                                        height={850}
+                                        loading="lazy"
+                                    />
                                 </figure>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -117,4 +158,4 @@ const ProjectDetails = () => {
     );
 };
 
-export default ProjectDetails;
+export default Eventodetail;
