@@ -5,6 +5,16 @@ import Link from "next/link";
 
 const allPosts = [
     {
+        id: 9994,
+        slug: "Tesis-arroz-29-04-2025",
+        title: "Segundo Avance de Tesis: Análisis Visual de Factores que Afectan el Rendimiento del Arroz",
+        category: "Investigación I",
+        date: "29 abril, 2025",
+        image: "/assets/images/blog/tesis-arroz2.jpg",
+        excerpt: "En este segundo avance se realizó un análisis visual que muestra cómo ciertos factores, como la variabilidad climática y los valores NDVI, impactan directamente en el rendimiento del arroz en la zona de Tarapoto.",
+    },
+    
+    {
         id: 9995,
         slug: "Tesis-arroz-22-04-2025",
         title: "Avance de Tesis: Modelo Predictivo de Rendimiento de Arroz con Satélite y Datos Climáticos",
