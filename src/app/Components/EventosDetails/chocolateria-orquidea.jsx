@@ -10,9 +10,14 @@ const CATEGORIES = "Producción, Agroindustria, Chocolate";
 const WEBSITE_URL = "https://chocolatesorquidea.com/";
 
 const ICON_ARROW = "/assets/images/icons/arrow-left-top.svg";
-const IMG_MAIN = "/assets/images/portfolio/details-thumb_muni.jpg";
-const IMG_SIDE = "/assets/images/portfolio/portfolio4_1_muni.jpg";
-const IMG_BOTTOM = "/assets/images/portfolio/details-thumb-2_muni.jpg";
+const IMG_MAIN = "/assets/images/eventos/evento-chocolate-1.jpg";
+const IMG_SIDE = "/assets/images/eventos/evento-chocolate-2.jpg";
+const IMG_GALLERY = [
+    "/assets/images/eventos/details-thumb-3-robot1-2.jpg",
+    "/assets/images/eventos/details-thumb-3-robot2-2.jpg",
+    "/assets/images/eventos/details-thumb-3-robot3-2.jpg",
+    "/assets/images/eventos/details-thumb-3-robot4-2.jpg",
+  ];
 
 const Eventodetail = () => {
     return (
@@ -78,6 +83,7 @@ const Eventodetail = () => {
                                     width={1320}
                                     height={850}
                                     loading="lazy"
+                                    style={{ borderRadius: "20px", objectFit: "cover" }}
                                 />
                             </div>
                         </div>
@@ -119,6 +125,7 @@ const Eventodetail = () => {
                                 <li>Planes de modernización</li>
                                 <li>Compromiso con la calidad artesanal</li>
                             </ul>
+                            <p> </p>
                             <figure className="thumb lg-mb-0 md-mb-30">
                                 <Image
                                     src={IMG_SIDE}
@@ -126,6 +133,7 @@ const Eventodetail = () => {
                                     width={648}
                                     height={420}
                                     loading="lazy"
+                                    style={{ borderRadius: "20px", objectFit: "cover" }}
                                 />
                             </figure>
                         </div>
@@ -140,15 +148,27 @@ const Eventodetail = () => {
                                     <li>Mantenimiento de la calidad artesanal</li>
                                     <li>Expansión de la capacidad productiva</li>
                                 </ul>
-                                <figure className="result-thumb mt-60 mb-60">
-                                    <Image
-                                        src={IMG_BOTTOM}
-                                        alt="Instalaciones Chocolates Orquídea"
-                                        width={1320}
-                                        height={850}
-                                        loading="lazy"
-                                    />
-                                </figure>
+                                <div
+                                                className="result-thumb mt-60 mb-60"
+                                                style={{
+                                                    display: "flex",
+                                                    gap: "20px",
+                                                    justifyContent: "center",
+                                                    flexWrap: "wrap",
+                                                }}
+                                                >
+                                                {IMG_GALLERY.map((src, i) => (
+                                                    <Image
+                                                    key={i}
+                                                    src={src}
+                                                    alt={`Imagen ${i + 1}`}
+                                                    width={300}
+                                                    height={650}
+                                                    loading="lazy"
+                                                    style={{ borderRadius: "20px", objectFit: "cover" }}
+                                                    />
+                                                ))}
+                                                </div>
                             </div>
                         </div>
                     </div>
