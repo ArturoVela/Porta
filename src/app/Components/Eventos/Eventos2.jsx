@@ -21,14 +21,14 @@ const projectContent = [
         addclass:'col-lg-5',
         img:'/assets/images/eventos/Eventos1-1-xpertus.jpg',
         title:'Xpertus glexrobotics',
-        category:'Robótica',
+        category:'Evento Tecnológico',
         slug: 'xpertus-glexrobotics'
     },
     {
         addclass:'col-lg-7',
-        img:'/assets/images/portfolio/portfolio3_2.jpg',
+        img:'/assets/images/eventos/Eventos1-2-orquidea.jpg',
         title:'Chocolatería orquidea',
-        category:'Automatización',
+        category:'Visita Industrial',
         slug: 'chocolateria-orquidea'
     },
 ];

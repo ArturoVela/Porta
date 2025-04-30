@@ -102,8 +102,7 @@ const Services2 = () => {
                                     </Link>
                                 </div>
                             </div>
-                            <div 
-                            
+                            <div   
                                 className="hover-reveal-bg"
                                 style={{
                                     backgroundImage: `url(${item.img})`,

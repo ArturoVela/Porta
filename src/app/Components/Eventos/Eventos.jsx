@@ -5,8 +5,8 @@ import Image from 'next/image';
 const Eventos = () => {
 
     const awardContent = [
-        {title: 'Xpertus Glexrobotic', tag: 'Robótica', subject: 'Tegnología', year: '2025'},
-        {title: 'Chocolatería Orquidea', tag: 'Simulación', subject: 'Automatización', year: '2025'},
+        {title: 'Xpertus Glexrobotic', tag: 'Robótica', subject: 'Evento Tecnológico', year: '2025'},
+        {title: 'Chocolatería Orquidea', tag: 'Simulación', subject: 'Visita Industrials', year: '2025'},
        
     ];    
 
