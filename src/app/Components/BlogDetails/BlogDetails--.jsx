@@ -1,4 +1,3 @@
-import CommentForm from "@/app/Components/BlogDetails/CommentForm";
 import { createComment, getComments } from "@/app/api/comments/actions";
 import Image from "next/image";
 
@@ -131,13 +130,39 @@ export default async function BlogDetails() {
                 </div>
             </div>
 
-            <div className="comment-area space-bottom bg-theme2">
+             <div className="comment-area space-bottom bg-theme2">
         <div className="container">
           <div className="row">
             <div className="col-lg-12">
               <div className="comment-respond">
                 <h3 className="comment-reply-title">Post a comment</h3>
-                <CommentForm action={createComment} />
+                <form action={createComment} className="comment-form">
+                  <div className="row gx-30">
+                    <div className="col-md-6">
+                      <div className="form-group">
+                        <input type="text" className="form-control" name="name" placeholder="Name" required />
+                      </div>
+                    </div>
+                    <div className="col-md-6">
+                      <div className="form-group">
+                        <input type="email" className="form-control" name="email" placeholder="Email" required />
+                      </div>
+                    </div>
+                    <div className="col-lg-12">
+                      <div className="form-group">
+                        <textarea name="message" placeholder="Message" className="form-control style2" required></textarea>
+                      </div>
+                    </div>
+                    <div className="form-btn col-12">
+                      <button type="submit" className="link-btn">
+                        <span className="link-effect">
+                          <span className="btn-title">Submit Comment</span>
+                        </span>
+                        <img src="/assets/images/icons/arrow-left-top.svg" alt="icon" />
+                      </button>
+                    </div>
+                  </div>
+                </form>
 
                 <hr className="my-5" />
                 <h4 className="comment-reply-title">Recent Comments</h4>
@@ -149,6 +174,7 @@ export default async function BlogDetails() {
                     </li>
                   ))}
                 </ul>
+
               </div>
             </div>
           </div>
