@@ -1,4 +1,4 @@
-import { createComment, getComments } from "@/app/api/comments/actions";
+import { createComment, getComments } from "@/app/api/comments/commentsActions/actions";
 import Image from "next/image";
 
 export default async function BlogDetails() {
