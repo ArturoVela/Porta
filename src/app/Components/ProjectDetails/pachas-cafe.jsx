@@ -58,7 +58,15 @@ const ProjectDetails = () => {
           <div className="row details-thumb">
             <div className="col-xl-12">
               <div className="project-inner-thumb mb-50 wow img-custom-anim-top">
-                <Image className="w-100" src={IMG_COVER} alt="Dashboard Pacha's Café" width={1320} height={850} loading="lazy" style={{ borderRadius: "20px", objectFit: "cover" }}/>
+                <Image
+                  className="w-100 responsive-img"
+                  src={IMG_COVER}
+                  alt="Dashboard Pacha's Café"
+                  width={1320}
+                  height={850}
+                  loading="lazy"
+                  style={{ borderRadius: "20px", objectFit: "cover" }}
+                />
               </div>
             </div>
           </div>
@@ -68,7 +76,8 @@ const ProjectDetails = () => {
               <div className="project-area mb-50">
                 <h3 className="title mb-20">Resumen del Proyecto</h3>
                 <p className="text">
-                  Implementación de un sistema integrado de gestión para la cadena de cafeterías Pacha's Café, incluyendo:
+                  Implementación de un sistema integrado de gestión para la
+                  cadena de cafeterías Pacha's Café, incluyendo:
                 </p>
                 <ul className="challenge-area_list">
                   <li>Control de inventario de insumos</li>
@@ -80,7 +89,9 @@ const ProjectDetails = () => {
 
               <div className="challenge-area mb-50">
                 <h3 className="title mb-20">Retos Principales</h3>
-                <p className="text mb-40">Desafíos clave en la implementación:</p>
+                <p className="text mb-40">
+                  Desafíos clave en la implementación:
+                </p>
                 <ul className="challenge-area_list">
                   <li>Sincronización de stock entre locales</li>
                   <li>Gestión de variantes de productos</li>
@@ -91,14 +102,24 @@ const ProjectDetails = () => {
 
             <div className="col-lg-6">
               <h3 className="title mb-20">Tecnologías</h3>
-              <p className="text mb-45 mt-60 md-mt-0">Solución tecnológica implementada:</p>
+              <p className="text mb-45 mt-60 md-mt-0">
+                Solución tecnológica implementada:
+              </p>
               <ul className="challenge-area_list">
                 <li>Automatización de pedidos online</li>
                 <li>Integración con métodos de pago digitales</li>
                 <li>Reportes personalizados de ventas horarias</li>
               </ul>
               <figure className="thumb lg-mb-0 md-mb-30">
-                <Image src={IMG_FEATURE} alt="App Móvil Pacha's Café" width={648} height={320} loading="lazy" style={{ borderRadius: "20px", objectFit: "cover" }} />
+                <Image
+                  src={IMG_FEATURE}
+                  alt="App Móvil Pacha's Café"
+                  width={648}
+                  height={320}
+                  loading="lazy"
+                  className="responsive-img"
+                  style={{ borderRadius: "20px", objectFit: "cover" }}
+                />
               </figure>
             </div>
 
@@ -112,7 +133,15 @@ const ProjectDetails = () => {
                   <li>50% aumento en pedidos online</li>
                 </ul>
                 <figure className="result-thumb mt-60 mb-60">
-                  <Image src={IMG_RESULTS} alt="Analíticas Pacha's Café" width={1320} height={850} loading="lazy"  style={{ borderRadius: "20px", objectFit: "cover" }}/>
+                  <Image
+                    src={IMG_RESULTS}
+                    alt="Analíticas Pacha's Café"
+                    width={1320}
+                    height={850}
+                    loading="lazy"
+                    className="responsive-img"
+                    style={{ borderRadius: "20px", objectFit: "cover" }}
+                  />
                 </figure>
               </div>
             </div>

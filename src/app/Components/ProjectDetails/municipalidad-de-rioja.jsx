@@ -54,7 +54,12 @@ const ProjectDetails = () => {
                   <span className="text">{PROJECT.categories}</span>
                 </li>
                 <li className="btn-wrap mt--20 sm-mt-0">
-                  <a className="circle-btn tp-hover-btn btn" href={PROJECT.websiteUrl} target="_blank" rel="noopener noreferrer">
+                  <a
+                    className="circle-btn tp-hover-btn btn"
+                    href={PROJECT.websiteUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     <span className="link-effect">
                       <span className="effect-1">Visitar Sitio</span>
                       <span className="effect-1">Visitar Sitio</span>
@@ -70,7 +75,15 @@ const ProjectDetails = () => {
           <div className="row details-thumb">
             <div className="col-xl-12">
               <div className="project-inner-thumb mb-50 wow img-custom-anim-top">
-                <Image className="w-100" src={IMG_MAIN} alt="Página principal Municipalidad" width={1320} height={850} loading="lazy" style={{ borderRadius: "20px", objectFit: "cover" }} />
+                <Image
+                  className="w-100 responsive-img"
+                  src={IMG_MAIN}
+                  alt="Página principal Municipalidad"
+                  width={1320}
+                  height={850}
+                  loading="lazy"
+                  style={{ borderRadius: "20px", objectFit: "cover" }}
+                />
               </div>
             </div>
           </div>
@@ -80,7 +93,8 @@ const ProjectDetails = () => {
               <div className="project-area mb-50">
                 <h3 className="title mb-20">Resumen del Proyecto</h3>
                 <p className="text">
-                  Desarrollo de portal web institucional para la Municipalidad Provincial de Rioja (San Martín) incluyendo:
+                  Desarrollo de portal web institucional para la Municipalidad
+                  Provincial de Rioja (San Martín) incluyendo:
                 </p>
                 <ul className="challenge-area_list">
                   <li>Diseño responsive y accesible</li>
@@ -103,7 +117,9 @@ const ProjectDetails = () => {
 
             <div className="col-lg-6">
               <h3 className="title mb-20">Características</h3>
-              <p className="text mb-45 mt-60 md-mt-0">Principales funcionalidades implementadas:</p>
+              <p className="text mb-45 mt-60 md-mt-0">
+                Principales funcionalidades implementadas:
+              </p>
               <ul className="challenge-area_list">
                 <li>Mapa interactivo de la provincia</li>
                 <li>Formularios digitales para trámites</li>
@@ -111,7 +127,15 @@ const ProjectDetails = () => {
                 <li>Sección de transparencia pública</li>
               </ul>
               <figure className="thumb lg-mb-0 md-mb-30">
-                <Image src={IMG_FEATURE} alt="Versión móvil del sitio" width={648} height={420} loading="lazy" style={{ borderRadius: "20px", objectFit: "cover" }}/>
+                <Image
+                  src={IMG_FEATURE}
+                  alt="Versión móvil del sitio"
+                  width={648}
+                  height={420}
+                  loading="lazy"
+                  className="responsive-img"
+                  style={{ borderRadius: "20px", objectFit: "cover" }}
+                />
               </figure>
             </div>
 
@@ -126,7 +150,15 @@ const ProjectDetails = () => {
                   <li>4.8/5 en satisfacción usuaria</li>
                 </ul>
                 <figure className="result-thumb mt-60 mb-60">
-                  <Image src={IMG_RESULTS} alt="Estadísticas de uso" width={1320} height={850} loading="lazy" style={{ borderRadius: "20px", objectFit: "cover" }}/>
+                  <Image
+                    src={IMG_RESULTS}
+                    alt="Estadísticas de uso"
+                    width={1320}
+                    height={850}
+                    loading="lazy"
+                    className="responsive-img"
+                    style={{ borderRadius: "20px", objectFit: "cover" }}
+                  />
                 </figure>
               </div>
             </div>

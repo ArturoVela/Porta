@@ -76,7 +76,7 @@ const ProjectDetails = () => {
             <div className="col-xl-12">
               <div className="project-inner-thumb mb-50 wow img-custom-anim-top">
                 <Image
-                  className="w-100"
+                  className="w-100 responsive-img"
                   src={PROJECT.images.main}
                   alt="Panel de control del servidor"
                   width={1320}
@@ -129,6 +129,7 @@ const ProjectDetails = () => {
                   width={648}
                   height={320}
                   loading="lazy"
+                  className="responsive-img"
                   style={{ borderRadius: "20px", objectFit: "cover" }}
                 />
               </figure>
@@ -151,6 +152,7 @@ const ProjectDetails = () => {
                     width={1320}
                     height={850}
                     loading="lazy"
+                    className="responsive-img"
                     style={{ borderRadius: "20px", objectFit: "cover" }}
                   />
                 </figure>

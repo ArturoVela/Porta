@@ -67091,5 +67091,16 @@ a.text-theme:hover,
       drop-shadow(0 0 10px rgba(255, 255, 255, 0.103));
   }
 
+  .responsive-img {
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+    display: block;
+  }
+  
+  .center-image-blog{
 
-
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }

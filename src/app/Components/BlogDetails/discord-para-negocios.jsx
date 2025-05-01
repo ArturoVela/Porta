@@ -1,6 +1,9 @@
 import SocialShare from "@/app/Components/BlogDetails/SocialShare";
 import CommentSection from "@/app/Components/BlogDetails/CommentSection";
-import { createComment, getComments } from "@/app/api/comments/commentsActions/actions";
+import {
+  createComment,
+  getComments,
+} from "@/app/api/comments/commentsActions/actions";
 import Image from "next/image";
 
 // Constantes reutilizables
@@ -36,7 +39,7 @@ export default async function BlogDetails() {
             <ul className="info-items xs-py-30 space-bottom">
               <li className="item">
                 <div className="thumb">
-                  <Image src={THUMB_IMAGE} alt="img" width={75} height={75} />
+                  <Image src={THUMB_IMAGE} alt="img" width={75} height={75} className="responsive-img"/>
                 </div>
                 <div className="info">
                   <span className="title">Escrito por</span>
@@ -60,7 +63,14 @@ export default async function BlogDetails() {
         </div>
 
         <div className="blog-details-thumb mb-50">
-          <Image className="w-100" src={COVER_IMAGE} alt="img" width={1910} height={846} />
+          <Image
+            className="w-100 responsive-img"
+            src={COVER_IMAGE}
+            alt="img"
+            width={1910}
+            height={846}
+            
+          />
         </div>
 
         <div className="container">
@@ -88,6 +98,7 @@ export default async function BlogDetails() {
                     alt="img"
                     width={40}
                     height={40}
+                    
                   />
                   <p>
                     "Discord no es solo para jugar, es una poderosa herramienta
@@ -109,11 +120,12 @@ export default async function BlogDetails() {
 
                 <figure className="details-thumb mb-60">
                   <Image
-                    className="br-10"
+                    className="br-10 responsive-img"
                     src={CONTENT_IMAGE}
                     alt="img"
                     width={1320}
                     height={650}
+                    
                   />
                 </figure>
 

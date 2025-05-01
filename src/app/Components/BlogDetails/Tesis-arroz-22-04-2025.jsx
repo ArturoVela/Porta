@@ -16,7 +16,8 @@ const COVER_IMAGE = "/assets/images/blog/blog-details1-tesis-22-04-2025.jpg";
 const DATA_IMAGE = "/assets/images/blog/blog-details2-tesis-22-04-2025.jpg";
 const QUOTE_ICON = "/assets/images/icons/block_quote.svg";
 const FOOTER_IMAGE = "/assets/images/blog/blog-details3-tesis-22-04-2025.jpg";
-const DOWNLOAD_LINK = "https://1drv.ms/b/s!AhTBs2k3EIAxjsdX2G-vrZa9PEsKQQ?e=XMTisa";
+const DOWNLOAD_LINK =
+  "https://1drv.ms/b/s!AhTBs2k3EIAxjsdX2G-vrZa9PEsKQQ?e=XMTisa";
 const ARROW_ICON = "/assets/images/icons/arrow-left-top.svg";
 
 export default async function BlogDetails() {
@@ -43,7 +44,7 @@ export default async function BlogDetails() {
             <ul className="info-items xs-py-30 space-bottom">
               <li className="item">
                 <div className="thumb">
-                  <Image src={THUMB_IMAGE} alt="img" width={75} height={75} />
+                  <Image src={THUMB_IMAGE} alt="img" width={75} height={75} className="responsive-img" />
                 </div>
                 <div className="info">
                   <span className="title">Escrito por</span>
@@ -63,9 +64,15 @@ export default async function BlogDetails() {
                 </div>
               </li>
               <div className="about_content">
-                <p className="about-text wow text-anim-left mt-50 vxs-mt-30"> </p>
+                <p className="about-text wow text-anim-left mt-50 vxs-mt-30">
+                  {" "}
+                </p>
                 <div className="btn-wrap btn-bounce-1 home-circle-btn">
-                  <Link className="circle-btn btn gsap-magnetic" href={DOWNLOAD_LINK} target="_blank">
+                  <Link
+                    className="circle-btn btn gsap-magnetic"
+                    href={DOWNLOAD_LINK}
+                    target="_blank"
+                  >
                     <span className="link-effect">
                       <span className="effect-1">Leer más</span>
                       <span className="effect-1">Leer más</span>
@@ -79,7 +86,13 @@ export default async function BlogDetails() {
         </div>
 
         <div className="blog-details-thumb mb-50">
-          <Image className="w-100" src={COVER_IMAGE} alt="img" width={1910} height={846} />
+          <Image
+            className="w-100 responsive-img"
+            src={COVER_IMAGE}
+            alt="img"
+            width={1910}
+            height={846}
+          />
         </div>
 
         <div className="container">
@@ -104,7 +117,13 @@ export default async function BlogDetails() {
 
               <div className="col-lg-12">
                 <blockquote className="blockquote">
-                  <Image className="blockquote-icon" src={QUOTE_ICON} alt="img" width={40} height={40} />
+                  <Image
+                    className="blockquote-icon"
+                    src={QUOTE_ICON}
+                    alt="img"
+                    width={40}
+                    height={40}
+                  />
                   <p>
                     "La combinación del análisis multitemporal de datos
                     satelitales y climáticos con redes de convolución temporal
@@ -125,13 +144,22 @@ export default async function BlogDetails() {
                 </p>
 
                 <figure className="details-thumb mb-60">
-                  <Image className="br-10" src={DATA_IMAGE} alt="img" width={1320} height={650} />
+                  <Image
+                    className="br-10 responsive-img"
+                    src={DATA_IMAGE}
+                    alt="img"
+                    width={1320}
+                    height={650}
+                  />
                 </figure>
 
                 <h3 className="title mb-25">Ventajas del Modelo Propuesto</h3>
                 <ul className="challenge_list">
                   <li>Análisis simultáneo de múltiples variables</li>
-                  <li>Menor tiempo de procesamiento comparado con métodos tradicionales</li>
+                  <li>
+                    Menor tiempo de procesamiento comparado con métodos
+                    tradicionales
+                  </li>
                   <li>Mejor identificación de relaciones espacio-temporales</li>
                   <li>Menor error de predicción</li>
                   <li>Adaptabilidad a diversos cultivos y regiones</li>
@@ -146,7 +174,10 @@ export default async function BlogDetails() {
                   <li>Menor error absoluto medio (MAE)</li>
                   <li>Menor error cuadrático medio (RMSE)</li>
                   <li>Mayor coeficiente de determinación (R²)</li>
-                  <li>Predicción precisa: 4.34 ton/ha vs 4.37 ton/ha oficial (2019-2020)</li>
+                  <li>
+                    Predicción precisa: 4.34 ton/ha vs 4.37 ton/ha oficial
+                    (2019-2020)
+                  </li>
                 </ul>
 
                 <p className="mt-30 mb-60">
@@ -158,7 +189,13 @@ export default async function BlogDetails() {
 
                 <h3 className="title mb-25 mt-60">Anotaciones del Docente</h3>
                 <figure className="details-thumb mb-60">
-                  <Image className="br-10" src={FOOTER_IMAGE} alt="img" width={1320} height={650} />
+                  <Image
+                    className="br-10 responsive-img"
+                    src={FOOTER_IMAGE}
+                    alt="img"
+                    width={1320}
+                    height={650}
+                  />
                 </figure>
               </div>
 
