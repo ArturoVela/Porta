@@ -92,7 +92,7 @@ const Blog3 = () => {
               <div className="blog__details-wrap">
                 {filteredPosts.map((post) => (
                   <div key={post.id} className="single-blog-box">
-                    <a className="meta" href="#">
+                    <a className="meta" href={`/blog/${post.slug}`}>
                       {" "}
                       {post.category} . {post.date}{" "}
                     </a>
@@ -101,6 +101,7 @@ const Blog3 = () => {
                     </h3>
                     <figure className="blog-thumb">
                       <Image
+                        href={`/blog/${post.slug}`}
                         src={post.image}
                         alt={post.title}
                         width={798}
@@ -198,7 +199,7 @@ const Blog3 = () => {
                   <div className="sidebar__post-list">
                     {recentPosts.map((post) => (
                       <div key={post.id} className="sidebar__post-item">
-                        <div className="sidebar__post-thumb">
+                        {/* <div className="sidebar__post-thumb">
                           <Link href={`/blog/${post.slug}`}>
                             <Image
                               src={post.image}
@@ -209,10 +210,10 @@ const Blog3 = () => {
                               className="responsive-img center-image-blog"
                             />
                           </Link>
-                        </div>
+                        </div> */}
                         <div className="sidebar__post-content">
-                          <h5 className="title">
-                            <Link href={`/blog/${post.slug}`}>
+                          <h5 className="title title-link">
+                            <Link href={`/blog/${post.slug}`} >
                               {post.title}
                             </Link>
                           </h5>
