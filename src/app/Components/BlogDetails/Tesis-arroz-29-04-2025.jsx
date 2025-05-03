@@ -1,5 +1,6 @@
 import SocialShare from "@/app/Components/BlogDetails/SocialShare";
 import CommentSection from "@/app/Components/BlogDetails/CommentSection";
+import PaginationBlog from "@/app/Components/BlogDetails/PaginationBlog";
 import {
   createComment,
   getComments,
@@ -97,7 +98,7 @@ export default async function BlogDetails() {
             height={846}
           />
         </div>
-
+                    
         <div className="container">
           <div className="blog__details-content">
             <div className="row justify-content-between">
@@ -206,8 +207,9 @@ export default async function BlogDetails() {
             </div>
           </div>
         </div>
+        <PaginationBlog />
       </div>
-
+      
       <CommentSection />
     </div>
   );

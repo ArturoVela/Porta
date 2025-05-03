@@ -1,5 +1,6 @@
 import SocialShare from "@/app/Components/BlogDetails/SocialShare";
 import CommentSection from "@/app/Components/BlogDetails/CommentSection";
+import PaginationBlog from "@/app/Components/BlogDetails/PaginationBlog";
 import {
   createComment,
   getComments,
@@ -207,6 +208,7 @@ export default async function BlogDetails() {
             </div>
           </div>
         </div>
+        <PaginationBlog />
       </div>
 
       <CommentSection />

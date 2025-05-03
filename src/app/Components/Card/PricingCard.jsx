@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-const PricingCard = ({title,price,time,btnname,btnurl,FeatureList,addclass}) => {
+const PricingCard = ({title,price,time,btnname,btnurl,FeatureList,addclass,btnname2}) => {
     return (
         <div className={addclass}>
         <h5 className="pricing-title">{title}</h5>
@@ -16,12 +16,14 @@ const PricingCard = ({title,price,time,btnname,btnurl,FeatureList,addclass}) => 
                 </span>
                 <img src="/assets/images/icons/arrow-left-top.svg" alt="icon" />
             </Link>
+            
         </div>
         <ul className="checklist">
         {FeatureList?.map((item, index) => (
             <li key={index}>{item}</li>
         ))}
         </ul>
+        
     </div>
     );
 };

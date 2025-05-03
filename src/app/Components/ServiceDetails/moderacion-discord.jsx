@@ -17,34 +17,34 @@ const ServiceDetails = () => {
 
   const faqContent = [
     {
-      title: "¿Qué incluye el servicio de moderación?",
+      title: "¿Qué diferencia hay entre los planes?",
       content:
-        "El servicio incluye: configuración de roles y permisos, implementación de bots de moderación, filtrado de contenido inapropiado, gestión de eventos, manejo de raids y spam, y reportes semanales de actividad.",
+        "Cada plan ofrece un nivel de personalización y herramientas progresivas: desde configuraciones básicas hasta automatización avanzada, integración con servicios externos y soporte extendido.",
     },
     {
-      title: "¿Qué bots de moderación utilizas?",
+      title: "¿Qué incluye el Plan Inicial?",
       content:
-        "Trabajo principalmente con MEE6, Dyno, Carl-bot y bots personalizados según necesidades. Estos permiten automod, sistemas de niveles, tickets de soporte, verificación y más funcionalidades.",
+        "Ideal para servidores pequeños: hasta 10 canales, roles predefinidos, estructura básica, bot de bienvenida, guía de uso y soporte por 3 días. Se entrega en 48h.",
     },
     {
-      title: "¿Cuánto tiempo de respuesta ofreces?",
+      title: "¿Qué incluye el Plan Comunidad?",
       content:
-        "Tiempo de respuesta máximo de 15 minutos para incidentes críticos. Monitoreo activo durante las horas acordadas y sistema de respaldo para emergencias 24/7.",
+        "Incluye todo lo del Plan Inicial y añade: hasta 30 canales, bots avanzados (MEE6, Dyno), permisos personalizados, panel de reglas, automatización básica y soporte por 7 días.",
     },
     {
-      title: "¿Puedes ayudar a crecer mi comunidad?",
+      title: "¿Qué ofrece el Servidor Premium?",
       content:
-        "Sí, implemento estrategias de crecimiento como: eventos periódicos, sistemas de recompensas, colaboraciones con otros servidores, y optimización de la experiencia del usuario.",
+        "Solución profesional 100% personalizada: más de 50 canales, economía con bots, eventos, dashboard, integración con Twitch y soporte técnico 30 días.",
     },
     {
-      title: "¿Qué medidas de seguridad implementas?",
+      title: "¿Se puede personalizar un plan?",
       content:
-        "Verificación en dos pasos, sistemas anti-raid, filtros de contenido, niveles de acceso progresivos, monitoreo de enlaces maliciosos y respaldos regulares de configuraciones.",
+        "Sí, especialmente el plan Premium. Se realiza una reunión para identificar las necesidades exactas del proyecto y adaptar funciones, estructura y herramientas.",
     },
     {
-      title: "¿Cómo empezamos con el servicio?",
+      title: "¿Cómo contrato un servicio?",
       content:
-        "1) Reunión inicial para entender tus necesidades, 2) Evaluación del servidor actual, 3) Propuesta de mejoras y configuraciones, 4) Implementación gradual de cambios, 5) Capacitación del equipo existente.",
+        "Puedes usar los botones en la página para solicitar o cotizar el servicio. También puedes escribirme por correo, WhatsApp o Discord para iniciar la configuración de tu servidor.",
     },
   ];
 
@@ -54,7 +54,9 @@ const ServiceDetails = () => {
         <div className="container">
           <div className="row">
             <div className="col-lg-12">
-              <h2 className="sec-title mb-30 md-mb-15">Moderación Discord</h2>
+              <h2 className="sec-title mb-30 md-mb-15">
+                Creación de Servidores Discord
+              </h2>
               <div className="sec-icon">
                 <i className="fa-regular fa-chevron-down"></i>
               </div>
@@ -72,65 +74,178 @@ const ServiceDetails = () => {
                   <div className="service__details-thumb">
                     <Image
                       src="/assets/images/service/service-details1-dc.jpg"
-                      alt="Moderación Discord"
+                      alt="Planes Discord"
                       width={796}
                       height={496}
                       loading="lazy"
                       className="responsive-img"
                     />
                   </div>
-                  <p className="mb-25">
-                    Como moderador experimentado de Discord, me especializo en
-                    crear y mantener comunidades seguras y activas. Implemento
-                    sistemas automatizados y estrategias de moderación efectivas
-                    para garantizar una experiencia positiva para todos los
-                    miembros.
-                  </p>
-                  <p className="mb-55">
-                    Mi enfoque se centra en construir comunidades saludables
-                    donde los usuarios puedan interactuar de manera segura y
-                    divertida, mientras mantenemos un ambiente libre de
-                    toxicidad y comportamientos inadecuados.
-                  </p>
-                  <div className="service__details-content">
-                    <h3 className="title">
-                      Gestión profesional de comunidades Discord
-                    </h3>
-                    <p className="mb-35">
-                      Ofrezco un servicio integral de moderación que incluye
-                      configuración de bots, sistemas de verificación, gestión
-                      de roles, y estrategias de crecimiento comunitario. Cada
-                      servidor recibe atención personalizada según sus
-                      necesidades específicas.
+
+                  <aside className="mb-30">
+                    <p>
+                      Hola, si quieres que tu servidor sea 100% funcional y
+                      atractivo para tu comunidad, ¡no te preocupes! Puedes
+                      ponerte en contacto conmigo y puedo ayudarte a formar tu
+                      comunidad a tu gusto. Puedes echar un vistazo a los
+                      servicios que ofrezco a continuación:
                     </p>
-                    <div className="service__details-thumb mb-55">
-                      <Image
-                        src="/assets/images/service/service-details2-dc.jpg"
-                        alt="Gestión de Discord"
-                        width={796}
-                        height={496}
-                        loading="lazy"
-                        className="responsive-img"
-                      />
-                    </div>
-                    <h3 className="title">
-                      Herramientas y Metodología de Moderación
-                    </h3>
-                    <p className="mb-35">
-                      Utilizo una combinación de bots de moderación avanzados y
-                      estrategias manuales para mantener el orden. Implemento
-                      sistemas de tickets, niveles de usuario, y eventos
-                      comunitarios para mantener el engagement.
-                    </p>
-                    <div className="video-wrap">
-                      <div
-                        className="jarallax responsive-img"
-                        data-background="/assets/images/service/service-details3-dc.jpg"
-                        loading="lazy"
-                      ></div>
-                    </div>
+                  </aside>
+                  <div className="service__details-wrap">
+                  <h3 className="title">🟢 Plan Inicial – S/80</h3>
+                  <p className="mb-35">
+                    Ideal para comunidades pequeñas o personales que desean
+                    comenzar con buen orden y estética.
+                    <br />
+                    <br />
+                    <strong>Incluye:</strong>
+                    <br />- 🧱 <strong>Diseño base:</strong> Se crean hasta 10
+                    canales estructurados (bienvenida, reglas, general, voz)
+                    <br />- 🎭 <strong>Roles predefinidos:</strong>{" "}
+                    Configuración de roles esenciales (Admin, Mod, Miembro,
+                    Invitado) con permisos básicos
+                    <br />- 🤖 <strong>Bot de bienvenida:</strong> Instalación y
+                    configuración de Carl-bot o MEE6 para mensajes automáticos
+                    de ingreso
+                    <br />- 🖼️ <strong>Personalización visual:</strong> Icono
+                    del servidor, banner y emojis en canales principales
+                    <br />- 📑 <strong>Reglas y bienvenida:</strong> Canal con
+                    reglas claras en formato embebido con emojis y estilo
+                    organizado
+                    <br />- 🧭 <strong>Guía del administrador:</strong> Archivo
+                    PDF explicativo de cómo gestionar el servidor
+                    <br />- 🛡️ <strong>Seguridad básica:</strong> Activación de
+                    verificación por botón para evitar spam
+                    <br />- 🧼 <strong>Filtros mínimos:</strong> Anti-links y
+                    antispam activado en los canales públicos
+                    <br />- ⏱️ <strong>Entrega en 48h:</strong> Tu servidor
+                    estará listo y funcional en menos de 2 días
+                    <br />- 🛠️ <strong>Soporte:</strong> 3 días de ayuda vía
+                    correo para resolver dudas básicas
+                  </p>
+                  <div className="service__details-thumb">
+                    <Image
+                      src="/assets/images/service/service-details1-dc.jpg"
+                      alt="Planes Discord"
+                      width={796}
+                      height={496}
+                      loading="lazy"
+                      className="responsive-img"
+                    />
                   </div>
+                  </div>
+                  <p>  </p>
+                  <div className="service__details-wrap">    
+                  <h3 className="title">🟣 Plan Comunidad – S/150</h3>
+                  <p className="mb-35">
+                    Pensado para comunidades en crecimiento, con herramientas
+                    que automatizan y optimizan la experiencia.
+                    <br />
+                    <br />
+                    <strong>Incluye todo lo del Plan Inicial +</strong>
+                    <br />- 🧩 <strong>Expansión estructural:</strong> Hasta 30
+                    canales clasificados por categorías (chat, voz, soporte,
+                    eventos, recursos)
+                    <br />- 🧙 <strong>Jerarquía avanzada:</strong> Creación de
+                    hasta 10 roles con permisos únicos, acceso privado y
+                    visualización por secciones
+                    <br />- ⚙️ <strong>Bots potentes:</strong> Configuración de
+                    MEE6, Dyno, YAGPDB y Carl-bot con módulos activados
+                    (auto-mod, mensajes automáticos, comandos)
+                    <br />- 🖲️ <strong>Auto-roles interactivos:</strong> Sistema
+                    con botones o menús desplegables donde el usuario elige su
+                    rol
+                    <br />- 📋 <strong>Canal de anuncios:</strong> Activación de
+                    canal con restricciones solo para staff y notificaciones
+                    importantes
+                    <br />- 📚 <strong>Panel de reglas embebido:</strong> Reglas
+                    divididas por secciones (conducta, sanciones, contenido,
+                    staff) con formato embed
+                    <br />- 👁️ <strong>Logs automáticos:</strong> Registro de
+                    entradas, salidas, cambios de nickname, mensajes eliminados
+                    o editados
+                    <br />- 🔗 <strong>Integración con redes:</strong> Anuncios
+                    automáticos de YouTube y Twitch cuando los miembros hagan
+                    stream o suban video
+                    <br />- 🔁 <strong>Automatización básica:</strong> Muteos
+                    automáticos, respuestas automáticas, menciones de staff en
+                    palabras clave
+                    <br />- 📅 <strong>Notificaciones de eventos:</strong>{" "}
+                    Recordatorios conectados a Notion o Google Calendar
+                    <br />- 📞 <strong>Soporte técnico:</strong> 7 días de
+                    asistencia por mensaje o llamada para ajustes y dudas
+                  </p>
+
+                  <div className="service__details-thumb">
+                    <Image
+                      src="/assets/images/service/service-details1-dc.jpg"
+                      alt="Planes Discord"
+                      width={796}
+                      height={496}
+                      loading="lazy"
+                      className="responsive-img"
+                    />
+                  </div>
+                  </div>
+                  <p>  </p>
+                  <div className="service__details-wrap">
+                  <h3 className="title">🔮 Servidor Premium – Desde S/250</h3>
+                  <p className="mb-55">
+                    Para servidores de alto impacto que necesitan automatización
+                    profesional, métricas, economía, y gestión completa.
+                    <br />
+                    <br />
+                    <strong>Incluye todo lo anterior +</strong>
+                    <br />- 🏗️ <strong>Diseño de gran escala:</strong> Más de 50
+                    canales agrupados por funciones (foro, canales ocultos, logs
+                    separados, onboarding, comunidad, soporte)
+                    <br />- 🏆 <strong>Economía y niveles:</strong> Integración
+                    con Tatsu, UnbelievaBoat o Arcane para puntos, monedas,
+                    tienda, niveles visuales y rachas
+                    <br />- 🧾 <strong>Tickets de soporte:</strong> Sistema
+                    profesional con panel de botones, categorías, logs y
+                    mensajes predeterminados
+                    <br />- 🔍 <strong>Centro de ayuda:</strong> Canal embebido
+                    con preguntas frecuentes, comandos explicados y enlaces
+                    útiles
+                    <br />- 📊 <strong>Dashboard:</strong> Integración de panel
+                    de estadísticas (actividad diaria, miembros activos,
+                    crecimiento semanal)
+                    <br />- 🛡️{" "}
+                    <strong>Anti-alt y verificación avanzada:</strong> Detección
+                    de cuentas falsas o recién creadas usando AltDentifier, Wick
+                    o Beemo
+                    <br />- 🔗 <strong>Webhooks y API:</strong> Automatización
+                    externa con GitHub, tiendas, sitios web o bases de datos
+                    externas
+                    <br />- 📢 <strong>Eventos y tags:</strong> Sistema para
+                    registrar, anunciar y automatizar sorteos, eventos o pings
+                    masivos
+                    <br />- 🔄 <strong>Optimización profunda:</strong> Limpieza
+                    de roles/canales inactivos, análisis de canales no usados,
+                    consolidación de permisos duplicados
+                    <br />- 📦 <strong>Backups avanzados:</strong> Backups
+                    totales con restauración completa y versiones incrementales
+                    <br />- 📘 <strong>Manual de administración:</strong>{" "}
+                    Documento PDF completo con mapas de rol, canal y
+                    configuración personalizada
+                    <br />- 🧠 <strong>Asesoría:</strong> 30 días de soporte
+                    directo y asistencia técnica para nuevas funciones
+                  </p>
+                  <div className="service__details-thumb">
+                    <Image
+                      src="/assets/images/service/service-details1-dc.jpg"
+                      alt="Planes Discord"
+                      width={796}
+                      height={496}
+                      loading="lazy"
+                      className="responsive-img"
+                    />
+                  </div>
+                  </div>
+                  
                 </div>
+
                 <div className="faq-area-1">
                   <h3 className="faq-title">Preguntas Frecuentes</h3>
                   <ul className="accordion-box style-2 faq-area">
@@ -169,6 +284,7 @@ const ServiceDetails = () => {
                   </ul>
                 </div>
               </div>
+
               <div className="col-lg-4">
                 <aside className="service__sidebar">
                   <div className="sidebar__widget">
@@ -200,6 +316,7 @@ const ServiceDetails = () => {
                       </ul>
                     </div>
                   </div>
+
                   <div className="sidebar__widget">
                     <div className="sidebar__contact-info">
                       <figure className="thumb mb-25">

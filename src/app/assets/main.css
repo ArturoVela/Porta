@@ -67104,3 +67104,57 @@ a.text-theme:hover,
     justify-content: center;
     align-items: center;
   }
+
+
+ /* Cambios de stilo para botones de navecaion poyeto */
+
+ .page-number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background-color: #fff;
+    color: #111;
+    font-weight: 600;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: 2px solid transparent;
+  }
+  
+  .page-number:hover,
+  .page-number.active {
+    background-color: #6a1b9a;
+    color: #fff;
+    border-color: #6a1b9a;
+  }
+  
+  .arrow-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background-color: #fff;
+    color: #6a1b9a;
+    font-size: 18px;
+    font-weight: bold;
+    transition: 0.3s;
+    cursor: pointer;
+    border: 2px solid transparent;
+  }
+  
+  .arrow-btn:hover {
+    background-color: #6a1b9a;
+    color: #fff;
+    border-color: #6a1b9a;
+  }
+  
+  .arrow-btn.disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+  
