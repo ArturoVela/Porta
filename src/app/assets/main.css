@@ -11477,19 +11477,25 @@ a.text-theme:hover,
 }
 
 .project-details-area .challenge-area_list li,
-.project-details-area .results-area_list li {
+.project-details-area .results-area_list li,
+.service__details-area .challenge-area_list li,
+.service__details-area .results-area_list li {
     position: relative;
     padding-left: 18px;
-    margin-bottom: 16px
+    margin-bottom: 16px;
 }
 
 .project-details-area .challenge-area_list li:last-child,
-.project-details-area .results-area_list li:last-child {
-    margin-bottom: 0
+.project-details-area .results-area_list li:last-child,
+.service__details-area .challenge-area_list li:last-child,
+.service__details-area .results-area_list li:last-child {
+    margin-bottom: 0;
 }
 
 .project-details-area .challenge-area_list li::before,
-.project-details-area .results-area_list li::before {
+.project-details-area .results-area_list li::before,
+.service__details-area .challenge-area_list li::before,
+.service__details-area .results-area_list li::before {
     content: "";
     position: absolute;
     top: 50%;
@@ -11498,8 +11504,9 @@ a.text-theme:hover,
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    background-color: var(--theme-color)
+    background-color: var(--theme-color); /* o reemplaza por #a100ff si prefieres */
 }
+
 
 .inner__page-nav {
     display: flex;
@@ -67126,9 +67133,9 @@ a.text-theme:hover,
   
   .page-number:hover,
   .page-number.active {
-    background-color: #6a1b9a;
-    color: #fff;
-    border-color: #6a1b9a;
+    background-color: #9528cf;
+    color: #111111;
+    border-color: #9528cf;
   }
   
   .arrow-btn {
@@ -67139,7 +67146,7 @@ a.text-theme:hover,
     height: 44px;
     border-radius: 50%;
     background-color: #fff;
-    color: #6a1b9a;
+    color: #9528cf;
     font-size: 18px;
     font-weight: bold;
     transition: 0.3s;
@@ -67148,9 +67155,9 @@ a.text-theme:hover,
   }
   
   .arrow-btn:hover {
-    background-color: #6a1b9a;
+    background-color: #9528cf;
     color: #fff;
-    border-color: #6a1b9a;
+    border-color: #9528cf;
   }
   
   .arrow-btn.disabled {

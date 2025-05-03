@@ -92,158 +92,207 @@ const ServiceDetails = () => {
                     </p>
                   </aside>
                   <div className="service__details-wrap">
-                  <h3 className="title">🟢 Plan Inicial – S/80</h3>
-                  <p className="mb-35">
-                    Ideal para comunidades pequeñas o personales que desean
-                    comenzar con buen orden y estética.
-                    <br />
-                    <br />
-                    <strong>Incluye:</strong>
-                    <br />- 🧱 <strong>Diseño base:</strong> Se crean hasta 10
-                    canales estructurados (bienvenida, reglas, general, voz)
-                    <br />- 🎭 <strong>Roles predefinidos:</strong>{" "}
-                    Configuración de roles esenciales (Admin, Mod, Miembro,
-                    Invitado) con permisos básicos
-                    <br />- 🤖 <strong>Bot de bienvenida:</strong> Instalación y
-                    configuración de Carl-bot o MEE6 para mensajes automáticos
-                    de ingreso
-                    <br />- 🖼️ <strong>Personalización visual:</strong> Icono
-                    del servidor, banner y emojis en canales principales
-                    <br />- 📑 <strong>Reglas y bienvenida:</strong> Canal con
-                    reglas claras en formato embebido con emojis y estilo
-                    organizado
-                    <br />- 🧭 <strong>Guía del administrador:</strong> Archivo
-                    PDF explicativo de cómo gestionar el servidor
-                    <br />- 🛡️ <strong>Seguridad básica:</strong> Activación de
-                    verificación por botón para evitar spam
-                    <br />- 🧼 <strong>Filtros mínimos:</strong> Anti-links y
-                    antispam activado en los canales públicos
-                    <br />- ⏱️ <strong>Entrega en 48h:</strong> Tu servidor
-                    estará listo y funcional en menos de 2 días
-                    <br />- 🛠️ <strong>Soporte:</strong> 3 días de ayuda vía
-                    correo para resolver dudas básicas
-                  </p>
-                  <div className="service__details-thumb">
-                    <Image
-                      src="/assets/images/service/service-details1-dc.jpg"
-                      alt="Planes Discord"
-                      width={796}
-                      height={496}
-                      loading="lazy"
-                      className="responsive-img"
-                    />
+                    <h3 className="title">🟢 Plan Inicial – S/80</h3>
+                    <p className="mb-35">
+                      Ideal para comunidades pequeñas o personales que desean
+                      comenzar con buen orden y estética.
+                    </p>
+                    <strong className="d-block mb-10">Incluye:</strong>
+                    <ul className="results-area_list">
+                      <li>
+                        <strong>Diseño base:</strong> Hasta 10 canales
+                        estructurados (bienvenida, reglas, general, voz).
+                      </li>
+                      <li>
+                        <strong>Roles predefinidos:</strong> Admin, Mod, Miembro
+                        e Invitado con permisos básicos.
+                      </li>
+                      <li>
+                        <strong>Bot de bienvenida:</strong> Carl-bot o MEE6 con
+                        mensajes automáticos.
+                      </li>
+                      <li>
+                        <strong>Personalización visual:</strong> Icono del
+                        servidor, banner y emojis en canales clave.
+                      </li>
+                      <li>
+                        <strong>Reglas y bienvenida:</strong> Canal con reglas
+                        en formato embed con estilo organizado.
+                      </li>
+                      <li>
+                        <strong>Guía del administrador:</strong> Archivo PDF
+                        explicativo.
+                      </li>
+                      <li>
+                        <strong>Seguridad básica:</strong> Verificación por
+                        botón contra spam.
+                      </li>
+                      <li>
+                        <strong>Filtros mínimos:</strong> Anti-links y antispam
+                        activo.
+                      </li>
+                      <li>
+                        <strong>Entrega en 48h:</strong> El servidor estará
+                        listo en 2 días.
+                      </li>
+                      <li>
+                        <strong>Soporte:</strong> 3 días de ayuda por correo
+                        para dudas básicas.
+                      </li>
+                    </ul>
+                    <p> </p>
+                    <div className="service__details-thumb">
+                      <Image
+                        src="/assets/images/service/service-details1-dc.jpg"
+                        alt="Planes Discord"
+                        width={796}
+                        height={496}
+                        loading="lazy"
+                        className="responsive-img"
+                      />
+                    </div>
                   </div>
-                  </div>
-                  <p>  </p>
-                  <div className="service__details-wrap">    
-                  <h3 className="title">🟣 Plan Comunidad – S/150</h3>
-                  <p className="mb-35">
-                    Pensado para comunidades en crecimiento, con herramientas
-                    que automatizan y optimizan la experiencia.
-                    <br />
-                    <br />
-                    <strong>Incluye todo lo del Plan Inicial +</strong>
-                    <br />- 🧩 <strong>Expansión estructural:</strong> Hasta 30
-                    canales clasificados por categorías (chat, voz, soporte,
-                    eventos, recursos)
-                    <br />- 🧙 <strong>Jerarquía avanzada:</strong> Creación de
-                    hasta 10 roles con permisos únicos, acceso privado y
-                    visualización por secciones
-                    <br />- ⚙️ <strong>Bots potentes:</strong> Configuración de
-                    MEE6, Dyno, YAGPDB y Carl-bot con módulos activados
-                    (auto-mod, mensajes automáticos, comandos)
-                    <br />- 🖲️ <strong>Auto-roles interactivos:</strong> Sistema
-                    con botones o menús desplegables donde el usuario elige su
-                    rol
-                    <br />- 📋 <strong>Canal de anuncios:</strong> Activación de
-                    canal con restricciones solo para staff y notificaciones
-                    importantes
-                    <br />- 📚 <strong>Panel de reglas embebido:</strong> Reglas
-                    divididas por secciones (conducta, sanciones, contenido,
-                    staff) con formato embed
-                    <br />- 👁️ <strong>Logs automáticos:</strong> Registro de
-                    entradas, salidas, cambios de nickname, mensajes eliminados
-                    o editados
-                    <br />- 🔗 <strong>Integración con redes:</strong> Anuncios
-                    automáticos de YouTube y Twitch cuando los miembros hagan
-                    stream o suban video
-                    <br />- 🔁 <strong>Automatización básica:</strong> Muteos
-                    automáticos, respuestas automáticas, menciones de staff en
-                    palabras clave
-                    <br />- 📅 <strong>Notificaciones de eventos:</strong>{" "}
-                    Recordatorios conectados a Notion o Google Calendar
-                    <br />- 📞 <strong>Soporte técnico:</strong> 7 días de
-                    asistencia por mensaje o llamada para ajustes y dudas
-                  </p>
-
-                  <div className="service__details-thumb">
-                    <Image
-                      src="/assets/images/service/service-details1-dc.jpg"
-                      alt="Planes Discord"
-                      width={796}
-                      height={496}
-                      loading="lazy"
-                      className="responsive-img"
-                    />
-                  </div>
-                  </div>
-                  <p>  </p>
+                  <p> </p>
                   <div className="service__details-wrap">
-                  <h3 className="title">🔮 Servidor Premium – Desde S/250</h3>
-                  <p className="mb-55">
-                    Para servidores de alto impacto que necesitan automatización
-                    profesional, métricas, economía, y gestión completa.
-                    <br />
-                    <br />
-                    <strong>Incluye todo lo anterior +</strong>
-                    <br />- 🏗️ <strong>Diseño de gran escala:</strong> Más de 50
-                    canales agrupados por funciones (foro, canales ocultos, logs
-                    separados, onboarding, comunidad, soporte)
-                    <br />- 🏆 <strong>Economía y niveles:</strong> Integración
-                    con Tatsu, UnbelievaBoat o Arcane para puntos, monedas,
-                    tienda, niveles visuales y rachas
-                    <br />- 🧾 <strong>Tickets de soporte:</strong> Sistema
-                    profesional con panel de botones, categorías, logs y
-                    mensajes predeterminados
-                    <br />- 🔍 <strong>Centro de ayuda:</strong> Canal embebido
-                    con preguntas frecuentes, comandos explicados y enlaces
-                    útiles
-                    <br />- 📊 <strong>Dashboard:</strong> Integración de panel
-                    de estadísticas (actividad diaria, miembros activos,
-                    crecimiento semanal)
-                    <br />- 🛡️{" "}
-                    <strong>Anti-alt y verificación avanzada:</strong> Detección
-                    de cuentas falsas o recién creadas usando AltDentifier, Wick
-                    o Beemo
-                    <br />- 🔗 <strong>Webhooks y API:</strong> Automatización
-                    externa con GitHub, tiendas, sitios web o bases de datos
-                    externas
-                    <br />- 📢 <strong>Eventos y tags:</strong> Sistema para
-                    registrar, anunciar y automatizar sorteos, eventos o pings
-                    masivos
-                    <br />- 🔄 <strong>Optimización profunda:</strong> Limpieza
-                    de roles/canales inactivos, análisis de canales no usados,
-                    consolidación de permisos duplicados
-                    <br />- 📦 <strong>Backups avanzados:</strong> Backups
-                    totales con restauración completa y versiones incrementales
-                    <br />- 📘 <strong>Manual de administración:</strong>{" "}
-                    Documento PDF completo con mapas de rol, canal y
-                    configuración personalizada
-                    <br />- 🧠 <strong>Asesoría:</strong> 30 días de soporte
-                    directo y asistencia técnica para nuevas funciones
-                  </p>
-                  <div className="service__details-thumb">
-                    <Image
-                      src="/assets/images/service/service-details1-dc.jpg"
-                      alt="Planes Discord"
-                      width={796}
-                      height={496}
-                      loading="lazy"
-                      className="responsive-img"
-                    />
+                    <h3 className="title">🟣 Plan Comunidad – S/150</h3>
+                    <p className="mb-35">
+                      Pensado para comunidades en crecimiento, con herramientas
+                      que automatizan y optimizan la experiencia.
+                    </p>
+                    <strong className="d-block mb-10">
+                      Incluye todo lo del Plan Inicial +
+                    </strong>
+                    <ul className="results-area_list">
+                      <li>
+                        <strong>Expansión estructural:</strong> Hasta 30 canales
+                        por categorías (chat, voz, soporte, eventos, recursos).
+                      </li>
+                      <li>
+                        <strong>Jerarquía avanzada:</strong> Hasta 10 roles con
+                        permisos únicos y acceso privado.
+                      </li>
+                      <li>
+                        <strong>Bots potentes:</strong> MEE6, Dyno, YAGPDB y
+                        Carl-bot con módulos activos.
+                      </li>
+                      <li>
+                        <strong>Auto-roles interactivos:</strong> Con botones o
+                        menús para que el usuario elija su rol.
+                      </li>
+                      <li>
+                        <strong>Canal de anuncios:</strong> Exclusivo para staff
+                        con notificaciones importantes.
+                      </li>
+                      <li>
+                        <strong>Panel de reglas embebido:</strong> Reglas por
+                        secciones con formato organizado.
+                      </li>
+                      <li>
+                        <strong>Logs automáticos:</strong> Registros de acciones
+                        como cambios de nombre o mensajes editados.
+                      </li>
+                      <li>
+                        <strong>Integración con redes:</strong> Anuncios
+                        automáticos de YouTube o Twitch.
+                      </li>
+                      <li>
+                        <strong>Automatización básica:</strong> Muteos,
+                        respuestas y menciones inteligentes.
+                      </li>
+                      <li>
+                        <strong>Notificaciones de eventos:</strong> Conexión a
+                        Notion o Google Calendar.
+                      </li>
+                      <li>
+                        <strong>Soporte técnico:</strong> 7 días de asistencia
+                        por mensaje o llamada.
+                      </li>
+                    </ul>
+                    <p> </p>
+                    <div className="service__details-thumb">
+                      <Image
+                        src="/assets/images/service/service-details1-dc.jpg"
+                        alt="Planes Discord"
+                        width={796}
+                        height={496}
+                        loading="lazy"
+                        className="responsive-img"
+                      />
+                    </div>
                   </div>
+                  <p> </p>
+                  <div className="service__details-wrap">
+                    <h3 className="title">🔮 Servidor Premium – Desde S/250</h3>
+                    <p className="mb-55">
+                      Para servidores de alto impacto que necesitan
+                      automatización profesional, métricas, economía y gestión
+                      completa.
+                    </p>
+                    <strong className="d-block mb-10">
+                      Incluye todo lo anterior +
+                    </strong>
+                    <ul className="results-area_list">
+                      <li>
+                        <strong>Diseño de gran escala:</strong> Más de 50
+                        canales organizados por funciones.
+                      </li>
+                      <li>
+                        <strong>Economía y niveles:</strong> Integración con
+                        Tatsu, UnbelievaBoat o Arcane para niveles y tienda.
+                      </li>
+                      <li>
+                        <strong>Tickets de soporte:</strong> Panel profesional
+                        con logs, botones y mensajes automáticos.
+                      </li>
+                      <li>
+                        <strong>Centro de ayuda:</strong> Canal embebido con
+                        preguntas frecuentes y comandos.
+                      </li>
+                      <li>
+                        <strong>Dashboard:</strong> Estadísticas de actividad,
+                        crecimiento y uso del servidor.
+                      </li>
+                      <li>
+                        <strong>Anti-alt y verificación avanzada:</strong>{" "}
+                        Protección contra cuentas falsas (Wick, Beemo).
+                      </li>
+                      <li>
+                        <strong>Webhooks y API:</strong> Automatización con
+                        GitHub, sitios web o bases externas.
+                      </li>
+                      <li>
+                        <strong>Eventos y tags:</strong> Herramientas para
+                        sorteos, pings masivos y gestión de eventos.
+                      </li>
+                      <li>
+                        <strong>Optimización profunda:</strong> Limpieza de
+                        roles y canales inactivos con ajustes detallados.
+                      </li>
+                      <li>
+                        <strong>Backups avanzados:</strong> Copias de seguridad
+                        totales y restauración incremental.
+                      </li>
+                      <li>
+                        <strong>Manual de administración:</strong> PDF con mapa
+                        de rol, canales y funciones del servidor.
+                      </li>
+                      <li>
+                        <strong>Asesoría:</strong> 30 días de soporte técnico y
+                        acompañamiento estratégico.
+                      </li>
+                    </ul>
+                    <p> </p>
+                    <div className="service__details-thumb">
+                      <Image
+                        src="/assets/images/service/service-details1-dc.jpg"
+                        alt="Planes Discord"
+                        width={796}
+                        height={496}
+                        loading="lazy"
+                        className="responsive-img"
+                      />
+                    </div>
                   </div>
-                  
                 </div>
 
                 <div className="faq-area-1">

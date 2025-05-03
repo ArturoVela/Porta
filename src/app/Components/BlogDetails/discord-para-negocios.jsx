@@ -40,7 +40,13 @@ export default async function BlogDetails() {
             <ul className="info-items xs-py-30 space-bottom">
               <li className="item">
                 <div className="thumb">
-                  <Image src={THUMB_IMAGE} alt="img" width={75} height={75} className="responsive-img"/>
+                  <Image
+                    src={THUMB_IMAGE}
+                    alt="img"
+                    width={75}
+                    height={75}
+                    className="responsive-img"
+                  />
                 </div>
                 <div className="info">
                   <span className="title">Escrito por</span>
@@ -70,7 +76,6 @@ export default async function BlogDetails() {
             alt="img"
             width={1910}
             height={846}
-            
           />
         </div>
 
@@ -99,7 +104,6 @@ export default async function BlogDetails() {
                     alt="img"
                     width={40}
                     height={40}
-                    
                   />
                   <p>
                     "Discord no es solo para jugar, es una poderosa herramienta
@@ -126,7 +130,6 @@ export default async function BlogDetails() {
                     alt="img"
                     width={1320}
                     height={650}
-                    
                   />
                 </figure>
 

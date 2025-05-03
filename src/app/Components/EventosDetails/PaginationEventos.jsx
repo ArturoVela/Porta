@@ -52,16 +52,16 @@ export default function PaginationEventos() {
         }
 
         .page-number:hover {
-          background-color: #8000ff;
+          background-color: #9528cf;
           color: #ffffff;
-          border-color: #8000ff;
+          border-color: #9528cf;
         }
 
         .active-page {
-          background-color: #8000ff;
-          color: white;
+          background-color: #9528cf;
+          color: #111111;
           font-weight: 700;
-          border-color: #8000ff;
+          border-color: #9528cf;
         }
 
         .dots {
