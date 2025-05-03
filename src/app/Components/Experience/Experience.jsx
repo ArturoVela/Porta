@@ -5,7 +5,7 @@ const Experience = () => {
 
     const experiencetContent = [
         {name:'Caña Wasky - Perú', position:'Diseñador Ventas', year:'2025-1 - Presente'},
-        {name:'K y F Products', position:'Administrador de ventas', year:'2024-7 - 2024-9'},
+        {name:'K & F Products', position:'Administrador de ventas', year:'2024-7 - 2024-9'},
         {name:'Pachas Café - Perú', position:'Diseñador Web', year:'2024-3 - 2024-5'},
         {name:'Discord - Servidores', position:'Admin - Moderador', year:'2018 - Presente'} 
       ];  

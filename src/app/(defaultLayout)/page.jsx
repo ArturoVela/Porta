@@ -18,7 +18,7 @@ const page = () => {
            <About2></About2>
            <Skill2></Skill2>
            <Experience></Experience>  
-           <Project2></Project2> 
+           <Project2></Project2>
            <Brand1></Brand1>      
            <Services2></Services2> 
            <Pricing2

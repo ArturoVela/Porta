@@ -14,7 +14,7 @@ const Footer1 = () => {
                             <a href="mailto:velarturo70@gmail.com" className="bg-black2">
                                 <span className="link-effect">
                                     <span className="effect-1">velarturo70@gmail.com</span>
-                                    <span className="effect-1">velarturo70@gmail.com</span>
+                                    <span className="effect-1">Correo Personal</span>
                                 </span>
                                 <Image src="/assets/images/icons/arrow-left-top.svg" alt="img" width={16} height={40}   />
                             </a>

@@ -16,9 +16,7 @@ const page = () => {
             <Skill2></Skill2>
             <Experience2></Experience2>
             <Faq1></Faq1>
-
-            <Eventos></Eventos> 
-
+            <Eventos></Eventos>
             <Testimonail2
                 addclass="testimonial-area space bg-theme2"
             ></Testimonail2> 
