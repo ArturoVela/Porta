@@ -27,7 +27,7 @@
 }
 
 :root {
-    --theme-color: #9528cf;
+    --theme-color: #B66DFF;
     --title-color: var(--white-color);
     --body-color: var(--gray-color);
     --black-color: #171717;
@@ -67133,9 +67133,9 @@ a.text-theme:hover,
   
   .page-number:hover,
   .page-number.active {
-    background-color: #9528cf;
+    background-color: var(--theme-color);
     color: #111111;
-    border-color: #9528cf;
+    border-color:  var(--theme-color);
   }
   
   .arrow-btn {
@@ -67146,7 +67146,7 @@ a.text-theme:hover,
     height: 44px;
     border-radius: 50%;
     background-color: #fff;
-    color: #9528cf;
+    color: var(--theme-color);
     font-size: 18px;
     font-weight: bold;
     transition: 0.3s;
@@ -67155,9 +67155,9 @@ a.text-theme:hover,
   }
   
   .arrow-btn:hover {
-    background-color: #9528cf;
+    background-color:  var(--theme-color);
     color: #fff;
-    border-color: #9528cf;
+    border-color:  var(--theme-color);
   }
   
   .arrow-btn.disabled {
@@ -67170,10 +67170,10 @@ a.text-theme:hover,
   /* Cambios de estilo blog sobre cursor */
 
   .sidebar__post-content .title a:hover {
-    color: #9528cf;
+    color: var(--theme-color);
   }
   .sidebar__post-item:hover .title a {
-    color: #9528cf;
+    color: var(--theme-color);
   }
   
   .sidebar__post-item:hover .date {
@@ -67192,12 +67192,12 @@ a.text-theme:hover,
     height: 2px;
     bottom: 0;
     left: 0;
-    background-color: #9528cf;
+    background-color: var(--theme-color);
     transition: width 0.3s ease;
   }
   
   .title-link:hover {
-    color: #9528cf;
+    color: var(--theme-color);
   }
   
   .title-link:hover::before {
