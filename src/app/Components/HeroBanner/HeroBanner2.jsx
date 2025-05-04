@@ -5,7 +5,7 @@ import React from "react";
 const HeroBanner2 = () => {
   const heroContent = {
     number: "+51 963 653 154",
-    title2: " ",
+    title2: "",
     title: "ARTURO VELA",
     title3: "velaarturo70@gmail.com",
     img: "/assets/images/hero/hero-img.jpg",

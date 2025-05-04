@@ -48,25 +48,25 @@ const Eventos = () => {
       </div>
       <p> </p>
       <div className="row justify-content-center">
-          <div className="col-xl-12">
-            <div className="title-area text-center">
-              <div className="btn-wrap btn-bounce-1 d-inline-block">
-                <Link href="/eventos" className="link-btn">
-                  <span className="link-effect">
-                    <span className="effect-1">Más información</span>
-                    <span className="effect-1">De eventos</span>
-                  </span>
-                  <Image
-                    src="/assets/images/icons/arrow-left-top.svg"
-                    alt="img"
-                    width={10}
-                    height={26}
-                  />
-                </Link>
-              </div>
+        <div className="col-xl-12">
+          <div className="title-area text-center">
+            <div className="btn-wrap btn-bounce-1 d-inline-block">
+              <Link href="/eventos" className="link-btn">
+                <span className="link-effect">
+                  <span className="effect-1">Más información</span>
+                  <span className="effect-1">De eventos</span>
+                </span>
+                <Image
+                  src="/assets/images/icons/arrow-left-top.svg"
+                  alt="img"
+                  width={10}
+                  height={26}
+                />
+              </Link>
             </div>
           </div>
         </div>
+      </div>
     </section>
   );
 };
