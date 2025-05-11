@@ -26,7 +26,7 @@ const Project2 = () => {
         {
             title:'Caña Wasky', 
             number:'01/04', 
-            content:'istema de ventas a medida para Caña Wasky. Optimiza la gestión y el crecimiento de este negocio único.',
+            content:'Sistema de ventas a medida para Caña Wasky. Optimiza la gestión y el crecimiento de este negocio único.',
             img:'/assets/images/portfolio/portfolio1_1.jpg',
             tag:'Sistema ventas, Interfaz de usuario (UI)',
             year:'( 2025 )',              
