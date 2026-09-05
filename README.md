@@ -86,4 +86,4 @@ pnpm deploy:staging
 pnpm deploy:production
 ```
 
-Producción usa los dominios personalizados `velaarturo.com` y `www.velaarturo.com`; `www` se redirige al dominio canónico. Los cambios de contenido publicados en Second Brain se reflejan sin reconstruir la SPA, con una caché máxima de 60 segundos.
+Producción usa Worker Routes sobre los registros DNS proxied existentes de `velaarturo.com` y `www.velaarturo.com`; `www` se redirige al dominio canónico. Los cambios de contenido publicados en Second Brain se reflejan sin reconstruir la SPA, con una caché máxima de 60 segundos.

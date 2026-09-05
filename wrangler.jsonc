@@ -63,8 +63,8 @@
       "name": "velaarturo",
       "workers_dev": true,
       "routes": [
-        { "pattern": "velaarturo.com", "custom_domain": true },
-        { "pattern": "www.velaarturo.com", "custom_domain": true }
+        { "pattern": "velaarturo.com/*", "zone_name": "velaarturo.com" },
+        { "pattern": "www.velaarturo.com/*", "zone_name": "velaarturo.com" }
       ],
       "vars": {
         "SITE_KEY": "velaarturo",

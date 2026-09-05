@@ -302,7 +302,7 @@ async function html(request: Request, env: Env, ctx: ExecutionContext) {
   headers.set("permissions-policy", "camera=(), microphone=(), geolocation=()");
   headers.set("x-frame-options", "DENY");
   if (url.hostname !== "localhost" && url.hostname !== "127.0.0.1") {
-    headers.set("content-security-policy", "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self' https://formspree.io; script-src 'self' https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:; connect-src 'self' https://formspree.io https://challenges.cloudflare.com; frame-src https://challenges.cloudflare.com; upgrade-insecure-requests");
+    headers.set("content-security-policy", "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self' https://formspree.io; script-src 'self' https://challenges.cloudflare.com https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:; connect-src 'self' https://formspree.io https://challenges.cloudflare.com; frame-src https://challenges.cloudflare.com; upgrade-insecure-requests");
   }
   const shell = new Response(asset.body, { status: meta.status, headers });
   const canonical = new URL(meta.canonicalPath, env.CANONICAL_ORIGIN).href;
