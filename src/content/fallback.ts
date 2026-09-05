@@ -8,7 +8,7 @@ export const FALLBACK_ENVELOPE: PortfolioEnvelope = {
   data: {
     site: {
       name: "Arturo Vela",
-      headline: "Construyo productos digitales que convierten procesos complejos en herramientas claras.",
+      headline: "Diseño y construyo productos digitales que hacen simple lo complejo.",
       intro: "Ingeniero de sistemas y desarrollador web en Perú. Diseño interfaces, datos y servicios edge como un solo producto.",
       availability: "Abierto a conversar sobre productos, sistemas internos y colaboración técnica.",
       location: "Perú",

@@ -32,7 +32,7 @@ function ThemeToggle() {
       borderColor="app.border"
       bg="app.panel"
       color="app.text"
-      borderRadius="full"
+      borderRadius="0"
       onClick={() => setTheme(dark ? "light" : "dark")}
     >
       {dark ? <Sun size={18} /> : <Moon size={18} />}
@@ -49,11 +49,11 @@ function NavigationLinks({ onNavigate }: { onNavigate?: () => void }) {
           display="block"
           px="3"
           py="2"
-          borderRadius="lg"
           color={isActive ? "app.text" : "app.muted"}
-          bg={isActive ? "app.accent-subtle" : "transparent"}
+          borderBottomWidth="2px"
+          borderColor={isActive ? "app.accent" : "transparent"}
           fontWeight="600"
-          _hover={{ color: "app.text", bg: "app.accent-subtle" }}
+          _hover={{ color: "app.text", borderColor: "app.accent" }}
         >
           {item.label}
         </Text>
@@ -90,13 +90,16 @@ export function SiteShell({ children }: { children: ReactNode }) {
       >
         <a href="#contenido">Saltar al contenido</a>
       </Box>
-      <Box as="header" position="sticky" top="0" zIndex="sticky" bg="app.canvas/88" backdropFilter="blur(18px)" borderBottomWidth="1px" borderColor="app.border">
+      <Box as="header" position="sticky" top="0" zIndex="sticky" bg="app.canvas/88" backdropFilter="blur(18px)" py="3">
         <Container maxW="7xl">
-          <Flex minH="18" align="center" justify="space-between" gap="4">
+          <Flex minH="15" align="center" justify="space-between" gap="4" bg="app.panel/92" borderWidth="1px" borderColor="app.border" px={{ base: "3", md: "5" }} boxShadow="0 8px 30px rgba(8, 11, 18, .06)">
             <Link to="/">
               <HStack gap="3">
-                <Flex w="9" h="9" bg="app.text" color="app.canvas" borderRadius="xl" align="center" justify="center" fontWeight="800">AV</Flex>
-                <Text fontWeight="700" letterSpacing="-.02em">{content.site.name}</Text>
+                <Flex className="brand-mark" w="9" h="9" bg="brand.600" color="white" align="center" justify="center" fontWeight="850">A/</Flex>
+                <Stack gap="0" display={{ base: "none", sm: "flex" }}>
+                  <Text fontWeight="750" letterSpacing="-.025em" lineHeight="1.1">{content.site.name}</Text>
+                  <Text color="app.muted" fontSize="xs">Producto e ingeniería web</Text>
+                </Stack>
               </HStack>
             </Link>
             <HStack display={{ base: "none", md: "flex" }} gap="1">
@@ -104,7 +107,7 @@ export function SiteShell({ children }: { children: ReactNode }) {
             </HStack>
             <HStack gap="2">
               <ThemeToggle />
-              <Button asChild display={{ base: "none", sm: "inline-flex" }} bg="app.text" color="app.canvas" borderRadius="full" px="5" _hover={{ opacity: .86 }}>
+              <Button asChild display={{ base: "none", sm: "inline-flex" }} bg="app.signal" color="#160B08" borderRadius="0" px="5" _hover={{ transform: "translate(2px, -2px)" }}>
                 <Link to="/contacto">Hablemos <ArrowUpRight size={17} /></Link>
               </Button>
               <IconButton
@@ -113,7 +116,7 @@ export function SiteShell({ children }: { children: ReactNode }) {
                 variant="outline"
                 borderColor="app.border"
                 bg="app.panel"
-                borderRadius="full"
+                borderRadius="0"
                 onClick={() => setOpen((value) => !value)}
               >
                 {open ? <X size={19} /> : <Menu size={19} />}
@@ -121,9 +124,9 @@ export function SiteShell({ children }: { children: ReactNode }) {
             </HStack>
           </Flex>
           {open ? (
-            <Stack display={{ md: "none" }} pb="5" gap="1">
+            <Stack display={{ md: "none" }} p="4" gap="1" bg="app.panel" borderWidth="1px" borderTopWidth="0" borderColor="app.border">
               <NavigationLinks onNavigate={() => setOpen(false)} />
-              <Button asChild mt="2" bg="app.text" color="app.canvas" borderRadius="full">
+              <Button asChild mt="2" bg="app.signal" color="#160B08" borderRadius="0">
                 <Link to="/contacto">Hablemos <ArrowUpRight size={17} /></Link>
               </Button>
             </Stack>
@@ -131,18 +134,18 @@ export function SiteShell({ children }: { children: ReactNode }) {
         </Container>
       </Box>
       <Box as="main" id="contenido" flex="1">{children}</Box>
-      <Box as="footer" borderTopWidth="1px" borderColor="app.border" py={{ base: "10", md: "14" }}>
+      <Box as="footer" bg="#080B12" color="#F7F9FC" py={{ base: "12", md: "16" }}>
         <Container maxW="7xl">
-          <Flex direction={{ base: "column", md: "row" }} justify="space-between" gap="8">
-            <Stack gap="2" maxW="md">
-              <Text fontSize="xl" fontWeight="700">{content.site.name}</Text>
-              <Text color="app.muted">Productos digitales claros, seguros y mantenibles.</Text>
+          <Flex direction={{ base: "column", md: "row" }} justify="space-between" align={{ md: "end" }} gap="12">
+            <Stack gap="6" maxW="2xl">
+              <Text color="#AAB5C6">{content.site.name} · {content.site.location}</Text>
+              <Text fontSize={{ base: "3xl", md: "5xl" }} fontWeight="750" letterSpacing="-.05em" lineHeight=".95">Productos digitales claros, seguros y mantenibles.</Text>
             </Stack>
-            <Stack align={{ base: "start", md: "end" }} gap="3">
+            <Stack align={{ base: "start", md: "end" }} gap="5">
               <HStack gap="5" flexWrap="wrap">
-                {content.site.socials.map((social) => <a key={social.label} href={social.url} target="_blank" rel="noreferrer"><Text color="app.muted" _hover={{ color: "app.text" }}>{social.label}</Text></a>)}
+                {content.site.socials.map((social) => <a key={social.label} href={social.url} target="_blank" rel="noreferrer"><Text color="#AAB5C6" borderBottomWidth="1px" borderColor="#596476" _hover={{ color: "white", borderColor: "white" }}>{social.label}</Text></a>)}
               </HStack>
-              <Text color="app.muted" fontSize="sm">© {new Date().getFullYear()} · Construido desde {content.site.location}</Text>
+              <Text color="#7D899B" fontSize="sm">© {new Date().getFullYear()} · Construido desde {content.site.location}</Text>
             </Stack>
           </Flex>
         </Container>

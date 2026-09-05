@@ -17,7 +17,7 @@ export function ContactPage() {
             <HStack><MapPin size={18} /><Text>{content.site.location}</Text></HStack>
           </Stack>
         </Stack>
-        <Box bg="app.panel" borderWidth="1px" borderColor="app.border" borderRadius="3xl" p={{ base: "6", md: "10" }}>
+        <Box className="contact-panel" bg="app.panel" borderWidth="1px" borderColor="app.border" p={{ base: "6", md: "10" }}>
           {state.succeeded ? <Stack role="status" gap="3"><Heading as="h2" fontSize="3xl">Mensaje enviado</Heading><Text color="app.muted">Gracias por compartir el contexto. Te responderé por correo.</Text></Stack> : (
             <form onSubmit={handleSubmit}>
               <Stack gap="5">
@@ -28,7 +28,7 @@ export function ContactPage() {
                 </Grid>
                 <Field.Root><Field.Label>Organización o proyecto</Field.Label><Input name="organization" autoComplete="organization" /></Field.Root>
                 <Field.Root required><Field.Label>Contexto</Field.Label><Textarea name="message" required minH="11rem" resize="vertical" placeholder="Qué ocurre hoy, a quién afecta y qué te gustaría mejorar." /><ValidationError prefix="Mensaje" field="message" errors={state.errors} /></Field.Root>
-                <Button type="submit" alignSelf="start" size="lg" borderRadius="full" bg="app.text" color="app.canvas" loading={state.submitting}>Enviar mensaje <Send size={17} /></Button>
+                <Button type="submit" alignSelf="start" size="lg" borderRadius="0" bg="brand.600" color="white" loading={state.submitting}>Enviar mensaje <Send size={17} /></Button>
               </Stack>
             </form>
           )}

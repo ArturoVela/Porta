@@ -1,17 +1,17 @@
 import { createSystem, defaultConfig, defineConfig } from "@chakra-ui/react";
 
 export const brandColors = {
-  50: "#F2F5FA",
-  100: "#E8EDF6",
-  200: "#D6DFED",
-  300: "#BAC8DE",
-  400: "#91A4C5",
-  500: "#7185AE",
-  600: "#5F739E",
-  700: "#4C5E83",
-  800: "#314466",
-  900: "#1D2A42",
-  950: "#111A2A",
+  50: "#EEF3FF",
+  100: "#DDE7FF",
+  200: "#BED0FF",
+  300: "#91ADFF",
+  400: "#6488FF",
+  500: "#3E68FF",
+  600: "#2453F4",
+  700: "#1D43CC",
+  800: "#1939A4",
+  900: "#172F7C",
+  950: "#0B173A",
 } as const;
 
 const config = defineConfig({
@@ -19,14 +19,15 @@ const config = defineConfig({
     "html, body, #root": { minHeight: "100%" },
     html: { scrollBehavior: "smooth" },
     body: { bg: "app.canvas", color: "app.text", fontFamily: "body", lineHeight: "1.6" },
-    "*::selection": { bg: "brand.300", color: "brand.950" },
+    "*::selection": { bg: "brand.300", color: "#080B12" },
     "*:focus-visible": { outline: "3px solid {colors.app.focus-ring}", outlineOffset: "3px" },
   },
   theme: {
     tokens: {
       colors: {
         brand: Object.fromEntries(Object.entries(brandColors).map(([key, value]) => [key, { value }])),
-        panel: { value: "#F9FBFE" },
+        panel: { value: "#FFFFFF" },
+        signal: { value: "#FF5A36" },
       },
       fonts: {
         body: { value: "Satoshi, ui-sans-serif, system-ui, sans-serif" },
@@ -37,15 +38,16 @@ const config = defineConfig({
     semanticTokens: {
       colors: {
         app: {
-          canvas: { value: { base: "{colors.brand.50}", _dark: "{colors.brand.950}" } },
-          panel: { value: { base: "{colors.panel}", _dark: "{colors.brand.900}" } },
-          surface: { value: { base: "{colors.brand.100}", _dark: "{colors.brand.800}" } },
-          text: { value: { base: "{colors.brand.950}", _dark: "{colors.brand.50}" } },
-          muted: { value: { base: "{colors.brand.700}", _dark: "{colors.brand.300}" } },
-          border: { value: { base: "{colors.brand.200}", _dark: "{colors.brand.800}" } },
-          accent: { value: { base: "{colors.brand.800}", _dark: "{colors.brand.200}" } },
-          "accent-subtle": { value: { base: "{colors.brand.100}", _dark: "{colors.brand.900}" } },
-          "focus-ring": { value: { base: "{colors.brand.700}", _dark: "{colors.brand.300}" } },
+          canvas: { value: { base: "#F5F7FA", _dark: "#080B12" } },
+          panel: { value: { base: "{colors.panel}", _dark: "#0E1420" } },
+          surface: { value: { base: "#E9EDF4", _dark: "#151D2A" } },
+          text: { value: { base: "#0A0D14", _dark: "#F7F9FC" } },
+          muted: { value: { base: "#596476", _dark: "#AAB5C6" } },
+          border: { value: { base: "#CED5E0", _dark: "#2B3545" } },
+          accent: { value: { base: "{colors.brand.600}", _dark: "{colors.brand.400}" } },
+          "accent-subtle": { value: { base: "{colors.brand.50}", _dark: "{colors.brand.950}" } },
+          signal: { value: { base: "{colors.signal}", _dark: "#FF7657" } },
+          "focus-ring": { value: { base: "{colors.brand.600}", _dark: "{colors.brand.300}" } },
         },
       },
     },
