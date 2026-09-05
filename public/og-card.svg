@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#F2F5FA"/>
+  <path d="M0 500h1200v130H0z" fill="#111A2A"/>
+  <g fill="none" stroke="#7185AE" stroke-width="3"><path d="M770 132h145l90 91h112M915 132v260H760"/><circle cx="770" cy="132" r="13" fill="#F2F5FA"/><circle cx="1005" cy="223" r="13" fill="#F2F5FA"/><circle cx="915" cy="392" r="13" fill="#F2F5FA"/></g>
+  <text x="88" y="210" fill="#111A2A" font-family="Arial,sans-serif" font-size="78" font-weight="700">Arturo Vela</text>
+  <text x="88" y="292" fill="#314466" font-family="Arial,sans-serif" font-size="42">Ingeniería de productos digitales</text>
+  <text x="88" y="565" fill="#F2F5FA" font-family="Arial,sans-serif" font-size="28">UI · Datos · Edge · Automatización</text>
+</svg>

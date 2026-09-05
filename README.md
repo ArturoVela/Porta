@@ -1,108 +1,89 @@
-# 🚀 Portafolio Profesional – Arturo Vela
+# velaarturo.com
 
-Bienvenido al portafolio de **Arturo Vela**, ingeniero en sistemas y desarrollador web especializado en crear soluciones tecnológicas eficientes, modernas y atractivas. Este sitio muestra sus proyectos destacados, servicios, habilidades y más.
+Portafolio profesional de Arturo Vela. Es una SPA de React y Chakra UI servida junto con su API desde un único Cloudflare Worker.
 
----
+## Arquitectura
 
-## 📑 Tabla de Contenidos
-
-- [🧾 Descripción](#descripción)
-- [📂 Estructura del Proyecto](#estructura-del-proyecto)
-- [📁 Descripción de Carpetas](#descripción-de-carpetas)
-- [🛠 Tecnologías Utilizadas](#tecnologías-utilizadas)
-- [⚙️ Instalación](#instalación)
-- [💻 Uso](#uso)
-- [🌟 Características](#características)
-- [👨‍💻 Autor](#autor)
-- [📄 Licencia](#licencia)
-
----
-
-## 🧾 Descripción
-
-Este proyecto es un **portafolio profesional** diseñado para presentar los trabajos, habilidades y servicios de **Arturo Vela**. Incluye secciones como proyectos interactivos, planes de precios, formularios de contacto y un diseño responsivo optimizado para todo tipo de dispositivos.
-
----
-
-## 📂 Estructura del Proyecto
-
-```
-.env
-.gitignore
-eslint.config.mjs
-jsconfig.json
-next.config.mjs
-package.json
-README.md
-.vscode/
-public/
-src/
- └── app/
-     └── Components/
-         ├── Pricing/
-         └── Project/
-     └── assets/
+```text
+Second Brain Worker ── Service Binding ── Porta Worker
+       │                                      ├─ Vite SPA / Static Assets
+       └─ D1 secondbrain-core + R2 FILES      ├─ HTML, SEO, feed y sitemap
+                                              └─ D1 velaarturo-comments
 ```
 
----
+- React 19, TypeScript estricto, Vite y React Router en modo librería.
+- Chakra UI 3 con tokens semánticos, tema claro/oscuro y Satoshi.
+- Workers Static Assets para bundles, fuentes y recursos propios.
+- Service Binding privado `BRAIN` para contenido publicado y medios de Second Brain.
+- D1 independiente para comentarios; Turnstile se valida en el Worker.
+- Formspree continúa atendiendo el formulario de contacto.
 
-## 📁 Descripción de Carpetas
+El contenido público usa el contrato versionado en [`contracts/portfolio-v1.example.json`](contracts/portfolio-v1.example.json). Si Second Brain no responde, el Worker usa la última respuesta válida y, finalmente, el snapshot empaquetado en `src/content/fallback.ts`.
 
-- **public/**: Imágenes y recursos accesibles directamente por el navegador.
-- **src/app/**: Contiene el núcleo del proyecto.
-  - **Components/**: Componentes reutilizables como secciones de precios, proyectos, blog, etc.
-  - **assets/**: Archivos CSS globales y recursos visuales.
+## Desarrollo local
 
----
-
-## 🛠 Tecnologías Utilizadas
-
-- ⚛️ **Next.js** – Framework de React para SSR y SSG.
-- 💡 **React** – Librería de interfaces de usuario.
-- 🎯 **Bootstrap** – Sistema de diseño responsivo.
-- 🎠 **Slick Carousel** – Carruseles interactivos.
-- 🎨 **CSS personalizado** – Para control de estilos finos.
-
----
-
-## ⚙️ Instalación
+Requisitos: Node.js 22 o posterior y pnpm 11.
 
 ```bash
-git clone https://github.com/tu-usuario/Porta.git
-cd Porta
-npm install
-npm run dev
+pnpm install
+cp .dev.vars.example .dev.vars
+cp .env.example .env.local
+pnpm types
+pnpm dev
 ```
 
----
+Variables privadas del Worker en `.dev.vars`:
 
-## 💻 Uso
+- `BRAIN_CONTENT_TOKEN`: secreto compartido con Second Brain.
+- `TURNSTILE_SECRET_KEY`: clave privada de Turnstile.
 
-1. Abre tu navegador en [http://localhost:3000](http://localhost:3000).
-2. Navega por las secciones: proyectos, precios, contacto, etc.
-3. Personalízalo desde `/src/app/Components/`.
+Variable pública de Vite en `.env.local`:
 
----
+- `VITE_TURNSTILE_SITE_KEY`: clave pública del widget de Turnstile.
 
-## 🌟 Características
+No se deben confirmar archivos `.dev.vars` ni `.env.local`.
 
-- ✅ **Diseño 100% Responsivo**
-- 🧩 **Componentes Reutilizables**
-- 🧠 **Optimización para SEO**
-- 📂 **Contenido Dinámico y Estructurado**
-- 🛠 **Fácil de Escalar y Mantener**
+## Verificación
 
----
+```bash
+pnpm check
+pnpm build:staging
+pnpm build:production
+pnpm types:check
+pnpm deploy:dry
+```
 
-## 👨‍💻 Autor
+Las pruebas cubren el contrato público, redirecciones, payloads de comentarios, mismo origen, metadatos y 404 de publicaciones.
 
-**Arturo Vela**  
-Ingeniero de Sistemas & Desarrollador Web  
-🌐 [Portafolio Web](https://www.trolinol.xyz/project)  
-💼 [LinkedIn](https://www.linkedin.com/in/arturo-vela/)
+## D1
 
----
+Las bases remotas configuradas son:
 
-## 📄 Licencia
+- Staging: `velaarturo-comments-staging`
+- Producción: `velaarturo-comments`
 
-Este proyecto está bajo la licencia [MIT](https://opensource.org/licenses/MIT).
+Aplicar migraciones:
+
+```bash
+pnpm db:migrate:local
+pnpm db:migrate:staging
+pnpm db:migrate:production
+```
+
+La importación histórica desde Neon es separada e idempotente. Requiere proporcionar temporalmente `DATABASE_URL`; no se importa el correo de los comentarios antiguos.
+
+```bash
+DATABASE_URL='…' pnpm comments:migrate:neon -- --env staging --dry-run
+DATABASE_URL='…' pnpm comments:migrate:neon -- --env production
+```
+
+## Despliegue
+
+Antes de staging, deben existir el Worker `secondbrain-web-staging`, su API interna v1 y el mismo valor de `BRAIN_CONTENT_TOKEN` en ambos Workers. Luego:
+
+```bash
+pnpm deploy:staging
+pnpm deploy:production
+```
+
+Producción usa los dominios personalizados `velaarturo.com` y `www.velaarturo.com`; `www` se redirige al dominio canónico. Los cambios de contenido publicados en Second Brain se reflejan sin reconstruir la SPA, con una caché máxima de 60 segundos.

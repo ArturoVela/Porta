@@ -1,0 +1,13 @@
+{
+  "name": "Arturo Vela — Portafolio",
+  "short_name": "Arturo Vela",
+  "description": "Productos digitales, sistemas internos e ingeniería web.",
+  "lang": "es-PE",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F2F5FA",
+  "theme_color": "#111A2A",
+  "icons": [
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}

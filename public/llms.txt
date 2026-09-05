@@ -1,0 +1,13 @@
+# Arturo Vela — Portafolio profesional
+
+Sitio oficial de Arturo Vela, ingeniero de sistemas y desarrollador de productos web en Perú.
+
+## Secciones públicas
+
+- [Inicio](https://velaarturo.com/)
+- [Proyectos](https://velaarturo.com/proyectos)
+- [Perfil](https://velaarturo.com/perfil)
+- [Artículos](https://velaarturo.com/articulos)
+- [Contacto](https://velaarturo.com/contacto)
+
+El contenido editorial publicado se refleja desde Second Brain. Los borradores y las vistas previas privadas no deben indexarse.

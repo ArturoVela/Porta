@@ -1,0 +1,6 @@
+{
+  "error": {
+    "code": "PORTFOLIO_NOT_FOUND",
+    "message": "La publicación solicitada no existe."
+  }
+}

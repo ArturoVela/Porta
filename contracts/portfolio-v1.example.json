@@ -1,0 +1,63 @@
+{
+  "schemaVersion": "1",
+  "siteKey": "velaarturo",
+  "publishedRevision": 42,
+  "generatedAt": "2026-09-04T21:00:00-05:00",
+  "data": {
+    "site": {
+      "name": "Arturo Vela",
+      "headline": "Construyo productos digitales que convierten procesos complejos en herramientas claras.",
+      "intro": "Ingeniería de producto, interfaz y edge como un solo sistema.",
+      "availability": "Abierto a nuevas conversaciones.",
+      "location": "Perú",
+      "bio": "Ingeniero de sistemas y desarrollador web.",
+      "email": "dev@velaarturo.com",
+      "socials": [{ "label": "GitHub", "url": "https://github.com/ArturoVela" }],
+      "seo": {
+        "title": "Arturo Vela — Ingeniería de productos digitales",
+        "description": "Portafolio profesional de Arturo Vela.",
+        "ogImage": "/og-card.svg"
+      }
+    },
+    "services": [{
+      "id": "web-products",
+      "title": "Productos web",
+      "description": "Aplicaciones rápidas, accesibles y mantenibles.",
+      "capabilities": ["React", "TypeScript", "Cloudflare Workers"]
+    }],
+    "projects": [{
+      "id": "project-hub",
+      "slug": "hub",
+      "title": "Hub",
+      "excerpt": "Herramientas cotidianas en una SPA local-first.",
+      "body": "## El reto\n\nResolver utilidades frecuentes sin enviar datos sensibles al servidor.",
+      "category": "Producto personal",
+      "type": "Aplicación web",
+      "role": "Diseño y desarrollo integral",
+      "year": "2026",
+      "stack": ["React", "Vite", "Chakra UI"],
+      "outcomes": ["Procesamiento local", "Carga modular"],
+      "featured": true,
+      "order": 1,
+      "cover": {
+        "src": "/media/42/opaque-file-id",
+        "alt": "Vista del producto Hub",
+        "width": 1600,
+        "height": 1000
+      },
+      "seo": { "description": "Caso de estudio de Hub." }
+    }],
+    "articles": [{
+      "id": "article-example",
+      "slug": "decisiones-de-producto",
+      "title": "Decisiones de producto",
+      "excerpt": "Una nota breve sobre diseño e ingeniería.",
+      "body": "El cuerpo publicado se entrega como Markdown saneado.",
+      "category": "Producto",
+      "tags": ["Producto", "Ingeniería"],
+      "publishedAt": "2026-09-04",
+      "readingMinutes": 4,
+      "seo": {}
+    }]
+  }
+}

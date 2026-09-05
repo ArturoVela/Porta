@@ -1,2 +1,1 @@
-# Auto detect text files and perform LF normalization
-* text=auto
+worker-configuration.d.ts whitespace=-blank-at-eol

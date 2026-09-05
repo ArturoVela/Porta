@@ -1,0 +1,2 @@
+BRAIN_CONTENT_TOKEN=replace-with-the-shared-secondbrain-secret
+TURNSTILE_SECRET_KEY=replace-with-a-turnstile-secret-key
