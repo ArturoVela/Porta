@@ -3,6 +3,7 @@ import { ArrowUpRight } from "lucide-react";
 import { Link } from "react-router";
 import type { ArticleContent, ProjectContent } from "@/types/content";
 import { ResponsiveImage } from "@/components/ResponsiveImage";
+import { projectAvailabilityLabel } from "@/lib/projectAvailability";
 
 const visualCopy: Record<string, string[]> = {
   hub: ["39 utilidades", "Local-first", "Carga modular"],
@@ -41,7 +42,10 @@ export function ProjectFeature({ project, reverse = false, index = 0 }: { projec
         <Stack gridColumn={{ lg: reverse ? "1" : "2" }} gridRow={{ lg: "1" }} justify="space-between" align="start" gap="8" py={{ lg: "2" }}>
           <Flex justify="space-between" w="full" color="app.muted" fontSize="sm"><Text>{String(index + 1).padStart(2, "0")}</Text><Text>{project.year}</Text></Flex>
           <Stack gap="5" align="start">
-            <Text color="app.accent" fontWeight="700">{project.category}</Text>
+            <HStack gap="3" flexWrap="wrap">
+              <Text color="app.accent" fontWeight="700">{project.category}</Text>
+              <Text color="app.muted" fontSize="sm">· {projectAvailabilityLabel(project)}</Text>
+            </HStack>
             <Heading as="h3" fontSize={{ base: "3xl", md: "5xl", lg: "6xl" }} letterSpacing="-.055em" lineHeight=".9">{project.title}</Heading>
             <Text color="app.muted" fontSize={{ base: "md", md: "lg" }} maxW="44ch">{project.excerpt}</Text>
             <HStack gap="2" flexWrap="wrap">{project.stack.slice(0, 4).map((item) => <Text key={item} fontSize="sm" borderBottomWidth="1px" borderColor="app.border">{item}</Text>)}</HStack>

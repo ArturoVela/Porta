@@ -2,6 +2,7 @@ import { Box, Container, Heading, SimpleGrid, Stack, Text } from "@chakra-ui/rea
 import { ProjectFeature } from "@/components/ContentCards";
 import { SectionHeading } from "@/components/SectionHeading";
 import { useContent } from "@/content/context";
+import { projectAvailabilityLabel } from "@/lib/projectAvailability";
 import { Link } from "react-router";
 
 export function ProjectsPage() {
@@ -11,9 +12,9 @@ export function ProjectsPage() {
   const archive = projects.filter((project) => !project.featured);
   return (
     <>
-      <Container maxW="7xl" py={{ base: "14", md: "24" }}><SectionHeading title="Proyectos" description="Una selección de productos propios, trabajo para clientes y experimentos donde la decisión técnica responde a una necesidad concreta." /></Container>
+      <Container maxW="7xl" py={{ base: "14", md: "24" }}><SectionHeading title="Proyectos" description="Productos propios, trabajo para clientes y experimentos donde cada decisión técnica responde a una necesidad concreta." /></Container>
       <Box bg="app.panel" borderYWidth="1px" borderColor="app.border"><Container maxW="7xl">{featured.map((project, index) => <ProjectFeature key={project.id} project={project} reverse={index % 2 === 1} index={index} />)}</Container></Box>
-      {archive.length ? <Container maxW="7xl" py={{ base: "16", md: "24" }}><Heading as="h2" fontSize={{ base: "3xl", md: "5xl" }} letterSpacing="-.045em" mb="10">Archivo</Heading><SimpleGrid columns={{ base: 1, md: 3 }} gap="8">{archive.map((project) => <Link key={project.id} to={`/proyectos/${project.slug}`}><Stack borderTopWidth="1px" borderColor="app.border" pt="5" gap="3"><Text color="app.muted" fontSize="sm">{project.year} · {project.type}</Text><Heading as="h3" fontSize="2xl">{project.title}</Heading><Text color="app.muted">{project.excerpt}</Text></Stack></Link>)}</SimpleGrid></Container> : null}
+      {archive.length ? <Container maxW="7xl" py={{ base: "16", md: "24" }}><Heading as="h2" fontSize={{ base: "3xl", md: "5xl" }} letterSpacing="-.045em" mb="10">Más proyectos</Heading><SimpleGrid columns={{ base: 1, md: 3 }} gap="8">{archive.map((project) => <Link key={project.id} to={`/proyectos/${project.slug}`}><Stack borderTopWidth="1px" borderColor="app.border" pt="5" gap="3"><Text color="app.muted" fontSize="sm">{project.year} · {project.type}</Text><Text color="app.accent" fontSize="sm" fontWeight="700">{projectAvailabilityLabel(project)}</Text><Heading as="h3" fontSize="2xl">{project.title}</Heading><Text color="app.muted">{project.excerpt}</Text></Stack></Link>)}</SimpleGrid></Container> : null}
     </>
   );
 }
