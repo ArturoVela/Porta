@@ -189,6 +189,7 @@ async function createComment(request: Request, env: Env, ctx: ExecutionContext) 
 
 async function contentApi(url: URL, env: Env, ctx: ExecutionContext) {
   const previewToken = url.pathname === "/api/content/preview" ? url.searchParams.get("token") ?? undefined : undefined;
+  if (url.pathname === "/api/content/preview" && !previewToken) return json({ error: "Vista previa inválida o expirada" }, 404);
   try {
     const result = await loadContent(env, ctx, previewToken);
     const manifest = result.envelope.data;
@@ -206,7 +207,7 @@ async function contentApi(url: URL, env: Env, ctx: ExecutionContext) {
       if (!item) return json({ error: "Artículo no encontrado" }, 404);
       envelope = { ...result.envelope, data: item };
     } else if (url.pathname !== "/api/content/manifest" && url.pathname !== "/api/content/preview") return json({ error: "Ruta de contenido no encontrada" }, 404);
-    return json(envelope, 200, { "x-portfolio-source": result.source, "cache-control": previewToken ? "private, no-store" : "public, max-age=60" });
+    return json(envelope, 200, { "x-portfolio-source": result.source, "cache-control": previewToken ? "private, no-store" : "public, max-age=60", ...(previewToken ? { "referrer-policy": "no-referrer" } : {}) });
   } catch {
     return previewToken
       ? json({ error: "Vista previa inválida o expirada" }, 404)
@@ -216,17 +217,21 @@ async function contentApi(url: URL, env: Env, ctx: ExecutionContext) {
 
 async function media(request: Request, env: Env, ctx: ExecutionContext, path: string) {
   if (!/^\/media\/[a-zA-Z0-9_-]+\/[a-zA-Z0-9_-]+$/.test(path)) return json({ error: "Medio no encontrado" }, 404);
-  const cached = await defaultCache().match(request);
+  const previewToken = new URL(request.url).searchParams.get("token");
+  const cached = previewToken ? null : await defaultCache().match(request);
   if (cached) return cached;
   const token = optionalString(env, "BRAIN_CONTENT_TOKEN");
   if (!token) return json({ error: "Medios no configurados" }, 503);
-  const response = await env.BRAIN.fetch(new Request(`https://secondbrain.internal/internal/v1/portfolio/${encodeURIComponent(env.SITE_KEY)}${path}`, { headers: { authorization: `Bearer ${token}` } }));
+  const internalUrl = new URL(`https://secondbrain.internal/internal/v1/portfolio/${encodeURIComponent(env.SITE_KEY)}${path}`);
+  if (previewToken) internalUrl.searchParams.set("token", previewToken);
+  const response = await env.BRAIN.fetch(new Request(internalUrl, { headers: { authorization: `Bearer ${token}` } }));
   if (!response.ok) return json({ error: "Medio no encontrado" }, response.status === 404 ? 404 : 502);
   const headers = new Headers(response.headers);
-  headers.set("cache-control", "public, max-age=31536000, immutable");
+  headers.set("cache-control", previewToken ? "private, no-store" : "public, max-age=31536000, immutable");
   headers.set("x-content-type-options", "nosniff");
+  if (previewToken) headers.set("referrer-policy", "no-referrer");
   const publicResponse = new Response(response.body, { status: response.status, headers });
-  ctx.waitUntil(defaultCache().put(request, publicResponse.clone()));
+  if (!previewToken) ctx.waitUntil(defaultCache().put(request, publicResponse.clone()));
   return publicResponse;
 }
 
@@ -300,7 +305,14 @@ function isHtmlNavigation(request: Request, pathname: string) {
 async function html(request: Request, env: Env, ctx: ExecutionContext) {
   const url = new URL(request.url);
   const previewToken = url.pathname === "/__preview" ? url.searchParams.get("token") ?? undefined : undefined;
-  const result = await loadContent(env, ctx, previewToken);
+  if (url.pathname === "/__preview" && !previewToken) return json({ error: "Vista previa inválida o expirada" }, 404);
+  let result: ContentResult;
+  try {
+    result = await loadContent(env, ctx, previewToken);
+  } catch (error) {
+    if (!previewToken) throw error;
+    return json({ error: "Vista previa inválida o expirada" }, 404);
+  }
   const renderedPath = previewToken ? url.searchParams.get("path") ?? "/" : url.pathname;
   const meta = metaForPath(renderedPath, result.envelope.data, env.CANONICAL_ORIGIN, Boolean(previewToken));
   const asset = await env.ASSETS.fetch(request);
@@ -308,7 +320,7 @@ async function html(request: Request, env: Env, ctx: ExecutionContext) {
   const headers = new Headers(asset.headers);
   headers.set("cache-control", previewToken ? "private, no-store" : "no-cache");
   headers.set("x-content-type-options", "nosniff");
-  headers.set("referrer-policy", "strict-origin-when-cross-origin");
+  headers.set("referrer-policy", previewToken ? "no-referrer" : "strict-origin-when-cross-origin");
   headers.set("permissions-policy", "camera=(), microphone=(), geolocation=()");
   headers.set("x-frame-options", "DENY");
   if (url.hostname !== "localhost" && url.hostname !== "127.0.0.1") {

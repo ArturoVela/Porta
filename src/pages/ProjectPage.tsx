@@ -1,8 +1,10 @@
-import { Box, Button, Container, Flex, Grid, Heading, HStack, SimpleGrid, Stack, Text } from "@chakra-ui/react";
+import { AspectRatio, Box, Button, Container, Flex, Grid, Heading, HStack, SimpleGrid, Stack, Text } from "@chakra-ui/react";
 import { ArrowLeft, ExternalLink, Github } from "lucide-react";
-import { Link, useParams } from "react-router";
+import { useParams } from "react-router";
+import { ContentLink as Link } from "@/components/ContentLink";
 import { MarkdownBody } from "@/components/MarkdownBody";
 import { ProjectVisual } from "@/components/ContentCards";
+import { ResponsiveImage } from "@/components/ResponsiveImage";
 import { useContent } from "@/content/context";
 import { projectAvailabilityLabel } from "@/lib/projectAvailability";
 import { NotFoundPage } from "@/pages/NotFoundPage";
@@ -21,6 +23,7 @@ export function ProjectPage() {
         <Stack gap="3"><Text fontSize="sm" color="app.muted">Rol</Text><Text fontWeight="650">{project.role}</Text><HStack color="app.muted" fontSize="sm"><Box w="2" h="2" borderRadius="full" bg="app.accent" /><Text>{availability}</Text></HStack><Flex gap="3" wrap="wrap" pt="3">{project.liveUrl ? <Button asChild borderRadius="0" bg="brand.600" color="white"><a href={project.liveUrl} target="_blank" rel="noreferrer">{availability === "Acceso restringido" ? "Abrir acceso" : "Abrir proyecto"} <ExternalLink size={16} /></a></Button> : null}{project.repoUrl ? <Button asChild borderRadius="0" variant="outline" borderColor="app.text"><a href={project.repoUrl} target="_blank" rel="noreferrer"><Github size={16} /> Código</a></Button> : null}</Flex></Stack>
       </Grid>
       <ProjectVisual project={project} />
+      {project.gallery?.length ? <Box as="section" pt={{ base: "8", md: "12" }} aria-label={`Pantallas de ${project.title}`}><SimpleGrid columns={{ base: 1, md: 2 }} gap="6">{project.gallery.map((image) => <Box as="figure" key={image.src}><AspectRatio ratio={image.width / image.height} overflow="hidden" bg="app.surface"><ResponsiveImage image={image} /></AspectRatio><Text as="figcaption" color="app.muted" fontSize="sm" mt="3">{image.alt}</Text></Box>)}</SimpleGrid></Box> : null}
       <Grid templateColumns={{ base: "1fr", lg: "1.2fr .8fr" }} gap={{ base: "12", lg: "20" }} py={{ base: "12", md: "20" }}>
         <MarkdownBody>{project.body}</MarkdownBody>
         <Stack gap="10">

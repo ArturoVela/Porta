@@ -1,6 +1,6 @@
 import { AspectRatio, Box, Flex, Grid, Heading, HStack, Stack, Text } from "@chakra-ui/react";
 import { ArrowUpRight } from "lucide-react";
-import { Link } from "react-router";
+import { ContentLink as Link } from "@/components/ContentLink";
 import type { ArticleContent, ProjectContent } from "@/types/content";
 import { ResponsiveImage } from "@/components/ResponsiveImage";
 import { projectAvailabilityLabel } from "@/lib/projectAvailability";

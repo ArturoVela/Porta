@@ -19,6 +19,63 @@ afterEach(() => {
 });
 
 describe("contenido dinámico", () => {
+  it("expone proyectos nuevos y sus fotos desde Second Brain sin reconstruir el catálogo", async () => {
+    stubContentCache();
+    const project = {
+      ...FALLBACK_ENVELOPE.data.projects[0], id: "project-new", slug: "nuevo", title: "Nuevo desde Second Brain",
+      cover: { src: "/media/2/new-cover", alt: "Pantalla principal", width: 1280, height: 720 },
+      gallery: [{ src: "/media/2/new-screen", alt: "Pantalla de detalle", width: 1280, height: 720 }],
+    };
+    const env = {
+      SITE_KEY: "velaarturo", BRAIN_CONTENT_TOKEN: "test-only-token",
+      BRAIN: { fetch: vi.fn(async () => Response.json({ ...FALLBACK_ENVELOPE, data: { ...FALLBACK_ENVELOPE.data, projects: [project] } })) },
+    } as unknown as Env;
+    const response = await worker.fetch(new Request("https://velaarturo.com/api/content/projects/nuevo") as unknown as Parameters<typeof worker.fetch>[0], env, executionContext());
+    expect(response.status).toBe(200);
+    expect(await response.json()).toMatchObject({ data: project });
+  });
+
+  it("consulta el borrador autorizado sin leer ni escribir caché pública", async () => {
+    const cache = stubContentCache();
+    const brainFetch = vi.fn(async (_request: Request) => Response.json(FALLBACK_ENVELOPE));
+    const env = { SITE_KEY: "velaarturo", BRAIN_CONTENT_TOKEN: "test-only-token", BRAIN: { fetch: brainFetch } } as unknown as Env;
+    const response = await worker.fetch(new Request("https://velaarturo.com/api/content/preview?token=private-preview") as unknown as Parameters<typeof worker.fetch>[0], env, executionContext());
+    expect(response.status).toBe(200);
+    expect(response.headers.get("cache-control")).toBe("private, no-store");
+    expect(response.headers.get("x-portfolio-source")).toBe("preview");
+    expect(brainFetch.mock.calls[0]![0].url).toBe("https://secondbrain.internal/internal/v1/portfolio/velaarturo/preview?token=private-preview");
+    expect(cache.match).not.toHaveBeenCalled();
+    expect(cache.put).not.toHaveBeenCalled();
+  });
+
+  it.each(["/api/content/preview", "/__preview"])("rechaza %s sin token", async (path) => {
+    const response = await worker.fetch(new Request(`https://velaarturo.com${path}`) as unknown as Parameters<typeof worker.fetch>[0], {} as Env, executionContext());
+    expect(response.status).toBe(404);
+    expect(response.headers.get("cache-control")).toBe("no-store");
+  });
+
+  it("responde 404 para una vista previa expirada sin cargar la aplicación pública", async () => {
+    const assetsFetch = vi.fn();
+    const env = { SITE_KEY: "velaarturo", BRAIN_CONTENT_TOKEN: "test-only-token", BRAIN: { fetch: vi.fn(async () => new Response(null, { status: 404 })) }, ASSETS: { fetch: assetsFetch } } as unknown as Env;
+    const response = await worker.fetch(new Request("https://velaarturo.com/__preview?token=expired") as unknown as Parameters<typeof worker.fetch>[0], env, executionContext());
+    expect(response.status).toBe(404);
+    expect(assetsFetch).not.toHaveBeenCalled();
+  });
+
+  it("sirve fotos privadas de borrador con token y sin introducirlas en caché pública", async () => {
+    const cache = stubContentCache();
+    const brainFetch = vi.fn(async (_request: Request) => new Response("preview-image", { headers: { "content-type": "image/webp" } }));
+    const env = { SITE_KEY: "velaarturo", BRAIN_CONTENT_TOKEN: "test-only-token", BRAIN: { fetch: brainFetch } } as unknown as Env;
+    const response = await worker.fetch(new Request("https://velaarturo.com/media/2/draft-photo?token=private-preview") as unknown as Parameters<typeof worker.fetch>[0], env, executionContext());
+    expect(response.status).toBe(200);
+    expect(response.headers.get("content-type")).toBe("image/webp");
+    expect(response.headers.get("cache-control")).toBe("private, no-store");
+    expect(response.headers.get("referrer-policy")).toBe("no-referrer");
+    expect(brainFetch.mock.calls[0]![0].url).toBe("https://secondbrain.internal/internal/v1/portfolio/velaarturo/media/2/draft-photo?token=private-preview");
+    expect(cache.match).not.toHaveBeenCalled();
+    expect(cache.put).not.toHaveBeenCalled();
+  });
+
   it("sirve el manifiesto v1 de Second Brain cuando el token y el binding están configurados", async () => {
     const remoteEnvelope = {
       ...FALLBACK_ENVELOPE,

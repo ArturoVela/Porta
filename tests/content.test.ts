@@ -1,8 +1,31 @@
-import { describe, expect, it } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import { FALLBACK_ENVELOPE } from "@/content/fallback";
-import { isPortfolioEnvelope } from "@/lib/content";
+import { fetchManifest, isPortfolioEnvelope } from "@/lib/content";
+import { contentHref } from "@/lib/preview";
 import { projectAvailabilityLabel } from "@/lib/projectAvailability";
 import contractFixture from "../contracts/portfolio-v1.example.json";
+
+afterEach(() => vi.unstubAllGlobals());
+
+describe("vista previa del editor", () => {
+  it("actualiza desde el borrador privado sin reemplazarlo con el manifiesto publicado", async () => {
+    const fetchMock = vi.fn(async () => Response.json(FALLBACK_ENVELOPE));
+    vi.stubGlobal("fetch", fetchMock);
+    await fetchManifest(undefined, "private/preview+token");
+    expect(fetchMock).toHaveBeenCalledOnce();
+    expect(fetchMock).toHaveBeenCalledWith("/api/content/preview?token=private%2Fpreview%2Btoken", expect.objectContaining({ cache: "no-store" }));
+  });
+
+  it("mantiene el token al abrir otras páginas del borrador y no lo agrega a enlaces externos", () => {
+    const href = new URL(contentHref("/proyectos/nuevo", "private-token"), "https://velaarturo.com");
+    expect(href.pathname).toBe("/__preview");
+    expect(href.searchParams.get("token")).toBe("private-token");
+    expect(href.searchParams.get("path")).toBe("/proyectos/nuevo");
+    expect(contentHref("/proyectos/nuevo", null)).toBe("/proyectos/nuevo");
+    expect(contentHref("https://example.com", "private-token")).toBe("https://example.com");
+    expect(contentHref("//example.com", "private-token")).toBe("//example.com");
+  });
+});
 
 describe("contrato de contenido v1", () => {
   it("acepta el snapshot empaquetado", () => {
@@ -14,6 +37,21 @@ describe("contrato de contenido v1", () => {
     expect(isPortfolioEnvelope({ ...FALLBACK_ENVELOPE, schemaVersion: "2" })).toBe(false);
     expect(isPortfolioEnvelope({ ...FALLBACK_ENVELOPE, data: { ...FALLBACK_ENVELOPE.data, articles: [{ privateEmail: "secret@example.com" }] } })).toBe(false);
     expect(isPortfolioEnvelope({ ...FALLBACK_ENVELOPE, data: { ...FALLBACK_ENVELOPE.data, site: { ...FALLBACK_ENVELOPE.data.site, internalNotes: "privado" } } })).toBe(false);
+  });
+
+  it("acepta retrato y pantallas del CMS y rechaza metadatos de imagen inválidos", () => {
+    const image = { src: "/media/2/portrait?token=preview", alt: "Retrato", width: 800, height: 1000 };
+    const envelope = {
+      ...FALLBACK_ENVELOPE,
+      data: {
+        ...FALLBACK_ENVELOPE.data,
+        site: { ...FALLBACK_ENVELOPE.data.site, portrait: image },
+        projects: [{ ...FALLBACK_ENVELOPE.data.projects[0], gallery: [image] }],
+      },
+    };
+    expect(isPortfolioEnvelope(envelope)).toBe(true);
+    expect(isPortfolioEnvelope({ ...envelope, data: { ...envelope.data, projects: [{ ...envelope.data.projects[0], gallery: [{ ...image, width: 0 }] }] } })).toBe(false);
+    expect(isPortfolioEnvelope({ ...envelope, data: { ...envelope.data, site: { ...envelope.data.site, portrait: { ...image, internalId: "private" } } } })).toBe(false);
   });
 
   it("publica el catálogo ampliado con enlaces y estados honestos", () => {
@@ -42,7 +80,7 @@ describe("contrato de contenido v1", () => {
     ]);
     expect(projects.find((project) => project.slug === "hub")?.liveUrl).toBe("https://hub.velaarturo.com");
     expect(projects.find((project) => project.slug === "nieto-import")?.liveUrl).toBe("https://portal.nietoimport.com");
-    expect(projects.find((project) => project.slug === "nieto-hub")?.liveUrl).toBe("https://nieto.velarturo.com");
+    expect(projects.find((project) => project.slug === "nieto-hub")?.liveUrl).toBe("https://nieto.velaarturo.com");
     expect(projects.find((project) => project.slug === "porta")?.repoUrl).toBe("https://github.com/ArturoVela/Porta");
     expect(projectAvailabilityLabel(projects.find((project) => project.slug === "second-brain")!)).toBe("Proyecto privado");
     expect(projectAvailabilityLabel(projects.find((project) => project.slug === "db-nieto")!)).toBe("Acceso restringido");

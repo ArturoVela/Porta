@@ -10,7 +10,7 @@ export function ProfilePage() {
     <Container maxW="7xl" py={{ base: "14", md: "24" }}>
       <Grid templateColumns={{ base: "1fr", lg: ".8fr 1.2fr" }} gap={{ base: "12", lg: "20" }} alignItems="start">
         <Stack gap="6" position={{ lg: "sticky" }} top={{ lg: "7rem" }}>
-          <AspectRatio className="profile-portrait" ratio={545 / 667} maxW={{ base: "28rem", lg: "100%" }} overflow="hidden" bg="app.surface"><ResponsiveImage loading="eager" image={{ src: "/assets/images/about/about_1-1.webp", alt: "Retrato de Arturo Vela", width: 545, height: 667 }} /></AspectRatio>
+          <AspectRatio className="profile-portrait" ratio={545 / 667} maxW={{ base: "28rem", lg: "100%" }} overflow="hidden" bg="app.surface"><ResponsiveImage loading="eager" image={content.site.portrait ?? { src: "/assets/images/about/about_1-1.webp", alt: `Retrato de ${content.site.name}`, width: 545, height: 667 }} /></AspectRatio>
           {content.site.cvUrl ? <Button asChild alignSelf="start" variant="outline" borderColor="app.text" borderRadius="0"><a href={content.site.cvUrl} target="_blank" rel="noreferrer"><Download size={17} /> Descargar CV</a></Button> : null}
         </Stack>
         <Stack gap={{ base: "12", md: "16" }}>

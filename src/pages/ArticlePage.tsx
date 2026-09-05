@@ -1,6 +1,7 @@
 import { AspectRatio, Box, Container, Heading, HStack, Stack, Text } from "@chakra-ui/react";
 import { ArrowLeft } from "lucide-react";
-import { Link, useParams } from "react-router";
+import { useParams } from "react-router";
+import { ContentLink as Link } from "@/components/ContentLink";
 import { Comments } from "@/components/Comments";
 import { MarkdownBody } from "@/components/MarkdownBody";
 import { ResponsiveImage } from "@/components/ResponsiveImage";

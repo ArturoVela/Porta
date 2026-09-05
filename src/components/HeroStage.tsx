@@ -1,8 +1,9 @@
 import { Box, Button, Flex, Grid, Heading, HStack, Stack, Text } from "@chakra-ui/react";
 import { ArrowUpRight } from "lucide-react";
 import { useState } from "react";
-import { Link } from "react-router";
+import { ContentLink as Link } from "@/components/ContentLink";
 import type { ProjectContent } from "@/types/content";
+import { ResponsiveImage } from "@/components/ResponsiveImage";
 
 const projectPalettes = [
   { background: "#081538", foreground: "#F4F7FF", signal: "#79A0FF" },
@@ -25,7 +26,7 @@ export function HeroStage({ projects }: { projects: ProjectContent[] }) {
       <Flex
         className="hero-stage__poster"
         bg={palette.background}
-        color={palette.foreground}
+        color={project.cover ? "white" : palette.foreground}
         minH={{ base: "25rem", md: "31rem" }}
         direction="column"
         justify="space-between"
@@ -33,8 +34,13 @@ export function HeroStage({ projects }: { projects: ProjectContent[] }) {
         position="relative"
         overflow="hidden"
       >
-        <Box className="hero-stage__orb" style={{ borderColor: palette.signal }} aria-hidden="true" />
-        <Box className="hero-stage__axis" style={{ background: palette.signal }} aria-hidden="true" />
+        {project.cover ? <>
+          <Box position="absolute" inset="0"><ResponsiveImage image={project.cover} loading="eager" /></Box>
+          <Box position="absolute" inset="0" bg="linear-gradient(180deg, rgba(0,0,0,.55), rgba(0,0,0,.12) 30%, rgba(0,0,0,.82))" aria-hidden="true" />
+        </> : <>
+          <Box className="hero-stage__orb" style={{ borderColor: palette.signal }} aria-hidden="true" />
+          <Box className="hero-stage__axis" style={{ background: palette.signal }} aria-hidden="true" />
+        </>}
         <Flex justify="space-between" align="start" position="relative" zIndex="1">
           <Stack gap="1">
             <Text fontWeight="700">Proyecto seleccionado</Text>

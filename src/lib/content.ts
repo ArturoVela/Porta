@@ -38,10 +38,11 @@ function isCover(value: unknown) {
 }
 
 function isSite(value: unknown) {
-  if (!isRecord(value) || !hasOnlyKeys(value, ["name", "headline", "intro", "availability", "location", "bio", "email", "phone", "cvUrl", "socials", "seo"])) return false;
+  if (!isRecord(value) || !hasOnlyKeys(value, ["name", "headline", "intro", "availability", "location", "bio", "email", "phone", "cvUrl", "portrait", "socials", "seo"])) return false;
   return [value.name, value.headline, value.intro, value.availability, value.location, value.bio, value.email].every(isString)
     && (value.phone === undefined || isString(value.phone))
     && (value.cvUrl === undefined || isString(value.cvUrl))
+    && (value.portrait === undefined || isCover(value.portrait))
     && Array.isArray(value.socials)
     && value.socials.every((social) => isRecord(social) && hasOnlyKeys(social, ["label", "url"]) && isString(social.label) && isString(social.url))
     && isSeo(value.seo)
@@ -60,7 +61,7 @@ function isService(value: unknown) {
 }
 
 function isProject(value: unknown) {
-  if (!isRecord(value) || !hasOnlyKeys(value, ["id", "slug", "title", "excerpt", "body", "category", "type", "role", "year", "stack", "outcomes", "liveUrl", "repoUrl", "featured", "order", "cover", "seo"])) return false;
+  if (!isRecord(value) || !hasOnlyKeys(value, ["id", "slug", "title", "excerpt", "body", "category", "type", "role", "year", "stack", "outcomes", "liveUrl", "repoUrl", "featured", "order", "cover", "gallery", "seo"])) return false;
   return [value.id, value.slug, value.title, value.excerpt, value.body, value.category, value.type, value.role, value.year].every(isString)
     && isStringArray(value.stack)
     && isStringArray(value.outcomes)
@@ -69,6 +70,7 @@ function isProject(value: unknown) {
     && typeof value.featured === "boolean"
     && Number.isInteger(value.order)
     && (value.cover === undefined || isCover(value.cover))
+    && (value.gallery === undefined || (Array.isArray(value.gallery) && value.gallery.every(isCover)))
     && isSeo(value.seo);
 }
 
@@ -114,8 +116,9 @@ export function bootstrapEnvelope(): PortfolioEnvelope | null {
   }
 }
 
-export async function fetchManifest(signal?: AbortSignal): Promise<PortfolioEnvelope> {
-  const response = await fetch("/api/content/manifest", { signal, headers: { Accept: "application/json" } });
+export async function fetchManifest(signal?: AbortSignal, previewToken?: string | null): Promise<PortfolioEnvelope> {
+  const endpoint = previewToken ? `/api/content/preview?token=${encodeURIComponent(previewToken)}` : "/api/content/manifest";
+  const response = await fetch(endpoint, { signal, headers: { Accept: "application/json" }, ...(previewToken ? { cache: "no-store" as const } : {}) });
   if (!response.ok) throw new Error("No se pudo actualizar el contenido");
   const value: unknown = await response.json();
   if (!isPortfolioEnvelope(value)) throw new Error("El contenido recibido no cumple el contrato v1");

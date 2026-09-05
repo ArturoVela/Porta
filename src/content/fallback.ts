@@ -324,7 +324,7 @@ export const FALLBACK_ENVELOPE: PortfolioEnvelope = {
         year: "2026",
         stack: ["React", "TypeScript", "Vite", "Chakra UI", "Cloudflare Workers"],
         outcomes: ["Productos de NIETO reunidos en una sola vista", "Detalles públicos sin exponer información interna", "Contenido desacoplado y preparado para crecer"],
-        liveUrl: "https://nieto.velarturo.com",
+        liveUrl: "https://nieto.velaarturo.com",
         featured: false,
         order: 17,
         seo: { description: "NIETO Hub reúne los productos digitales desarrollados para NIETO en un portafolio público y seguro." },

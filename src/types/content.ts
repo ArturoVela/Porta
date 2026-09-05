@@ -26,6 +26,7 @@ export interface SiteContent {
   email: string;
   phone?: string;
   cvUrl?: string;
+  portrait?: CoverImage;
   socials: SocialLink[];
   seo: Required<Pick<SeoContent, "title" | "description">> & Pick<SeoContent, "ogImage">;
 }
@@ -54,6 +55,7 @@ export interface ProjectContent {
   featured: boolean;
   order: number;
   cover?: CoverImage;
+  gallery?: CoverImage[];
   seo: SeoContent;
 }
 

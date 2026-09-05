@@ -3,7 +3,7 @@ import { ProjectFeature } from "@/components/ContentCards";
 import { SectionHeading } from "@/components/SectionHeading";
 import { useContent } from "@/content/context";
 import { projectAvailabilityLabel } from "@/lib/projectAvailability";
-import { Link } from "react-router";
+import { ContentLink as Link } from "@/components/ContentLink";
 
 export function ProjectsPage() {
   const { content } = useContent();

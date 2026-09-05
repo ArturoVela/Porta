@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
+import { useLocation } from "react-router";
 import { fetchManifest, initialManifest } from "@/lib/content";
 import type { PortfolioManifest } from "@/types/content";
 
@@ -6,18 +7,22 @@ interface ContentState {
   content: PortfolioManifest;
   isRefreshing: boolean;
   refreshWarning: string | null;
+  previewToken: string | null;
 }
 
 const ContentContext = createContext<ContentState | null>(null);
 
 export function ContentProvider({ children }: { children: ReactNode }) {
+  const location = useLocation();
+  const previewToken = location.pathname === "/__preview" ? new URLSearchParams(location.search).get("token") : null;
   const [content, setContent] = useState(initialManifest);
   const [isRefreshing, setIsRefreshing] = useState(true);
   const [refreshWarning, setRefreshWarning] = useState<string | null>(null);
 
   useEffect(() => {
     const controller = new AbortController();
-    fetchManifest(controller.signal)
+    setIsRefreshing(true);
+    fetchManifest(controller.signal, previewToken)
       .then((envelope) => {
         setContent(envelope.data);
         setRefreshWarning(null);
@@ -29,9 +34,9 @@ export function ContentProvider({ children }: { children: ReactNode }) {
         if (!controller.signal.aborted) setIsRefreshing(false);
       });
     return () => controller.abort();
-  }, []);
+  }, [previewToken]);
 
-  const value = useMemo(() => ({ content, isRefreshing, refreshWarning }), [content, isRefreshing, refreshWarning]);
+  const value = useMemo(() => ({ content, isRefreshing, refreshWarning, previewToken }), [content, isRefreshing, refreshWarning, previewToken]);
   return <ContentContext.Provider value={value}>{children}</ContentContext.Provider>;
 }
 

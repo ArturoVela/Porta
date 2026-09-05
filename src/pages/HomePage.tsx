@@ -1,6 +1,6 @@
 import { Box, Button, Container, Flex, Grid, Heading, HStack, SimpleGrid, Stack, Text } from "@chakra-ui/react";
 import { ArrowDown, ArrowUpRight, Check, CodeXml, Component, DatabaseZap, Gauge } from "lucide-react";
-import { Link } from "react-router";
+import { ContentLink as Link } from "@/components/ContentLink";
 import { ArticleCard, ProjectFeature } from "@/components/ContentCards";
 import { HeroStage } from "@/components/HeroStage";
 import { SectionHeading } from "@/components/SectionHeading";
@@ -39,10 +39,10 @@ export function HomePage() {
               </HStack>
               <Heading
                 as="h1"
-                fontSize={{ base: "4.2rem", sm: "5.4rem", md: "7rem", lg: "6.4rem", xl: "7.3rem" }}
-                letterSpacing="-.075em"
-                lineHeight=".82"
-                maxW="11ch"
+                fontSize="clamp(3.5rem, 4.7vw, 5rem)"
+                letterSpacing="-.055em"
+                lineHeight=".9"
+                maxW="14ch"
               >
                 {content.site.headline}
               </Heading>

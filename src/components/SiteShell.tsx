@@ -11,7 +11,8 @@ import {
 import { ArrowUpRight, Menu, Moon, Sun, X } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useEffect, useState, type ReactNode } from "react";
-import { Link, NavLink, useLocation } from "react-router";
+import { useLocation } from "react-router";
+import { ContentLink as Link } from "@/components/ContentLink";
 import { useContent } from "@/content/context";
 
 const navigation = [
@@ -41,24 +42,24 @@ function ThemeToggle() {
 }
 
 function NavigationLinks({ onNavigate }: { onNavigate?: () => void }) {
+  const location = useLocation();
+  const pathname = location.pathname === "/__preview" ? new URLSearchParams(location.search).get("path") ?? "/" : location.pathname;
   return navigation.map((item) => (
-    <NavLink key={item.to} to={item.to} onClick={onNavigate}>
-      {({ isActive }) => (
+    <Link key={item.to} to={item.to} onClick={onNavigate} aria-current={pathname === item.to || pathname.startsWith(`${item.to}/`) ? "page" : undefined}>
         <Text
           as="span"
           display="block"
           px="3"
           py="2"
-          color={isActive ? "app.text" : "app.muted"}
+          color={pathname === item.to || pathname.startsWith(`${item.to}/`) ? "app.text" : "app.muted"}
           borderBottomWidth="2px"
-          borderColor={isActive ? "app.accent" : "transparent"}
+          borderColor={pathname === item.to || pathname.startsWith(`${item.to}/`) ? "app.accent" : "transparent"}
           fontWeight="600"
           _hover={{ color: "app.text", borderColor: "app.accent" }}
         >
           {item.label}
         </Text>
-      )}
-    </NavLink>
+    </Link>
   ));
 }
 
@@ -70,7 +71,7 @@ export function SiteShell({ children }: { children: ReactNode }) {
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "instant" });
     setOpen(false);
-  }, [location.pathname]);
+  }, [location.pathname, location.search]);
 
   return (
     <Flex minH="100vh" direction="column">

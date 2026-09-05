@@ -98,7 +98,11 @@ pnpm exec wrangler secret put BRAIN_CONTENT_TOKEN --env production
 
 Porta solicita `GET /internal/v1/portfolio/velaarturo/manifest` con `Authorization: Bearer <BRAIN_CONTENT_TOKEN>`, valida el envelope `{schemaVersion:"1",siteKey:"velaarturo",publishedRevision,generatedAt,data}` y nunca entrega el token al navegador.
 
-El catálogo dinámico se publica desde el sitio `velaarturo` de Second Brain. Para reflejar esta integración en producción, ese manifiesto debe contener NIETO Hub con `https://nieto.velarturo.com` y Nieto Import con `https://portal.nietoimport.com`, conservando el contrato v1. Cambiar el snapshot empaquetado no sustituye esa publicación.
+El editor permite cambiar textos y títulos, crear proyectos, reemplazar la portada de cada proyecto, añadir pantallas a su galería y actualizar el retrato del perfil. El contrato v1 admite `site.portrait` y `projects[].gallery` como campos opcionales de imagen `{src,alt,width,height}`; los manifiestos anteriores siguen siendo válidos. Las portadas también aparecen en el proyecto seleccionado de la portada del sitio.
+
+La vista previa mantiene el borrador al navegar y actualizar contenido. Sus imágenes usan el token temporal de vista previa y se sirven con `private, no-store`; Second Brain valida ese token antes de entregar medios aún no publicados.
+
+El catálogo dinámico se publica desde el sitio `velaarturo` de Second Brain. Para reflejar esta integración en producción, ese manifiesto debe contener NIETO Hub con `https://nieto.velaarturo.com` y Nieto Import con `https://portal.nietoimport.com`, conservando el contrato v1. Cambiar el snapshot empaquetado no sustituye esa publicación.
 
 Después de desplegar primero Second Brain y luego Porta, la cabecera permite comprobar el origen sin revelar el secreto:
 
