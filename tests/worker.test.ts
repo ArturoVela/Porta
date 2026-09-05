@@ -1,6 +1,98 @@
-import { describe, expect, it } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import { FALLBACK_ENVELOPE } from "@/content/fallback";
-import { isSameOrigin, metaForPath, normalizeLegacyPath, parseCommentPayload } from "../worker/index";
+import worker, { isSameOrigin, metaForPath, normalizeLegacyPath, parseCommentPayload } from "../worker/index";
+
+function executionContext() {
+  return { waitUntil: vi.fn(), passThroughOnException: vi.fn() } as unknown as ExecutionContext;
+}
+
+function stubContentCache(responses: Response[] = []) {
+  const match = vi.fn(async () => responses.shift());
+  const put = vi.fn(async () => undefined);
+  vi.stubGlobal("caches", { default: { match, put } });
+  return { match, put };
+}
+
+afterEach(() => {
+  vi.unstubAllGlobals();
+  vi.restoreAllMocks();
+});
+
+describe("contenido dinámico", () => {
+  it("sirve el manifiesto v1 de Second Brain cuando el token y el binding están configurados", async () => {
+    const remoteEnvelope = {
+      ...FALLBACK_ENVELOPE,
+      publishedRevision: 99,
+      generatedAt: "2026-09-05T12:00:00.000-05:00",
+    };
+    const brainFetch = vi.fn(async (_request: Request) => Response.json(remoteEnvelope));
+    const cache = stubContentCache();
+    const ctx = executionContext();
+    const env = {
+      SITE_KEY: "velaarturo",
+      CANONICAL_ORIGIN: "https://velaarturo.com",
+      BRAIN_CONTENT_TOKEN: "test-only-shared-token",
+      BRAIN: { fetch: brainFetch },
+    } as unknown as Env;
+
+    const response = await worker.fetch(
+      new Request("https://velaarturo.com/api/content/manifest") as unknown as Parameters<typeof worker.fetch>[0],
+      env,
+      ctx,
+    );
+
+    expect(response.status).toBe(200);
+    expect(response.headers.get("x-portfolio-source")).toBe("brain");
+    expect(await response.json()).toEqual(remoteEnvelope);
+    expect(brainFetch).toHaveBeenCalledTimes(1);
+    const brainRequest = brainFetch.mock.calls[0]![0];
+    expect(brainRequest.url).toBe("https://secondbrain.internal/internal/v1/portfolio/velaarturo/manifest");
+    expect(brainRequest.headers.get("authorization")).toBe("Bearer test-only-shared-token");
+    expect(ctx.waitUntil).toHaveBeenCalledTimes(1);
+    expect(cache.put).toHaveBeenCalledTimes(2);
+  });
+
+  it("no oculta con el snapshot bundled un fallo de la integración configurada", async () => {
+    stubContentCache();
+    vi.spyOn(console, "warn").mockImplementation(() => undefined);
+    const env = {
+      SITE_KEY: "velaarturo",
+      CANONICAL_ORIGIN: "https://velaarturo.com",
+      BRAIN_CONTENT_TOKEN: "test-only-shared-token",
+      BRAIN: { fetch: vi.fn(async () => new Response(null, { status: 503 })) },
+    } as unknown as Env;
+
+    const response = await worker.fetch(
+      new Request("https://velaarturo.com/api/content/manifest") as unknown as Parameters<typeof worker.fetch>[0],
+      env,
+      executionContext(),
+    );
+
+    expect(response.status).toBe(503);
+    expect(response.headers.get("x-portfolio-source")).toBeNull();
+    expect(await response.json()).toEqual({ error: "El contenido dinámico no está disponible" });
+  });
+
+  it("reserva el snapshot bundled para un entorno sin integración completa", async () => {
+    stubContentCache();
+    vi.spyOn(console, "warn").mockImplementation(() => undefined);
+    const env = {
+      SITE_KEY: "velaarturo",
+      CANONICAL_ORIGIN: "https://velaarturo.com",
+      BRAIN: { fetch: vi.fn() },
+    } as unknown as Env;
+
+    const response = await worker.fetch(
+      new Request("https://velaarturo.com/api/content/manifest") as unknown as Parameters<typeof worker.fetch>[0],
+      env,
+      executionContext(),
+    );
+
+    expect(response.status).toBe(200);
+    expect(response.headers.get("x-portfolio-source")).toBe("bundled");
+    expect(await response.json()).toEqual(FALLBACK_ENVELOPE);
+  });
+});
 
 describe("rutas heredadas", () => {
   it.each([

@@ -18,9 +18,31 @@ describe("contrato de contenido v1", () => {
 
   it("publica el catálogo ampliado con enlaces y estados honestos", () => {
     const projects = FALLBACK_ENVELOPE.data.projects;
-    expect(projects).toHaveLength(16);
+    expect(projects).toHaveLength(17);
     expect(new Set(projects.map((project) => project.slug)).size).toBe(projects.length);
+    expect(new Set(projects.map((project) => project.order)).size).toBe(projects.length);
+    expect(projects.map((project) => project.slug)).toEqual([
+      "hub",
+      "un-ramito",
+      "security-lab",
+      "cana-wasky",
+      "porta",
+      "second-brain",
+      "db-nieto",
+      "nieto-import",
+      "mercadillo-pe",
+      "kc-automotriz",
+      "pachas-cafe-web",
+      "misterio-maria",
+      "cumpleanos",
+      "seas-venta",
+      "municipalidad-de-rioja",
+      "discord",
+      "nieto-hub",
+    ]);
     expect(projects.find((project) => project.slug === "hub")?.liveUrl).toBe("https://hub.velaarturo.com");
+    expect(projects.find((project) => project.slug === "nieto-import")?.liveUrl).toBe("https://portal.nietoimport.com");
+    expect(projects.find((project) => project.slug === "nieto-hub")?.liveUrl).toBe("https://nieto.velarturo.com");
     expect(projects.find((project) => project.slug === "porta")?.repoUrl).toBe("https://github.com/ArturoVela/Porta");
     expect(projectAvailabilityLabel(projects.find((project) => project.slug === "second-brain")!)).toBe("Proyecto privado");
     expect(projectAvailabilityLabel(projects.find((project) => project.slug === "db-nieto")!)).toBe("Acceso restringido");

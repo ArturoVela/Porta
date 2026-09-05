@@ -3,8 +3,8 @@ import type { PortfolioEnvelope } from "@/types/content";
 export const FALLBACK_ENVELOPE: PortfolioEnvelope = {
   schemaVersion: "1",
   siteKey: "velaarturo",
-  publishedRevision: 2,
-  generatedAt: "2026-09-04T23:00:00.000-05:00",
+  publishedRevision: 3,
+  generatedAt: "2026-09-05T12:11:43.000-05:00",
   data: {
     site: {
       name: "Arturo Vela",
@@ -178,7 +178,7 @@ export const FALLBACK_ENVELOPE: PortfolioEnvelope = {
         year: "2026",
         stack: ["Next.js", "React", "TypeScript", "Supabase", "Firebase", "Capacitor"],
         outcomes: ["Herramientas administrativas centralizadas", "Soporte para dos empresas", "Experiencia web y envoltorio móvil"],
-        liveUrl: "https://nietoimport.vercel.app",
+        liveUrl: "https://portal.nietoimport.com",
         featured: false,
         order: 8,
         seo: { description: "Nieto Import es una aplicación privada para etiquetas, documentación y procesos administrativos." },
@@ -311,6 +311,23 @@ export const FALLBACK_ENVELOPE: PortfolioEnvelope = {
         featured: false,
         order: 16,
         seo: {},
+      },
+      {
+        id: "project-nieto-hub",
+        slug: "nieto-hub",
+        title: "NIETO Hub",
+        excerpt: "Portafolio público de los productos digitales desarrollados para NIETO.",
+        body: "## Un punto de entrada común\n\nNIETO Hub reúne en una sola página los productos digitales desarrollados para la empresa, con acceso directo a cada plataforma y fichas públicas de proyecto.\n\n## Contenido seguro y actualizable\n\nLas fichas describen objetivos, tecnologías y resultados sin exponer repositorios, credenciales ni datos internos. El contenido publicado se administra desde Second Brain y puede incorporar nuevos proyectos sin reconstruir el sitio.",
+        category: "Cliente",
+        type: "Portafolio web",
+        role: "Diseño, arquitectura y desarrollo",
+        year: "2026",
+        stack: ["React", "TypeScript", "Vite", "Chakra UI", "Cloudflare Workers"],
+        outcomes: ["Productos de NIETO reunidos en una sola vista", "Detalles públicos sin exponer información interna", "Contenido desacoplado y preparado para crecer"],
+        liveUrl: "https://nieto.velarturo.com",
+        featured: false,
+        order: 17,
+        seo: { description: "NIETO Hub reúne los productos digitales desarrollados para NIETO en un portafolio público y seguro." },
       },
     ],
     articles: [

@@ -18,7 +18,7 @@ Second Brain Worker ── Service Binding ── Porta Worker
 - D1 independiente para comentarios; Turnstile se valida en el Worker.
 - Formspree continúa atendiendo el formulario de contacto.
 
-El contenido público usa el contrato versionado en [`contracts/portfolio-v1.example.json`](contracts/portfolio-v1.example.json). Si Second Brain no responde, el Worker usa la última respuesta válida y, finalmente, el snapshot empaquetado en `src/content/fallback.ts`.
+El contenido público usa el contrato versionado en [`contracts/portfolio-v1.example.json`](contracts/portfolio-v1.example.json). Con el binding y el secreto configurados, Second Brain es la fuente de verdad: Porta sirve su manifiesto v1 o una copia válida obtenida previamente. El snapshot de `src/content/fallback.ts` queda reservado para desarrollo local o entornos sin la integración completa; un fallo de la integración configurada sin respaldo válido se expone como error y no se oculta con contenido bundled.
 
 ## Desarrollo local
 
@@ -34,7 +34,7 @@ pnpm dev
 
 Variables privadas del Worker en `.dev.vars`:
 
-- `BRAIN_CONTENT_TOKEN`: secreto compartido con Second Brain.
+- `BRAIN_CONTENT_TOKEN`: secreto largo y aleatorio compartido únicamente con Second Brain.
 - `TURNSTILE_SECRET_KEY`: clave privada de Turnstile.
 
 Variable pública de Vite en `.env.local`:
@@ -77,9 +77,42 @@ DATABASE_URL='…' pnpm comments:migrate:neon -- --env staging --dry-run
 DATABASE_URL='…' pnpm comments:migrate:neon -- --env production
 ```
 
+## Integración de contenido con Second Brain
+
+`wrangler.jsonc` declara `BRAIN_CONTENT_TOKEN` como secreto obligatorio y conecta el Service Binding `BRAIN` con:
+
+- Staging: `secondbrain-web-staging`.
+- Producción: `secondbrain`.
+
+El token debe existir por separado en ambos Workers de cada entorno. Usa el mismo valor dentro del par de staging y el mismo valor dentro del par de producción; los valores de staging y producción pueden ser distintos. Wrangler solicita el valor de forma interactiva, por lo que no debe pasarse como argumento ni guardarse en Git:
+
+```bash
+# Desde este repositorio (Porta)
+pnpm exec wrangler secret put BRAIN_CONTENT_TOKEN --env staging
+pnpm exec wrangler secret put BRAIN_CONTENT_TOKEN --env production
+
+# Desde el checkout de Second Brain
+pnpm exec wrangler secret put BRAIN_CONTENT_TOKEN --env staging
+pnpm exec wrangler secret put BRAIN_CONTENT_TOKEN --env production
+```
+
+Porta solicita `GET /internal/v1/portfolio/velaarturo/manifest` con `Authorization: Bearer <BRAIN_CONTENT_TOKEN>`, valida el envelope `{schemaVersion:"1",siteKey:"velaarturo",publishedRevision,generatedAt,data}` y nunca entrega el token al navegador.
+
+El catálogo dinámico se publica desde el sitio `velaarturo` de Second Brain. Para reflejar esta integración en producción, ese manifiesto debe contener NIETO Hub con `https://nieto.velarturo.com` y Nieto Import con `https://portal.nietoimport.com`, conservando el contrato v1. Cambiar el snapshot empaquetado no sustituye esa publicación.
+
+Después de desplegar primero Second Brain y luego Porta, la cabecera permite comprobar el origen sin revelar el secreto:
+
+```bash
+curl -fsS -D - https://velaarturo.com/api/content/manifest -o /dev/null \
+  | tr -d '\r' \
+  | grep -Ei '^x-portfolio-source: (brain|cache)$'
+```
+
+`x-portfolio-source: backup` indica operación degradada con el último manifiesto válido. Una respuesta `503` indica que la integración está configurada pero no existe un manifiesto remoto ni un respaldo válido; producción no responde con `bundled` en ese caso.
+
 ## Despliegue
 
-Antes de staging, deben existir el Worker `secondbrain-web-staging`, su API interna v1 y el mismo valor de `BRAIN_CONTENT_TOKEN` en ambos Workers. Luego:
+Antes de desplegar, deben existir los Workers destino, su API interna v1, los Service Bindings anteriores y el secreto compartido en ambos lados. Luego:
 
 ```bash
 pnpm deploy:staging

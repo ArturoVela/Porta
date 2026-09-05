@@ -13,6 +13,9 @@
     "SITE_KEY": "velaarturo",
     "CANONICAL_ORIGIN": "https://velaarturo.com"
   },
+  "secrets": {
+    "required": ["BRAIN_CONTENT_TOKEN"]
+  },
   "services": [
     { "binding": "BRAIN", "service": "secondbrain-web-staging", "remote": true }
   ],
@@ -44,6 +47,9 @@
         "SITE_KEY": "velaarturo",
         "CANONICAL_ORIGIN": "https://velaarturo-portfolio-staging.withered-hat-79c9.workers.dev"
       },
+      "secrets": {
+        "required": ["BRAIN_CONTENT_TOKEN"]
+      },
       "services": [
         { "binding": "BRAIN", "service": "secondbrain-web-staging" }
       ],
@@ -69,6 +75,9 @@
       "vars": {
         "SITE_KEY": "velaarturo",
         "CANONICAL_ORIGIN": "https://velaarturo.com"
+      },
+      "secrets": {
+        "required": ["BRAIN_CONTENT_TOKEN"]
       },
       "services": [
         { "binding": "BRAIN", "service": "secondbrain" }

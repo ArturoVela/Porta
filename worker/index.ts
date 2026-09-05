@@ -25,6 +25,12 @@ function optionalString(env: Env, key: string) {
   return typeof value === "string" && value.trim() ? value.trim() : null;
 }
 
+function isBrainIntegrationConfigured(env: Env) {
+  const binding: unknown = Reflect.get(env, "BRAIN");
+  const hasBinding = (typeof binding === "object" && binding !== null) || typeof binding === "function";
+  return Boolean(optionalString(env, "BRAIN_CONTENT_TOKEN") && hasBinding && typeof Reflect.get(binding as object, "fetch") === "function");
+}
+
 function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === "object" && value !== null && !Array.isArray(value);
 }
@@ -131,7 +137,9 @@ async function loadContent(env: Env, ctx: ExecutionContext, previewToken?: strin
   } catch (error) {
     console.warn(JSON.stringify({ event: "content_fallback", reason: error instanceof Error ? error.message : String(error) }));
     const backup = await readCachedEnvelope(cacheKey(path, "backup"));
-    return backup ? { envelope: backup, source: "backup" } : { envelope: FALLBACK_ENVELOPE, source: "bundled" };
+    if (backup) return { envelope: backup, source: "backup" };
+    if (isBrainIntegrationConfigured(env)) throw error;
+    return { envelope: FALLBACK_ENVELOPE, source: "bundled" };
   }
 }
 
@@ -200,7 +208,9 @@ async function contentApi(url: URL, env: Env, ctx: ExecutionContext) {
     } else if (url.pathname !== "/api/content/manifest" && url.pathname !== "/api/content/preview") return json({ error: "Ruta de contenido no encontrada" }, 404);
     return json(envelope, 200, { "x-portfolio-source": result.source, "cache-control": previewToken ? "private, no-store" : "public, max-age=60" });
   } catch {
-    return json({ error: "Vista previa inválida o expirada" }, 404);
+    return previewToken
+      ? json({ error: "Vista previa inválida o expirada" }, 404)
+      : json({ error: "El contenido dinámico no está disponible" }, 503);
   }
 }
 

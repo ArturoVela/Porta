@@ -1,2 +1,2 @@
-BRAIN_CONTENT_TOKEN=replace-with-the-shared-secondbrain-secret
+BRAIN_CONTENT_TOKEN=replace-with-a-long-random-token-shared-only-with-second-brain
 TURNSTILE_SECRET_KEY=replace-with-a-turnstile-secret-key
