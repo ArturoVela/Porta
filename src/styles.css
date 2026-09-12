@@ -104,8 +104,9 @@ img { display: block; max-width: 100%; }
 
 .project-poster {
   --poster-background: #081538;
+  --poster-foreground: #f4f7ff;
   background: var(--poster-background);
-  color: #f4f7ff;
+  color: var(--poster-foreground);
   isolation: isolate;
 }
 
@@ -134,16 +135,6 @@ img { display: block; max-width: 100%; }
   background-image: linear-gradient(115deg, transparent 49.8%, currentColor 50%, transparent 50.2%);
 }
 
-.project-poster--un-ramito {
-  --poster-background: #ff5a36;
-  color: #160b08;
-}
-
-.project-poster--security-lab {
-  --poster-background: #121722;
-  color: #8ff0bd;
-}
-
 .project-poster__monogram {
   position: absolute;
   right: clamp(1.2rem, 5vw, 4rem);
@@ -154,6 +145,37 @@ img { display: block; max-width: 100%; }
   line-height: .7;
   letter-spacing: -.12em;
   opacity: .16;
+}
+
+.project-poster__monogram[data-compact="true"] {
+  right: 1.5rem;
+  font-size: clamp(7rem, 15vw, 11rem);
+}
+
+.project-card {
+  display: block;
+  height: 100%;
+}
+
+.project-card__visual > * {
+  transition: transform .28s cubic-bezier(.2, .72, .2, 1);
+}
+
+.project-card__body,
+.project-card__action {
+  transition: border-color .18s ease, color .18s ease;
+}
+
+.project-card:hover .project-card__visual > * {
+  transform: scale(1.018);
+}
+
+.project-card:hover .project-card__body {
+  border-color: var(--chakra-colors-app-accent);
+}
+
+.project-card:hover .project-card__action {
+  color: var(--chakra-colors-app-accent);
 }
 
 .project-feature__link {

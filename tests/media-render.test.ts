@@ -8,6 +8,7 @@ import { ContentProvider } from "@/content/context";
 import { FALLBACK_ENVELOPE } from "@/content/fallback";
 import { ProfilePage } from "@/pages/ProfilePage";
 import { ProjectPage } from "@/pages/ProjectPage";
+import { ProjectsPage } from "@/pages/ProjectsPage";
 import { system } from "@/theme";
 
 const cover = { src: "/media/2/cover?token=preview-token", alt: "Portada editada", width: 1280, height: 720 };
@@ -42,5 +43,17 @@ describe("imágenes editadas en Second Brain", () => {
     expect(markup).toContain('src="/media/2/cover?token=preview-token"');
     expect(markup).toContain('src="/media/2/screen?token=preview-token"');
     expect(markup).toContain("Pantalla editada");
+  });
+
+  it("muestra una vista visual para cada proyecto del archivo", () => {
+    const projects = FALLBACK_ENVELOPE.data.projects.map((item, index) => ({ ...item, featured: index === 0 }));
+    const envelope = { ...FALLBACK_ENVELOPE, data: { ...FALLBACK_ENVELOPE.data, projects } };
+    vi.stubGlobal("document", { querySelector: () => ({ textContent: JSON.stringify(envelope) }) });
+    const markup = renderToStaticMarkup(createElement(MemoryRouter, { initialEntries: ["/proyectos"] },
+      createElement(ChakraProvider, { value: system, children: createElement(ContentProvider, { children: createElement(ProjectsPage) }) })));
+
+    expect(markup.match(/class="[^"]*project-card__visual/g)).toHaveLength(projects.length - 1);
+    expect(markup).toContain("details-thumb_cana.webp");
+    expect(projects.every((item) => markup.includes(item.title))).toBe(true);
   });
 });

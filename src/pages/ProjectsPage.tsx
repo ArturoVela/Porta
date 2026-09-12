@@ -1,9 +1,7 @@
 import { Box, Container, Heading, SimpleGrid, Stack, Text } from "@chakra-ui/react";
-import { ProjectFeature } from "@/components/ContentCards";
+import { ProjectArchiveCard, ProjectFeature } from "@/components/ContentCards";
 import { SectionHeading } from "@/components/SectionHeading";
 import { useContent } from "@/content/context";
-import { projectAvailabilityLabel } from "@/lib/projectAvailability";
-import { ContentLink as Link } from "@/components/ContentLink";
 
 export function ProjectsPage() {
   const { content } = useContent();
@@ -14,7 +12,7 @@ export function ProjectsPage() {
     <>
       <Container maxW="7xl" py={{ base: "14", md: "24" }}><SectionHeading title="Proyectos" description="Productos propios, trabajo para clientes y experimentos donde cada decisión técnica responde a una necesidad concreta." /></Container>
       <Box bg="app.panel" borderYWidth="1px" borderColor="app.border"><Container maxW="7xl">{featured.map((project, index) => <ProjectFeature key={project.id} project={project} reverse={index % 2 === 1} index={index} />)}</Container></Box>
-      {archive.length ? <Container maxW="7xl" py={{ base: "16", md: "24" }}><Heading as="h2" fontSize={{ base: "3xl", md: "5xl" }} letterSpacing="-.045em" mb="10">Más proyectos</Heading><SimpleGrid columns={{ base: 1, md: 3 }} gap="8">{archive.map((project) => <Link key={project.id} to={`/proyectos/${project.slug}`}><Stack borderTopWidth="1px" borderColor="app.border" pt="5" gap="3"><Text color="app.muted" fontSize="sm">{project.year} · {project.type}</Text><Text color="app.accent" fontSize="sm" fontWeight="700">{projectAvailabilityLabel(project)}</Text><Heading as="h3" fontSize="2xl">{project.title}</Heading><Text color="app.muted">{project.excerpt}</Text></Stack></Link>)}</SimpleGrid></Container> : null}
+      {archive.length ? <Container maxW="7xl" py={{ base: "16", md: "24" }}><Stack gap="3" mb="10"><Heading as="h2" fontSize={{ base: "3xl", md: "5xl" }} letterSpacing="-.045em">Archivo de proyectos</Heading><Text color="app.muted" maxW="62ch">Una vista rápida de cada producto, sistema y experimento. Cada portada se construye con la identidad y las tecnologías del proyecto.</Text></Stack><SimpleGrid columns={{ base: 1, md: 2, xl: 3 }} gap={{ base: "8", lg: "10" }}>{archive.map((project) => <ProjectArchiveCard key={project.id} project={project} />)}</SimpleGrid></Container> : null}
     </>
   );
 }

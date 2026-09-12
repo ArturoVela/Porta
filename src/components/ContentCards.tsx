@@ -1,4 +1,5 @@
 import { AspectRatio, Box, Flex, Grid, Heading, HStack, Stack, Text } from "@chakra-ui/react";
+import type { CSSProperties } from "react";
 import { ArrowUpRight } from "lucide-react";
 import { ContentLink as Link } from "@/components/ContentLink";
 import type { ArticleContent, ProjectContent } from "@/types/content";
@@ -11,26 +12,81 @@ const visualCopy: Record<string, string[]> = {
   "security-lab": ["V1", "V2", "V3", "V4"],
 };
 
-function AbstractProjectVisual({ project }: { project: ProjectContent }) {
+const posterPalettes = [
+  { background: "#081538", foreground: "#F4F7FF" },
+  { background: "#FF5A36", foreground: "#160B08" },
+  { background: "#DCE76A", foreground: "#171A08" },
+  { background: "#0D4B4F", foreground: "#E1FFF7" },
+  { background: "#48225F", foreground: "#FBEAFF" },
+  { background: "#2453F4", foreground: "#FFFFFF" },
+  { background: "#D6AF66", foreground: "#211607" },
+  { background: "#702640", foreground: "#FFEAF1" },
+] as const;
+
+const posterPaletteOverrides: Partial<Record<string, { background: string; foreground: string }>> = {
+  hub: posterPalettes[0],
+  "un-ramito": posterPalettes[1],
+  "security-lab": { background: "#121722", foreground: "#8FF0BD" },
+  coffee: posterPalettes[6],
+  "explora-san-martin": posterPalettes[3],
+  color: posterPalettes[4],
+};
+
+function posterPalette(slug: string) {
+  const override = posterPaletteOverrides[slug];
+  if (override) return override;
+  const index = Array.from(slug).reduce((total, character) => total + character.charCodeAt(0), 0) % posterPalettes.length;
+  return posterPalettes[index];
+}
+
+function AbstractProjectVisual({ project, compact = false }: { project: ProjectContent; compact?: boolean }) {
   const labels = visualCopy[project.slug] ?? project.stack.slice(0, 3);
   const monogram = project.title.split(/\s+/).map((word) => word[0]).join("").slice(0, 2);
+  const palette = posterPalette(project.slug);
+  const posterStyle = {
+    "--poster-background": palette.background,
+    "--poster-foreground": palette.foreground,
+  } as CSSProperties;
   return (
-    <Flex className={`project-poster project-poster--${project.slug}`} h="100%" minH={{ base: "20rem", md: "27rem" }} p={{ base: "6", md: "8" }} direction="column" justify="space-between" position="relative" overflow="hidden">
+    <Flex className="project-poster" style={posterStyle} h="100%" minH={compact ? "0" : { base: "20rem", md: "27rem" }} p={compact ? "5" : { base: "6", md: "8" }} direction="column" justify="space-between" position="relative" overflow="hidden">
       <HStack justify="space-between" position="relative" zIndex="1"><Text fontWeight="750">{project.type}</Text><Text opacity=".7">{project.year}</Text></HStack>
-      <Text className="project-poster__monogram" aria-hidden="true">{monogram}</Text>
+      <Text className="project-poster__monogram" data-compact={compact || undefined} aria-hidden="true">{monogram}</Text>
       <Stack gap="2" align="start" position="relative" zIndex="1">
-        {labels.map((label, index) => <Text key={label} borderWidth="1px" borderColor="currentColor" bg={index === 1 ? "currentColor" : "transparent"} color={index === 1 ? "var(--poster-background)" : "currentColor"} px="3" py="1" fontWeight="650">{label}</Text>)}
+        {labels.map((label, index) => <Text key={label} display={compact && index > 1 ? "none" : "block"} borderWidth="1px" borderColor="currentColor" bg={index === 1 ? "currentColor" : "transparent"} color={index === 1 ? "var(--poster-background)" : "currentColor"} px="3" py="1" fontSize={compact ? "sm" : "md"} fontWeight="650">{label}</Text>)}
       </Stack>
     </Flex>
   );
 }
 
-export function ProjectVisual({ project }: { project: ProjectContent }) {
-  if (!project.cover) return <AbstractProjectVisual project={project} />;
+export function ProjectVisual({ project, compact = false }: { project: ProjectContent; compact?: boolean }) {
+  if (!project.cover) {
+    return compact
+      ? <AspectRatio className="project-card__visual" ratio={16 / 10} overflow="hidden"><AbstractProjectVisual project={project} compact /></AspectRatio>
+      : <AbstractProjectVisual project={project} />;
+  }
   return (
-    <AspectRatio ratio={16 / 10} overflow="hidden" borderRadius="0" bg="app.surface">
+    <AspectRatio className={compact ? "project-card__visual" : undefined} ratio={16 / 10} overflow="hidden" borderRadius="0" bg="app.surface">
       <ResponsiveImage image={project.cover} />
     </AspectRatio>
+  );
+}
+
+export function ProjectArchiveCard({ project }: { project: ProjectContent }) {
+  return (
+    <Link to={`/proyectos/${project.slug}`} className="project-card">
+      <Stack h="100%" gap="0">
+        <ProjectVisual project={project} compact />
+        <Stack className="project-card__body" flex="1" borderWidth="1px" borderTopWidth="0" borderColor="app.border" p={{ base: "5", md: "6" }} gap="4">
+          <Flex justify="space-between" gap="4" color="app.muted" fontSize="sm"><Text>{project.year}</Text><Text textAlign="right">{projectAvailabilityLabel(project)}</Text></Flex>
+          <Stack gap="2">
+            <Text color="app.accent" fontWeight="700" fontSize="sm">{project.category}</Text>
+            <Heading as="h3" fontSize={{ base: "2xl", md: "3xl" }} letterSpacing="-.035em" lineHeight="1">{project.title}</Heading>
+          </Stack>
+          <Text color="app.muted">{project.excerpt}</Text>
+          <HStack className="project-card__action" mt="auto" pt="3" justify="space-between" fontWeight="750"><Text>Ver caso completo</Text><ArrowUpRight size={17} /></HStack>
+        </Stack>
+      </Stack>
+    </Link>
   );
 }
 

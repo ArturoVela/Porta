@@ -56,7 +56,7 @@ describe("contrato de contenido v1", () => {
 
   it("publica el catálogo ampliado con enlaces y estados honestos", () => {
     const projects = FALLBACK_ENVELOPE.data.projects;
-    expect(projects).toHaveLength(17);
+    expect(projects).toHaveLength(28);
     expect(new Set(projects.map((project) => project.slug)).size).toBe(projects.length);
     expect(new Set(projects.map((project) => project.order)).size).toBe(projects.length);
     expect(projects.map((project) => project.slug)).toEqual([
@@ -77,11 +77,44 @@ describe("contrato de contenido v1", () => {
       "municipalidad-de-rioja",
       "discord",
       "nieto-hub",
+      "coffee",
+      "explora-san-martin",
+      "ruleta",
+      "llevamos",
+      "horas",
+      "qr",
+      "pdf",
+      "foto",
+      "cuando",
+      "cotiza",
+      "color",
     ]);
     expect(projects.find((project) => project.slug === "hub")?.liveUrl).toBe("https://hub.velaarturo.com");
     expect(projects.find((project) => project.slug === "nieto-import")?.liveUrl).toBe("https://portal.nietoimport.com");
     expect(projects.find((project) => project.slug === "nieto-hub")?.liveUrl).toBe("https://nieto.velaarturo.com");
     expect(projects.find((project) => project.slug === "porta")?.repoUrl).toBe("https://github.com/ArturoVela/Porta");
+    expect(projects.slice(-11).map((project) => project.liveUrl)).toEqual([
+      "https://cafetero.velaarturo.com",
+      "https://explora.velaarturo.com",
+      "https://ruleta.velaarturo.com",
+      "https://llevamos.velaarturo.com",
+      "https://horas.velaarturo.com",
+      "https://qr.velaarturo.com",
+      "https://pdf.velaarturo.com",
+      "https://foto.velaarturo.com",
+      "https://cuando.velaarturo.com",
+      "https://cotiza.velaarturo.com",
+      "https://color.velaarturo.com",
+    ]);
+    expect(projects.slice(-11).every((project) => project.repoUrl?.startsWith("https://github.com/ArturoVela/"))).toBe(true);
+    expect(projects.filter((project) => project.featured).map((project) => project.slug)).toEqual([
+      "hub",
+      "un-ramito",
+      "security-lab",
+      "cana-wasky",
+      "coffee",
+      "explora-san-martin",
+    ]);
     expect(projectAvailabilityLabel(projects.find((project) => project.slug === "second-brain")!)).toBe("Proyecto privado");
     expect(projectAvailabilityLabel(projects.find((project) => project.slug === "db-nieto")!)).toBe("Acceso restringido");
   });
