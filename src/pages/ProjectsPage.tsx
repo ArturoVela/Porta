@@ -1,18 +1,53 @@
-import { Box, Container, Heading, SimpleGrid, Stack, Text } from "@chakra-ui/react";
+import { Box, Button, Container, Flex, Heading, HStack, Input, SimpleGrid, Stack, Text } from "@chakra-ui/react";
+import { useState } from "react";
 import { ProjectArchiveCard, ProjectFeature } from "@/components/ContentCards";
 import { SectionHeading } from "@/components/SectionHeading";
 import { useContent } from "@/content/context";
+import { projectAvailabilityLabel } from "@/lib/projectAvailability";
+import { selectSpotlightProjects } from "@/lib/spotlight";
+
+type DemoFilter = "all" | "public" | "other";
+
+const demoFilters: { value: DemoFilter; label: string }[] = [
+  { value: "all", label: "Todos" },
+  { value: "public", label: "Con demo pública" },
+  { value: "other", label: "Sin demo pública" },
+];
+
+function searchable(text: string) {
+  return text.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+}
 
 export function ProjectsPage() {
   const { content } = useContent();
-  const projects = [...content.projects].sort((a, b) => a.order - b.order);
-  const featured = projects.filter((project) => project.featured);
-  const archive = projects.filter((project) => !project.featured);
+  const [query, setQuery] = useState("");
+  const [demoFilter, setDemoFilter] = useState<DemoFilter>("all");
+  const featured = selectSpotlightProjects(content.projects);
+  const featuredIds = new Set(featured.map((project) => project.id));
+  const archive = [...content.projects].filter((project) => !featuredIds.has(project.id)).sort((a, b) => a.order - b.order);
+  const search = searchable(query.trim());
+  const visible = archive.filter((project) => {
+    const hasPublicDemo = projectAvailabilityLabel(project) === "Disponible en línea";
+    if (demoFilter === "public" && !hasPublicDemo) return false;
+    if (demoFilter === "other" && hasPublicDemo) return false;
+    return !search || searchable([project.title, project.excerpt, project.category, ...project.stack].join(" ")).includes(search);
+  });
+
   return (
     <>
-      <Container maxW="7xl" py={{ base: "14", md: "24" }}><SectionHeading title="Proyectos" description="Productos propios, trabajo para clientes y experimentos donde cada decisión técnica responde a una necesidad concreta." /></Container>
-      <Box bg="app.panel" borderYWidth="1px" borderColor="app.border"><Container maxW="7xl">{featured.map((project, index) => <ProjectFeature key={project.id} project={project} reverse={index % 2 === 1} index={index} />)}</Container></Box>
-      {archive.length ? <Container maxW="7xl" py={{ base: "16", md: "24" }}><Stack gap="3" mb="10"><Heading as="h2" fontSize={{ base: "3xl", md: "5xl" }} letterSpacing="-.045em">Archivo de proyectos</Heading><Text color="app.muted" maxW="62ch">Una vista rápida de cada producto, sistema y experimento. Cada portada se construye con la identidad y las tecnologías del proyecto.</Text></Stack><SimpleGrid columns={{ base: 1, md: 2, xl: 3 }} gap={{ base: "8", lg: "10" }}>{archive.map((project) => <ProjectArchiveCard key={project.id} project={project} />)}</SimpleGrid></Container> : null}
+      <Container maxW="7xl" py={{ base: "14", md: "24" }}><SectionHeading as="h1" title="Proyectos" description="Productos propios, trabajo para clientes y experimentos donde cada decisión técnica responde a una necesidad concreta." /></Container>
+      <Box bg="app.panel" borderYWidth="1px" borderColor="app.border"><Container maxW="7xl"><Heading as="h2" color="app.accent" fontSize="lg" fontWeight="750" pt="10">Trabajo destacado</Heading>{featured.map((project, index) => <ProjectFeature key={project.id} project={project} reverse={index % 2 === 1} index={index} />)}</Container></Box>
+      {archive.length ? <Container maxW="7xl" py={{ base: "16", md: "24" }}>
+        <Stack gap="3" mb="10"><Heading as="h2" fontSize={{ base: "3xl", md: "5xl" }} letterSpacing="-.045em">Más proyectos</Heading><Text color="app.muted" maxW="62ch">Explora el resto del trabajo por nombre, tecnología o disponibilidad de una demo.</Text></Stack>
+        <Flex gap="4" justify="space-between" align={{ base: "stretch", md: "center" }} direction={{ base: "column", md: "row" }} mb="8">
+          <Input aria-label="Buscar en los demás proyectos" placeholder="Buscar proyecto o tecnología" value={query} onChange={(event) => setQuery(event.target.value)} maxW={{ md: "22rem" }} borderRadius="0" borderColor="app.border" bg="app.panel" />
+          <HStack gap="2" flexWrap="wrap" role="group" aria-label="Filtrar por disponibilidad de demo">
+            {demoFilters.map((filter) => <Button key={filter.value} size="sm" variant={demoFilter === filter.value ? "solid" : "outline"} bg={demoFilter === filter.value ? "brand.600" : "app.panel"} color={demoFilter === filter.value ? "white" : "app.text"} borderColor="app.border" borderRadius="0" aria-pressed={demoFilter === filter.value} onClick={() => setDemoFilter(filter.value)}>{filter.label}</Button>)}
+          </HStack>
+        </Flex>
+        <Text color="app.muted" fontSize="sm" mb="6" role="status">{visible.length} {visible.length === 1 ? "proyecto" : "proyectos"}</Text>
+        {visible.length ? <SimpleGrid columns={{ base: 1, md: 2, xl: 3 }} gap={{ base: "8", lg: "10" }}>{visible.map((project) => <ProjectArchiveCard key={project.id} project={project} />)}</SimpleGrid> : <Box borderTopWidth="1px" borderColor="app.border" py="12"><Text fontWeight="700">No hay proyectos con esos filtros.</Text><Text color="app.muted" mt="2">Prueba otra búsqueda o selecciona «Todos».</Text></Box>}
+      </Container> : null}
     </>
   );
 }

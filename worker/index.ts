@@ -1,5 +1,6 @@
 import { FALLBACK_ENVELOPE } from "../src/content/fallback";
 import { isPortfolioEnvelope } from "../src/lib/content";
+import { projectDisplayCover } from "../src/lib/spotlight";
 import type { PortfolioEnvelope, PortfolioManifest, PublicComment } from "../src/types/content";
 
 const JSON_HEADERS = { "content-type": "application/json; charset=utf-8", "cache-control": "no-store", "x-content-type-options": "nosniff" };
@@ -10,7 +11,7 @@ const BACKUP_TTL_SECONDS = 86_400;
 type ContentResult = { envelope: PortfolioEnvelope; source: "brain" | "cache" | "backup" | "bundled" | "preview" };
 type CommentRow = { id: string; author_name: string; body: string; created_at: string };
 type CommentInput = { publicationId: string; name: string; message: string; turnstileToken: string };
-type RouteMeta = { title: string; description: string; canonicalPath: string; image: string; type: "website" | "article"; status: number; noindex: boolean; structuredData: Record<string, unknown> };
+type RouteMeta = { title: string; description: string; canonicalPath: string; image: string; imageWidth: number; imageHeight: number; type: "website" | "article"; status: number; noindex: boolean; structuredData: Record<string, unknown> };
 
 function defaultCache() {
   return (caches as unknown as { readonly default: Cache }).default;
@@ -269,6 +270,8 @@ export function metaForPath(pathname: string, manifest: PortfolioManifest, origi
   const baseImage = new URL(manifest.site.seo.ogImage ?? "/og-card.svg", origin).href;
   const base = {
     image: baseImage,
+    imageWidth: 1200,
+    imageHeight: 630,
     type: "website" as const,
     status: 200,
     noindex: preview,
@@ -284,15 +287,19 @@ export function metaForPath(pathname: string, manifest: PortfolioManifest, origi
   };
   if (pathname === "/") return { ...base, title: manifest.site.seo.title, description: manifest.site.seo.description, canonicalPath: "/" };
   if (pathname === "/proyectos") return { ...base, title: `Proyectos — ${manifest.site.name}`, description: "Productos web, sistemas internos y experiencias digitales construidas por Arturo Vela.", canonicalPath: pathname };
+  if (pathname === "/all") return { ...base, title: `Todos los proyectos — ${manifest.site.name}`, description: "Acceso rápido a todos los proyectos de Arturo Vela.", canonicalPath: pathname, noindex: true, structuredData: {} };
   if (pathname === "/perfil") return { ...base, title: `Perfil — ${manifest.site.name}`, description: manifest.site.bio, canonicalPath: pathname };
   if (pathname === "/articulos") return { ...base, title: `Artículos — ${manifest.site.name}`, description: "Notas sobre investigación, producto, comunidades e ingeniería web.", canonicalPath: pathname };
   if (pathname === "/contacto") return { ...base, title: `Contacto — ${manifest.site.name}`, description: "Conversa con Arturo Vela sobre productos web, sistemas internos y colaboración técnica.", canonicalPath: pathname };
   const projectSlug = pathname.match(/^\/proyectos\/([^/]+)$/)?.[1];
   const project = projectSlug ? manifest.projects.find((item) => item.slug === decodeURIComponent(projectSlug)) : undefined;
-  if (project) return { ...base, title: project.seo.title ?? `${project.title} — ${manifest.site.name}`, description: project.seo.description ?? project.excerpt, canonicalPath: pathname, image: project.cover ? new URL(project.cover.src, origin).href : baseImage, structuredData: { "@context": "https://schema.org", "@type": "CreativeWork", name: project.title, description: project.excerpt, creator: { "@type": "Person", name: manifest.site.name }, url: new URL(pathname, origin).href } };
+  if (project) {
+    const cover = projectDisplayCover(project);
+    return { ...base, title: project.seo.title ?? `${project.title} — ${manifest.site.name}`, description: project.seo.description ?? project.excerpt, canonicalPath: pathname, image: cover ? new URL(cover.src, origin).href : baseImage, imageWidth: cover?.width ?? 1200, imageHeight: cover?.height ?? 630, structuredData: { "@context": "https://schema.org", "@type": "CreativeWork", name: project.title, description: project.excerpt, creator: { "@type": "Person", name: manifest.site.name }, url: new URL(pathname, origin).href } };
+  }
   const articleSlug = pathname.match(/^\/articulos\/([^/]+)$/)?.[1];
   const article = articleSlug ? manifest.articles.find((item) => item.slug === decodeURIComponent(articleSlug)) : undefined;
-  if (article) return { ...base, title: article.seo.title ?? `${article.title} — ${manifest.site.name}`, description: article.seo.description ?? article.excerpt, canonicalPath: pathname, image: article.cover ? new URL(article.cover.src, origin).href : baseImage, type: "article", structuredData: { "@context": "https://schema.org", "@type": "BlogPosting", headline: article.title, description: article.excerpt, datePublished: article.publishedAt, author: { "@type": "Person", name: manifest.site.name }, url: new URL(pathname, origin).href } };
+  if (article) return { ...base, title: article.seo.title ?? `${article.title} — ${manifest.site.name}`, description: article.seo.description ?? article.excerpt, canonicalPath: pathname, image: article.cover ? new URL(article.cover.src, origin).href : baseImage, imageWidth: article.cover?.width ?? 1200, imageHeight: article.cover?.height ?? 630, type: "article", structuredData: { "@context": "https://schema.org", "@type": "BlogPosting", headline: article.title, description: article.excerpt, datePublished: article.publishedAt, author: { "@type": "Person", name: manifest.site.name }, url: new URL(pathname, origin).href } };
   return { ...base, title: `Página no encontrada — ${manifest.site.name}`, description: "La ruta solicitada no existe.", canonicalPath: pathname, status: 404, noindex: true, structuredData: {} };
 }
 
@@ -338,6 +345,8 @@ async function html(request: Request, env: Env, ctx: ExecutionContext) {
     .on('meta[property="og:title"]', { element(element) { element.setAttribute("content", meta.title); } })
     .on('meta[property="og:description"]', { element(element) { element.setAttribute("content", meta.description); } })
     .on('meta[property="og:image"]', { element(element) { element.setAttribute("content", meta.image); } })
+    .on('meta[property="og:image:width"]', { element(element) { element.setAttribute("content", String(meta.imageWidth)); } })
+    .on('meta[property="og:image:height"]', { element(element) { element.setAttribute("content", String(meta.imageHeight)); } })
     .on('meta[property="og:url"]', { element(element) { element.setAttribute("content", canonical); } })
     .on('meta[name="twitter:title"]', { element(element) { element.setAttribute("content", meta.title); } })
     .on('meta[name="twitter:description"]', { element(element) { element.setAttribute("content", meta.description); } })

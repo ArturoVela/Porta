@@ -5,6 +5,7 @@ import { ContentLink as Link } from "@/components/ContentLink";
 import type { ArticleContent, ProjectContent } from "@/types/content";
 import { ResponsiveImage } from "@/components/ResponsiveImage";
 import { projectAvailabilityLabel } from "@/lib/projectAvailability";
+import { projectDisplayCover } from "@/lib/spotlight";
 
 const visualCopy: Record<string, string[]> = {
   hub: ["39 utilidades", "Local-first", "Carga modular"],
@@ -27,6 +28,7 @@ const posterPaletteOverrides: Partial<Record<string, { background: string; foreg
   hub: posterPalettes[0],
   "un-ramito": posterPalettes[1],
   "security-lab": { background: "#121722", foreground: "#8FF0BD" },
+  "nieto-import": { background: "#1D2430", foreground: "#F7F4EF" },
   coffee: posterPalettes[6],
   "explora-san-martin": posterPalettes[3],
   color: posterPalettes[4],
@@ -59,14 +61,15 @@ function AbstractProjectVisual({ project, compact = false }: { project: ProjectC
 }
 
 export function ProjectVisual({ project, compact = false }: { project: ProjectContent; compact?: boolean }) {
-  if (!project.cover) {
+  const cover = projectDisplayCover(project);
+  if (!cover) {
     return compact
       ? <AspectRatio className="project-card__visual" ratio={16 / 10} overflow="hidden"><AbstractProjectVisual project={project} compact /></AspectRatio>
       : <AbstractProjectVisual project={project} />;
   }
   return (
-    <AspectRatio className={compact ? "project-card__visual" : undefined} ratio={16 / 10} overflow="hidden" borderRadius="0" bg="app.surface">
-      <ResponsiveImage image={project.cover} />
+    <AspectRatio className={compact ? "project-card__visual" : undefined} ratio={cover.width / cover.height} overflow="hidden" borderRadius="0" bg="app.surface">
+      <ResponsiveImage image={cover} />
     </AspectRatio>
   );
 }
@@ -91,6 +94,7 @@ export function ProjectArchiveCard({ project }: { project: ProjectContent }) {
 }
 
 export function ProjectFeature({ project, reverse = false, index = 0 }: { project: ProjectContent; reverse?: boolean; index?: number }) {
+  const evidence = project.outcomes.find((outcome) => /\d/.test(outcome)) ?? project.outcomes[0];
   return (
     <Box className="project-feature" borderTopWidth="1px" borderColor="app.border" py={{ base: "9", md: "14" }}>
       <Grid templateColumns={{ base: "1fr", lg: reverse ? ".72fr 1.28fr" : "1.28fr .72fr" }} gap={{ base: "7", lg: "12" }} alignItems="stretch">
@@ -104,6 +108,7 @@ export function ProjectFeature({ project, reverse = false, index = 0 }: { projec
             </HStack>
             <Heading as="h3" fontSize={{ base: "3xl", md: "5xl", lg: "6xl" }} letterSpacing="-.055em" lineHeight=".9">{project.title}</Heading>
             <Text color="app.muted" fontSize={{ base: "md", md: "lg" }} maxW="44ch">{project.excerpt}</Text>
+            {evidence ? <HStack gap="3" align="start" borderLeftWidth="3px" borderColor="app.signal" pl="4"><Text fontWeight="700">{evidence}</Text></HStack> : null}
             <HStack gap="2" flexWrap="wrap">{project.stack.slice(0, 4).map((item) => <Text key={item} fontSize="sm" borderBottomWidth="1px" borderColor="app.border">{item}</Text>)}</HStack>
           </Stack>
           <Link to={`/proyectos/${project.slug}`} className="project-feature__link">

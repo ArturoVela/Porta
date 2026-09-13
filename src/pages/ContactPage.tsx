@@ -22,6 +22,7 @@ export function ContactPage() {
             <form onSubmit={handleSubmit}>
               <Stack gap="5">
                 <Heading as="h2" fontSize="2xl">Cuéntame qué necesitas resolver</Heading>
+                <Text color="app.muted" fontSize="sm">Basta con contar qué ocurre, a quién afecta y qué te gustaría lograr. No necesitas traer una solución definida.</Text>
                 <Grid templateColumns={{ base: "1fr", md: "1fr 1fr" }} gap="5">
                   <Field.Root required><Field.Label>Nombre</Field.Label><Input name="name" required autoComplete="name" /></Field.Root>
                   <Field.Root required><Field.Label>Correo</Field.Label><Input type="email" name="email" required autoComplete="email" /><ValidationError prefix="Correo" field="email" errors={state.errors} /></Field.Root>

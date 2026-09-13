@@ -188,11 +188,21 @@ describe("comentarios", () => {
 });
 
 describe("SEO por ruta", () => {
+  it("sirve /all sin indexarlo", () => {
+    const meta = metaForPath("/all", FALLBACK_ENVELOPE.data, "https://velaarturo.com");
+    expect(meta.status).toBe(200);
+    expect(meta.noindex).toBe(true);
+    expect(meta.title).toContain("Todos los proyectos");
+  });
+
   it("crea metadatos de proyecto y artículo", () => {
     const project = metaForPath("/proyectos/hub", FALLBACK_ENVELOPE.data, "https://velaarturo.com");
     const article = metaForPath("/articulos/discord-para-negocios", FALLBACK_ENVELOPE.data, "https://velaarturo.com");
     expect(project.status).toBe(200);
     expect(project.structuredData["@type"]).toBe("CreativeWork");
+    const explora = metaForPath("/proyectos/explora-san-martin", FALLBACK_ENVELOPE.data, "https://velaarturo.com");
+    expect(explora.image).toBe("https://velaarturo.com/assets/images/portfolio/spotlight-explora.webp");
+    expect([explora.imageWidth, explora.imageHeight]).toEqual([1280, 720]);
     expect(article.type).toBe("article");
     expect(article.structuredData["@type"]).toBe("BlogPosting");
   });

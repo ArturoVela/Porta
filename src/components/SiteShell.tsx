@@ -14,6 +14,7 @@ import { useEffect, useState, type ReactNode } from "react";
 import { useLocation } from "react-router";
 import { ContentLink as Link } from "@/components/ContentLink";
 import { useContent } from "@/content/context";
+import { CV_URL } from "@/lib/links";
 
 const navigation = [
   { label: "Proyectos", to: "/proyectos" },
@@ -44,8 +45,9 @@ function ThemeToggle() {
 function NavigationLinks({ onNavigate }: { onNavigate?: () => void }) {
   const location = useLocation();
   const pathname = location.pathname === "/__preview" ? new URLSearchParams(location.search).get("path") ?? "/" : location.pathname;
-  return navigation.map((item) => (
-    <Link key={item.to} to={item.to} onClick={onNavigate} aria-current={pathname === item.to || pathname.startsWith(`${item.to}/`) ? "page" : undefined}>
+  return <>
+    {navigation.map((item) => (
+      <Link key={item.to} to={item.to} onClick={onNavigate} aria-current={pathname === item.to || pathname.startsWith(`${item.to}/`) ? "page" : undefined}>
         <Text
           as="span"
           display="block"
@@ -59,8 +61,12 @@ function NavigationLinks({ onNavigate }: { onNavigate?: () => void }) {
         >
           {item.label}
         </Text>
-    </Link>
-  ));
+      </Link>
+    ))}
+    <a href={CV_URL} target="_blank" rel="noopener noreferrer" onClick={onNavigate}>
+      <Text as="span" display="block" px="3" py="2" color="app.muted" borderBottomWidth="2px" borderColor="transparent" fontWeight="600" _hover={{ color: "app.text", borderColor: "app.accent" }}>CV</Text>
+    </a>
+  </>;
 }
 
 export function SiteShell({ children }: { children: ReactNode }) {
@@ -145,6 +151,7 @@ export function SiteShell({ children }: { children: ReactNode }) {
             <Stack align={{ base: "start", md: "end" }} gap="5">
               <HStack gap="5" flexWrap="wrap">
                 {content.site.socials.map((social) => <a key={social.label} href={social.url} target="_blank" rel="noreferrer"><Text color="#AAB5C6" borderBottomWidth="1px" borderColor="#596476" _hover={{ color: "white", borderColor: "white" }}>{social.label}</Text></a>)}
+                <a href={CV_URL} target="_blank" rel="noopener noreferrer"><Text color="#AAB5C6" borderBottomWidth="1px" borderColor="#596476" _hover={{ color: "white", borderColor: "white" }}>CV</Text></a>
               </HStack>
               <Text color="#7D899B" fontSize="sm">© {new Date().getFullYear()} · Construido desde {content.site.location}</Text>
             </Stack>

@@ -1,4 +1,5 @@
 import type { PortfolioEnvelope } from "@/types/content";
+import { CV_URL } from "@/lib/links";
 
 export const FALLBACK_ENVELOPE: PortfolioEnvelope = {
   schemaVersion: "1",
@@ -13,9 +14,9 @@ export const FALLBACK_ENVELOPE: PortfolioEnvelope = {
       availability: "Abierto a conversar sobre productos, sistemas internos y colaboración técnica.",
       location: "Perú",
       bio: "Trabajo entre producto, interfaz e ingeniería. Me interesa entender primero el proceso real, reducir fricción y entregar sistemas que las personas puedan usar y mantener con confianza.",
-      email: "velaarturo70@gmail.com",
+      email: "cv@velaarturo.com",
       phone: "+51 963 653 154",
-      cvUrl: "https://1drv.ms/b/s!AhTBs2k3EIAxjthfmoaQGB-VJxbvKA?e=jyDFsy",
+      cvUrl: CV_URL,
       socials: [
         { label: "GitHub", url: "https://github.com/ArturoVela" },
         { label: "LinkedIn", url: "https://www.linkedin.com/in/arturo-vela-aa81242ba/" },

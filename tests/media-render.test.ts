@@ -9,6 +9,7 @@ import { FALLBACK_ENVELOPE } from "@/content/fallback";
 import { ProfilePage } from "@/pages/ProfilePage";
 import { ProjectPage } from "@/pages/ProjectPage";
 import { ProjectsPage } from "@/pages/ProjectsPage";
+import { selectSpotlightProjects } from "@/lib/spotlight";
 import { system } from "@/theme";
 
 const cover = { src: "/media/2/cover?token=preview-token", alt: "Portada editada", width: 1280, height: 720 };
@@ -52,7 +53,7 @@ describe("imágenes editadas en Second Brain", () => {
     const markup = renderToStaticMarkup(createElement(MemoryRouter, { initialEntries: ["/proyectos"] },
       createElement(ChakraProvider, { value: system, children: createElement(ContentProvider, { children: createElement(ProjectsPage) }) })));
 
-    expect(markup.match(/class="[^"]*project-card__visual/g)).toHaveLength(projects.length - 1);
+    expect(markup.match(/class="[^"]*project-card__visual/g)).toHaveLength(projects.length - selectSpotlightProjects(projects).length);
     expect(markup).toContain("details-thumb_cana.webp");
     expect(projects.every((item) => markup.includes(item.title))).toBe(true);
   });

@@ -5,9 +5,9 @@
   "lang": "es-PE",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#F2F5FA",
-  "theme_color": "#111A2A",
+  "background_color": "#F5F7FA",
+  "theme_color": "#2453F4",
   "icons": [
-    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+    { "src": "/favicon.svg?v=2", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
   ]
 }

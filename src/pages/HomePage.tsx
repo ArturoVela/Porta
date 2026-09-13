@@ -5,6 +5,7 @@ import { ArticleCard, ProjectFeature } from "@/components/ContentCards";
 import { HeroStage } from "@/components/HeroStage";
 import { SectionHeading } from "@/components/SectionHeading";
 import { useContent } from "@/content/context";
+import { SPOTLIGHT_DESTINATIONS, selectSpotlightProjects } from "@/lib/spotlight";
 
 const process = [
   ["Entender", "El problema, las personas y las restricciones antes de elegir tecnología."],
@@ -22,7 +23,7 @@ const disciplines = [
 
 export function HomePage() {
   const { content } = useContent();
-  const featured = content.projects.filter((project) => project.featured).sort((a, b) => a.order - b.order).slice(0, 4);
+  const featured = selectSpotlightProjects(content.projects);
   const articles = [...content.articles].sort((a, b) => b.publishedAt.localeCompare(a.publishedAt)).slice(0, 3);
   const stack = Array.from(new Set(featured.flatMap((project) => project.stack))).slice(0, 12);
 
@@ -69,18 +70,21 @@ export function HomePage() {
       </Box>
 
       <Box borderYWidth="1px" borderColor="app.border" bg="app.panel">
-        <Container maxW="7xl">
-          <Grid templateColumns={{ base: "1fr 1fr", lg: "repeat(4, 1fr)" }}>
-            {[
-              ["Base", "Ingeniería de sistemas"],
-              ["Trabajo", "Producto de punta a punta"],
-              ["Especialidad", "Web, datos y edge"],
-              ["Ubicación", `${content.site.location} · remoto`],
-            ].map(([label, value], index) => (
-              <Stack key={label} gap="1" py={{ base: "6", md: "7" }} px={{ base: index % 2 ? "5" : "0", lg: index ? "7" : "0" }} borderLeftWidth={{ base: index % 2 ? "1px" : "0", lg: index ? "1px" : "0" }} borderColor="app.border">
-                <Text color="app.muted" fontSize="sm">{label}</Text>
-                <Text fontWeight="750">{value}</Text>
-              </Stack>
+        <Container maxW="7xl" py={{ base: "8", md: "10" }}>
+          <Flex justify="space-between" align="end" gap="4" mb="6" wrap="wrap">
+            <Heading as="h2" fontSize={{ base: "2xl", md: "3xl" }} letterSpacing="-.04em">En foco</Heading>
+            <Text color="app.muted">Proyectos que puedes explorar y mi trayectoria profesional.</Text>
+          </Flex>
+          <Grid templateColumns={{ base: "1fr", sm: "repeat(2, 1fr)", lg: "repeat(4, 1fr)" }} borderTopWidth="1px" borderLeftWidth="1px" borderColor="app.border">
+            {SPOTLIGHT_DESTINATIONS.map((item) => (
+              <Box asChild key={item.domain} display="block" minH="13rem" borderRightWidth="1px" borderBottomWidth="1px" borderColor="app.border" p={{ base: "5", md: "6" }} transition="background-color .18s ease" _hover={{ bg: "app.accent-subtle" }}>
+                <a href={item.url} target="_blank" rel="noopener noreferrer" aria-label={`${item.title}, abrir ${item.domain} en otra pestaña`}>
+                  <Flex h="full" direction="column" justify="space-between" gap="6">
+                    <Flex justify="space-between" align="start" gap="3"><Text color="app.accent" fontSize="sm" fontWeight="700">{item.category}</Text><ArrowUpRight size={18} aria-hidden="true" /></Flex>
+                    <Stack gap="2"><Heading as="h3" fontSize="2xl" letterSpacing="-.035em">{item.title}</Heading><Text color="app.muted" fontSize="sm">{item.description}</Text><Text fontSize="xs" fontWeight="700">{item.domain}</Text></Stack>
+                  </Flex>
+                </a>
+              </Box>
             ))}
           </Grid>
         </Container>

@@ -3,6 +3,7 @@ import { FALLBACK_ENVELOPE } from "@/content/fallback";
 import { fetchManifest, isPortfolioEnvelope } from "@/lib/content";
 import { contentHref } from "@/lib/preview";
 import { projectAvailabilityLabel } from "@/lib/projectAvailability";
+import { projectDisplayCover, selectSpotlightProjects, SPOTLIGHT_DESTINATIONS } from "@/lib/spotlight";
 import contractFixture from "../contracts/portfolio-v1.example.json";
 
 afterEach(() => vi.unstubAllGlobals());
@@ -117,5 +118,26 @@ describe("contrato de contenido v1", () => {
     ]);
     expect(projectAvailabilityLabel(projects.find((project) => project.slug === "second-brain")!)).toBe("Proyecto privado");
     expect(projectAvailabilityLabel(projects.find((project) => project.slug === "db-nieto")!)).toBe("Acceso restringido");
+  });
+});
+
+describe("trabajo destacado", () => {
+  it("prioriza los tres casos elegidos aunque el CMS conserve otros destacados", () => {
+    expect(selectSpotlightProjects(FALLBACK_ENVELOPE.data.projects).map((project) => project.slug)).toEqual([
+      "nieto-import", "explora-san-martin", "coffee",
+    ]);
+    expect(SPOTLIGHT_DESTINATIONS.map((item) => item.url)).toEqual([
+      "https://portal.nietoimport.com",
+      "https://explora.velaarturo.com",
+      "https://cafetero.velaarturo.com",
+      "https://cv.velaarturo.com",
+    ]);
+  });
+
+  it("usa capturas públicas solo cuando el CMS no entrega una portada", () => {
+    const coffee = FALLBACK_ENVELOPE.data.projects.find((project) => project.slug === "coffee")!;
+    expect(projectDisplayCover(coffee)?.src).toBe("/assets/images/portfolio/spotlight-coffee.webp");
+    const cmsCover = { src: "/media/2/cms-cover", alt: "Portada del CMS", width: 1200, height: 675 };
+    expect(projectDisplayCover({ ...coffee, cover: cmsCover })).toEqual(cmsCover);
   });
 });

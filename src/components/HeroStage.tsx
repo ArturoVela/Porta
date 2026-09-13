@@ -4,6 +4,7 @@ import { useState } from "react";
 import { ContentLink as Link } from "@/components/ContentLink";
 import type { ProjectContent } from "@/types/content";
 import { ResponsiveImage } from "@/components/ResponsiveImage";
+import { projectDisplayCover } from "@/lib/spotlight";
 
 const projectPalettes = [
   { background: "#081538", foreground: "#F4F7FF", signal: "#79A0FF" },
@@ -18,6 +19,7 @@ export function HeroStage({ projects }: { projects: ProjectContent[] }) {
   const project = projects[safeIndex];
   if (!project) return null;
 
+  const cover = projectDisplayCover(project);
   const palette = projectPalettes[safeIndex % projectPalettes.length];
   const projectNumber = String(safeIndex + 1).padStart(2, "0");
 
@@ -26,7 +28,7 @@ export function HeroStage({ projects }: { projects: ProjectContent[] }) {
       <Flex
         className="hero-stage__poster"
         bg={palette.background}
-        color={project.cover ? "white" : palette.foreground}
+        color={cover ? "white" : palette.foreground}
         minH={{ base: "25rem", md: "31rem" }}
         direction="column"
         justify="space-between"
@@ -34,8 +36,8 @@ export function HeroStage({ projects }: { projects: ProjectContent[] }) {
         position="relative"
         overflow="hidden"
       >
-        {project.cover ? <>
-          <Box position="absolute" inset="0"><ResponsiveImage image={project.cover} loading="eager" /></Box>
+        {cover ? <>
+          <Box position="absolute" inset="0"><ResponsiveImage image={cover} loading="eager" /></Box>
           <Box position="absolute" inset="0" bg="linear-gradient(180deg, rgba(0,0,0,.55), rgba(0,0,0,.12) 30%, rgba(0,0,0,.82))" aria-hidden="true" />
         </> : <>
           <Box className="hero-stage__orb" style={{ borderColor: palette.signal }} aria-hidden="true" />

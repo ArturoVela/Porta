@@ -11,7 +11,8 @@
       "availability": "Abierto a nuevas conversaciones.",
       "location": "Perú",
       "bio": "Ingeniero de sistemas y desarrollador web.",
-      "email": "dev@velaarturo.com",
+      "email": "cv@velaarturo.com",
+      "cvUrl": "https://cv.velaarturo.com",
       "socials": [{ "label": "GitHub", "url": "https://github.com/ArturoVela" }],
       "seo": {
         "title": "Arturo Vela — Ingeniería de productos digitales",
