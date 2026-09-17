@@ -21,6 +21,13 @@ const disciplines = [
   [Gauge, "Entrega en edge", "Workers, observabilidad y rendimiento"],
 ] as const;
 
+const saasProjects = [
+  { name: "Agua", domain: "agua.velaarturo.com", url: "https://agua.velaarturo.com" },
+  { name: "Ventas", domain: "ventas.velaarturo.com", url: "https://ventas.velaarturo.com" },
+  { name: "Agro", domain: "agro.velaarturo.com", url: "https://agro.velaarturo.com" },
+  { name: "Finanzas", domain: "finanzas.velaarturo.com", url: "https://finanzas.velaarturo.com" },
+] as const;
+
 export function HomePage() {
   const { content } = useContent();
   const featured = selectSpotlightProjects(content.projects);
@@ -82,6 +89,27 @@ export function HomePage() {
                   <Flex h="full" direction="column" justify="space-between" gap="6">
                     <Flex justify="space-between" align="start" gap="3"><Text color="app.accent" fontSize="sm" fontWeight="700">{item.category}</Text><ArrowUpRight size={18} aria-hidden="true" /></Flex>
                     <Stack gap="2"><Heading as="h3" fontSize="2xl" letterSpacing="-.035em">{item.title}</Heading><Text color="app.muted" fontSize="sm">{item.description}</Text><Text fontSize="xs" fontWeight="700">{item.domain}</Text></Stack>
+                  </Flex>
+                </a>
+              </Box>
+            ))}
+          </Grid>
+        </Container>
+      </Box>
+
+      <Box as="section" bg="#080B12" color="#F7F9FC" py={{ base: "16", md: "24" }} id="saas">
+        <Container maxW="7xl">
+          <Grid templateColumns={{ base: "1fr", lg: ".55fr 1.45fr" }} gap={{ base: "6", lg: "16" }} alignItems="end" mb={{ base: "8", md: "14" }}>
+            <Text color="app.signal" fontWeight="750">Software propio</Text>
+            <Stack gap="4" maxW="3xl"><Heading as="h2" fontSize={{ base: "3xl", md: "5xl", lg: "6xl" }} letterSpacing="-.05em" lineHeight=".98">Mis proyectos SaaS</Heading><Text color="#AAB5C6" fontSize={{ base: "md", md: "lg" }} maxW="62ch">Cuatro herramientas propias, disponibles desde sus dominios.</Text></Stack>
+          </Grid>
+          <Grid templateColumns={{ base: "1fr", sm: "repeat(2, 1fr)", lg: "repeat(4, 1fr)" }} borderTopWidth="1px" borderLeftWidth="1px" borderColor="#2B3545">
+            {saasProjects.map((project, index) => (
+              <Box asChild key={project.domain} display="block" minH="14rem" borderRightWidth="1px" borderBottomWidth="1px" borderColor="#2B3545" p={{ base: "5", md: "6" }} transition="background-color .18s ease, color .18s ease" _hover={{ bg: "#F7F9FC", color: "#080B12" }}>
+                <a href={project.url} target="_blank" rel="noopener noreferrer" aria-label={`${project.name}, abrir ${project.domain} en otra pestaña`}>
+                  <Flex h="full" direction="column" justify="space-between" gap="8">
+                    <Flex justify="space-between" align="start" gap="3"><Text color="app.signal" fontWeight="750">0{index + 1}</Text><ArrowUpRight size={18} aria-hidden="true" /></Flex>
+                    <Stack gap="2"><Heading as="h3" fontSize={{ base: "3xl", md: "4xl" }} letterSpacing="-.045em">{project.name}</Heading><Text fontSize="sm" fontWeight="650" opacity=".72">{project.domain}</Text></Stack>
                   </Flex>
                 </a>
               </Box>
