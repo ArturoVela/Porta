@@ -1,4 +1,6 @@
 import { FALLBACK_ENVELOPE } from "@/content/fallback";
+import { FALLBACK_ENVELOPE_EN } from "@/content/fallback-en";
+import type { Locale } from "@/i18n";
 import type { PortfolioEnvelope, PortfolioManifest } from "@/types/content";
 
 function isRecord(value: unknown): value is Record<string, unknown> {
@@ -104,8 +106,9 @@ export function isPortfolioEnvelope(value: unknown): value is PortfolioEnvelope 
     && data.articles.every(isArticle);
 }
 
-export function bootstrapEnvelope(): PortfolioEnvelope | null {
+export function bootstrapEnvelope(locale?: Locale): PortfolioEnvelope | null {
   if (typeof document === "undefined") return null;
+  if (locale && document.documentElement.lang !== locale) return null;
   const raw = document.querySelector<HTMLScriptElement>("#portfolio-content")?.textContent?.trim();
   if (!raw) return null;
   try {
@@ -116,15 +119,21 @@ export function bootstrapEnvelope(): PortfolioEnvelope | null {
   }
 }
 
-export async function fetchManifest(signal?: AbortSignal, previewToken?: string | null): Promise<PortfolioEnvelope> {
-  const endpoint = previewToken ? `/api/content/preview?token=${encodeURIComponent(previewToken)}` : "/api/content/manifest";
+export async function fetchManifest(locale: Locale, signal?: AbortSignal, previewToken?: string | null): Promise<PortfolioEnvelope> {
+  const params = new URLSearchParams({ locale });
+  if (previewToken) params.set("token", previewToken);
+  const endpoint = previewToken ? `/api/content/preview?${params}` : `/api/content/manifest?${params}`;
   const response = await fetch(endpoint, { signal, headers: { Accept: "application/json" }, ...(previewToken ? { cache: "no-store" as const } : {}) });
-  if (!response.ok) throw new Error("No se pudo actualizar el contenido");
+  if (!response.ok) throw new Error(locale === "en" ? "Content could not be refreshed" : "No se pudo actualizar el contenido");
   const value: unknown = await response.json();
-  if (!isPortfolioEnvelope(value)) throw new Error("El contenido recibido no cumple el contrato v1");
+  if (!isPortfolioEnvelope(value)) throw new Error(locale === "en" ? "Received content does not match the v1 contract" : "El contenido recibido no cumple el contrato v1");
   return value;
 }
 
-export function initialManifest(): PortfolioManifest {
-  return bootstrapEnvelope()?.data ?? FALLBACK_ENVELOPE.data;
+export function fallbackEnvelope(locale: Locale) {
+  return locale === "en" ? FALLBACK_ENVELOPE_EN : FALLBACK_ENVELOPE;
+}
+
+export function initialManifest(locale: Locale): PortfolioManifest {
+  return bootstrapEnvelope(locale)?.data ?? fallbackEnvelope(locale).data;
 }

@@ -12,9 +12,9 @@ describe("vista previa del editor", () => {
   it("actualiza desde el borrador privado sin reemplazarlo con el manifiesto publicado", async () => {
     const fetchMock = vi.fn(async () => Response.json(FALLBACK_ENVELOPE));
     vi.stubGlobal("fetch", fetchMock);
-    await fetchManifest(undefined, "private/preview+token");
+    await fetchManifest("es", undefined, "private/preview+token");
     expect(fetchMock).toHaveBeenCalledOnce();
-    expect(fetchMock).toHaveBeenCalledWith("/api/content/preview?token=private%2Fpreview%2Btoken", expect.objectContaining({ cache: "no-store" }));
+    expect(fetchMock).toHaveBeenCalledWith("/api/content/preview?locale=es&token=private%2Fpreview%2Btoken", expect.objectContaining({ cache: "no-store" }));
   });
 
   it("mantiene el token al abrir otras páginas del borrador y no lo agrega a enlaces externos", () => {
@@ -139,5 +139,18 @@ describe("trabajo destacado", () => {
     expect(projectDisplayCover(coffee)?.src).toBe("/assets/images/portfolio/spotlight-coffee.webp");
     const cmsCover = { src: "/media/2/cms-cover", alt: "Portada del CMS", width: 1200, height: 675 };
     expect(projectDisplayCover({ ...coffee, cover: cmsCover })).toEqual(cmsCover);
+  });
+
+  it("documenta los tres casos con problema, decisiones, proceso y resultados verificables", () => {
+    const cases = ["nieto-import", "explora-san-martin", "coffee"].map((slug) => FALLBACK_ENVELOPE.data.projects.find((project) => project.slug === slug)!);
+    for (const project of cases) {
+      expect(project.body).toContain("## Problema");
+      expect(project.body).toContain("## Decisiones clave");
+      expect(project.body).toContain("## Proceso");
+      expect(project.body).toContain("## Resultados y alcance");
+    }
+    expect(cases[0].body).toContain("dos empresas");
+    expect(cases[1].body).toContain("164 lugares");
+    expect(cases[2].body).toContain("41 cafeterías");
   });
 });

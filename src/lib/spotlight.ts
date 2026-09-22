@@ -1,5 +1,6 @@
 import type { CoverImage, ProjectContent } from "@/types/content";
 import { CV_URL } from "@/lib/links";
+import type { Locale } from "@/i18n";
 
 export const SPOTLIGHT_PROJECT_SLUGS = ["nieto-import", "explora-san-martin", "coffee"] as const;
 
@@ -15,8 +16,12 @@ const spotlightCovers: Record<string, CoverImage> = {
   coffee: { src: "/assets/images/portfolio/spotlight-coffee.webp", alt: "Portada y búsqueda de Cafetero", width: 1280, height: 720 },
 };
 
-export function projectDisplayCover(project: ProjectContent) {
-  return project.cover ?? spotlightCovers[project.slug];
+export function projectDisplayCover(project: ProjectContent, locale: Locale = "es") {
+  if (project.cover) return project.cover;
+  const cover = spotlightCovers[project.slug];
+  if (!cover || locale === "es") return cover;
+  const alt = project.slug === "explora-san-martin" ? "Map and destinations in Explore San Martín" : "Cafetero home and search experience";
+  return { ...cover, alt };
 }
 
 export function selectSpotlightProjects(projects: ProjectContent[], limit = 3) {

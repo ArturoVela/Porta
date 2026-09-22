@@ -1,5 +1,6 @@
 import { FALLBACK_ENVELOPE } from "../src/content/fallback";
-import { isPortfolioEnvelope } from "../src/lib/content";
+import { fallbackEnvelope, isPortfolioEnvelope } from "../src/lib/content";
+import { isLocale, localeFromPath, localizedPath, matchLocalizedRoute, preferredLocale, routePath, type Locale } from "../src/i18n";
 import { projectDisplayCover } from "../src/lib/spotlight";
 import type { PortfolioEnvelope, PortfolioManifest, PublicComment } from "../src/types/content";
 
@@ -116,14 +117,15 @@ async function fetchBrainEnvelope(env: Env, internalPath: string): Promise<Portf
   return value;
 }
 
-async function loadContent(env: Env, ctx: ExecutionContext, previewToken?: string): Promise<ContentResult> {
+async function loadContent(env: Env, ctx: ExecutionContext, locale: Locale = "es", previewToken?: string): Promise<ContentResult> {
   const siteKey = env.SITE_KEY;
   if (previewToken) {
-    const envelope = await fetchBrainEnvelope(env, `/internal/v1/portfolio/${encodeURIComponent(siteKey)}/preview?token=${encodeURIComponent(previewToken)}`);
+    const params = new URLSearchParams({ token: previewToken, locale });
+    const envelope = await fetchBrainEnvelope(env, `/internal/v1/portfolio/${encodeURIComponent(siteKey)}/preview?${params}`);
     return { envelope, source: "preview" };
   }
 
-  const path = `/internal/v1/portfolio/${encodeURIComponent(siteKey)}/manifest`;
+  const path = `/internal/v1/portfolio/${encodeURIComponent(siteKey)}/manifest?locale=${locale}`;
   const currentKey = cacheKey(path, "current");
   const current = await readCachedEnvelope(currentKey);
   if (current) return { envelope: current, source: "cache" };
@@ -140,7 +142,7 @@ async function loadContent(env: Env, ctx: ExecutionContext, previewToken?: strin
     const backup = await readCachedEnvelope(cacheKey(path, "backup"));
     if (backup) return { envelope: backup, source: "backup" };
     if (isBrainIntegrationConfigured(env)) throw error;
-    return { envelope: FALLBACK_ENVELOPE, source: "bundled" };
+    return { envelope: fallbackEnvelope(locale), source: "bundled" };
   }
 }
 
@@ -181,7 +183,7 @@ async function createComment(request: Request, env: Env, ctx: ExecutionContext) 
   if (!verification.configured) return json({ error: "Los comentarios aún no están configurados" }, 503);
   if (!verification.success) return json({ error: "La verificación expiró o no es válida" }, 400);
 
-  const { envelope } = await loadContent(env, ctx);
+  const { envelope } = await loadContent(env, ctx, "es");
   if (!publicationExists(envelope.data, input.publicationId)) return json({ error: "La publicación no existe" }, 404);
   const comment: PublicComment = { id: crypto.randomUUID(), name: input.name, message: input.message, createdAt: new Date().toISOString() };
   await env.DB.prepare("INSERT INTO comments (id, publication_id, author_name, body, created_at, hidden_at, legacy_id) VALUES (?, ?, ?, ?, ?, NULL, NULL)").bind(comment.id, input.publicationId, input.name, input.message, comment.createdAt).run();
@@ -189,10 +191,13 @@ async function createComment(request: Request, env: Env, ctx: ExecutionContext) 
 }
 
 async function contentApi(url: URL, env: Env, ctx: ExecutionContext) {
+  const requestedLocale = url.searchParams.get("locale");
+  if (requestedLocale && !isLocale(requestedLocale)) return json({ error: "Locale inválido" }, 400);
+  const locale: Locale = isLocale(requestedLocale) ? requestedLocale : "es";
   const previewToken = url.pathname === "/api/content/preview" ? url.searchParams.get("token") ?? undefined : undefined;
   if (url.pathname === "/api/content/preview" && !previewToken) return json({ error: "Vista previa inválida o expirada" }, 404);
   try {
-    const result = await loadContent(env, ctx, previewToken);
+    const result = await loadContent(env, ctx, locale, previewToken);
     const manifest = result.envelope.data;
     let envelope: PortfolioEnvelope<unknown> = result.envelope;
     const projectMatch = url.pathname.match(/^\/api\/content\/projects\/([^/]+)$/);
@@ -208,7 +213,7 @@ async function contentApi(url: URL, env: Env, ctx: ExecutionContext) {
       if (!item) return json({ error: "Artículo no encontrado" }, 404);
       envelope = { ...result.envelope, data: item };
     } else if (url.pathname !== "/api/content/manifest" && url.pathname !== "/api/content/preview") return json({ error: "Ruta de contenido no encontrada" }, 404);
-    return json(envelope, 200, { "x-portfolio-source": result.source, "cache-control": previewToken ? "private, no-store" : "public, max-age=60", ...(previewToken ? { "referrer-policy": "no-referrer" } : {}) });
+    return json(envelope, 200, { "x-portfolio-source": result.source, "content-language": locale, etag: `W/\"${result.envelope.publishedRevision}-${locale}\"`, "cache-control": previewToken ? "private, no-store" : "public, max-age=60", ...(previewToken ? { "referrer-policy": "no-referrer" } : {}) });
   } catch {
     return previewToken
       ? json({ error: "Vista previa inválida o expirada" }, 404)
@@ -241,32 +246,50 @@ function escapeXml(value: string) {
 }
 
 async function sitemap(env: Env, ctx: ExecutionContext) {
-  const { envelope } = await loadContent(env, ctx);
+  const [es, en] = await Promise.all([loadContent(env, ctx, "es"), loadContent(env, ctx, "en")]);
   const origin = env.CANONICAL_ORIGIN.replace(/\/$/, "");
-  const paths = ["/", "/proyectos", "/perfil", "/articulos", "/contacto", ...envelope.data.projects.map((item) => `/proyectos/${item.slug}`), ...envelope.data.articles.map((item) => `/articulos/${item.slug}`)];
-  const body = `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${paths.map((path) => `<url><loc>${escapeXml(`${origin}${path}`)}</loc></url>`).join("")}</urlset>`;
+  const entries = ([{ locale: "es", manifest: es.envelope.data }, { locale: "en", manifest: en.envelope.data }] as const).flatMap(({ locale, manifest }) => [
+    { locale, name: "home" as const }, { locale, name: "projects" as const }, { locale, name: "profile" as const }, { locale, name: "articles" as const }, { locale, name: "contact" as const },
+    ...manifest.projects.map((item) => ({ locale, name: "project" as const, slug: item.slug })),
+    ...manifest.articles.map((item) => ({ locale, name: "article" as const, slug: item.slug })),
+  ]);
+  const body = `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">${entries.map((entry) => {
+    const slug = "slug" in entry ? entry.slug : undefined;
+    const path = routePath(entry.locale, entry.name, slug);
+    const esPath = routePath("es", entry.name, slug);
+    const enPath = routePath("en", entry.name, slug);
+    return `<url><loc>${escapeXml(`${origin}${path}`)}</loc><xhtml:link rel="alternate" hreflang="es" href="${escapeXml(`${origin}${esPath}`)}"/><xhtml:link rel="alternate" hreflang="en" href="${escapeXml(`${origin}${enPath}`)}"/><xhtml:link rel="alternate" hreflang="x-default" href="${escapeXml(`${origin}${esPath}`)}"/></url>`;
+  }).join("")}</urlset>`;
   return new Response(body, { headers: { "content-type": "application/xml; charset=utf-8", "cache-control": "public, max-age=300" } });
 }
 
-async function feed(env: Env, ctx: ExecutionContext) {
-  const { envelope } = await loadContent(env, ctx);
+async function feed(env: Env, ctx: ExecutionContext, locale: Locale) {
+  const { envelope } = await loadContent(env, ctx, locale);
   const origin = env.CANONICAL_ORIGIN.replace(/\/$/, "");
-  const body = `<?xml version="1.0" encoding="UTF-8"?><feed xmlns="http://www.w3.org/2005/Atom"><title>${escapeXml(envelope.data.site.name)}</title><id>${origin}/</id><link href="${origin}/feed.xml" rel="self"/>${[...envelope.data.articles].sort((a, b) => b.publishedAt.localeCompare(a.publishedAt)).map((item) => `<entry><title>${escapeXml(item.title)}</title><id>${origin}/articulos/${escapeXml(item.slug)}</id><link href="${origin}/articulos/${escapeXml(item.slug)}"/><updated>${item.publishedAt}T12:00:00-05:00</updated><summary>${escapeXml(item.excerpt)}</summary></entry>`).join("")}</feed>`;
-  return new Response(body, { headers: { "content-type": "application/atom+xml; charset=utf-8", "cache-control": "public, max-age=300" } });
+  const feedPath = `/${locale}/feed.xml`;
+  const body = `<?xml version="1.0" encoding="UTF-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="${locale}"><title>${escapeXml(envelope.data.site.name)}</title><id>${origin}${routePath(locale, "home")}</id><link href="${origin}${feedPath}" rel="self"/>${[...envelope.data.articles].sort((a, b) => b.publishedAt.localeCompare(a.publishedAt)).map((item) => { const path = routePath(locale, "article", item.slug); return `<entry><title>${escapeXml(item.title)}</title><id>${origin}${escapeXml(path)}</id><link href="${origin}${escapeXml(path)}"/><updated>${item.publishedAt}T12:00:00-05:00</updated><summary>${escapeXml(item.excerpt)}</summary></entry>`; }).join("")}</feed>`;
+  return new Response(body, { headers: { "content-type": "application/atom+xml; charset=utf-8", "content-language": locale, "cache-control": "public, max-age=300" } });
 }
 
 export function normalizeLegacyPath(pathname: string) {
-  if (pathname === "/project") return "/proyectos";
-  if (pathname.startsWith("/project/")) return `/proyectos/${pathname.slice(9).toLocaleLowerCase("es")}`;
-  if (pathname === "/blog") return "/articulos";
-  if (pathname.startsWith("/blog/")) return `/articulos/${pathname.slice(6).toLocaleLowerCase("es")}`;
-  if (pathname === "/about" || pathname === "/cv" || pathname.startsWith("/eventos")) return "/perfil";
-  if (pathname === "/contact") return "/contacto";
-  if (pathname === "/pricing" || pathname.startsWith("/service")) return "/#servicios";
+  if (pathname === "/proyectos" || pathname === "/project") return routePath("es", "projects");
+  if (pathname.startsWith("/proyectos/")) return routePath("es", "project", pathname.slice(11));
+  if (pathname.startsWith("/project/")) return routePath("es", "project", pathname.slice(9).toLocaleLowerCase("es"));
+  if (pathname === "/articulos" || pathname === "/blog") return routePath("es", "articles");
+  if (pathname.startsWith("/articulos/")) return routePath("es", "article", pathname.slice(11));
+  if (pathname.startsWith("/blog/")) return routePath("es", "article", pathname.slice(6).toLocaleLowerCase("es"));
+  if (pathname === "/perfil" || pathname === "/about" || pathname === "/cv" || pathname.startsWith("/eventos")) return routePath("es", "profile");
+  if (pathname === "/contacto" || pathname === "/contact") return routePath("es", "contact");
+  if (pathname === "/all") return routePath("es", "allProjects");
+  if (pathname === "/pricing" || pathname.startsWith("/service")) return `${routePath("es", "home")}#servicios`;
+  if (pathname === "/feed.xml") return "/es/feed.xml";
   return null;
 }
 
 export function metaForPath(pathname: string, manifest: PortfolioManifest, origin: string, preview = false): RouteMeta {
+  const match = matchLocalizedRoute(pathname) ?? matchLocalizedRoute(localizedPath(pathname, "es"));
+  const locale = match?.locale ?? localeFromPath(pathname) ?? "es";
+  const canonicalPath = match ? routePath(locale, match.name, match.slug) : pathname;
   const baseImage = new URL(manifest.site.seo.ogImage ?? "/og-card.svg", origin).href;
   const base = {
     image: baseImage,
@@ -279,28 +302,27 @@ export function metaForPath(pathname: string, manifest: PortfolioManifest, origi
       "@context": "https://schema.org",
       "@type": "Person",
       name: manifest.site.name,
-      url: origin,
+      url: new URL(routePath(locale, "home"), origin).href,
       email: manifest.site.email,
-      jobTitle: "Ingeniero de sistemas y desarrollador web",
+      jobTitle: locale === "en" ? "Systems engineer and web developer" : "Ingeniero de sistemas y desarrollador web",
+      inLanguage: locale,
       address: { "@type": "PostalAddress", addressCountry: "PE" },
     },
   };
-  if (pathname === "/") return { ...base, title: manifest.site.seo.title, description: manifest.site.seo.description, canonicalPath: "/" };
-  if (pathname === "/proyectos") return { ...base, title: `Proyectos — ${manifest.site.name}`, description: "Productos web, sistemas internos y experiencias digitales construidas por Arturo Vela.", canonicalPath: pathname };
-  if (pathname === "/all") return { ...base, title: `Todos los proyectos — ${manifest.site.name}`, description: "Acceso rápido a todos los proyectos de Arturo Vela.", canonicalPath: pathname, noindex: true, structuredData: {} };
-  if (pathname === "/perfil") return { ...base, title: `Perfil — ${manifest.site.name}`, description: manifest.site.bio, canonicalPath: pathname };
-  if (pathname === "/articulos") return { ...base, title: `Artículos — ${manifest.site.name}`, description: "Notas sobre investigación, producto, comunidades e ingeniería web.", canonicalPath: pathname };
-  if (pathname === "/contacto") return { ...base, title: `Contacto — ${manifest.site.name}`, description: "Conversa con Arturo Vela sobre productos web, sistemas internos y colaboración técnica.", canonicalPath: pathname };
-  const projectSlug = pathname.match(/^\/proyectos\/([^/]+)$/)?.[1];
-  const project = projectSlug ? manifest.projects.find((item) => item.slug === decodeURIComponent(projectSlug)) : undefined;
+  if (match?.name === "home") return { ...base, title: manifest.site.seo.title, description: manifest.site.seo.description, canonicalPath };
+  if (match?.name === "projects") return { ...base, title: `${locale === "en" ? "Projects" : "Proyectos"} — ${manifest.site.name}`, description: locale === "en" ? "Web products, internal systems, and digital experiences built by Arturo Vela." : "Productos web, sistemas internos y experiencias digitales construidas por Arturo Vela.", canonicalPath };
+  if (match?.name === "allProjects") return { ...base, title: `${locale === "en" ? "All projects" : "Todos los proyectos"} — ${manifest.site.name}`, description: locale === "en" ? "Quick access to every project by Arturo Vela." : "Acceso rápido a todos los proyectos de Arturo Vela.", canonicalPath, noindex: true, structuredData: {} };
+  if (match?.name === "profile") return { ...base, title: `${locale === "en" ? "Profile" : "Perfil"} — ${manifest.site.name}`, description: manifest.site.bio, canonicalPath };
+  if (match?.name === "articles") return { ...base, title: `${locale === "en" ? "Articles" : "Artículos"} — ${manifest.site.name}`, description: locale === "en" ? "Notes on research, product, communities, and web engineering." : "Notas sobre investigación, producto, comunidades e ingeniería web.", canonicalPath };
+  if (match?.name === "contact") return { ...base, title: `${locale === "en" ? "Contact" : "Contacto"} — ${manifest.site.name}`, description: locale === "en" ? "Talk with Arturo Vela about web products, internal systems, and technical collaboration." : "Conversa con Arturo Vela sobre productos web, sistemas internos y colaboración técnica.", canonicalPath };
+  const project = match?.name === "project" ? manifest.projects.find((item) => item.slug === match.slug) : undefined;
   if (project) {
     const cover = projectDisplayCover(project);
-    return { ...base, title: project.seo.title ?? `${project.title} — ${manifest.site.name}`, description: project.seo.description ?? project.excerpt, canonicalPath: pathname, image: cover ? new URL(cover.src, origin).href : baseImage, imageWidth: cover?.width ?? 1200, imageHeight: cover?.height ?? 630, structuredData: { "@context": "https://schema.org", "@type": "CreativeWork", name: project.title, description: project.excerpt, creator: { "@type": "Person", name: manifest.site.name }, url: new URL(pathname, origin).href } };
+    return { ...base, title: project.seo.title ?? `${project.title} — ${manifest.site.name}`, description: project.seo.description ?? project.excerpt, canonicalPath, image: cover ? new URL(cover.src, origin).href : baseImage, imageWidth: cover?.width ?? 1200, imageHeight: cover?.height ?? 630, structuredData: { "@context": "https://schema.org", "@type": "CreativeWork", name: project.title, description: project.excerpt, inLanguage: locale, creator: { "@type": "Person", name: manifest.site.name }, url: new URL(canonicalPath, origin).href } };
   }
-  const articleSlug = pathname.match(/^\/articulos\/([^/]+)$/)?.[1];
-  const article = articleSlug ? manifest.articles.find((item) => item.slug === decodeURIComponent(articleSlug)) : undefined;
-  if (article) return { ...base, title: article.seo.title ?? `${article.title} — ${manifest.site.name}`, description: article.seo.description ?? article.excerpt, canonicalPath: pathname, image: article.cover ? new URL(article.cover.src, origin).href : baseImage, imageWidth: article.cover?.width ?? 1200, imageHeight: article.cover?.height ?? 630, type: "article", structuredData: { "@context": "https://schema.org", "@type": "BlogPosting", headline: article.title, description: article.excerpt, datePublished: article.publishedAt, author: { "@type": "Person", name: manifest.site.name }, url: new URL(pathname, origin).href } };
-  return { ...base, title: `Página no encontrada — ${manifest.site.name}`, description: "La ruta solicitada no existe.", canonicalPath: pathname, status: 404, noindex: true, structuredData: {} };
+  const article = match?.name === "article" ? manifest.articles.find((item) => item.slug === match.slug) : undefined;
+  if (article) return { ...base, title: article.seo.title ?? `${article.title} — ${manifest.site.name}`, description: article.seo.description ?? article.excerpt, canonicalPath, image: article.cover ? new URL(article.cover.src, origin).href : baseImage, imageWidth: article.cover?.width ?? 1200, imageHeight: article.cover?.height ?? 630, type: "article", structuredData: { "@context": "https://schema.org", "@type": "BlogPosting", headline: article.title, description: article.excerpt, datePublished: article.publishedAt, inLanguage: locale, author: { "@type": "Person", name: manifest.site.name }, url: new URL(canonicalPath, origin).href } };
+  return { ...base, title: `${locale === "en" ? "Page not found" : "Página no encontrada"} — ${manifest.site.name}`, description: locale === "en" ? "The requested page does not exist." : "La ruta solicitada no existe.", canonicalPath, status: 404, noindex: true, structuredData: {} };
 }
 
 function isHtmlNavigation(request: Request, pathname: string) {
@@ -313,14 +335,15 @@ async function html(request: Request, env: Env, ctx: ExecutionContext) {
   const url = new URL(request.url);
   const previewToken = url.pathname === "/__preview" ? url.searchParams.get("token") ?? undefined : undefined;
   if (url.pathname === "/__preview" && !previewToken) return json({ error: "Vista previa inválida o expirada" }, 404);
+  const renderedPath = previewToken ? url.searchParams.get("path") ?? routePath("es", "home") : url.pathname;
+  const locale = localeFromPath(renderedPath) ?? "es";
   let result: ContentResult;
   try {
-    result = await loadContent(env, ctx, previewToken);
+    result = await loadContent(env, ctx, locale, previewToken);
   } catch (error) {
     if (!previewToken) throw error;
     return json({ error: "Vista previa inválida o expirada" }, 404);
   }
-  const renderedPath = previewToken ? url.searchParams.get("path") ?? "/" : url.pathname;
   const meta = metaForPath(renderedPath, result.envelope.data, env.CANONICAL_ORIGIN, Boolean(previewToken));
   const asset = await env.ASSETS.fetch(request);
   if (!asset.ok || !asset.body) return new Response("No se pudo cargar la aplicación", { status: 503 });
@@ -330,14 +353,19 @@ async function html(request: Request, env: Env, ctx: ExecutionContext) {
   headers.set("referrer-policy", previewToken ? "no-referrer" : "strict-origin-when-cross-origin");
   headers.set("permissions-policy", "camera=(), microphone=(), geolocation=()");
   headers.set("x-frame-options", "DENY");
+  headers.set("content-language", locale);
   if (url.hostname !== "localhost" && url.hostname !== "127.0.0.1") {
     headers.set("content-security-policy", "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self' https://formspree.io; script-src 'self' https://challenges.cloudflare.com https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:; connect-src 'self' https://formspree.io https://challenges.cloudflare.com; frame-src https://challenges.cloudflare.com; upgrade-insecure-requests");
   }
   const shell = new Response(asset.body, { status: meta.status, headers });
   const canonical = new URL(meta.canonicalPath, env.CANONICAL_ORIGIN).href;
+  const routeMatch = matchLocalizedRoute(meta.canonicalPath);
+  const spanish = new URL(routeMatch ? routePath("es", routeMatch.name, routeMatch.slug) : routePath("es", "home"), env.CANONICAL_ORIGIN).href;
+  const english = new URL(routeMatch ? routePath("en", routeMatch.name, routeMatch.slug) : routePath("en", "home"), env.CANONICAL_ORIGIN).href;
   const safeEnvelope = JSON.stringify(result.envelope).replace(/</g, "\\u003c");
   const safeStructuredData = JSON.stringify(meta.structuredData).replace(/</g, "\\u003c");
   return new HTMLRewriter()
+    .on("html", { element(element) { element.setAttribute("lang", locale); } })
     .on("title", { element(element) { element.setInnerContent(meta.title); } })
     .on('meta[name="description"]', { element(element) { element.setAttribute("content", meta.description); } })
     .on('meta[name="robots"]', { element(element) { element.setAttribute("content", meta.noindex ? "noindex,nofollow" : "index,follow"); } })
@@ -348,10 +376,15 @@ async function html(request: Request, env: Env, ctx: ExecutionContext) {
     .on('meta[property="og:image:width"]', { element(element) { element.setAttribute("content", String(meta.imageWidth)); } })
     .on('meta[property="og:image:height"]', { element(element) { element.setAttribute("content", String(meta.imageHeight)); } })
     .on('meta[property="og:url"]', { element(element) { element.setAttribute("content", canonical); } })
+    .on('meta[property="og:locale"]', { element(element) { element.setAttribute("content", locale === "en" ? "en_US" : "es_PE"); } })
     .on('meta[name="twitter:title"]', { element(element) { element.setAttribute("content", meta.title); } })
     .on('meta[name="twitter:description"]', { element(element) { element.setAttribute("content", meta.description); } })
     .on('meta[name="twitter:image"]', { element(element) { element.setAttribute("content", meta.image); } })
     .on('link[rel="canonical"]', { element(element) { element.setAttribute("href", canonical); } })
+    .on('link[data-hreflang="es"]', { element(element) { element.setAttribute("href", spanish); } })
+    .on('link[data-hreflang="en"]', { element(element) { element.setAttribute("href", english); } })
+    .on('link[data-hreflang="x-default"]', { element(element) { element.setAttribute("href", spanish); } })
+    .on('link[data-localized-feed]', { element(element) { element.setAttribute("href", `/${locale}/feed.xml`); element.setAttribute("title", locale === "en" ? "Arturo Vela's articles" : "Artículos de Arturo Vela"); } })
     .on("#portfolio-content", { element(element) { element.setInnerContent(safeEnvelope, { html: true }); } })
     .on("#structured-data", { element(element) { element.setInnerContent(safeStructuredData, { html: true }); } })
     .transform(shell);
@@ -360,6 +393,10 @@ async function html(request: Request, env: Env, ctx: ExecutionContext) {
 async function route(request: Request, env: Env, ctx: ExecutionContext) {
   const url = new URL(request.url);
   if (url.hostname === "www.velaarturo.com") return Response.redirect(`https://velaarturo.com${url.pathname}${url.search}${url.hash}`, 301);
+  if (url.pathname === "/" && (request.method === "GET" || request.method === "HEAD")) {
+    const locale = preferredLocale(request.headers.get("cookie"), request.headers.get("accept-language"));
+    return Response.redirect(new URL(routePath(locale, "home"), env.CANONICAL_ORIGIN).href, 302);
+  }
   const legacy = normalizeLegacyPath(url.pathname);
   if (legacy) return Response.redirect(new URL(`${legacy}${legacy.includes("#") ? "" : url.search}`, env.CANONICAL_ORIGIN).href, 301);
   if (url.pathname === "/api/health" && request.method === "GET") return json({ data: { ok: true, service: "velaarturo" } });
@@ -369,7 +406,8 @@ async function route(request: Request, env: Env, ctx: ExecutionContext) {
   if (url.pathname.startsWith("/api/")) return json({ error: "Ruta no encontrada" }, 404);
   if (url.pathname.startsWith("/media/") && request.method === "GET") return media(request, env, ctx, url.pathname);
   if (url.pathname === "/sitemap.xml" && request.method === "GET") return sitemap(env, ctx);
-  if (url.pathname === "/feed.xml" && request.method === "GET") return feed(env, ctx);
+  if (url.pathname === "/es/feed.xml" && request.method === "GET") return feed(env, ctx, "es");
+  if (url.pathname === "/en/feed.xml" && request.method === "GET") return feed(env, ctx, "en");
   if (url.pathname === "/robots.txt" && request.method === "GET") return new Response(`User-agent: *\nAllow: /\nSitemap: ${env.CANONICAL_ORIGIN}/sitemap.xml\n`, { headers: { "content-type": "text/plain; charset=utf-8", "cache-control": "public, max-age=86400" } });
   if (isHtmlNavigation(request, url.pathname) || url.pathname === "/__preview") return html(request, env, ctx);
   return env.ASSETS.fetch(request);

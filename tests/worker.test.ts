@@ -1,5 +1,6 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { FALLBACK_ENVELOPE } from "@/content/fallback";
+import { FALLBACK_ENVELOPE_EN } from "@/content/fallback-en";
 import worker, { isSameOrigin, metaForPath, normalizeLegacyPath, parseCommentPayload } from "../worker/index";
 
 function executionContext() {
@@ -43,7 +44,7 @@ describe("contenido dinámico", () => {
     expect(response.status).toBe(200);
     expect(response.headers.get("cache-control")).toBe("private, no-store");
     expect(response.headers.get("x-portfolio-source")).toBe("preview");
-    expect(brainFetch.mock.calls[0]![0].url).toBe("https://secondbrain.internal/internal/v1/portfolio/velaarturo/preview?token=private-preview");
+    expect(brainFetch.mock.calls[0]![0].url).toBe("https://secondbrain.internal/internal/v1/portfolio/velaarturo/preview?token=private-preview&locale=es");
     expect(cache.match).not.toHaveBeenCalled();
     expect(cache.put).not.toHaveBeenCalled();
   });
@@ -103,7 +104,7 @@ describe("contenido dinámico", () => {
     expect(await response.json()).toEqual(remoteEnvelope);
     expect(brainFetch).toHaveBeenCalledTimes(1);
     const brainRequest = brainFetch.mock.calls[0]![0];
-    expect(brainRequest.url).toBe("https://secondbrain.internal/internal/v1/portfolio/velaarturo/manifest");
+    expect(brainRequest.url).toBe("https://secondbrain.internal/internal/v1/portfolio/velaarturo/manifest?locale=es");
     expect(brainRequest.headers.get("authorization")).toBe("Bearer test-only-shared-token");
     expect(ctx.waitUntil).toHaveBeenCalledTimes(1);
     expect(cache.put).toHaveBeenCalledTimes(2);
@@ -153,14 +154,51 @@ describe("contenido dinámico", () => {
 
 describe("rutas heredadas", () => {
   it.each([
-    ["/project", "/proyectos"],
-    ["/blog", "/articulos"],
-    ["/about", "/perfil"],
-    ["/cv", "/perfil"],
-    ["/contact", "/contacto"],
-    ["/pricing", "/#servicios"],
+    ["/project", "/es/proyectos"],
+    ["/blog", "/es/articulos"],
+    ["/about", "/es/perfil"],
+    ["/cv", "/es/perfil"],
+    ["/contact", "/es/contacto"],
+    ["/pricing", "/es/#servicios"],
   ])("redirige %s a %s", (from, to) => {
     expect(normalizeLegacyPath(from)).toBe(to);
+  });
+
+  it("redirige la raíz según cookie y después Accept-Language", async () => {
+    const env = { CANONICAL_ORIGIN: "https://velaarturo.com" } as Env;
+    const cookie = await worker.fetch(new Request("https://velaarturo.com/", { headers: { cookie: "portfolio_locale=es", "accept-language": "en-US" } }) as never, env, executionContext());
+    const language = await worker.fetch(new Request("https://velaarturo.com/", { headers: { "accept-language": "en-US,en;q=0.9" } }) as never, env, executionContext());
+    expect([cookie.status, cookie.headers.get("location")]).toEqual([302, "https://velaarturo.com/es/"]);
+    expect([language.status, language.headers.get("location")]).toEqual([302, "https://velaarturo.com/en/"]);
+  });
+});
+
+describe("salidas bilingües", () => {
+  it("separa manifiesto, caché y cabeceras por idioma", async () => {
+    const cache = stubContentCache();
+    const brainFetch = vi.fn(async (_request: Request) => Response.json(FALLBACK_ENVELOPE_EN));
+    const env = { SITE_KEY: "velaarturo", BRAIN_CONTENT_TOKEN: "token", BRAIN: { fetch: brainFetch } } as unknown as Env;
+    const response = await worker.fetch(new Request("https://velaarturo.com/api/content/manifest?locale=en") as never, env, executionContext());
+    expect(response.headers.get("content-language")).toBe("en");
+    expect(response.headers.get("etag")).toContain("-en");
+    expect(brainFetch.mock.calls[0]![0].url).toContain("manifest?locale=en");
+    expect(cache.put).toHaveBeenCalledTimes(2);
+  });
+
+  it("genera sitemap y feed con URLs localizadas", async () => {
+    stubContentCache();
+    vi.spyOn(console, "warn").mockImplementation(() => undefined);
+    const env = { SITE_KEY: "velaarturo", CANONICAL_ORIGIN: "https://velaarturo.com", BRAIN: { fetch: vi.fn() } } as unknown as Env;
+    const sitemapResponse = await worker.fetch(new Request("https://velaarturo.com/sitemap.xml") as never, env, executionContext());
+    const sitemap = await sitemapResponse.text();
+    expect(sitemap).toContain("https://velaarturo.com/es/proyectos/coffee");
+    expect(sitemap).toContain("https://velaarturo.com/en/projects/coffee");
+    expect(sitemap).toContain('hreflang="x-default"');
+    const feedResponse = await worker.fetch(new Request("https://velaarturo.com/en/feed.xml") as never, env, executionContext());
+    const feed = await feedResponse.text();
+    expect(feedResponse.headers.get("content-language")).toBe("en");
+    expect(feed).toContain('xml:lang="en"');
+    expect(feed).toContain("/en/articles/");
   });
 });
 

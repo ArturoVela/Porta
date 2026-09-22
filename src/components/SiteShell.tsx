@@ -11,30 +11,28 @@ import {
 import { ArrowUpRight, Menu, Moon, Sun, X } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useEffect, useState, type ReactNode } from "react";
-import { useLocation } from "react-router";
+import { Link as RouterLink, useLocation } from "react-router";
 import { ContentLink as Link } from "@/components/ContentLink";
 import { useContent } from "@/content/context";
 import { CV_URL } from "@/lib/links";
+import { contentHref } from "@/lib/preview";
+import { localeCookie, localizedPath, routePath, type LocaleCopy } from "@/i18n";
 
-const navigation = [
-  { label: "Proyectos", to: "/proyectos" },
-  { label: "Perfil", to: "/perfil" },
-  { label: "Artículos", to: "/articulos" },
-];
-
-function ThemeToggle() {
+function ThemeToggle({ copy }: { copy: LocaleCopy }) {
   const { resolvedTheme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
   const dark = mounted && resolvedTheme === "dark";
   return (
     <IconButton
-      aria-label={mounted ? `Cambiar a modo ${dark ? "claro" : "oscuro"}` : "Cambiar tema"}
+      aria-label={mounted ? (dark ? copy.theme.light : copy.theme.dark) : copy.theme.change}
       variant="outline"
       borderColor="app.border"
       bg="app.panel"
       color="app.text"
       borderRadius="0"
+      minW="11"
+      minH="11"
       onClick={() => setTheme(dark ? "light" : "dark")}
     >
       {dark ? <Sun size={18} /> : <Moon size={18} />}
@@ -44,33 +42,65 @@ function ThemeToggle() {
 
 function NavigationLinks({ onNavigate }: { onNavigate?: () => void }) {
   const location = useLocation();
+  const { copy, locale } = useContent();
+  const navigation = [
+    { label: copy.nav.projects, to: "/proyectos" },
+    { label: copy.nav.profile, to: "/perfil" },
+    { label: copy.nav.articles, to: "/articulos" },
+  ];
   const pathname = location.pathname === "/__preview" ? new URLSearchParams(location.search).get("path") ?? "/" : location.pathname;
   return <>
-    {navigation.map((item) => (
-      <Link key={item.to} to={item.to} onClick={onNavigate} aria-current={pathname === item.to || pathname.startsWith(`${item.to}/`) ? "page" : undefined}>
-        <Text
-          as="span"
-          display="block"
-          px="3"
-          py="2"
-          color={pathname === item.to || pathname.startsWith(`${item.to}/`) ? "app.text" : "app.muted"}
-          borderBottomWidth="2px"
-          borderColor={pathname === item.to || pathname.startsWith(`${item.to}/`) ? "app.accent" : "transparent"}
-          fontWeight="600"
-          _hover={{ color: "app.text", borderColor: "app.accent" }}
-        >
-          {item.label}
-        </Text>
-      </Link>
-    ))}
+    {navigation.map((item) => {
+      const target = localizedPath(item.to, locale);
+      const active = pathname === target || pathname.startsWith(`${target}/`);
+      return (
+        <Link key={item.to} to={item.to} onClick={onNavigate} aria-current={active ? "page" : undefined}>
+          <Text
+            as="span"
+            display="block"
+            px="3"
+            py="2.5"
+            minH="11"
+            color={active ? "app.text" : "app.muted"}
+            borderBottomWidth="2px"
+            borderColor={active ? "app.accent" : "transparent"}
+            fontWeight="600"
+            _hover={{ color: "app.text", borderColor: "app.accent" }}
+          >
+            {item.label}
+          </Text>
+        </Link>
+      );
+    })}
     <a href={CV_URL} target="_blank" rel="noopener noreferrer" onClick={onNavigate}>
-      <Text as="span" display="block" px="3" py="2" color="app.muted" borderBottomWidth="2px" borderColor="transparent" fontWeight="600" _hover={{ color: "app.text", borderColor: "app.accent" }}>CV</Text>
+      <Text as="span" display="flex" alignItems="center" minH="11" px="3" py="2" color="app.muted" borderBottomWidth="2px" borderColor="transparent" fontWeight="600" _hover={{ color: "app.text", borderColor: "app.accent" }}>{copy.common.cv}</Text>
     </a>
   </>;
 }
 
+function LanguageSwitch() {
+  const { locale, copy, previewToken } = useContent();
+  const location = useLocation();
+  const currentPath = location.pathname === "/__preview" ? new URLSearchParams(location.search).get("path") ?? routePath(locale, "home") : location.pathname;
+  return (
+    <HStack role="group" aria-label={copy.common.language} gap="0" borderWidth="1px" borderColor="app.border" minH="11">
+      {(["es", "en"] as const).map((target) => (
+        <RouterLink
+          key={target}
+          to={contentHref(localizedPath(currentPath, target), previewToken)}
+          hrefLang={target}
+          aria-current={locale === target ? "page" : undefined}
+          onClick={() => { document.cookie = localeCookie(target); }}
+        >
+          <Text as="span" display="flex" alignItems="center" justifyContent="center" minW="11" minH="11" px="3" fontSize="sm" fontWeight="700" bg={locale === target ? "app.text" : "app.panel"} color={locale === target ? "app.canvas" : "app.muted"}>{target.toUpperCase()}</Text>
+        </RouterLink>
+      ))}
+    </HStack>
+  );
+}
+
 export function SiteShell({ children }: { children: ReactNode }) {
-  const { content } = useContent();
+  const { content, copy, locale } = useContent();
   const location = useLocation();
   const [open, setOpen] = useState(false);
 
@@ -95,17 +125,17 @@ export function SiteShell({ children }: { children: ReactNode }) {
         py="2"
         borderRadius="lg"
       >
-        <a href="#contenido">Saltar al contenido</a>
+        <a href="#contenido">{copy.common.skip}</a>
       </Box>
       <Box as="header" position="sticky" top="0" zIndex="sticky" bg="app.canvas/88" backdropFilter="blur(18px)" py="3">
         <Container maxW="7xl">
           <Flex minH="15" align="center" justify="space-between" gap="4" bg="app.panel/92" borderWidth="1px" borderColor="app.border" px={{ base: "3", md: "5" }} boxShadow="0 8px 30px rgba(8, 11, 18, .06)">
             <Link to="/">
               <HStack gap="3">
-                <Flex className="brand-mark" w="9" h="9" bg="brand.600" color="white" align="center" justify="center" fontWeight="850">A/</Flex>
-                <Stack gap="0" display={{ base: "none", sm: "flex" }}>
+                <Flex className="brand-mark" w="11" h="11" bg="brand.600" color="white" align="center" justify="center" fontWeight="850">A/</Flex>
+                <Stack gap="0" display={{ base: "none", lg: "flex" }}>
                   <Text fontWeight="750" letterSpacing="-.025em" lineHeight="1.1">{content.site.name}</Text>
-                  <Text color="app.muted" fontSize="xs">Producto e ingeniería web</Text>
+                  <Text color="app.muted" fontSize="xs">{copy.common.brandSubtitle}</Text>
                 </Stack>
               </HStack>
             </Link>
@@ -113,17 +143,20 @@ export function SiteShell({ children }: { children: ReactNode }) {
               <NavigationLinks />
             </HStack>
             <HStack gap="2">
-              <ThemeToggle />
-              <Button asChild display={{ base: "none", sm: "inline-flex" }} bg="app.signal" color="#160B08" borderRadius="0" px="5" _hover={{ transform: "translate(2px, -2px)" }}>
-                <Link to="/contacto">Hablemos <ArrowUpRight size={17} /></Link>
+              <LanguageSwitch />
+              <ThemeToggle copy={copy} />
+              <Button asChild display={{ base: "none", sm: "inline-flex" }} minH="11" bg="app.signal" color="#160B08" borderRadius="0" px="5" _hover={{ transform: "translate(2px, -2px)" }}>
+                <Link to="/contacto">{copy.common.talk} <ArrowUpRight size={17} /></Link>
               </Button>
               <IconButton
                 display={{ base: "inline-flex", md: "none" }}
-                aria-label={open ? "Cerrar navegación" : "Abrir navegación"}
+                aria-label={open ? copy.menu.close : copy.menu.open}
                 variant="outline"
                 borderColor="app.border"
                 bg="app.panel"
                 borderRadius="0"
+                minW="11"
+                minH="11"
                 onClick={() => setOpen((value) => !value)}
               >
                 {open ? <X size={19} /> : <Menu size={19} />}
@@ -133,8 +166,8 @@ export function SiteShell({ children }: { children: ReactNode }) {
           {open ? (
             <Stack display={{ md: "none" }} p="4" gap="1" bg="app.panel" borderWidth="1px" borderTopWidth="0" borderColor="app.border">
               <NavigationLinks onNavigate={() => setOpen(false)} />
-              <Button asChild mt="2" bg="app.signal" color="#160B08" borderRadius="0">
-                <Link to="/contacto">Hablemos <ArrowUpRight size={17} /></Link>
+              <Button asChild mt="2" minH="11" bg="app.signal" color="#160B08" borderRadius="0">
+                <Link to="/contacto">{copy.common.talk} <ArrowUpRight size={17} /></Link>
               </Button>
             </Stack>
           ) : null}
@@ -146,14 +179,14 @@ export function SiteShell({ children }: { children: ReactNode }) {
           <Flex direction={{ base: "column", md: "row" }} justify="space-between" align={{ md: "end" }} gap="12">
             <Stack gap="6" maxW="2xl">
               <Text color="#AAB5C6">{content.site.name} · {content.site.location}</Text>
-              <Text fontSize={{ base: "3xl", md: "5xl" }} fontWeight="750" letterSpacing="-.05em" lineHeight=".95">Productos digitales claros, seguros y mantenibles.</Text>
+              <Text fontSize={{ base: "3xl", md: "5xl" }} fontWeight="750" letterSpacing="-.05em" lineHeight=".95">{copy.footer.headline}</Text>
             </Stack>
             <Stack align={{ base: "start", md: "end" }} gap="5">
               <HStack gap="5" flexWrap="wrap">
-                {content.site.socials.map((social) => <a key={social.label} href={social.url} target="_blank" rel="noreferrer"><Text color="#AAB5C6" borderBottomWidth="1px" borderColor="#596476" _hover={{ color: "white", borderColor: "white" }}>{social.label}</Text></a>)}
-                <a href={CV_URL} target="_blank" rel="noopener noreferrer"><Text color="#AAB5C6" borderBottomWidth="1px" borderColor="#596476" _hover={{ color: "white", borderColor: "white" }}>CV</Text></a>
+                {content.site.socials.map((social) => <a key={social.label} href={social.url} target="_blank" rel="noreferrer"><Text display="flex" alignItems="center" minW="11" minH="11" color="#AAB5C6" borderBottomWidth="1px" borderColor="#596476" _hover={{ color: "white", borderColor: "white" }}>{social.label}</Text></a>)}
+                <a href={CV_URL} target="_blank" rel="noopener noreferrer"><Text display="flex" alignItems="center" minW="11" minH="11" color="#AAB5C6" borderBottomWidth="1px" borderColor="#596476" _hover={{ color: "white", borderColor: "white" }}>{copy.common.cv}</Text></a>
               </HStack>
-              <Text color="#7D899B" fontSize="sm">© {new Date().getFullYear()} · Construido desde {content.site.location}</Text>
+              <Text color="#7D899B" fontSize="sm">© {new Date().getFullYear()} · {copy.footer.built} {content.site.location}</Text>
             </Stack>
           </Flex>
         </Container>

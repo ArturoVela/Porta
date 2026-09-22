@@ -56,52 +56,6 @@ img { display: block; max-width: 100%; }
   box-shadow: 4px 4px 0 var(--chakra-colors-app-text);
 }
 
-.hero-stage {
-  box-shadow: 16px 16px 0 color-mix(in srgb, var(--chakra-colors-app-text) 10%, transparent);
-}
-
-.hero-stage__poster {
-  transition: background-color .24s ease, color .24s ease;
-}
-
-.hero-stage__poster::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  opacity: .16;
-  background-image: radial-gradient(circle at center, currentColor 1px, transparent 1px);
-  background-size: 18px 18px;
-  mask-image: linear-gradient(120deg, transparent 18%, black 76%);
-}
-
-.hero-stage__orb {
-  position: absolute;
-  width: 20rem;
-  height: 20rem;
-  border: 1px solid;
-  border-radius: 50%;
-  right: -4rem;
-  top: 21%;
-  opacity: .72;
-  box-shadow:
-    0 0 0 2.5rem color-mix(in srgb, currentColor 4%, transparent),
-    0 0 0 5rem color-mix(in srgb, currentColor 4%, transparent),
-    0 0 0 7.5rem color-mix(in srgb, currentColor 4%, transparent);
-  transition: border-color .24s ease;
-}
-
-.hero-stage__axis {
-  position: absolute;
-  width: 30rem;
-  height: 1px;
-  right: -9rem;
-  top: 45%;
-  opacity: .8;
-  transform: rotate(-32deg);
-  transform-origin: center;
-  transition: background-color .24s ease;
-}
-
 .project-poster {
   --poster-background: #081538;
   --poster-foreground: #f4f7ff;
@@ -179,8 +133,11 @@ img { display: block; max-width: 100%; }
 }
 
 .project-feature__link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
   position: relative;
-  padding-bottom: .3rem;
+  padding-block: .3rem;
 }
 
 .project-feature__link::after {
@@ -197,34 +154,6 @@ img { display: block; max-width: 100%; }
 
 .project-feature__link:hover::after {
   transform: scaleX(.34);
-}
-
-.stack-board {
-  position: relative;
-  overflow: hidden;
-}
-
-.stack-board::after {
-  content: "";
-  position: absolute;
-  width: 18rem;
-  height: 18rem;
-  right: -7rem;
-  bottom: -9rem;
-  border: 1px solid currentColor;
-  border-radius: 50%;
-  opacity: .18;
-  box-shadow: 0 0 0 3rem color-mix(in srgb, currentColor 5%, transparent), 0 0 0 6rem color-mix(in srgb, currentColor 5%, transparent);
-}
-
-.stack-chip {
-  transition: background-color .18s ease, color .18s ease, transform .18s ease;
-}
-
-.stack-chip:hover {
-  color: #080b12;
-  background: #f7f9fc;
-  transform: translateY(-2px);
 }
 
 .article-card:hover .article-card__arrow {
@@ -343,8 +272,6 @@ img { display: block; max-width: 100%; }
 
 @media (max-width: 48rem) {
   .hero-grid { background-size: 44px 44px; }
-  .hero-stage { box-shadow: 8px 8px 0 color-mix(in srgb, var(--chakra-colors-app-text) 10%, transparent); }
-  .hero-stage__orb { width: 15rem; height: 15rem; right: -5rem; }
   .project-poster__monogram { right: 1.25rem; }
   .profile-portrait,
   .contact-panel { box-shadow: 8px 8px 0 color-mix(in srgb, var(--chakra-colors-app-accent) 20%, transparent); }

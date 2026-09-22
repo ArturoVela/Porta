@@ -4,6 +4,7 @@ import { ArrowUpRight } from "lucide-react";
 import { ContentLink as Link } from "@/components/ContentLink";
 import type { ArticleContent, ProjectContent } from "@/types/content";
 import { ResponsiveImage } from "@/components/ResponsiveImage";
+import { useContent } from "@/content/context";
 import { projectAvailabilityLabel } from "@/lib/projectAvailability";
 import { projectDisplayCover } from "@/lib/spotlight";
 
@@ -61,7 +62,8 @@ function AbstractProjectVisual({ project, compact = false }: { project: ProjectC
 }
 
 export function ProjectVisual({ project, compact = false }: { project: ProjectContent; compact?: boolean }) {
-  const cover = projectDisplayCover(project);
+  const { locale } = useContent();
+  const cover = projectDisplayCover(project, locale);
   if (!cover) {
     return compact
       ? <AspectRatio className="project-card__visual" ratio={16 / 10} overflow="hidden"><AbstractProjectVisual project={project} compact /></AspectRatio>
@@ -75,18 +77,19 @@ export function ProjectVisual({ project, compact = false }: { project: ProjectCo
 }
 
 export function ProjectArchiveCard({ project }: { project: ProjectContent }) {
+  const { copy, locale } = useContent();
   return (
     <Link to={`/proyectos/${project.slug}`} className="project-card">
       <Stack h="100%" gap="0">
         <ProjectVisual project={project} compact />
         <Stack className="project-card__body" flex="1" borderWidth="1px" borderTopWidth="0" borderColor="app.border" p={{ base: "5", md: "6" }} gap="4">
-          <Flex justify="space-between" gap="4" color="app.muted" fontSize="sm"><Text>{project.year}</Text><Text textAlign="right">{projectAvailabilityLabel(project)}</Text></Flex>
+          <Flex justify="space-between" gap="4" color="app.muted" fontSize="sm"><Text>{project.year}</Text><Text textAlign="right">{projectAvailabilityLabel(project, locale)}</Text></Flex>
           <Stack gap="2">
             <Text color="app.accent" fontWeight="700" fontSize="sm">{project.category}</Text>
             <Heading as="h3" fontSize={{ base: "2xl", md: "3xl" }} letterSpacing="-.035em" lineHeight="1">{project.title}</Heading>
           </Stack>
           <Text color="app.muted">{project.excerpt}</Text>
-          <HStack className="project-card__action" mt="auto" pt="3" justify="space-between" fontWeight="750"><Text>Ver caso completo</Text><ArrowUpRight size={17} /></HStack>
+          <HStack className="project-card__action" minH="11" mt="auto" pt="3" justify="space-between" fontWeight="750"><Text>{copy.cards.viewCase}</Text><ArrowUpRight size={17} /></HStack>
         </Stack>
       </Stack>
     </Link>
@@ -94,7 +97,8 @@ export function ProjectArchiveCard({ project }: { project: ProjectContent }) {
 }
 
 export function ProjectFeature({ project, reverse = false, index = 0 }: { project: ProjectContent; reverse?: boolean; index?: number }) {
-  const evidence = project.outcomes.find((outcome) => /\d/.test(outcome)) ?? project.outcomes[0];
+  const { copy, locale } = useContent();
+  const evidence = project.outcomes.find((outcome) => /\d|dos empresas|two companies/i.test(outcome)) ?? project.outcomes[0];
   return (
     <Box className="project-feature" borderTopWidth="1px" borderColor="app.border" py={{ base: "9", md: "14" }}>
       <Grid templateColumns={{ base: "1fr", lg: reverse ? ".72fr 1.28fr" : "1.28fr .72fr" }} gap={{ base: "7", lg: "12" }} alignItems="stretch">
@@ -104,7 +108,7 @@ export function ProjectFeature({ project, reverse = false, index = 0 }: { projec
           <Stack gap="5" align="start">
             <HStack gap="3" flexWrap="wrap">
               <Text color="app.accent" fontWeight="700">{project.category}</Text>
-              <Text color="app.muted" fontSize="sm">· {projectAvailabilityLabel(project)}</Text>
+              <Text color="app.muted" fontSize="sm">· {projectAvailabilityLabel(project, locale)}</Text>
             </HStack>
             <Heading as="h3" fontSize={{ base: "3xl", md: "5xl", lg: "6xl" }} letterSpacing="-.055em" lineHeight=".9">{project.title}</Heading>
             <Text color="app.muted" fontSize={{ base: "md", md: "lg" }} maxW="44ch">{project.excerpt}</Text>
@@ -112,7 +116,7 @@ export function ProjectFeature({ project, reverse = false, index = 0 }: { projec
             <HStack gap="2" flexWrap="wrap">{project.stack.slice(0, 4).map((item) => <Text key={item} fontSize="sm" borderBottomWidth="1px" borderColor="app.border">{item}</Text>)}</HStack>
           </Stack>
           <Link to={`/proyectos/${project.slug}`} className="project-feature__link">
-            <HStack fontWeight="750" gap="2"><Text>Ver caso completo</Text><ArrowUpRight size={17} /></HStack>
+            <HStack minH="11" fontWeight="750" gap="2"><Text>{copy.cards.viewCase}</Text><ArrowUpRight size={17} /></HStack>
           </Link>
         </Stack>
       </Grid>
@@ -121,13 +125,14 @@ export function ProjectFeature({ project, reverse = false, index = 0 }: { projec
 }
 
 export function ArticleCard({ article, index = 0 }: { article: ArticleContent; index?: number }) {
+  const { locale, copy } = useContent();
   return (
     <Link to={`/articulos/${article.slug}`}>
       <Stack className="article-card" h="100%" borderTopWidth="1px" borderColor="app.text" pt="5" pb="3" gap="4" transition="transform .18s ease, border-color .18s ease" _hover={{ transform: "translateY(-4px)", borderColor: "app.accent" }}>
-        <HStack justify="space-between" color="app.muted" fontSize="sm"><Text>0{index + 1} · {article.category}</Text><Text>{new Intl.DateTimeFormat("es-PE", { year: "numeric", month: "short", day: "numeric", timeZone: "America/Lima" }).format(new Date(`${article.publishedAt}T12:00:00-05:00`))}</Text></HStack>
+        <HStack justify="space-between" color="app.muted" fontSize="sm"><Text>0{index + 1} · {article.category}</Text><Text>{new Intl.DateTimeFormat(locale === "en" ? "en-US" : "es-PE", { year: "numeric", month: "short", day: "numeric", timeZone: "America/Lima" }).format(new Date(`${article.publishedAt}T12:00:00-05:00`))}</Text></HStack>
         <Heading as="h3" fontSize={{ base: "xl", md: "2xl" }} letterSpacing="-.025em" lineHeight="1.15">{article.title}</Heading>
         <Text color="app.muted">{article.excerpt}</Text>
-        <HStack mt="auto" pt="5" fontWeight="650" justify="space-between"><Text>{article.readingMinutes} min de lectura</Text><Flex className="article-card__arrow" w="9" h="9" align="center" justify="center" bg="app.accent-subtle"><ArrowUpRight size={16} /></Flex></HStack>
+        <HStack mt="auto" pt="5" minH="11" fontWeight="650" justify="space-between"><Text>{article.readingMinutes} {copy.articles.reading}</Text><Flex className="article-card__arrow" w="9" h="9" align="center" justify="center" bg="app.accent-subtle"><ArrowUpRight size={16} /></Flex></HStack>
       </Stack>
     </Link>
   );

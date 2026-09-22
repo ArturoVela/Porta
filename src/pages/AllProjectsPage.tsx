@@ -9,7 +9,7 @@ function searchable(value: string) {
 }
 
 export function AllProjectsPage() {
-  const { content } = useContent();
+  const { content, copy, locale } = useContent();
   const [query, setQuery] = useState("");
   const search = searchable(query.trim());
   const projects = [...content.projects]
@@ -20,20 +20,20 @@ export function AllProjectsPage() {
     <div className="all-projects">
       <div className="all-projects__intro">
         <div>
-          <h1>Todos los proyectos</h1>
-          <p>Un acceso rápido a cada proyecto, sin recorrer el portafolio.</p>
+          <h1>{copy.allProjects.title}</h1>
+          <p>{copy.allProjects.intro}</p>
         </div>
-        <span className="all-projects__total">{content.projects.length} en total</span>
+        <span className="all-projects__total">{content.projects.length} {copy.allProjects.total}</span>
       </div>
 
       <label className="all-projects__search">
         <Search aria-hidden="true" size={20} />
-        <span className="sr-only">Buscar proyectos</span>
+        <span className="sr-only">{copy.allProjects.search}</span>
         <input
           type="search"
           value={query}
           onChange={(event) => setQuery(event.target.value)}
-          placeholder="Buscar por nombre, tipo o tecnología"
+          placeholder={copy.allProjects.placeholder}
           autoComplete="off"
         />
       </label>
@@ -42,7 +42,7 @@ export function AllProjectsPage() {
       {projects.length ? (
         <div className="all-projects__grid">
           {projects.map((project) => {
-            const availability = projectAvailabilityLabel(project);
+            const availability = projectAvailabilityLabel(project, locale);
             return (
               <article className="all-projects__item" key={project.id}>
                 <div className="all-projects__meta"><span>{project.category}</span><span>{project.year}</span></div>
@@ -51,10 +51,10 @@ export function AllProjectsPage() {
                 <div className="all-projects__actions">
                   {project.liveUrl ? (
                     <a className="all-projects__open" href={project.liveUrl} target="_blank" rel="noopener noreferrer">
-                      {availability === "Acceso restringido" ? "Abrir acceso" : "Abrir proyecto"}<ArrowUpRight aria-hidden="true" size={16} />
+                      {availability === (locale === "en" ? "Restricted access" : "Acceso restringido") ? copy.allProjects.openRestricted : copy.allProjects.open}<ArrowUpRight aria-hidden="true" size={16} />
                     </a>
                   ) : null}
-                  <Link className="all-projects__detail" to={`/proyectos/${project.slug}`}>Ver ficha</Link>
+                  <Link className="all-projects__detail" to={`/proyectos/${project.slug}`}>{copy.allProjects.detail}</Link>
                   <span className="all-projects__availability">{availability}</span>
                 </div>
               </article>
@@ -62,7 +62,7 @@ export function AllProjectsPage() {
           })}
         </div>
       ) : (
-        <p className="all-projects__empty">No hay proyectos con esa búsqueda. Prueba otro nombre o tecnología.</p>
+        <p className="all-projects__empty">{copy.allProjects.empty}</p>
       )}
     </div>
   );

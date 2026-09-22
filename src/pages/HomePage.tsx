@@ -1,209 +1,107 @@
 import { Box, Button, Container, Flex, Grid, Heading, HStack, SimpleGrid, Stack, Text } from "@chakra-ui/react";
-import { ArrowDown, ArrowUpRight, Check, CodeXml, Component, DatabaseZap, Gauge } from "lucide-react";
+import { ArrowUpRight, Check } from "lucide-react";
 import { ContentLink as Link } from "@/components/ContentLink";
-import { ArticleCard, ProjectFeature } from "@/components/ContentCards";
-import { HeroStage } from "@/components/HeroStage";
+import { ProjectFeature } from "@/components/ContentCards";
 import { SectionHeading } from "@/components/SectionHeading";
 import { useContent } from "@/content/context";
-import { SPOTLIGHT_DESTINATIONS, selectSpotlightProjects } from "@/lib/spotlight";
-
-const process = [
-  ["Entender", "El problema, las personas y las restricciones antes de elegir tecnología."],
-  ["Dar forma", "Un flujo principal claro, prototipos rápidos y decisiones visibles."],
-  ["Construir", "Interfaz, datos y servicios desarrollados como un solo producto."],
-  ["Verificar", "Accesibilidad, rendimiento y despliegue comprobados con evidencia."],
-] as const;
-
-const disciplines = [
-  [CodeXml, "Frontend", "React, TypeScript y experiencias responsive"],
-  [Component, "Sistemas de UI", "Chakra UI, tokens y accesibilidad"],
-  [DatabaseZap, "Datos y automatización", "D1, modelado e integraciones"],
-  [Gauge, "Entrega en edge", "Workers, observabilidad y rendimiento"],
-] as const;
-
-const saasProjects = [
-  { name: "Agua", domain: "agua.velaarturo.com", url: "https://agua.velaarturo.com" },
-  { name: "Ventas", domain: "ventas.velaarturo.com", url: "https://ventas.velaarturo.com" },
-  { name: "Agro", domain: "agro.velaarturo.com", url: "https://agro.velaarturo.com" },
-  { name: "Finanzas", domain: "finanzas.velaarturo.com", url: "https://finanzas.velaarturo.com" },
-] as const;
+import { selectSpotlightProjects } from "@/lib/spotlight";
 
 export function HomePage() {
-  const { content } = useContent();
+  const { content, copy } = useContent();
   const featured = selectSpotlightProjects(content.projects);
-  const articles = [...content.articles].sort((a, b) => b.publishedAt.localeCompare(a.publishedAt)).slice(0, 3);
-  const stack = Array.from(new Set(featured.flatMap((project) => project.stack))).slice(0, 12);
 
   return (
     <>
-      <Box as="section" position="relative" overflow="hidden">
+      <Box as="section" className="home-hero" position="relative" overflow="hidden">
         <Box className="hero-grid" aria-hidden="true" />
-        <Container maxW="7xl" py={{ base: "12", md: "20", lg: "24" }} position="relative">
-          <Grid templateColumns={{ base: "1fr", lg: "1.02fr .98fr" }} gap={{ base: "12", lg: "12" }} alignItems="center">
+        <Container maxW="7xl" py={{ base: "14", md: "20" }} position="relative">
+          <Grid templateColumns={{ base: "1fr", lg: "1.45fr .55fr" }} gap={{ base: "10", lg: "16" }} alignItems="end">
             <Stack gap={{ base: "7", md: "9" }} align="start">
-              <HStack gap="3" fontWeight="650">
-                <Box className="availability-pulse" w="2.5" h="2.5" borderRadius="full" bg="app.signal" />
-                <Text>{content.site.availability}</Text>
-              </HStack>
               <Heading
                 as="h1"
-                fontSize="clamp(3.5rem, 4.7vw, 5rem)"
-                letterSpacing="-.055em"
-                lineHeight=".9"
-                maxW="14ch"
+                fontSize={{ base: "clamp(3.25rem, 15vw, 5.4rem)", md: "clamp(4.5rem, 7vw, 6.5rem)" }}
+                letterSpacing="-.07em"
+                lineHeight=".86"
+                maxW="13ch"
               >
                 {content.site.headline}
               </Heading>
-              <Grid templateColumns={{ base: "1fr", sm: "1fr auto" }} gap="6" alignItems="end" w="full" maxW="44rem">
-                <Text color="app.muted" fontSize={{ base: "lg", md: "xl" }} maxW="43ch">{content.site.intro}</Text>
-                <Box className="hero-signature" aria-label={`${content.site.name}, ${content.site.location}`}>
-                  <Text fontSize="sm" fontWeight="750">{content.site.name}</Text>
-                  <Text fontSize="xs" color="app.muted">{content.site.location}</Text>
-                </Box>
-              </Grid>
               <Flex gap="3" wrap="wrap">
-                <Button asChild size="lg" bg="brand.600" color="white" borderRadius="0" px="7" _hover={{ bg: "brand.700", transform: "translateY(-2px)" }}>
-                  <Link to="/proyectos">Explorar mi trabajo <ArrowUpRight size={18} /></Link>
+                <Button asChild minH="11" size="lg" bg="brand.600" color="white" borderRadius="0" px="7" _hover={{ bg: "brand.700" }}>
+                  <Link to="/proyectos">{copy.home.heroCases} <ArrowUpRight size={18} /></Link>
                 </Button>
-                <Button asChild size="lg" variant="outline" borderColor="app.text" borderRadius="0" px="7" _hover={{ bg: "app.text", color: "app.canvas" }}>
-                  <Link to="/perfil">Conocer mi enfoque</Link>
+                <Button asChild minH="11" size="lg" variant="outline" borderColor="app.text" borderRadius="0" px="7" _hover={{ bg: "app.text", color: "app.canvas" }}>
+                  <Link to="/contacto">{copy.home.heroContact}</Link>
                 </Button>
               </Flex>
             </Stack>
-            <HeroStage projects={featured} />
-          </Grid>
-          <HStack mt={{ base: "12", md: "16" }} color="app.muted" gap="2"><ArrowDown size={16} /><Text fontSize="sm">Explora proyectos, proceso y notas de trabajo</Text></HStack>
-        </Container>
-      </Box>
 
-      <Box borderYWidth="1px" borderColor="app.border" bg="app.panel">
-        <Container maxW="7xl" py={{ base: "8", md: "10" }}>
-          <Flex justify="space-between" align="end" gap="4" mb="6" wrap="wrap">
-            <Heading as="h2" fontSize={{ base: "2xl", md: "3xl" }} letterSpacing="-.04em">En foco</Heading>
-            <Text color="app.muted">Proyectos que puedes explorar y mi trayectoria profesional.</Text>
-          </Flex>
-          <Grid templateColumns={{ base: "1fr", sm: "repeat(2, 1fr)", lg: "repeat(4, 1fr)" }} borderTopWidth="1px" borderLeftWidth="1px" borderColor="app.border">
-            {SPOTLIGHT_DESTINATIONS.map((item) => (
-              <Box asChild key={item.domain} display="block" minH="13rem" borderRightWidth="1px" borderBottomWidth="1px" borderColor="app.border" p={{ base: "5", md: "6" }} transition="background-color .18s ease" _hover={{ bg: "app.accent-subtle" }}>
-                <a href={item.url} target="_blank" rel="noopener noreferrer" aria-label={`${item.title}, abrir ${item.domain} en otra pestaña`}>
-                  <Flex h="full" direction="column" justify="space-between" gap="6">
-                    <Flex justify="space-between" align="start" gap="3"><Text color="app.accent" fontSize="sm" fontWeight="700">{item.category}</Text><ArrowUpRight size={18} aria-hidden="true" /></Flex>
-                    <Stack gap="2"><Heading as="h3" fontSize="2xl" letterSpacing="-.035em">{item.title}</Heading><Text color="app.muted" fontSize="sm">{item.description}</Text><Text fontSize="xs" fontWeight="700">{item.domain}</Text></Stack>
-                  </Flex>
-                </a>
+            <Stack gap="7" borderTopWidth="1px" borderColor="app.text" pt="6">
+              <Text color="app.muted" fontSize={{ base: "lg", md: "xl" }} maxW="40ch">{content.site.intro}</Text>
+              <HStack gap="3" align="start">
+                <Box className="availability-pulse" mt="2" w="2.5" h="2.5" borderRadius="full" bg="app.signal" flexShrink="0" />
+                <Text fontWeight="650">{content.site.availability}</Text>
+              </HStack>
+              <Box className="hero-signature" aria-label={`${content.site.name}, ${content.site.location}`}>
+                <Text fontSize="sm" fontWeight="750">{content.site.name}</Text>
+                <Text fontSize="sm" color="app.muted">{content.site.location}</Text>
               </Box>
-            ))}
+            </Stack>
           </Grid>
         </Container>
       </Box>
 
-      <Box as="section" bg="#080B12" color="#F7F9FC" py={{ base: "16", md: "24" }} id="saas">
+      <Box as="section" bg="app.panel" borderYWidth="1px" borderColor="app.border" py={{ base: "14", md: "22" }} id="trabajo">
         <Container maxW="7xl">
-          <Grid templateColumns={{ base: "1fr", lg: ".55fr 1.45fr" }} gap={{ base: "6", lg: "16" }} alignItems="end" mb={{ base: "8", md: "14" }}>
-            <Text color="app.signal" fontWeight="750">Software propio</Text>
-            <Stack gap="4" maxW="3xl"><Heading as="h2" fontSize={{ base: "3xl", md: "5xl", lg: "6xl" }} letterSpacing="-.05em" lineHeight=".98">Mis proyectos SaaS</Heading><Text color="#AAB5C6" fontSize={{ base: "md", md: "lg" }} maxW="62ch">Cuatro herramientas propias, disponibles en sus dominios.</Text></Stack>
-          </Grid>
-          <Grid templateColumns={{ base: "1fr", sm: "repeat(2, 1fr)", lg: "repeat(4, 1fr)" }} borderTopWidth="1px" borderLeftWidth="1px" borderColor="#2B3545">
-            {saasProjects.map((project, index) => (
-              <Box asChild key={project.domain} display="block" minH="14rem" borderRightWidth="1px" borderBottomWidth="1px" borderColor="#2B3545" p={{ base: "5", md: "6" }} transition="background-color .18s ease, color .18s ease" _hover={{ bg: "#F7F9FC", color: "#080B12" }}>
-                <a href={project.url} target="_blank" rel="noopener noreferrer" aria-label={`${project.name}, abrir ${project.domain} en otra pestaña`}>
-                  <Flex h="full" direction="column" justify="space-between" gap="8">
-                    <Flex justify="space-between" align="start" gap="3"><Text color="app.signal" fontWeight="750">0{index + 1}</Text><ArrowUpRight size={18} aria-hidden="true" /></Flex>
-                    <Stack gap="2"><Heading as="h3" fontSize={{ base: "3xl", md: "4xl" }} letterSpacing="-.045em">{project.name}</Heading><Text fontSize="sm" fontWeight="650" opacity=".72">{project.domain}</Text></Stack>
-                  </Flex>
-                </a>
-              </Box>
-            ))}
-          </Grid>
-        </Container>
-      </Box>
-
-      <Box as="section" bg="app.panel" py={{ base: "16", md: "24" }} id="trabajo">
-        <Container maxW="7xl">
-          <Grid templateColumns={{ base: "1fr", lg: ".55fr 1.45fr" }} gap={{ base: "6", lg: "16" }} alignItems="end" mb={{ base: "8", md: "14" }}>
-            <Text color="app.accent" fontWeight="750">Trabajo seleccionado</Text>
-            <SectionHeading title="Casos que conectan producto, interfaz y tecnología." description="Cada proyecto parte de una necesidad distinta. La constante es reducir fricción y construir una solución proporcionada al contexto." />
+          <Grid templateColumns={{ base: "1fr", lg: ".55fr 1.45fr" }} gap={{ base: "5", lg: "16" }} alignItems="end" mb={{ base: "8", md: "12" }}>
+            <Text color="app.accent" fontWeight="750">{copy.home.projectsLabel}</Text>
+            <SectionHeading title={copy.home.projectsTitle} description={copy.home.projectsDescription} />
           </Grid>
           <Box>{featured.map((project, index) => <ProjectFeature key={project.id} project={project} reverse={index % 2 === 1} index={index} />)}</Box>
-          <Button asChild mt="8" variant="outline" borderColor="app.text" borderRadius="0"><Link to="/proyectos">Ver archivo completo <ArrowUpRight size={17} /></Link></Button>
+          <Button asChild minH="11" mt="7" variant="outline" borderColor="app.text" borderRadius="0" px="6"><Link to="/proyectos">{copy.home.allProjects} <ArrowUpRight size={17} /></Link></Button>
         </Container>
       </Box>
 
-      <Box as="section" bg="brand.600" color="white" py={{ base: "16", md: "24" }} id="enfoque">
+      <Box as="section" bg="brand.600" color="white" py={{ base: "14", md: "20" }} id="enfoque">
         <Container maxW="7xl">
-          <Grid templateColumns={{ base: "1fr", lg: ".85fr 1.15fr" }} gap={{ base: "12", lg: "20" }}>
-            <Stack gap="7" align="start" position={{ lg: "sticky" }} top={{ lg: "8rem" }} alignSelf="start">
-              <Text fontWeight="750" color="brand.100">Cómo construyo</Text>
-              <Heading as="h2" fontSize={{ base: "4xl", md: "6xl", lg: "7xl" }} letterSpacing="-.065em" lineHeight=".9" maxW="9ch">Menos ruido. Más producto.</Heading>
-              <Text color="brand.100" fontSize="lg" maxW="40ch">Un proceso breve y legible para pasar de una necesidad real a algo que funciona y se puede mantener.</Text>
-            </Stack>
-            <Stack gap="0">
-              {process.map(([title, description], index) => (
-                <Grid key={title} templateColumns={{ base: "4rem 1fr", md: "7rem 1fr" }} gap="5" py={{ base: "7", md: "9" }} borderTopWidth="1px" borderColor="whiteAlpha.400">
-                  <Text color="brand.100" fontSize={{ base: "xl", md: "2xl" }}>0{index + 1}</Text>
-                  <Stack gap="3"><Heading as="h3" fontSize={{ base: "2xl", md: "4xl" }} letterSpacing="-.035em">{title}</Heading><Text color="brand.100" fontSize={{ md: "lg" }} maxW="48ch">{description}</Text></Stack>
-                </Grid>
-              ))}
-            </Stack>
+          <Grid templateColumns={{ base: "1fr", lg: ".7fr 1.3fr" }} gap={{ base: "7", lg: "16" }} mb={{ base: "9", md: "12" }} alignItems="end">
+            <Text fontWeight="750" color="brand.100">{copy.home.processLabel}</Text>
+            <Stack gap="4"><Heading as="h2" fontSize={{ base: "4xl", md: "6xl" }} letterSpacing="-.055em" lineHeight=".94">{copy.home.processTitle}</Heading><Text color="brand.100" fontSize={{ md: "lg" }} maxW="54ch">{copy.home.processDescription}</Text></Stack>
           </Grid>
-        </Container>
-      </Box>
-
-      <Box as="section" py={{ base: "16", md: "24" }} id="capacidades">
-        <Container maxW="7xl">
-          <Grid templateColumns={{ base: "1fr", lg: ".8fr 1.2fr" }} gap={{ base: "12", lg: "20" }}>
-            <Stack gap="8">
-              <SectionHeading title="Una práctica híbrida." description="No separo la experiencia de la implementación: diseño y desarrollo avanzan juntos desde el primer flujo." />
-              <Stack gap="0">
-                {disciplines.map(([Icon, title, description]) => (
-                  <Grid key={title} templateColumns="2.75rem 1fr" gap="4" py="5" borderTopWidth="1px" borderColor="app.border">
-                    <Icon size={21} />
-                    <Box><Text fontWeight="750">{title}</Text><Text color="app.muted" mt="1">{description}</Text></Box>
-                  </Grid>
-                ))}
+          <SimpleGrid columns={{ base: 1, md: 3 }} borderTopWidth="1px" borderLeftWidth="1px" borderColor="whiteAlpha.400">
+            {copy.home.processSteps.map((step, index) => (
+              <Stack key={step.title} minH={{ md: "15rem" }} justify="space-between" gap="8" p={{ base: "6", md: "7" }} borderRightWidth="1px" borderBottomWidth="1px" borderColor="whiteAlpha.400">
+                <Text color="brand.100" fontSize="lg">0{index + 1}</Text>
+                <Stack gap="2"><Heading as="h3" fontSize={{ base: "2xl", md: "3xl" }} letterSpacing="-.035em">{step.title}</Heading><Text color="brand.100">{step.description}</Text></Stack>
               </Stack>
-            </Stack>
-            <Box className="stack-board" bg="app.text" color="app.canvas" p={{ base: "7", md: "10" }}>
-              <Flex justify="space-between" align="start" gap="6" mb={{ base: "12", md: "20" }}>
-                <Stack gap="2"><Text fontWeight="750">Stack actual</Text><Text opacity=".68" maxW="36ch">Herramientas elegidas por el problema, no por la tendencia.</Text></Stack>
-                <Text fontSize="sm" opacity=".58">{String(stack.length).padStart(2, "0")}</Text>
-              </Flex>
-              <Flex wrap="wrap" gap={{ base: "2", md: "3" }}>
-                {stack.map((item, index) => <Text key={item} className="stack-chip" fontSize={{ base: "xl", md: "3xl" }} fontWeight="700" letterSpacing="-.035em" borderWidth="1px" borderColor="currentColor" px={{ base: "3", md: "4" }} py="2" opacity={index > 7 ? ".58" : "1"}>{item}</Text>)}
-              </Flex>
-            </Box>
-          </Grid>
-
-          <Grid templateColumns={{ base: "1fr", lg: ".55fr 1.45fr" }} gap={{ base: "8", lg: "16" }} mt={{ base: "16", md: "24" }}>
-            <Stack gap="3"><Text color="app.accent" fontWeight="750">Formas de colaborar</Text><Text color="app.muted" maxW="34ch">Alcance claro y una solución que tu equipo pueda sostener.</Text></Stack>
-            <Stack gap="0">
-              {content.services.map((service, index) => (
-                <Grid key={service.id} templateColumns={{ base: "3rem 1fr", md: "3rem .7fr 1.3fr" }} gap={{ base: "4", md: "6" }} py="7" borderTopWidth="1px" borderColor="app.border">
-                  <Text color="app.muted">0{index + 1}</Text>
-                  <Heading as="h3" fontSize={{ base: "2xl", md: "3xl" }} letterSpacing="-.03em">{service.title}</Heading>
-                  <Stack gap="4" gridColumn={{ base: "2", md: "auto" }}><Text color="app.muted">{service.description}</Text><Flex wrap="wrap" gap="2">{service.capabilities.map((item) => <HStack key={item} gap="2" fontSize="sm"><Check size={14} color="var(--chakra-colors-app-accent)" /><Text>{item}</Text></HStack>)}</Flex></Stack>
-                </Grid>
-              ))}
-            </Stack>
-          </Grid>
+            ))}
+          </SimpleGrid>
         </Container>
       </Box>
 
-      <Box as="section" borderYWidth="1px" borderColor="app.border" bg="app.panel" py={{ base: "16", md: "24" }}>
+      <Box as="section" py={{ base: "14", md: "22" }} id="servicios">
         <Container maxW="7xl">
-          <Grid templateColumns={{ base: "1fr", lg: ".55fr 1.45fr" }} gap={{ base: "8", lg: "16" }} mb="10">
-            <Text color="app.accent" fontWeight="750">Notas de trabajo</Text>
-            <Flex justify="space-between" align="end" gap="6"><SectionHeading title="Pensar también es parte de construir." description="Investigación, decisiones técnicas y aprendizajes que vale la pena conservar." /><Button asChild display={{ base: "none", md: "inline-flex" }} variant="plain" flexShrink="0"><Link to="/articulos">Todos <ArrowUpRight size={17} /></Link></Button></Flex>
+          <Grid templateColumns={{ base: "1fr", lg: ".55fr 1.45fr" }} gap={{ base: "5", lg: "16" }} mb={{ base: "8", md: "12" }} alignItems="end">
+            <Text color="app.accent" fontWeight="750">{copy.home.servicesLabel}</Text>
+            <SectionHeading title={copy.home.servicesTitle} description={copy.home.servicesDescription} />
           </Grid>
-          <SimpleGrid columns={{ base: 1, md: 3 }} gap={{ base: "8", md: "7" }}>{articles.map((article, index) => <ArticleCard key={article.id} article={article} index={index} />)}</SimpleGrid>
+          <Stack gap="0">
+            {content.services.map((service, index) => (
+              <Grid key={service.id} templateColumns={{ base: "3rem 1fr", md: "3rem .7fr 1.3fr" }} gap={{ base: "4", md: "6" }} py={{ base: "6", md: "7" }} borderTopWidth="1px" borderColor="app.border">
+                <Text color="app.muted">0{index + 1}</Text>
+                <Heading as="h3" fontSize={{ base: "2xl", md: "3xl" }} letterSpacing="-.03em">{service.title}</Heading>
+                <Stack gap="4" gridColumn={{ base: "2", md: "auto" }}><Text color="app.muted">{service.description}</Text><Flex wrap="wrap" gap="3">{service.capabilities.map((item) => <HStack key={item} gap="2" fontSize="sm"><Check size={14} color="var(--chakra-colors-app-accent)" /><Text>{item}</Text></HStack>)}</Flex></Stack>
+              </Grid>
+            ))}
+          </Stack>
         </Container>
       </Box>
 
       <Box as="section" bg="app.signal" color="#160B08">
-        <Container maxW="7xl" py={{ base: "14", md: "20" }}>
+        <Container maxW="7xl" py={{ base: "12", md: "18" }}>
           <Grid templateColumns={{ base: "1fr", md: "1.4fr .6fr" }} gap="10" alignItems="end">
-            <Stack gap="4"><Text fontWeight="750">Disponible para el próximo reto</Text><Heading as="h2" fontSize={{ base: "4xl", md: "7xl", lg: "8xl" }} letterSpacing="-.07em" lineHeight=".86" maxW="12ch">¿Qué debería sentirse más simple?</Heading></Stack>
-            <Stack gap="6" align={{ base: "start", md: "end" }}><Text maxW="34ch" textAlign={{ md: "right" }}>{content.site.availability}</Text><Button asChild size="lg" bg="#160B08" color="white" borderRadius="0" px="7" _hover={{ transform: "translate(3px, -3px)" }}><Link to="/contacto">Cuéntame el contexto <ArrowUpRight size={18} /></Link></Button></Stack>
+            <Stack gap="4"><Text fontWeight="750">{copy.home.ctaLabel}</Text><Heading as="h2" fontSize={{ base: "4xl", md: "7xl", lg: "8xl" }} letterSpacing="-.07em" lineHeight=".86" maxW="12ch">{copy.home.ctaTitle}</Heading></Stack>
+            <Stack gap="6" align={{ base: "start", md: "end" }}><Text maxW="36ch" textAlign={{ md: "right" }}>{copy.home.ctaDescription}</Text><Button asChild minH="11" size="lg" bg="#160B08" color="white" borderRadius="0" px="7"><Link to="/contacto">{copy.home.ctaButton} <ArrowUpRight size={18} /></Link></Button></Stack>
           </Grid>
         </Container>
       </Box>
