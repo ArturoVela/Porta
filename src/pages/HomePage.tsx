@@ -101,7 +101,7 @@ export function HomePage() {
         <Container maxW="7xl">
           <Grid templateColumns={{ base: "1fr", lg: ".55fr 1.45fr" }} gap={{ base: "6", lg: "16" }} alignItems="end" mb={{ base: "8", md: "14" }}>
             <Text color="app.signal" fontWeight="750">Software propio</Text>
-            <Stack gap="4" maxW="3xl"><Heading as="h2" fontSize={{ base: "3xl", md: "5xl", lg: "6xl" }} letterSpacing="-.05em" lineHeight=".98">Mis proyectos SaaS</Heading><Text color="#AAB5C6" fontSize={{ base: "md", md: "lg" }} maxW="62ch">Cuatro herramientas propias, disponibles desde sus dominios.</Text></Stack>
+            <Stack gap="4" maxW="3xl"><Heading as="h2" fontSize={{ base: "3xl", md: "5xl", lg: "6xl" }} letterSpacing="-.05em" lineHeight=".98">Mis proyectos SaaS</Heading><Text color="#AAB5C6" fontSize={{ base: "md", md: "lg" }} maxW="62ch">Cuatro herramientas propias, disponibles en sus dominios.</Text></Stack>
           </Grid>
           <Grid templateColumns={{ base: "1fr", sm: "repeat(2, 1fr)", lg: "repeat(4, 1fr)" }} borderTopWidth="1px" borderLeftWidth="1px" borderColor="#2B3545">
             {saasProjects.map((project, index) => (
