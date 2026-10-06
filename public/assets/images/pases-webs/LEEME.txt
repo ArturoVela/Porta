@@ -1,0 +1,35 @@
+TARJETAS WEB DE ARTURO VELA
+22 PNG · 750 x 288 píxeles · 2026-10-04
+
+Colores e identidad derivados de capturas de las webs. Símbolos adaptados a composición común. En sitios claros, fondo basado en color de marca.
+Modo: generador integrado image_gen; prompts en prompts.txt.
+
+Agro: propuesta provisional, acceso Cloudflare requerido; logo y paleta no confirmados.
+Coffee: dominio indicado coffee.velaarturo.com no resuelve. Portafolio enlaza cafetero.velaarturo.com; diseño y dirección de tarjeta corresponden a Cafetero.
+CV: sitio tipográfico sin logo gráfico, adaptación sobre grafito con letras CV.
+
+ARCHIVOS Y FUENTES
+01-torneo.png — https://torneo.velaarturo.com
+02-textos.png — https://textos.velaarturo.com
+03-color.png — https://color.velaarturo.com
+04-cotiza.png — https://cotiza.velaarturo.com
+05-cuando.png — https://cuando.velaarturo.com
+06-foto.png — https://foto.velaarturo.com
+07-pdf.png — https://pdf.velaarturo.com
+08-qr.png — https://qr.velaarturo.com
+09-horas.png — https://horas.velaarturo.com
+10-llevamos.png — https://llevamos.velaarturo.com
+11-ruleta.png — https://ruleta.velaarturo.com
+12-explora.png — https://explora.velaarturo.com
+13-coffee.png — https://cafetero.velaarturo.com
+14-formularios.png — https://formularios.velaarturo.com
+15-un-ramito.png — https://un-ramito.velaarturo.com
+16-hub.png — https://hub.velaarturo.com
+17-cv.png — https://cv.velaarturo.com
+18-principal.png — https://velaarturo.com
+19-finanzas.png — https://finanzas.velaarturo.com
+20-ventas.png — https://ventas.velaarturo.com
+21-agua.png — https://agua.velaarturo.com
+22-agro.png — https://agro.velaarturo.com
+
+Abre index.html para comparar tarjetas y descargar cada PNG.

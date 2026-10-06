@@ -104,7 +104,7 @@ export function preferredLocale(cookie: string | null, acceptLanguage: string | 
 export const COPY = {
   es: {
     common: { loading: "Cargando contenido…", skip: "Saltar al contenido", talk: "Hablemos", language: "Idioma", spanish: "Español", english: "English", brandSubtitle: "Producto e ingeniería web", cv: "CV" },
-    nav: { projects: "Proyectos", profile: "Perfil", articles: "Artículos" },
+    nav: { projects: "Proyectos", profile: "Perfil", articles: "Artículos", linktree: "Tarjetero" },
     footer: { headline: "Productos digitales claros, seguros y mantenibles.", built: "Construido desde" },
     preview: "Vista previa privada · los cambios aún no están publicados",
     theme: { change: "Cambiar tema", light: "Cambiar a modo claro", dark: "Cambiar a modo oscuro" },
@@ -131,7 +131,7 @@ export const COPY = {
   },
   en: {
     common: { loading: "Loading content…", skip: "Skip to content", talk: "Let's talk", language: "Language", spanish: "Español", english: "English", brandSubtitle: "Product and web engineering", cv: "CV" },
-    nav: { projects: "Projects", profile: "Profile", articles: "Articles" },
+    nav: { projects: "Projects", profile: "Profile", articles: "Articles", linktree: "Wallet" },
     footer: { headline: "Clear, secure, maintainable digital products.", built: "Built from" },
     preview: "Private preview · changes have not been published yet",
     theme: { change: "Change theme", light: "Switch to light mode", dark: "Switch to dark mode" },

@@ -8,6 +8,7 @@ import { HomePage } from "@/pages/HomePage";
 
 const ProjectsPage = lazy(() => import("@/pages/ProjectsPage").then((module) => ({ default: module.ProjectsPage })));
 const AllProjectsPage = lazy(() => import("@/pages/AllProjectsPage").then((module) => ({ default: module.AllProjectsPage })));
+const LinktreePage = lazy(() => import("@/pages/LinktreePage").then((module) => ({ default: module.LinktreePage })));
 const ProjectPage = lazy(() => import("@/pages/ProjectPage").then((module) => ({ default: module.ProjectPage })));
 const ProfilePage = lazy(() => import("@/pages/ProfilePage").then((module) => ({ default: module.ProfilePage })));
 const ArticlesPage = lazy(() => import("@/pages/ArticlesPage").then((module) => ({ default: module.ArticlesPage })));
@@ -29,6 +30,7 @@ function PortfolioRoutes() {
         <Route path="/en/projects" element={<ProjectsPage />} />
         <Route path="/es/todos" element={<AllProjectsPage />} />
         <Route path="/en/all" element={<AllProjectsPage />} />
+        <Route path="/linktree" element={<LinktreePage />} />
         <Route path="/es/proyectos/:slug" element={<ProjectPage />} />
         <Route path="/en/projects/:slug" element={<ProjectPage />} />
         <Route path="/es/perfil" element={<ProfilePage />} />
@@ -55,11 +57,8 @@ export function App() {
 
 function LocalizedRoutes() {
   const { copy } = useContent();
-  return (
-    <SiteShell>
-      <Suspense fallback={<div className="route-loading" role="status">{copy.common.loading}</div>}>
-        <PortfolioRoutes />
-      </Suspense>
-    </SiteShell>
-  );
+  const location = useLocation();
+  const path = location.pathname === "/__preview" ? new URLSearchParams(location.search).get("path") ?? "/" : location.pathname;
+  const routes = <Suspense fallback={<div className="route-loading" role="status">{copy.common.loading}</div>}><PortfolioRoutes /></Suspense>;
+  return path.replace(/\/$/, "") === "/linktree" ? routes : <SiteShell>{routes}</SiteShell>;
 }

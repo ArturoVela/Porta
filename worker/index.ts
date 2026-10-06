@@ -259,7 +259,7 @@ async function sitemap(env: Env, ctx: ExecutionContext) {
     const esPath = routePath("es", entry.name, slug);
     const enPath = routePath("en", entry.name, slug);
     return `<url><loc>${escapeXml(`${origin}${path}`)}</loc><xhtml:link rel="alternate" hreflang="es" href="${escapeXml(`${origin}${esPath}`)}"/><xhtml:link rel="alternate" hreflang="en" href="${escapeXml(`${origin}${enPath}`)}"/><xhtml:link rel="alternate" hreflang="x-default" href="${escapeXml(`${origin}${esPath}`)}"/></url>`;
-  }).join("")}</urlset>`;
+  }).join("")}<url><loc>${escapeXml(`${origin}/linktree`)}</loc></url></urlset>`;
   return new Response(body, { headers: { "content-type": "application/xml; charset=utf-8", "cache-control": "public, max-age=300" } });
 }
 
@@ -289,7 +289,8 @@ export function normalizeLegacyPath(pathname: string) {
 export function metaForPath(pathname: string, manifest: PortfolioManifest, origin: string, preview = false): RouteMeta {
   const match = matchLocalizedRoute(pathname) ?? matchLocalizedRoute(localizedPath(pathname, "es"));
   const locale = match?.locale ?? localeFromPath(pathname) ?? "es";
-  const canonicalPath = match ? routePath(locale, match.name, match.slug) : pathname;
+  const wallet = pathname.replace(/\/$/, "") === "/linktree";
+  const canonicalPath = wallet ? "/linktree" : match ? routePath(locale, match.name, match.slug) : pathname;
   const baseImage = new URL(manifest.site.seo.ogImage ?? "/og-card.svg", origin).href;
   const base = {
     image: baseImage,
@@ -312,6 +313,7 @@ export function metaForPath(pathname: string, manifest: PortfolioManifest, origi
   if (match?.name === "home") return { ...base, title: manifest.site.seo.title, description: manifest.site.seo.description, canonicalPath };
   if (match?.name === "projects") return { ...base, title: `${locale === "en" ? "Projects" : "Proyectos"} — ${manifest.site.name}`, description: locale === "en" ? "Web products, internal systems, and digital experiences built by Arturo Vela." : "Productos web, sistemas internos y experiencias digitales construidas por Arturo Vela.", canonicalPath };
   if (match?.name === "allProjects") return { ...base, title: `${locale === "en" ? "All projects" : "Todos los proyectos"} — ${manifest.site.name}`, description: locale === "en" ? "Quick access to every project by Arturo Vela." : "Acceso rápido a todos los proyectos de Arturo Vela.", canonicalPath, noindex: true, structuredData: {} };
+  if (wallet) return { ...base, title: `Tarjetero — ${manifest.site.name}`, description: "Todos los proyectos de Arturo Vela en un tarjetero: herramientas, espacio personal, portafolio y SaaS.", canonicalPath };
   if (match?.name === "profile") return { ...base, title: `${locale === "en" ? "Profile" : "Perfil"} — ${manifest.site.name}`, description: manifest.site.bio, canonicalPath };
   if (match?.name === "articles") return { ...base, title: `${locale === "en" ? "Articles" : "Artículos"} — ${manifest.site.name}`, description: locale === "en" ? "Notes on research, product, communities, and web engineering." : "Notas sobre investigación, producto, comunidades e ingeniería web.", canonicalPath };
   if (match?.name === "contact") return { ...base, title: `${locale === "en" ? "Contact" : "Contacto"} — ${manifest.site.name}`, description: locale === "en" ? "Talk with Arturo Vela about web products, internal systems, and technical collaboration." : "Conversa con Arturo Vela sobre productos web, sistemas internos y colaboración técnica.", canonicalPath };
@@ -384,6 +386,8 @@ async function html(request: Request, env: Env, ctx: ExecutionContext) {
     .on('link[data-hreflang="es"]', { element(element) { element.setAttribute("href", spanish); } })
     .on('link[data-hreflang="en"]', { element(element) { element.setAttribute("href", english); } })
     .on('link[data-hreflang="x-default"]', { element(element) { element.setAttribute("href", spanish); } })
+    .on('link[data-hreflang]', { element(element) { if (meta.canonicalPath === "/linktree") element.remove(); } })
+    .on('meta[name="theme-color"]', { element(element) { if (meta.canonicalPath === "/linktree") element.setAttribute("content", "#080B12"); } })
     .on('link[data-localized-feed]', { element(element) { element.setAttribute("href", `/${locale}/feed.xml`); element.setAttribute("title", locale === "en" ? "Arturo Vela's articles" : "Artículos de Arturo Vela"); } })
     .on("#portfolio-content", { element(element) { element.setInnerContent(safeEnvelope, { html: true }); } })
     .on("#structured-data", { element(element) { element.setInnerContent(safeStructuredData, { html: true }); } })

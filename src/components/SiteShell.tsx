@@ -47,6 +47,7 @@ function NavigationLinks({ onNavigate }: { onNavigate?: () => void }) {
     { label: copy.nav.projects, to: "/proyectos" },
     { label: copy.nav.profile, to: "/perfil" },
     { label: copy.nav.articles, to: "/articulos" },
+    { label: copy.nav.linktree, to: "/linktree" },
   ];
   const pathname = location.pathname === "/__preview" ? new URLSearchParams(location.search).get("path") ?? "/" : location.pathname;
   return <>
