@@ -1,6 +1,7 @@
 import type { CoverImage, ProjectContent } from "@/types/content";
 import { CV_URL } from "@/lib/links";
 import type { Locale } from "@/i18n";
+import { WALLET_PROJECTS } from "@/lib/linktree";
 
 export const SPOTLIGHT_PROJECT_SLUGS = ["nieto-import", "explora-san-martin", "coffee"] as const;
 
@@ -31,4 +32,15 @@ export function selectSpotlightProjects(projects: ProjectContent[], limit = 3) {
     ...sorted.filter((project) => project.featured),
   ];
   return candidates.filter((project, index) => candidates.findIndex((item) => item.id === project.id) === index).slice(0, limit);
+}
+
+const HOME_PRODUCT_IDS = ["explora", "coffee", "hub", "cotiza", "ventas", "finanzas", "bc", "tarjetas"];
+
+export function selectHomeProducts(projects: ProjectContent[], locale: Locale = "es") {
+  return HOME_PRODUCT_IDS.flatMap((id) => {
+    const app = WALLET_PROJECTS.find((item) => item.id === id && !item.private);
+    if (!app) return [];
+    const project = projects.find((item) => item.slug === app.caseSlug);
+    return [{ app, project, cover: project ? projectDisplayCover(project, locale) : undefined }];
+  });
 }

@@ -9,6 +9,10 @@ describe("rutas localizadas", () => {
     expect(localizedPath("/articulos/discord-para-negocios", "en")).toBe("/en/articles/discord-para-negocios");
     expect(matchLocalizedRoute("/en/projects/coffee")).toEqual({ locale: "en", name: "project", slug: "coffee" });
     expect(routePath("es", "contact")).toBe("/es/contacto");
+    expect(localizedPath("/legal#cookies", "en")).toBe("/en/legal#cookies");
+    expect(localizedPath("/es/proyectos?search=React#trabajo", "en")).toBe("/en/projects?search=React#trabajo");
+    expect(localizedPath("/es/legal#privacidad", "en")).toBe("/en/legal#privacidad");
+    expect(matchLocalizedRoute("/en/legal")).toEqual({ locale: "en", name: "legal" });
   });
 
   it("prefiere cookie, luego Accept-Language y finalmente español", () => {

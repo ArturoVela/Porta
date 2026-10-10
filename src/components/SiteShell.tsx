@@ -4,6 +4,7 @@ import {
   Container,
   Flex,
   HStack,
+  Grid,
   IconButton,
   Stack,
   Text,
@@ -46,6 +47,7 @@ function NavigationLinks({ onNavigate }: { onNavigate?: () => void }) {
   const navigation = [
     { label: copy.nav.projects, to: "/proyectos" },
     { label: copy.nav.profile, to: "/perfil" },
+    { label: "Dev", to: "/dev" },
     { label: copy.nav.articles, to: "/articulos" },
     { label: copy.nav.linktree, to: "/linktree" },
   ];
@@ -88,7 +90,7 @@ function LanguageSwitch() {
       {(["es", "en"] as const).map((target) => (
         <RouterLink
           key={target}
-          to={contentHref(localizedPath(currentPath, target), previewToken)}
+          to={contentHref(localizedPath(`${currentPath}${location.hash}`, target), previewToken)}
           hrefLang={target}
           aria-current={locale === target ? "page" : undefined}
           onClick={() => { document.cookie = localeCookie(target); }}
@@ -106,7 +108,7 @@ export function SiteShell({ children }: { children: ReactNode }) {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "instant" });
+    if (!location.hash) window.scrollTo({ top: 0, behavior: "instant" });
     setOpen(false);
   }, [location.pathname, location.search]);
 
@@ -134,13 +136,13 @@ export function SiteShell({ children }: { children: ReactNode }) {
             <Link to="/">
               <HStack gap="3">
                 <Flex className="brand-mark" w="11" h="11" bg="brand.600" color="white" align="center" justify="center" fontWeight="850">A/</Flex>
-                <Stack gap="0" display={{ base: "none", lg: "flex" }}>
+                <Stack gap="0" display={{ base: "none", xl: "flex" }}>
                   <Text fontWeight="750" letterSpacing="-.025em" lineHeight="1.1">{content.site.name}</Text>
                   <Text color="app.muted" fontSize="xs">{copy.common.brandSubtitle}</Text>
                 </Stack>
               </HStack>
             </Link>
-            <HStack display={{ base: "none", md: "flex" }} gap="1">
+            <HStack display={{ base: "none", lg: "flex" }} gap="1">
               <NavigationLinks />
             </HStack>
             <HStack gap="2">
@@ -150,7 +152,7 @@ export function SiteShell({ children }: { children: ReactNode }) {
                 <Link to="/contacto">{copy.common.talk} <ArrowUpRight size={17} /></Link>
               </Button>
               <IconButton
-                display={{ base: "inline-flex", md: "none" }}
+                display={{ base: "inline-flex", lg: "none" }}
                 aria-label={open ? copy.menu.close : copy.menu.open}
                 variant="outline"
                 borderColor="app.border"
@@ -165,7 +167,7 @@ export function SiteShell({ children }: { children: ReactNode }) {
             </HStack>
           </Flex>
           {open ? (
-            <Stack display={{ md: "none" }} p="4" gap="1" bg="app.panel" borderWidth="1px" borderTopWidth="0" borderColor="app.border">
+            <Stack display={{ lg: "none" }} p="4" gap="1" bg="app.panel" borderWidth="1px" borderTopWidth="0" borderColor="app.border">
               <NavigationLinks onNavigate={() => setOpen(false)} />
               <Button asChild mt="2" minH="11" bg="app.signal" color="#160B08" borderRadius="0">
                 <Link to="/contacto">{copy.common.talk} <ArrowUpRight size={17} /></Link>
@@ -175,21 +177,44 @@ export function SiteShell({ children }: { children: ReactNode }) {
         </Container>
       </Box>
       <Box as="main" id="contenido" flex="1">{children}</Box>
-      <Box as="footer" bg="#080B12" color="#F7F9FC" py={{ base: "12", md: "16" }}>
+      <Box as="footer" className="site-footer" bg="#080B12" color="#F7F9FC" py={{ base: "10", md: "14" }}>
         <Container maxW="7xl">
-          <Flex direction={{ base: "column", md: "row" }} justify="space-between" align={{ md: "end" }} gap="12">
-            <Stack gap="6" maxW="2xl">
-              <Text color="#AAB5C6">{content.site.name} · {content.site.location}</Text>
-              <Text fontSize={{ base: "3xl", md: "5xl" }} fontWeight="750" letterSpacing="-.05em" lineHeight=".95">{copy.footer.headline}</Text>
+          <Grid templateColumns={{ base: "1fr", lg: "1.25fr 1fr" }} gap={{ base: "10", lg: "20" }}>
+            <Stack gap="5" align="start">
+              <Link to="/"><Text fontWeight="750" fontSize="lg">{content.site.name} <Text as="span" color="#AAB5C6" fontWeight="400">· {content.site.location}</Text></Text></Link>
+              <Text fontSize={{ base: "3xl", md: "4xl" }} maxW="22ch" fontWeight="750" letterSpacing="-.03em" lineHeight="1.1">{copy.footer.headline}</Text>
+              <a href={`mailto:${content.site.email}`} className="footer-contact">{content.site.email}<ArrowUpRight size={18} aria-hidden="true" /></a>
+              <Text color="#AAB5C6" fontSize="sm" maxW="48ch">{copy.footer.scope}</Text>
             </Stack>
-            <Stack align={{ base: "start", md: "end" }} gap="5">
-              <HStack gap="5" flexWrap="wrap">
-                {content.site.socials.map((social) => <a key={social.label} href={social.url} target="_blank" rel="noreferrer"><Text display="flex" alignItems="center" minW="11" minH="11" color="#AAB5C6" borderBottomWidth="1px" borderColor="#596476" _hover={{ color: "white", borderColor: "white" }}>{social.label}</Text></a>)}
-                <a href={CV_URL} target="_blank" rel="noopener noreferrer"><Text display="flex" alignItems="center" minW="11" minH="11" color="#AAB5C6" borderBottomWidth="1px" borderColor="#596476" _hover={{ color: "white", borderColor: "white" }}>{copy.common.cv}</Text></a>
+            <Grid templateColumns="1fr 1fr" gap="6">
+              <Stack as="nav" aria-label={copy.footer.explore} gap="0" align="start">
+                <Text fontWeight="700" mb="3">{copy.footer.explore}</Text>
+                <Link to="/proyectos">{copy.nav.projects}</Link>
+                <Link to="/perfil">{copy.nav.profile}</Link>
+                <Link to="/dev">Dev</Link>
+                <Link to="/articulos">{copy.nav.articles}</Link>
+                <Link to="/linktree">{copy.nav.linktree}</Link>
+              </Stack>
+              <Stack as="nav" aria-label={copy.footer.connect} gap="0" align="start">
+                <Text fontWeight="700" mb="3">{copy.footer.connect}</Text>
+                <Link to="/contacto">{copy.common.talk}</Link>
+                {content.site.socials.map((social) => <a key={social.label} href={social.url} target="_blank" rel="noopener noreferrer">{social.label}<ArrowUpRight size={14} aria-hidden="true" /></a>)}
+                <a href={CV_URL} target="_blank" rel="noopener noreferrer">{copy.common.cv}<ArrowUpRight size={14} aria-hidden="true" /></a>
+              </Stack>
+            </Grid>
+          </Grid>
+          <Stack gap="4" mt="10" pt="5" borderTopWidth="1px" borderColor="#303B4B">
+            <Flex justify="space-between" align="start" gap="3" direction={{ base: "column", md: "row" }}>
+              <Text color="#AAB5C6" fontSize="sm" pt="3">© {new Date().getFullYear()} {content.site.name}</Text>
+              <HStack as="nav" aria-label={copy.footer.legal} gap={{ base: "4", md: "6" }} flexWrap="wrap" fontSize="sm">
+                <Link to="/legal#privacidad">{copy.footer.privacy}</Link>
+                <Link to="/legal#cookies">{copy.footer.cookies}</Link>
+                <Link to="/legal#condiciones">{copy.footer.terms}</Link>
+                <Link to="/legal#derechos">{copy.footer.rights}</Link>
               </HStack>
-              <Text color="#7D899B" fontSize="sm">© {new Date().getFullYear()} · {copy.footer.built} {content.site.location}</Text>
-            </Stack>
-          </Flex>
+            </Flex>
+            <Text color="#AAB5C6" fontSize="xs">{copy.footer.copyright}</Text>
+          </Stack>
         </Container>
       </Box>
     </Flex>

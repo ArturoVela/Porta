@@ -4,6 +4,7 @@ import { MessageSquare } from "lucide-react";
 import { FormEvent, useEffect, useState } from "react";
 import type { PublicComment } from "@/types/content";
 import { useContent } from "@/content/context";
+import { PrivacyConsent } from "@/components/PrivacyConsent";
 
 const turnstileSiteKey = (import.meta.env.VITE_TURNSTILE_SITE_KEY as string | undefined) || "0x4AAAAAAEoXHMY-TciCTywd";
 
@@ -38,7 +39,7 @@ export function Comments({ publicationId }: { publicationId: string }) {
       const response = await fetch("/api/comments", {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({ publicationId, name: data.get("name"), message: data.get("message"), turnstileToken: token }),
+        body: JSON.stringify({ publicationId, name: data.get("name"), message: data.get("message"), turnstileToken: token, privacyConsent: data.get("privacyConsent") }),
       });
       const payload = await response.json() as { data?: PublicComment; error?: string };
       if (!response.ok || !payload.data) throw new Error(locale === "en" ? copy.comments.publishError : payload.error ?? copy.comments.publishError);
@@ -60,6 +61,7 @@ export function Comments({ publicationId }: { publicationId: string }) {
         <Stack gap="5" maxW="2xl">
           <Field.Root required><Field.Label>{copy.comments.name}</Field.Label><Input name="name" required maxLength={80} autoComplete="name" minH="11" bg="app.panel" borderColor="app.border" /></Field.Root>
           <Field.Root required><Field.Label>{copy.comments.comment}</Field.Label><Textarea name="message" required maxLength={2000} minH="8rem" resize="vertical" bg="app.panel" borderColor="app.border" /></Field.Root>
+          <PrivacyConsent comments />
           {turnstileSiteKey ? <Turnstile siteKey={turnstileSiteKey} onSuccess={setToken} onExpire={() => setToken("")} options={{ theme: "auto", language: locale }} /> : <Text color="app.muted" fontSize="sm">{copy.comments.configure}</Text>}
           <Button type="submit" alignSelf="start" minH="11" borderRadius="full" bg="app.text" color="app.canvas" loading={submitting} disabled={!turnstileSiteKey || !token}>{copy.comments.publish}</Button>
           {message ? <Text role="status" color="app.muted">{message}</Text> : null}

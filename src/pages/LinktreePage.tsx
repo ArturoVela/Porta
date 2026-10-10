@@ -84,7 +84,8 @@ export function LinktreePage() {
   const reduced = useReducedMotion();
   const groups = walletCollections(query, collection);
   const count = new Set(groups.flatMap((group) => group.projects.map((project) => project.id))).size;
-  const activeGroup = groups.find((group) => group.projects.some((project) => project.id === params.get("project")) && (!params.get("group") || group.id === params.get("group")))?.id;
+  const activeGroups = groups.filter((group) => group.projects.some((project) => project.id === params.get("project")));
+  const activeGroup = (activeGroups.find((group) => group.id === params.get("group")) ?? activeGroups[0])?.id;
 
   function peekCard(key: string | null) { setInstant(false); setPreview(key); }
 
@@ -102,7 +103,7 @@ export function LinktreePage() {
       <div className="wallet-container">
         <header className="wallet-header">
           <ContentLink to="/" className="wallet-profile" aria-label="Arturo Vela, ir al portafolio">
-            <span className="wallet-avatar">A/</span>
+            <img className="wallet-avatar" src="/assets/images/Me/Fototech.jpg" alt="" width="48" height="48" decoding="async" />
             <span><strong>Arturo Vela</strong><small>Producto e ingeniería web</small></span>
           </ContentLink>
           <ContentLink to="/" className="wallet-icon-button" aria-label="Volver al portafolio"><ArrowUpRight size={21} aria-hidden="true" /></ContentLink>
@@ -156,7 +157,7 @@ export function LinktreePage() {
           {!groups.length ? <div className="wallet-empty"><Search size={28} aria-hidden="true" /><h2>No encontré ese proyecto</h2><p>Prueba otro nombre o busca en todas las colecciones.</p><button type="button" onClick={(event) => { setInstant(event.detail === 0); setPreview(null); setQuery(""); setCollection("todas"); }}>Ver todos los proyectos</button></div> : null}
         </main>
 
-        <footer className="wallet-footer"><ContentLink to="/"><ArrowLeft size={15} aria-hidden="true" /> Volver al portafolio</ContentLink><span>Hecho por Arturo Vela · Perú</span></footer>
+        <footer className="wallet-footer"><ContentLink to="/"><ArrowLeft size={15} aria-hidden="true" /> Volver al portafolio</ContentLink><ContentLink to="/legal">Privacidad y condiciones</ContentLink><span>Hecho por Arturo Vela · Perú</span></footer>
       </div>
 
     </div>

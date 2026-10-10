@@ -39,13 +39,15 @@ export const WALLET_PROJECTS: WalletProject[] = [
   { id: "agua", name: "AquaVigía", domain: "agua.velaarturo.com", image: pass("21-agua"), color: "#173f47", private: true, description: "AquaVigía. Plataforma de agua con acceso a datos reservado a cuentas autorizadas.", features: ["Acceso con cuenta", "Consulta de datos según autorización"] },
   { id: "agro", name: "Agro Vela", domain: "agro.velaarturo.com", image: pass("22-agro"), color: "#336244", private: true, description: "Tu campo, tus cuentas. Espacio de Agro Vela protegido con acceso privado.", features: ["Espacio de trabajo agrícola", "Acceso protegido"] },
   { id: "bc", name: "Vela Entradas", domain: "bc.velaarturo.com", image: pass("bc-750x288"), color: "#315745", description: "Encuentra eventos y entradas digitales; una plataforma para asistentes y organizadores.", features: ["Cartelera de eventos", "Entradas digitales", "Herramientas para organizadores"] },
+  { id: "tarjetas", name: "Tarjetas Arturo", domain: "tarjetas.velaarturo.com", image: pass("https-::tarjetas.velaarturo.com:"), color: "#307b6e", description: "Crea tarjetas digitales de fidelización para tu negocio y convierte cada visita en una recompensa.", features: ["Tarjetas personalizadas de sellos, cashback y membresías", "Registro de visitas y recompensas con QR", "Clientes, sucursales, campañas y reportes"] },
 ];
 
 export const WALLET_COLLECTIONS = [
-  { id: "proyectos", name: "Proyectos", projects: ["torneo", "textos", "color", "cotiza", "cuando", "foto", "pdf", "qr", "horas", "llevamos", "ruleta", "explora", "coffee", "formularios", "divide", "un-ramito", "hub", "cv"] },
+  { id: "herramientas", name: "Herramientas", projects: ["torneo", "textos", "color", "cotiza", "cuando", "foto", "pdf", "qr", "horas", "llevamos", "ruleta", "formularios", "divide", "hub", "cv"] },
+  { id: "proyectos", name: "Proyectos", projects: ["coffee", "explora", "un-ramito"] },
   { id: "personal", name: "Personal", projects: ["brain", "hub", "cv"] },
   { id: "principal", name: "Principal", projects: ["principal"] },
-  { id: "saas", name: "SaaS", projects: ["finanzas", "ventas", "agua", "agro", "bc"] },
+  { id: "saas", name: "SaaS", projects: ["finanzas", "ventas", "agua", "agro", "bc", "tarjetas"] },
 ];
 
 export function walletCollections(query: string, collection = "todas") {

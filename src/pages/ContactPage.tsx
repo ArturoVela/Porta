@@ -2,6 +2,8 @@ import { useForm, ValidationError } from "@formspree/react";
 import { Box, Button, Container, Field, Grid, Heading, HStack, Input, Link as ChakraLink, Stack, Text, Textarea } from "@chakra-ui/react";
 import { Mail, MapPin, Phone, Send } from "lucide-react";
 import { useContent } from "@/content/context";
+import { PrivacyConsent } from "@/components/PrivacyConsent";
+import { CopyEmail } from "@/components/CopyEmail";
 
 export function ContactPage() {
   const { content, copy } = useContent();
@@ -13,6 +15,7 @@ export function ContactPage() {
           <Stack gap="5"><Heading as="h1" fontSize={{ base: "5xl", md: "7xl" }} letterSpacing="-.055em" lineHeight=".92">{copy.contact.title}</Heading><Text color="app.muted" fontSize="lg">{content.site.availability}</Text></Stack>
           <Stack gap="4">
             <HStack><Mail size={18} /><ChakraLink href={`mailto:${content.site.email}`}>{content.site.email}</ChakraLink></HStack>
+            <CopyEmail />
             {content.site.phone ? <HStack><Phone size={18} /><ChakraLink href={`tel:${content.site.phone.replace(/\s/g, "")}`}>{content.site.phone}</ChakraLink></HStack> : null}
             <HStack><MapPin size={18} /><Text>{content.site.location}</Text></HStack>
           </Stack>
@@ -24,12 +27,14 @@ export function ContactPage() {
                 <Heading as="h2" fontSize="2xl">{copy.contact.formTitle}</Heading>
                 <Text color="app.muted" fontSize="sm">{copy.contact.formIntro}</Text>
                 <Grid templateColumns={{ base: "1fr", md: "1fr 1fr" }} gap="5">
-                  <Field.Root required><Field.Label>{copy.contact.name}</Field.Label><Input name="name" required autoComplete="name" minH="11" /></Field.Root>
+                  <Field.Root required><Field.Label>{copy.contact.name}</Field.Label><Input name="name" required autoComplete="name" minH="11" /><ValidationError prefix={copy.contact.name} field="name" errors={state.errors} /></Field.Root>
                   <Field.Root required><Field.Label>{copy.contact.email}</Field.Label><Input type="email" name="email" required autoComplete="email" minH="11" /><ValidationError prefix={copy.contact.email} field="email" errors={state.errors} /></Field.Root>
                 </Grid>
                 <Field.Root><Field.Label>{copy.contact.organization}</Field.Label><Input name="organization" autoComplete="organization" minH="11" /></Field.Root>
                 <Field.Root required><Field.Label>{copy.contact.context}</Field.Label><Textarea name="message" required minH="11rem" resize="vertical" placeholder={copy.contact.placeholder} /><ValidationError prefix={copy.contact.context} field="message" errors={state.errors} /></Field.Root>
-                <Button type="submit" alignSelf="start" size="lg" borderRadius="0" bg="brand.600" color="white" loading={state.submitting}>{copy.contact.submit} <Send size={17} /></Button>
+                <PrivacyConsent />
+                {state.errors && <Text role="alert" fontSize="sm" color="app.text">{copy.contact.error}</Text>}
+                <Button type="submit" alignSelf="start" size="lg" borderRadius="0" bg="brand.600" color="white" loading={state.submitting} loadingText={copy.contact.sending}>{copy.contact.submit} <Send size={17} /></Button>
               </Stack>
             </form>
           )}

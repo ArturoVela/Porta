@@ -55,6 +55,13 @@ pnpm deploy:dry
 
 Las pruebas cubren el contrato público, redirecciones, payloads de comentarios, mismo origen, metadatos y 404 de publicaciones.
 
+## Información legal
+
+- `/es/legal` y `/en/legal` reúnen privacidad, cookies, condiciones de uso y el canal de derechos ARCO. El aviso cubre este portafolio; las aplicaciones enlazadas tienen sus propias políticas.
+- `PRIVACY_POLICY_VERSION`, en `src/lib/legal.ts`, es compartida por el aviso, los formularios y el Worker. El consentimiento empieza desmarcado; la API valida y guarda su versión en los comentarios nuevos.
+- Aplicar `migrations/0002_comment_privacy_consent.sql` antes de desplegar el Worker actualizado. Añade una columna nullable: conserva los comentarios existentes sin atribuirles consentimiento retroactivo. Los comandos `deploy:staging` y `deploy:production` ya aplican las migraciones antes del despliegue.
+- El aviso no acredita cumplimiento legal integral. Quedan por completar identidad y domicilio del responsable, fijar plazos de conservación y revisar el registro de bancos de datos y las obligaciones de los proveedores.
+
 ## D1
 
 Las bases remotas configuradas son:

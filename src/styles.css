@@ -8,6 +8,14 @@
 
 * { box-sizing: border-box; }
 body { margin: 0; }
+.site-footer a { display: inline-flex; align-items: center; gap: .4rem; min-height: 2.75rem; color: #AAB5C6; text-underline-offset: .25em; }
+.site-footer a:hover { color: #F7F9FC; text-decoration: underline; }
+.site-footer a:focus-visible { outline: 2px solid #F7F9FC; outline-offset: 4px; }
+.site-footer .footer-contact { color: #F7F9FC; font-size: clamp(1rem, 2vw, 1.25rem); border-bottom: 1px solid #596476; overflow-wrap: anywhere; }
+.privacy-consent { flex: none; width: 1.15rem; height: 1.15rem; margin-top: .15rem; accent-color: var(--chakra-colors-app-accent); }
+.privacy-consent:focus-visible, .privacy-policy-link:focus-visible, .legal-section-link:focus-visible { outline: 2px solid var(--chakra-colors-app-accent); outline-offset: 4px; }
+.privacy-policy-link, .legal-section-link { display: inline-flex; align-items: center; min-height: 2.75rem; text-decoration: underline; text-underline-offset: .25em; color: var(--chakra-colors-app-accent); }
+.legal-section-link { padding-inline: .75rem; }
 a { color: inherit; text-decoration: none; }
 img { display: block; max-width: 100%; }
 
@@ -276,3 +284,7 @@ img { display: block; max-width: 100%; }
   .profile-portrait,
   .contact-panel { box-shadow: 8px 8px 0 color-mix(in srgb, var(--chakra-colors-app-accent) 20%, transparent); }
 }
+html:has(.home-hero), html:has(.contact-panel) { scrollbar-gutter: stable; }
+.home-product-visual[data-brand] img { object-fit: contain; }
+.home-product-link { display: inline-flex; align-items: center; gap: .4rem; min-height: 44px; font-size: .875rem; font-weight: 700; text-decoration: underline; text-underline-offset: .25em; }
+.home-product-link:hover { color: var(--chakra-colors-app-accent); }

@@ -1,6 +1,8 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { FALLBACK_ENVELOPE } from "@/content/fallback";
 import { FALLBACK_ENVELOPE_EN } from "@/content/fallback-en";
+import { PRIVACY_POLICY_VERSION } from "@/lib/legal";
+import { routePath } from "@/i18n";
 import worker, { isSameOrigin, metaForPath, normalizeLegacyPath, parseCommentPayload } from "../worker/index";
 
 function executionContext() {
@@ -193,6 +195,8 @@ describe("salidas bilingües", () => {
     const sitemap = await sitemapResponse.text();
     expect(sitemap).toContain("https://velaarturo.com/es/proyectos/coffee");
     expect(sitemap).toContain("https://velaarturo.com/en/projects/coffee");
+    expect(sitemap).toContain("https://velaarturo.com/es/legal");
+    expect(sitemap).toContain("https://velaarturo.com/en/legal");
     expect(sitemap).toContain('hreflang="x-default"');
     const feedResponse = await worker.fetch(new Request("https://velaarturo.com/en/feed.xml") as never, env, executionContext());
     const feed = await feedResponse.text();
@@ -204,17 +208,53 @@ describe("salidas bilingües", () => {
 
 describe("comentarios", () => {
   it("normaliza una carga válida", () => {
-    expect(parseCommentPayload({ publicationId: "article-discord-business", name: "  Ada   Lovelace ", message: " Interesante ", turnstileToken: "token" })).toEqual({
+    expect(parseCommentPayload({ publicationId: "article-discord-business", name: "  Ada   Lovelace ", message: " Interesante ", turnstileToken: "token", privacyConsent: PRIVACY_POLICY_VERSION })).toEqual({
       publicationId: "article-discord-business",
       name: "Ada Lovelace",
       message: "Interesante",
       turnstileToken: "token",
+      privacyConsent: PRIVACY_POLICY_VERSION,
     });
   });
 
   it("rechaza entradas fuera de límites", () => {
-    expect(parseCommentPayload({ publicationId: "x", name: "Ada", message: "Hola", turnstileToken: "token" })).toBeNull();
-    expect(parseCommentPayload({ publicationId: "article-1", name: "Ada", message: "x".repeat(2001), turnstileToken: "token" })).toBeNull();
+    expect(parseCommentPayload({ publicationId: "x", name: "Ada", message: "Hola", turnstileToken: "token", privacyConsent: PRIVACY_POLICY_VERSION })).toBeNull();
+    expect(parseCommentPayload({ publicationId: "article-1", name: "Ada", message: "x".repeat(2001), turnstileToken: "token", privacyConsent: PRIVACY_POLICY_VERSION })).toBeNull();
+  });
+
+  it.each([undefined, false, true, "on", "2020-01-01"])("rechaza autorización ausente o versión incorrecta: %s", (privacyConsent) => {
+    expect(parseCommentPayload({ publicationId: "article-1", name: "Ada", message: "Hola", turnstileToken: "token", privacyConsent })).toBeNull();
+  });
+
+  it("rechaza el envío sin autorización antes de verificar o escribir datos", async () => {
+    const prepare = vi.fn();
+    const limit = vi.fn();
+    const response = await worker.fetch(new Request("https://velaarturo.com/api/comments", {
+      method: "POST", headers: { origin: "https://velaarturo.com", "content-type": "application/json" },
+      body: JSON.stringify({ publicationId: "article-1", name: "Ada", message: "Hola", turnstileToken: "token" }),
+    }) as never, { DB: { prepare }, COMMENT_RATE_LIMITER: { limit } } as unknown as Env, executionContext());
+    expect(response.status).toBe(400);
+    expect(prepare).not.toHaveBeenCalled();
+    expect(limit).not.toHaveBeenCalled();
+  });
+
+  it("guarda la versión autorizada junto al comentario sin publicarla", async () => {
+    stubContentCache();
+    vi.spyOn(console, "warn").mockImplementation(() => undefined);
+    vi.stubGlobal("fetch", vi.fn(async () => Response.json({ success: true })));
+    const run = vi.fn(async () => undefined);
+    const bind = vi.fn(() => ({ run }));
+    const prepare = vi.fn(() => ({ bind }));
+    const env = { SITE_KEY: "velaarturo", TURNSTILE_SECRET_KEY: "test-only", DB: { prepare }, COMMENT_RATE_LIMITER: { limit: async () => ({ success: true }) } } as unknown as Env;
+    const response = await worker.fetch(new Request("https://velaarturo.com/api/comments", {
+      method: "POST", headers: { origin: "https://velaarturo.com", "content-type": "application/json" },
+      body: JSON.stringify({ publicationId: FALLBACK_ENVELOPE.data.articles[0].id, name: "Ada", message: "Hola", turnstileToken: "token", privacyConsent: PRIVACY_POLICY_VERSION }),
+    }) as never, env, executionContext());
+    expect(response.status).toBe(201);
+    expect(prepare).toHaveBeenCalledWith(expect.stringContaining("privacy_policy_version"));
+    expect(bind.mock.calls[0]).toEqual([expect.any(String), FALLBACK_ENVELOPE.data.articles[0].id, "Ada", "Hola", expect.any(String), PRIVACY_POLICY_VERSION]);
+    expect(run).toHaveBeenCalledOnce();
+    expect(await response.json()).toMatchObject({ data: { name: "Ada", message: "Hola" } });
   });
 
   it("solo permite el mismo origen cuando Origin está presente", () => {
@@ -226,6 +266,13 @@ describe("comentarios", () => {
 });
 
 describe("SEO por ruta", () => {
+  it.each(["es", "en"] as const)("sirve la página legal en %s con HTTP 200 y canonical correcto", (locale) => {
+    const path = routePath(locale, "legal");
+    const meta = metaForPath(path, locale === "en" ? FALLBACK_ENVELOPE_EN.data : FALLBACK_ENVELOPE.data, "https://velaarturo.com");
+    expect(meta.status).toBe(200);
+    expect(meta.canonicalPath).toBe(path);
+    expect(meta.title).toContain(locale === "en" ? "Privacy" : "Privacidad");
+  });
   it("sirve /all sin indexarlo", () => {
     const meta = metaForPath("/all", FALLBACK_ENVELOPE.data, "https://velaarturo.com");
     expect(meta.status).toBe(200);

@@ -9,11 +9,13 @@ import { HomePage } from "@/pages/HomePage";
 const ProjectsPage = lazy(() => import("@/pages/ProjectsPage").then((module) => ({ default: module.ProjectsPage })));
 const AllProjectsPage = lazy(() => import("@/pages/AllProjectsPage").then((module) => ({ default: module.AllProjectsPage })));
 const LinktreePage = lazy(() => import("@/pages/LinktreePage").then((module) => ({ default: module.LinktreePage })));
+const DevPage = lazy(() => import("@/pages/DevPage").then((module) => ({ default: module.DevPage })));
 const ProjectPage = lazy(() => import("@/pages/ProjectPage").then((module) => ({ default: module.ProjectPage })));
 const ProfilePage = lazy(() => import("@/pages/ProfilePage").then((module) => ({ default: module.ProfilePage })));
 const ArticlesPage = lazy(() => import("@/pages/ArticlesPage").then((module) => ({ default: module.ArticlesPage })));
 const ArticlePage = lazy(() => import("@/pages/ArticlePage").then((module) => ({ default: module.ArticlePage })));
 const ContactPage = lazy(() => import("@/pages/ContactPage").then((module) => ({ default: module.ContactPage })));
+const LegalPage = lazy(() => import("@/pages/LegalPage").then((module) => ({ default: module.LegalPage })));
 const NotFoundPage = lazy(() => import("@/pages/NotFoundPage").then((module) => ({ default: module.NotFoundPage })));
 
 function PortfolioRoutes() {
@@ -23,7 +25,7 @@ function PortfolioRoutes() {
   return (
     <>
       {previewPath ? <Box bg="app.accent-subtle" borderBottomWidth="1px" borderColor="app.border" px="5" py="3"><Text textAlign="center" fontSize="sm" fontWeight="650">{copy.preview}</Text></Box> : null}
-      <Routes location={previewPath ?? location}>
+      <Routes location={previewPath ? `${previewPath}${location.hash}` : location}>
         <Route path="/es" element={<HomePage />} />
         <Route path="/en" element={<HomePage />} />
         <Route path="/es/proyectos" element={<ProjectsPage />} />
@@ -31,6 +33,8 @@ function PortfolioRoutes() {
         <Route path="/es/todos" element={<AllProjectsPage />} />
         <Route path="/en/all" element={<AllProjectsPage />} />
         <Route path="/linktree" element={<LinktreePage />} />
+        <Route path="/dev" element={<DevPage />} />
+        <Route path="/en/dev" element={<DevPage />} />
         <Route path="/es/proyectos/:slug" element={<ProjectPage />} />
         <Route path="/en/projects/:slug" element={<ProjectPage />} />
         <Route path="/es/perfil" element={<ProfilePage />} />
@@ -41,6 +45,8 @@ function PortfolioRoutes() {
         <Route path="/en/articles/:slug" element={<ArticlePage />} />
         <Route path="/es/contacto" element={<ContactPage />} />
         <Route path="/en/contact" element={<ContactPage />} />
+        <Route path="/es/legal" element={<LegalPage />} />
+        <Route path="/en/legal" element={<LegalPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </>

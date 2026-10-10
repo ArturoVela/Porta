@@ -2,6 +2,8 @@ import { FALLBACK_ENVELOPE } from "../src/content/fallback";
 import { fallbackEnvelope, isPortfolioEnvelope } from "../src/lib/content";
 import { isLocale, localeFromPath, localizedPath, matchLocalizedRoute, preferredLocale, routePath, type Locale } from "../src/i18n";
 import { projectDisplayCover } from "../src/lib/spotlight";
+import { PRIVACY_POLICY_VERSION } from "../src/lib/legal";
+import { githubApi } from "./github";
 import type { PortfolioEnvelope, PortfolioManifest, PublicComment } from "../src/types/content";
 
 const JSON_HEADERS = { "content-type": "application/json; charset=utf-8", "cache-control": "no-store", "x-content-type-options": "nosniff" };
@@ -11,7 +13,7 @@ const BACKUP_TTL_SECONDS = 86_400;
 
 type ContentResult = { envelope: PortfolioEnvelope; source: "brain" | "cache" | "backup" | "bundled" | "preview" };
 type CommentRow = { id: string; author_name: string; body: string; created_at: string };
-type CommentInput = { publicationId: string; name: string; message: string; turnstileToken: string };
+type CommentInput = { publicationId: string; name: string; message: string; turnstileToken: string; privacyConsent: string };
 type RouteMeta = { title: string; description: string; canonicalPath: string; image: string; imageWidth: number; imageHeight: number; type: "website" | "article"; status: number; noindex: boolean; structuredData: Record<string, unknown> };
 
 function defaultCache() {
@@ -75,8 +77,10 @@ export function parseCommentPayload(value: Record<string, unknown> | null): Comm
   const name = typeof value.name === "string" ? value.name.trim().replace(/\s+/g, " ") : "";
   const message = typeof value.message === "string" ? value.message.trim() : "";
   const turnstileToken = typeof value.turnstileToken === "string" ? value.turnstileToken.trim() : "";
+  const privacyConsent = value.privacyConsent;
+  if (privacyConsent !== PRIVACY_POLICY_VERSION) return null;
   if (!/^[a-zA-Z0-9][a-zA-Z0-9_-]{2,127}$/.test(publicationId) || name.length < 1 || name.length > 80 || message.length < 1 || message.length > 2000 || turnstileToken.length < 1 || turnstileToken.length > 4096) return null;
-  return { publicationId, name, message, turnstileToken };
+  return { publicationId, name, message, turnstileToken, privacyConsent };
 }
 
 export function isSameOrigin(request: Request) {
@@ -175,7 +179,7 @@ async function verifyTurnstile(request: Request, env: Env, token: string) {
 async function createComment(request: Request, env: Env, ctx: ExecutionContext) {
   if (!isSameOrigin(request)) return json({ error: "Origen no permitido" }, 403);
   const input = parseCommentPayload(await readJson(request));
-  if (!input) return json({ error: "Revisa el nombre, el comentario y la verificación" }, 400);
+  if (!input) return json({ error: "Revisa el nombre, el comentario, la autorización de privacidad y la verificación" }, 400);
   const rateKey = request.headers.get("CF-Connecting-IP") ?? "local";
   const rate = await env.COMMENT_RATE_LIMITER.limit({ key: rateKey });
   if (!rate.success) return json({ error: "Espera un momento antes de publicar otro comentario" }, 429, { "retry-after": "60" });
@@ -186,7 +190,7 @@ async function createComment(request: Request, env: Env, ctx: ExecutionContext) 
   const { envelope } = await loadContent(env, ctx, "es");
   if (!publicationExists(envelope.data, input.publicationId)) return json({ error: "La publicación no existe" }, 404);
   const comment: PublicComment = { id: crypto.randomUUID(), name: input.name, message: input.message, createdAt: new Date().toISOString() };
-  await env.DB.prepare("INSERT INTO comments (id, publication_id, author_name, body, created_at, hidden_at, legacy_id) VALUES (?, ?, ?, ?, ?, NULL, NULL)").bind(comment.id, input.publicationId, input.name, input.message, comment.createdAt).run();
+  await env.DB.prepare("INSERT INTO comments (id, publication_id, author_name, body, created_at, hidden_at, legacy_id, privacy_policy_version) VALUES (?, ?, ?, ?, ?, NULL, NULL, ?)").bind(comment.id, input.publicationId, input.name, input.message, comment.createdAt, input.privacyConsent).run();
   return json({ data: comment }, 201);
 }
 
@@ -249,7 +253,7 @@ async function sitemap(env: Env, ctx: ExecutionContext) {
   const [es, en] = await Promise.all([loadContent(env, ctx, "es"), loadContent(env, ctx, "en")]);
   const origin = env.CANONICAL_ORIGIN.replace(/\/$/, "");
   const entries = ([{ locale: "es", manifest: es.envelope.data }, { locale: "en", manifest: en.envelope.data }] as const).flatMap(({ locale, manifest }) => [
-    { locale, name: "home" as const }, { locale, name: "projects" as const }, { locale, name: "profile" as const }, { locale, name: "articles" as const }, { locale, name: "contact" as const },
+    { locale, name: "home" as const }, { locale, name: "projects" as const }, { locale, name: "profile" as const }, { locale, name: "articles" as const }, { locale, name: "contact" as const }, { locale, name: "legal" as const }, { locale, name: "dev" as const },
     ...manifest.projects.map((item) => ({ locale, name: "project" as const, slug: item.slug })),
     ...manifest.articles.map((item) => ({ locale, name: "article" as const, slug: item.slug })),
   ]);
@@ -281,6 +285,7 @@ export function normalizeLegacyPath(pathname: string) {
   if (pathname === "/perfil" || pathname === "/about" || pathname === "/cv" || pathname.startsWith("/eventos")) return routePath("es", "profile");
   if (pathname === "/contacto" || pathname === "/contact") return routePath("es", "contact");
   if (pathname === "/all") return routePath("es", "allProjects");
+  if (pathname === "/legal") return routePath("es", "legal");
   if (pathname === "/pricing" || pathname.startsWith("/service")) return `${routePath("es", "home")}#servicios`;
   if (pathname === "/feed.xml") return "/es/feed.xml";
   return null;
@@ -290,6 +295,7 @@ export function metaForPath(pathname: string, manifest: PortfolioManifest, origi
   const match = matchLocalizedRoute(pathname) ?? matchLocalizedRoute(localizedPath(pathname, "es"));
   const locale = match?.locale ?? localeFromPath(pathname) ?? "es";
   const wallet = pathname.replace(/\/$/, "") === "/linktree";
+  const dev = match?.name === "dev";
   const canonicalPath = wallet ? "/linktree" : match ? routePath(locale, match.name, match.slug) : pathname;
   const baseImage = new URL(manifest.site.seo.ogImage ?? "/og-card.svg", origin).href;
   const base = {
@@ -314,9 +320,11 @@ export function metaForPath(pathname: string, manifest: PortfolioManifest, origi
   if (match?.name === "projects") return { ...base, title: `${locale === "en" ? "Projects" : "Proyectos"} — ${manifest.site.name}`, description: locale === "en" ? "Web products, internal systems, and digital experiences built by Arturo Vela." : "Productos web, sistemas internos y experiencias digitales construidas por Arturo Vela.", canonicalPath };
   if (match?.name === "allProjects") return { ...base, title: `${locale === "en" ? "All projects" : "Todos los proyectos"} — ${manifest.site.name}`, description: locale === "en" ? "Quick access to every project by Arturo Vela." : "Acceso rápido a todos los proyectos de Arturo Vela.", canonicalPath, noindex: true, structuredData: {} };
   if (wallet) return { ...base, title: `Tarjetero — ${manifest.site.name}`, description: "Todos los proyectos de Arturo Vela en un tarjetero: herramientas, espacio personal, portafolio y SaaS.", canonicalPath };
+  if (dev) return { ...base, title: `${manifest.site.name} — Dev · ${locale === "en" ? "Product and web engineering" : "Producto e ingeniería web"}`, description: locale === "en" ? "Meet Arturo Vela: featured projects, independent apps, languages and GitHub contributions. Let’s discuss your next product." : "Conoce a Arturo Vela: proyectos destacados, apps propias, lenguajes y contribuciones en GitHub. Conversemos sobre tu próximo producto.", canonicalPath, structuredData: { ...base.structuredData, url: new URL(canonicalPath, origin).href, image: new URL("/assets/images/Me/Fototech.jpg", origin).href, sameAs: manifest.site.socials.map((social) => social.url) } };
   if (match?.name === "profile") return { ...base, title: `${locale === "en" ? "Profile" : "Perfil"} — ${manifest.site.name}`, description: manifest.site.bio, canonicalPath };
   if (match?.name === "articles") return { ...base, title: `${locale === "en" ? "Articles" : "Artículos"} — ${manifest.site.name}`, description: locale === "en" ? "Notes on research, product, communities, and web engineering." : "Notas sobre investigación, producto, comunidades e ingeniería web.", canonicalPath };
   if (match?.name === "contact") return { ...base, title: `${locale === "en" ? "Contact" : "Contacto"} — ${manifest.site.name}`, description: locale === "en" ? "Talk with Arturo Vela about web products, internal systems, and technical collaboration." : "Conversa con Arturo Vela sobre productos web, sistemas internos y colaboración técnica.", canonicalPath };
+  if (match?.name === "legal") return { ...base, title: `${locale === "en" ? "Privacy and terms of use" : "Privacidad y condiciones de uso"} — ${manifest.site.name}`, description: locale === "en" ? "Privacy policy, cookies, data rights and terms for Arturo Vela's portfolio." : "Política de privacidad, cookies, derechos ARCO y condiciones del portafolio de Arturo Vela.", canonicalPath, structuredData: {} };
   const project = match?.name === "project" ? manifest.projects.find((item) => item.slug === match.slug) : undefined;
   if (project) {
     const cover = projectDisplayCover(project);
@@ -404,6 +412,7 @@ async function route(request: Request, env: Env, ctx: ExecutionContext) {
   const legacy = normalizeLegacyPath(url.pathname);
   if (legacy) return Response.redirect(new URL(`${legacy}${legacy.includes("#") ? "" : url.search}`, env.CANONICAL_ORIGIN).href, 301);
   if (url.pathname === "/api/health" && request.method === "GET") return json({ data: { ok: true, service: "velaarturo" } });
+  if ((url.pathname === "/api/github" || url.pathname === "/api/github/contributions") && request.method === "GET") return githubApi(request, ctx);
   if (url.pathname === "/api/comments" && request.method === "GET") return listComments(request, env);
   if (url.pathname === "/api/comments" && request.method === "POST") return createComment(request, env, ctx);
   if (url.pathname.startsWith("/api/content/") && request.method === "GET") return contentApi(url, env, ctx);

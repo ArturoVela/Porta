@@ -26,6 +26,14 @@ describe("vista previa del editor", () => {
     expect(contentHref("https://example.com", "private-token")).toBe("https://example.com");
     expect(contentHref("//example.com", "private-token")).toBe("//example.com");
   });
+
+  it("separa el ancla legal de la ruta enviada al servidor de vista previa", () => {
+    const href = new URL(contentHref("/es/legal#cookies", "private/preview+token"), "https://velaarturo.com");
+    expect(href.searchParams.get("path")).toBe("/es/legal");
+    expect(href.searchParams.get("token")).toBe("private/preview+token");
+    expect(href.hash).toBe("#cookies");
+    expect(contentHref("/es/legal#cookies", null)).toBe("/es/legal#cookies");
+  });
 });
 
 describe("contrato de contenido v1", () => {

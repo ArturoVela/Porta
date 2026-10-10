@@ -24,7 +24,7 @@
 .wallet-skip:focus { transform: translateY(0); }
 .wallet-header { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
 .wallet-profile { display: flex; align-items: center; gap: 12px; min-height: 44px; }
-.wallet-avatar { display: grid; place-items: center; width: 44px; height: 44px; background: #2453f4; border-radius: 12px; font-weight: 850; }
+.wallet-avatar { display: block; width: 48px; height: 48px; flex-shrink: 0; object-fit: cover; object-position: 50% 25%; border: 1px solid var(--wallet-line); border-radius: 50%; }
 .wallet-profile strong { display: block; font-size: 15px; font-weight: 750; }
 .wallet-profile small { display: block; color: var(--wallet-muted); font-size: 12px; margin-top: 1px; }
 .wallet-icon-button { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; flex-shrink: 0; border: 0; border-radius: 50%; background: var(--wallet-surface); color: var(--wallet-text); transition: transform 140ms ease-out, background-color 140ms ease; }
@@ -40,8 +40,8 @@
 .wallet-search input { width: 100%; min-width: 0; min-height: 48px; padding: 0; background: transparent; color: var(--wallet-text); border: 0; outline: none; font: inherit; font-size: 16px; caret-color: #fff; }
 .wallet-search input:focus-visible { outline: none; }
 .wallet-search input::placeholder { color: var(--wallet-muted); opacity: 1; }
-.wallet-filters { display: flex; gap: 4px; margin-top: 12px; }
-.wallet-filters button { flex: 1 1 auto; min-width: 44px; min-height: 44px; border: 0; padding: 0 3px; border-radius: 10px; color: var(--wallet-muted); background: transparent; font-size: 12px; font-weight: 650; white-space: nowrap; transition: color 140ms ease, background-color 140ms ease; }
+.wallet-filters { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px; margin-top: 12px; }
+.wallet-filters button { min-width: 44px; min-height: 44px; border: 0; padding: 0 3px; border-radius: 10px; color: var(--wallet-muted); background: transparent; font-size: 12px; font-weight: 650; white-space: nowrap; transition: color 140ms ease, background-color 140ms ease; }
 .wallet-filters button[aria-pressed="true"] { background: var(--wallet-surface); color: var(--wallet-text); }
 .wallet-hint { color: var(--wallet-muted); font-size: 12px; margin: 4px 0 24px; }
 .wallet-collection + .wallet-collection { margin-top: 38px; }

@@ -1,0 +1,795 @@
+{
+  "products": [
+    {
+      "caption": "Explora San Martín164 lugares documentados con fuentesProbar app Ver caso",
+      "focus": null,
+      "height": 653.3046875,
+      "image": "/assets/images/portfolio/spotlight-explora.webp",
+      "links": [
+        "https://explora.velaarturo.com/",
+        "http://127.0.0.1:5173/es/proyectos/explora-san-martin"
+      ],
+      "loaded": true
+    },
+    {
+      "caption": "Cafetero41 cafeterías con fuentes trazablesProbar app Ver caso",
+      "focus": "Siguiente producto",
+      "height": 653.3046875,
+      "image": "/assets/images/portfolio/spotlight-coffee.webp",
+      "links": [
+        "https://cafetero.velaarturo.com/",
+        "http://127.0.0.1:5173/es/proyectos/coffee"
+      ],
+      "loaded": true
+    },
+    {
+      "caption": "Hub39 herramientas agrupadas en 11 categoríasProbar app Ver caso",
+      "focus": "Siguiente producto",
+      "height": 653.3046875,
+      "image": "/assets/images/pases-webs/16-hub.png",
+      "links": [
+        "https://hub.velaarturo.com/",
+        "http://127.0.0.1:5173/es/proyectos/hub"
+      ],
+      "loaded": true
+    },
+    {
+      "caption": "CotizaCotizaciones y contratos en un mismo flujoProbar app Ver caso",
+      "focus": "Siguiente producto",
+      "height": 653.3046875,
+      "image": "/assets/images/pases-webs/04-cotiza.png",
+      "links": [
+        "https://cotiza.velaarturo.com/",
+        "http://127.0.0.1:5173/es/proyectos/cotiza"
+      ],
+      "loaded": true
+    },
+    {
+      "caption": "Vela VentasVentas, compras, inventario por sucursal y caja diaria para comercios peruanos.Probar app ",
+      "focus": "Siguiente producto",
+      "height": 653.3046875,
+      "image": "/assets/images/pases-webs/20-ventas.png",
+      "links": [
+        "https://ventas.velaarturo.com/"
+      ],
+      "loaded": true
+    },
+    {
+      "caption": "FinanzasOrganiza cuentas, movimientos y metas para ti y tu hogar.Probar app ",
+      "focus": "Siguiente producto",
+      "height": 653.3046875,
+      "image": "/assets/images/pases-webs/19-finanzas.png",
+      "links": [
+        "https://finanzas.velaarturo.com/"
+      ],
+      "loaded": true
+    },
+    {
+      "caption": "Vela EntradasEncuentra eventos y entradas digitales; una plataforma para asistentes y organizadores.Probar app ",
+      "focus": "Siguiente producto",
+      "height": 653.3046875,
+      "image": "/assets/images/pases-webs/bc-750x288.png",
+      "links": [
+        "https://bc.velaarturo.com/"
+      ],
+      "loaded": true
+    },
+    {
+      "caption": "Tarjetas ArturoCrea tarjetas digitales de fidelización para tu negocio y convierte cada visita en una recompensa.Probar app ",
+      "focus": null,
+      "height": 653.3046875,
+      "image": "/assets/images/pases-webs/https-::tarjetas.velaarturo.com:.png",
+      "links": [
+        "https://tarjetas.velaarturo.com/"
+      ],
+      "loaded": true
+    }
+  ],
+  "matrix": [
+    {
+      "locale": "es",
+      "width": 1440,
+      "theme": "dark",
+      "capture": "es-1440-dark.jpg",
+      "carousel": {
+        "bottom": 670.8984375,
+        "height": 541.3046875,
+        "left": 768.1171875,
+        "right": 1320.5,
+        "top": 129.59375,
+        "width": 552.3828125,
+        "x": 768.1171875,
+        "y": 129.59375
+      },
+      "controls": [
+        {
+          "height": 44,
+          "name": "Producto anterior",
+          "width": 44
+        },
+        {
+          "height": 44,
+          "name": "Siguiente producto",
+          "width": 44
+        }
+      ],
+      "hero": {
+        "bottom": 726.8984375,
+        "height": 653.3046875,
+        "left": 0,
+        "right": 1425,
+        "top": 73.59375,
+        "width": 1425,
+        "x": 0,
+        "y": 73.59375
+      },
+      "loaded": [
+        true
+      ],
+      "overflow": false,
+      "scrollY": 0
+    },
+    {
+      "locale": "es",
+      "width": 1440,
+      "theme": "light",
+      "capture": "es-1440-light.jpg",
+      "carousel": {
+        "bottom": 670.8984375,
+        "height": 541.3046875,
+        "left": 768.1171875,
+        "right": 1320.5,
+        "top": 129.59375,
+        "width": 552.3828125,
+        "x": 768.1171875,
+        "y": 129.59375
+      },
+      "controls": [
+        {
+          "height": 44,
+          "name": "Producto anterior",
+          "width": 44
+        },
+        {
+          "height": 44,
+          "name": "Siguiente producto",
+          "width": 44
+        }
+      ],
+      "hero": {
+        "bottom": 726.8984375,
+        "height": 653.3046875,
+        "left": 0,
+        "right": 1425,
+        "top": 73.59375,
+        "width": 1425,
+        "x": 0,
+        "y": 73.59375
+      },
+      "loaded": [
+        true
+      ],
+      "overflow": false,
+      "scrollY": 0
+    },
+    {
+      "locale": "es",
+      "width": 1024,
+      "theme": "dark",
+      "capture": "es-1024-dark.jpg",
+      "carousel": {
+        "bottom": 636.3359375,
+        "height": 468.71875,
+        "left": 553.6640625,
+        "right": 977,
+        "top": 167.6171875,
+        "width": 423.3359375,
+        "x": 553.6640625,
+        "y": 167.6171875
+      },
+      "controls": [
+        {
+          "height": 44,
+          "name": "Producto anterior",
+          "width": 44
+        },
+        {
+          "height": 44,
+          "name": "Siguiente producto",
+          "width": 44
+        }
+      ],
+      "hero": {
+        "bottom": 730.3671875,
+        "height": 656.7734375,
+        "left": 0,
+        "right": 1009,
+        "top": 73.59375,
+        "width": 1009,
+        "x": 0,
+        "y": 73.59375
+      },
+      "loaded": [
+        true
+      ],
+      "overflow": false,
+      "scrollY": 0
+    },
+    {
+      "locale": "es",
+      "width": 1024,
+      "theme": "light",
+      "capture": "es-1024-light.jpg",
+      "carousel": {
+        "bottom": 636.3359375,
+        "height": 468.71875,
+        "left": 553.6640625,
+        "right": 977,
+        "top": 167.6171875,
+        "width": 423.3359375,
+        "x": 553.6640625,
+        "y": 167.6171875
+      },
+      "controls": [
+        {
+          "height": 44,
+          "name": "Producto anterior",
+          "width": 44
+        },
+        {
+          "height": 44,
+          "name": "Siguiente producto",
+          "width": 44
+        }
+      ],
+      "hero": {
+        "bottom": 730.3671875,
+        "height": 656.7734375,
+        "left": 0,
+        "right": 1009,
+        "top": 73.59375,
+        "width": 1009,
+        "x": 0,
+        "y": 73.59375
+      },
+      "loaded": [
+        true
+      ],
+      "overflow": false,
+      "scrollY": 0
+    },
+    {
+      "locale": "es",
+      "width": 768,
+      "theme": "dark",
+      "capture": "es-768-dark.jpg",
+      "carousel": {
+        "bottom": 1203.7734375,
+        "height": 613.5625,
+        "left": 24,
+        "right": 729,
+        "top": 590.2109375,
+        "width": 705,
+        "x": 24,
+        "y": 590.2109375
+      },
+      "controls": [
+        {
+          "height": 44,
+          "name": "Producto anterior",
+          "width": 44
+        },
+        {
+          "height": 44,
+          "name": "Siguiente producto",
+          "width": 44
+        }
+      ],
+      "hero": {
+        "bottom": 1259.7734375,
+        "height": 1187.7734375,
+        "left": 0,
+        "right": 753,
+        "top": 72,
+        "width": 753,
+        "x": 0,
+        "y": 72
+      },
+      "loaded": [
+        true
+      ],
+      "overflow": false,
+      "scrollY": 0
+    },
+    {
+      "locale": "es",
+      "width": 768,
+      "theme": "light",
+      "capture": "es-768-light.jpg",
+      "carousel": {
+        "bottom": 1203.7734375,
+        "height": 613.5625,
+        "left": 24,
+        "right": 729,
+        "top": 590.2109375,
+        "width": 705,
+        "x": 24,
+        "y": 590.2109375
+      },
+      "controls": [
+        {
+          "height": 44,
+          "name": "Producto anterior",
+          "width": 44
+        },
+        {
+          "height": 44,
+          "name": "Siguiente producto",
+          "width": 44
+        }
+      ],
+      "hero": {
+        "bottom": 1259.7734375,
+        "height": 1187.7734375,
+        "left": 0,
+        "right": 753,
+        "top": 72,
+        "width": 753,
+        "x": 0,
+        "y": 72
+      },
+      "loaded": [
+        true
+      ],
+      "overflow": false,
+      "scrollY": 0
+    },
+    {
+      "locale": "es",
+      "width": 390,
+      "theme": "dark",
+      "capture": "es-390-dark.jpg",
+      "carousel": {
+        "bottom": 1136.765625,
+        "height": 425.9375,
+        "left": 16,
+        "right": 359,
+        "top": 710.828125,
+        "width": 343,
+        "x": 16,
+        "y": 710.828125
+      },
+      "controls": [
+        {
+          "height": 44,
+          "name": "Producto anterior",
+          "width": 44
+        },
+        {
+          "height": 44,
+          "name": "Siguiente producto",
+          "width": 44
+        }
+      ],
+      "hero": {
+        "bottom": 1176.765625,
+        "height": 1104.765625,
+        "left": 0,
+        "right": 375,
+        "top": 72,
+        "width": 375,
+        "x": 0,
+        "y": 72
+      },
+      "loaded": [
+        true
+      ],
+      "overflow": false,
+      "scrollY": 0
+    },
+    {
+      "locale": "es",
+      "width": 390,
+      "theme": "light",
+      "capture": "es-390-light.jpg",
+      "carousel": {
+        "bottom": 1136.765625,
+        "height": 425.9375,
+        "left": 16,
+        "right": 359,
+        "top": 710.828125,
+        "width": 343,
+        "x": 16,
+        "y": 710.828125
+      },
+      "controls": [
+        {
+          "height": 44,
+          "name": "Producto anterior",
+          "width": 44
+        },
+        {
+          "height": 44,
+          "name": "Siguiente producto",
+          "width": 44
+        }
+      ],
+      "hero": {
+        "bottom": 1176.765625,
+        "height": 1104.765625,
+        "left": 0,
+        "right": 375,
+        "top": 72,
+        "width": 375,
+        "x": 0,
+        "y": 72
+      },
+      "loaded": [
+        true
+      ],
+      "overflow": false,
+      "scrollY": 0
+    },
+    {
+      "locale": "en",
+      "width": 1440,
+      "theme": "dark",
+      "capture": "en-1440-dark.jpg",
+      "carousel": {
+        "bottom": 657.3046875,
+        "height": 527.7109375,
+        "left": 768.1171875,
+        "right": 1320.5,
+        "top": 129.59375,
+        "width": 552.3828125,
+        "x": 768.1171875,
+        "y": 129.59375
+      },
+      "controls": [
+        {
+          "height": 44,
+          "name": "Previous product",
+          "width": 44
+        },
+        {
+          "height": 44,
+          "name": "Next product",
+          "width": 44
+        }
+      ],
+      "hero": {
+        "bottom": 713.3046875,
+        "height": 639.7109375,
+        "left": 0,
+        "right": 1425,
+        "top": 73.59375,
+        "width": 1425,
+        "x": 0,
+        "y": 73.59375
+      },
+      "loaded": [
+        true
+      ],
+      "overflow": false,
+      "scrollY": 0
+    },
+    {
+      "locale": "en",
+      "width": 1440,
+      "theme": "light",
+      "capture": "en-1440-light.jpg",
+      "carousel": {
+        "bottom": 657.3046875,
+        "height": 527.7109375,
+        "left": 768.1171875,
+        "right": 1320.5,
+        "top": 129.59375,
+        "width": 552.3828125,
+        "x": 768.1171875,
+        "y": 129.59375
+      },
+      "controls": [
+        {
+          "height": 44,
+          "name": "Previous product",
+          "width": 44
+        },
+        {
+          "height": 44,
+          "name": "Next product",
+          "width": 44
+        }
+      ],
+      "hero": {
+        "bottom": 713.3046875,
+        "height": 639.7109375,
+        "left": 0,
+        "right": 1425,
+        "top": 73.59375,
+        "width": 1425,
+        "x": 0,
+        "y": 73.59375
+      },
+      "loaded": [
+        true
+      ],
+      "overflow": false,
+      "scrollY": 0
+    },
+    {
+      "locale": "en",
+      "width": 1024,
+      "theme": "dark",
+      "capture": "en-1024-dark.jpg",
+      "carousel": {
+        "bottom": 607.78125,
+        "height": 468.71875,
+        "left": 553.6640625,
+        "right": 977,
+        "top": 139.0625,
+        "width": 423.3359375,
+        "x": 553.6640625,
+        "y": 139.0625
+      },
+      "controls": [
+        {
+          "height": 44,
+          "name": "Previous product",
+          "width": 44
+        },
+        {
+          "height": 44,
+          "name": "Next product",
+          "width": 44
+        }
+      ],
+      "hero": {
+        "bottom": 673.25,
+        "height": 599.65625,
+        "left": 0,
+        "right": 1009,
+        "top": 73.59375,
+        "width": 1009,
+        "x": 0,
+        "y": 73.59375
+      },
+      "loaded": [
+        true
+      ],
+      "overflow": false,
+      "scrollY": 0
+    },
+    {
+      "locale": "en",
+      "width": 1024,
+      "theme": "light",
+      "capture": "en-1024-light.jpg",
+      "carousel": {
+        "bottom": 607.78125,
+        "height": 468.71875,
+        "left": 553.6640625,
+        "right": 977,
+        "top": 139.0625,
+        "width": 423.3359375,
+        "x": 553.6640625,
+        "y": 139.0625
+      },
+      "controls": [
+        {
+          "height": 44,
+          "name": "Previous product",
+          "width": 44
+        },
+        {
+          "height": 44,
+          "name": "Next product",
+          "width": 44
+        }
+      ],
+      "hero": {
+        "bottom": 673.25,
+        "height": 599.65625,
+        "left": 0,
+        "right": 1009,
+        "top": 73.59375,
+        "width": 1009,
+        "x": 0,
+        "y": 73.59375
+      },
+      "loaded": [
+        true
+      ],
+      "overflow": false,
+      "scrollY": 0
+    },
+    {
+      "locale": "en",
+      "width": 768,
+      "theme": "dark",
+      "capture": "en-768-dark.jpg",
+      "carousel": {
+        "bottom": 1203.7734375,
+        "height": 613.5625,
+        "left": 24,
+        "right": 729,
+        "top": 590.2109375,
+        "width": 705,
+        "x": 24,
+        "y": 590.2109375
+      },
+      "controls": [
+        {
+          "height": 44,
+          "name": "Previous product",
+          "width": 44
+        },
+        {
+          "height": 44,
+          "name": "Next product",
+          "width": 44
+        }
+      ],
+      "hero": {
+        "bottom": 1259.7734375,
+        "height": 1187.7734375,
+        "left": 0,
+        "right": 753,
+        "top": 72,
+        "width": 753,
+        "x": 0,
+        "y": 72
+      },
+      "loaded": [
+        true
+      ],
+      "overflow": false,
+      "scrollY": 0
+    },
+    {
+      "locale": "en",
+      "width": 768,
+      "theme": "light",
+      "capture": "en-768-light.jpg",
+      "carousel": {
+        "bottom": 1203.7734375,
+        "height": 613.5625,
+        "left": 24,
+        "right": 729,
+        "top": 590.2109375,
+        "width": 705,
+        "x": 24,
+        "y": 590.2109375
+      },
+      "controls": [
+        {
+          "height": 44,
+          "name": "Previous product",
+          "width": 44
+        },
+        {
+          "height": 44,
+          "name": "Next product",
+          "width": 44
+        }
+      ],
+      "hero": {
+        "bottom": 1259.7734375,
+        "height": 1187.7734375,
+        "left": 0,
+        "right": 753,
+        "top": 72,
+        "width": 753,
+        "x": 0,
+        "y": 72
+      },
+      "loaded": [
+        true
+      ],
+      "overflow": false,
+      "scrollY": 0
+    },
+    {
+      "locale": "en",
+      "width": 390,
+      "theme": "dark",
+      "capture": "en-390-dark.jpg",
+      "carousel": {
+        "bottom": 1091.890625,
+        "height": 425.9375,
+        "left": 16,
+        "right": 359,
+        "top": 665.953125,
+        "width": 343,
+        "x": 16,
+        "y": 665.953125
+      },
+      "controls": [
+        {
+          "height": 44,
+          "name": "Previous product",
+          "width": 44
+        },
+        {
+          "height": 44,
+          "name": "Next product",
+          "width": 44
+        }
+      ],
+      "hero": {
+        "bottom": 1131.890625,
+        "height": 1059.890625,
+        "left": 0,
+        "right": 375,
+        "top": 72,
+        "width": 375,
+        "x": 0,
+        "y": 72
+      },
+      "loaded": [
+        true
+      ],
+      "overflow": false,
+      "scrollY": 0
+    },
+    {
+      "locale": "en",
+      "width": 390,
+      "theme": "light",
+      "capture": "en-390-light.jpg",
+      "carousel": {
+        "bottom": 1091.890625,
+        "height": 425.9375,
+        "left": 16,
+        "right": 359,
+        "top": 665.953125,
+        "width": 343,
+        "x": 16,
+        "y": 665.953125
+      },
+      "controls": [
+        {
+          "height": 44,
+          "name": "Previous product",
+          "width": 44
+        },
+        {
+          "height": 44,
+          "name": "Next product",
+          "width": 44
+        }
+      ],
+      "hero": {
+        "bottom": 1131.890625,
+        "height": 1059.890625,
+        "left": 0,
+        "right": 375,
+        "top": 72,
+        "width": 375,
+        "x": 0,
+        "y": 72
+      },
+      "loaded": [
+        true
+      ],
+      "overflow": false,
+      "scrollY": 0
+    }
+  ],
+  "checks": {
+    "keyboard": "Enter navigates and Tab moves between controls; inactive slides inert",
+    "nativeHorizontalScroll": "390px EN moved to Cafetero, 2 of 8",
+    "missingImage": "Generated dist copy temporarily removed; local compiled preview showed image unavailable with working links/controls; file restored SHA-256 matches source",
+    "compiled": {
+      "canonical": "https://velaarturo.com/en/",
+      "current": "FinanzasOrganize accounts, transactions and goals for yourself and your household.Try app ",
+      "imageLoaded": true,
+      "overflow": false
+    },
+    "tests": 79,
+    "stagingBuild": true,
+    "productionBuild": true,
+    "stagingDryRun": true,
+    "productionDryRun": true,
+    "productionPublished": false
+  }
+}

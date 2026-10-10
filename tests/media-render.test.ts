@@ -9,7 +9,7 @@ import { HomePage } from "@/pages/HomePage";
 import { ProfilePage } from "@/pages/ProfilePage";
 import { ProjectPage } from "@/pages/ProjectPage";
 import { ProjectsPage } from "@/pages/ProjectsPage";
-import { selectSpotlightProjects } from "@/lib/spotlight";
+import { selectHomeProducts, selectSpotlightProjects } from "@/lib/spotlight";
 import { system } from "@/theme";
 import type { ProjectContent } from "@/types/content";
 
@@ -39,11 +39,38 @@ describe("imágenes editadas en Second Brain", () => {
     expect(markup).not.toContain("Stack actual");
   });
 
-  it("incluye una sola entrada para cada uno de los tres casos elegidos", () => {
+  it("mantiene tres destacados y permite acceso adicional desde el slider público", () => {
     const markup = renderContent(createElement(HomePage), FALLBACK_ENVELOPE.data.projects);
     for (const slug of ["nieto-import", "explora-san-martin", "coffee"]) {
-      expect(markup.match(new RegExp(`path=%2Fes%2Fproyectos%2F${slug}`, "g"))).toHaveLength(1);
+      expect(markup.match(new RegExp(`path=%2Fes%2Fproyectos%2F${slug}`, "g"))).toHaveLength(slug === "nieto-import" ? 1 : 2);
     }
+    expect(markup.match(/class="project-feature /g)).toHaveLength(3);
+  });
+
+  it("usa captura editada en slider y conserva productos públicos sin casos del manifiesto", () => {
+    const explora = FALLBACK_ENVELOPE.data.projects.find((item) => item.slug === "explora-san-martin")!;
+    const markup = renderContent(createElement(HomePage), [{ ...explora, cover }]);
+    expect(markup).toContain('class="home-product-carousel');
+    expect(markup).toContain('src="/media/2/cover?token=preview-token"');
+    expect(markup).toContain('loading="eager"');
+    const withoutCases = renderContent(createElement(HomePage), []);
+    expect(withoutCases).toContain('class="home-product-carousel');
+    expect(withoutCases).toContain('https://explora.velaarturo.com');
+    expect(withoutCases).not.toContain('path=%2Fes%2Fproyectos%2Fexplora-san-martin');
+  });
+
+  it("elige ocho productos públicos únicos, incluidos SaaS, y reutiliza marca sin inventar capturas", () => {
+    const products = selectHomeProducts(FALLBACK_ENVELOPE.data.projects);
+    expect(products.map(({ app }) => app.id)).toEqual(["explora", "coffee", "hub", "cotiza", "ventas", "finanzas", "bc", "tarjetas"]);
+    expect(products.every(({ app }) => !app.private)).toBe(true);
+    expect(new Set(products.map(({ app }) => app.id)).size).toBe(products.length);
+    expect(products[0].cover?.src).toContain('spotlight-explora');
+    expect(products.find(({ app }) => app.id === 'ventas')?.cover).toBeUndefined();
+    const markup = renderContent(createElement(HomePage), FALLBACK_ENVELOPE.data.projects);
+    expect(markup).toContain('data-brand="true"');
+    expect(markup).toContain('alt="Imagen de marca: Vela Ventas"');
+    expect(markup).toContain('aria-label="Siguiente producto"');
+    expect(markup.match(/inert=""/g)).toHaveLength(7);
   });
 
   it("muestra el retrato del manifiesto en el perfil", () => {

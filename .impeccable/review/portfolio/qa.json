@@ -1,0 +1,1099 @@
+{
+  "cases": [
+    {
+      "apps": 8,
+      "client": 375,
+      "images": [
+        {
+          "loaded": true,
+          "src": "/assets/images/Me/Fototech.jpg"
+        }
+      ],
+      "lang": "es",
+      "scroll": 375,
+      "theme": "dark",
+      "url": "/dev",
+      "viewport": 390,
+      "requestedTheme": "dark"
+    },
+    {
+      "apps": 8,
+      "client": 375,
+      "images": [
+        {
+          "loaded": true,
+          "src": "/assets/images/Me/Fototech.jpg"
+        }
+      ],
+      "lang": "es",
+      "scroll": 375,
+      "theme": "light",
+      "url": "/dev",
+      "viewport": 390,
+      "requestedTheme": "light"
+    },
+    {
+      "apps": 8,
+      "client": 753,
+      "images": [
+        {
+          "loaded": true,
+          "src": "/assets/images/Me/Fototech.jpg"
+        },
+        {
+          "loaded": false,
+          "src": "/assets/images/portfolio/dev-qr-es.png"
+        }
+      ],
+      "lang": "es",
+      "scroll": 753,
+      "theme": "dark",
+      "url": "/dev",
+      "viewport": 768,
+      "requestedTheme": "dark"
+    },
+    {
+      "apps": 8,
+      "client": 753,
+      "images": [
+        {
+          "loaded": true,
+          "src": "/assets/images/Me/Fototech.jpg"
+        },
+        {
+          "loaded": false,
+          "src": "/assets/images/portfolio/dev-qr-es.png"
+        }
+      ],
+      "lang": "es",
+      "scroll": 753,
+      "theme": "light",
+      "url": "/dev",
+      "viewport": 768,
+      "requestedTheme": "light"
+    },
+    {
+      "apps": 8,
+      "client": 375,
+      "images": [
+        {
+          "loaded": true,
+          "src": "/assets/images/Me/Fototech.jpg"
+        }
+      ],
+      "lang": "en",
+      "scroll": 375,
+      "theme": "dark",
+      "url": "/en/dev",
+      "viewport": 390,
+      "requestedTheme": "dark"
+    },
+    {
+      "apps": 8,
+      "client": 375,
+      "images": [
+        {
+          "loaded": true,
+          "src": "/assets/images/Me/Fototech.jpg"
+        }
+      ],
+      "lang": "en",
+      "scroll": 375,
+      "theme": "light",
+      "url": "/en/dev",
+      "viewport": 390,
+      "requestedTheme": "light"
+    },
+    {
+      "apps": 8,
+      "client": 753,
+      "images": [
+        {
+          "loaded": true,
+          "src": "/assets/images/Me/Fototech.jpg"
+        },
+        {
+          "loaded": false,
+          "src": "/assets/images/portfolio/dev-qr-en.png"
+        }
+      ],
+      "lang": "en",
+      "scroll": 753,
+      "theme": "dark",
+      "url": "/en/dev",
+      "viewport": 768,
+      "requestedTheme": "dark"
+    },
+    {
+      "apps": 8,
+      "client": 753,
+      "images": [
+        {
+          "loaded": true,
+          "src": "/assets/images/Me/Fototech.jpg"
+        },
+        {
+          "loaded": false,
+          "src": "/assets/images/portfolio/dev-qr-en.png"
+        }
+      ],
+      "lang": "en",
+      "scroll": 753,
+      "theme": "light",
+      "url": "/en/dev",
+      "viewport": 768,
+      "requestedTheme": "light"
+    },
+    {
+      "client": 1009,
+      "headerScroll": 1009,
+      "heading": "1,131 contribuciones en los últimos 12 meses",
+      "lang": "es",
+      "scroll": 1009,
+      "theme": "dark",
+      "url": "/dev",
+      "viewport": 1024,
+      "requestedTheme": "dark"
+    },
+    {
+      "client": 1009,
+      "headerScroll": 1009,
+      "heading": "1,131 contribuciones en los últimos 12 meses",
+      "lang": "es",
+      "scroll": 1009,
+      "theme": "light",
+      "url": "/dev",
+      "viewport": 1024,
+      "requestedTheme": "light"
+    },
+    {
+      "client": 1425,
+      "headerScroll": 1425,
+      "heading": "1,131 contribuciones en los últimos 12 meses",
+      "lang": "es",
+      "scroll": 1425,
+      "theme": "dark",
+      "url": "/dev",
+      "viewport": 1440,
+      "requestedTheme": "dark"
+    },
+    {
+      "client": 1425,
+      "headerScroll": 1425,
+      "heading": "1,131 contribuciones en los últimos 12 meses",
+      "lang": "es",
+      "scroll": 1425,
+      "theme": "light",
+      "url": "/dev",
+      "viewport": 1440,
+      "requestedTheme": "light"
+    },
+    {
+      "client": 1009,
+      "headerScroll": 1009,
+      "heading": "1,131 contributions in the last 12 months",
+      "lang": "en",
+      "scroll": 1009,
+      "theme": "dark",
+      "url": "/en/dev",
+      "viewport": 1024,
+      "requestedTheme": "dark"
+    },
+    {
+      "client": 1009,
+      "headerScroll": 1009,
+      "heading": "1,131 contributions in the last 12 months",
+      "lang": "en",
+      "scroll": 1009,
+      "theme": "light",
+      "url": "/en/dev",
+      "viewport": 1024,
+      "requestedTheme": "light"
+    },
+    {
+      "client": 1425,
+      "headerScroll": 1425,
+      "heading": "1,131 contributions in the last 12 months",
+      "lang": "en",
+      "scroll": 1425,
+      "theme": "dark",
+      "url": "/en/dev",
+      "viewport": 1440,
+      "requestedTheme": "dark"
+    },
+    {
+      "client": 1425,
+      "headerScroll": 1425,
+      "heading": "1,131 contributions in the last 12 months",
+      "lang": "en",
+      "scroll": 1425,
+      "theme": "light",
+      "url": "/en/dev",
+      "viewport": 1440,
+      "requestedTheme": "light"
+    },
+    {
+      "client": 375,
+      "cover": "/assets/images/portfolio/spotlight-explora.webp",
+      "hero": "Convierto procesos complejos en productos web claros y mantenibles.\n\nAyudo a empresas y equipos a diseñar y construir aplicaciones, sistemas internos y experiencias digitales que simplifican su trabajo.\n\nHablemos\nVer casos de estudio\n\nAbierto a conversar sobre productos, sistemas internos y colaboración técnica.\n\nExplora San Martín\n\n164 lugares documentados con fuentes",
+      "lang": "es",
+      "scroll": 375,
+      "theme": "dark",
+      "url": "/es/",
+      "viewport": 390,
+      "requestedTheme": "dark"
+    },
+    {
+      "client": 375,
+      "cover": "/assets/images/portfolio/spotlight-explora.webp",
+      "hero": "Convierto procesos complejos en productos web claros y mantenibles.\n\nAyudo a empresas y equipos a diseñar y construir aplicaciones, sistemas internos y experiencias digitales que simplifican su trabajo.\n\nHablemos\nVer casos de estudio\n\nAbierto a conversar sobre productos, sistemas internos y colaboración técnica.\n\nExplora San Martín\n\n164 lugares documentados con fuentes",
+      "lang": "es",
+      "scroll": 375,
+      "theme": "light",
+      "url": "/es/",
+      "viewport": 390,
+      "requestedTheme": "light"
+    },
+    {
+      "client": 753,
+      "cover": "/assets/images/portfolio/spotlight-explora.webp",
+      "hero": "Convierto procesos complejos en productos web claros y mantenibles.\n\nAyudo a empresas y equipos a diseñar y construir aplicaciones, sistemas internos y experiencias digitales que simplifican su trabajo.\n\nHablemos\nVer casos de estudio\n\nAbierto a conversar sobre productos, sistemas internos y colaboración técnica.\n\nExplora San Martín\n\n164 lugares documentados con fuentes",
+      "lang": "es",
+      "scroll": 753,
+      "theme": "dark",
+      "url": "/es/",
+      "viewport": 768,
+      "requestedTheme": "dark"
+    },
+    {
+      "client": 753,
+      "cover": "/assets/images/portfolio/spotlight-explora.webp",
+      "hero": "Convierto procesos complejos en productos web claros y mantenibles.\n\nAyudo a empresas y equipos a diseñar y construir aplicaciones, sistemas internos y experiencias digitales que simplifican su trabajo.\n\nHablemos\nVer casos de estudio\n\nAbierto a conversar sobre productos, sistemas internos y colaboración técnica.\n\nExplora San Martín\n\n164 lugares documentados con fuentes",
+      "lang": "es",
+      "scroll": 753,
+      "theme": "light",
+      "url": "/es/",
+      "viewport": 768,
+      "requestedTheme": "light"
+    },
+    {
+      "client": 1009,
+      "cover": "/assets/images/portfolio/spotlight-explora.webp",
+      "hero": "Convierto procesos complejos en productos web claros y mantenibles.\n\nAyudo a empresas y equipos a diseñar y construir aplicaciones, sistemas internos y experiencias digitales que simplifican su trabajo.\n\nHablemos\nVer casos de estudio\n\nAbierto a conversar sobre productos, sistemas internos y colaboración técnica.\n\nExplora San Martín\n\n164 lugares documentados con fuentes",
+      "lang": "es",
+      "scroll": 1009,
+      "theme": "dark",
+      "url": "/es/",
+      "viewport": 1024,
+      "requestedTheme": "dark"
+    },
+    {
+      "client": 1009,
+      "cover": "/assets/images/portfolio/spotlight-explora.webp",
+      "hero": "Convierto procesos complejos en productos web claros y mantenibles.\n\nAyudo a empresas y equipos a diseñar y construir aplicaciones, sistemas internos y experiencias digitales que simplifican su trabajo.\n\nHablemos\nVer casos de estudio\n\nAbierto a conversar sobre productos, sistemas internos y colaboración técnica.\n\nExplora San Martín\n\n164 lugares documentados con fuentes",
+      "lang": "es",
+      "scroll": 1009,
+      "theme": "light",
+      "url": "/es/",
+      "viewport": 1024,
+      "requestedTheme": "light"
+    },
+    {
+      "client": 1425,
+      "cover": "/assets/images/portfolio/spotlight-explora.webp",
+      "hero": "Convierto procesos complejos en productos web claros y mantenibles.\n\nAyudo a empresas y equipos a diseñar y construir aplicaciones, sistemas internos y experiencias digitales que simplifican su trabajo.\n\nHablemos\nVer casos de estudio\n\nAbierto a conversar sobre productos, sistemas internos y colaboración técnica.\n\nExplora San Martín\n\n164 lugares documentados con fuentes",
+      "lang": "es",
+      "scroll": 1425,
+      "theme": "dark",
+      "url": "/es/",
+      "viewport": 1440,
+      "requestedTheme": "dark"
+    },
+    {
+      "client": 1425,
+      "cover": "/assets/images/portfolio/spotlight-explora.webp",
+      "hero": "Convierto procesos complejos en productos web claros y mantenibles.\n\nAyudo a empresas y equipos a diseñar y construir aplicaciones, sistemas internos y experiencias digitales que simplifican su trabajo.\n\nHablemos\nVer casos de estudio\n\nAbierto a conversar sobre productos, sistemas internos y colaboración técnica.\n\nExplora San Martín\n\n164 lugares documentados con fuentes",
+      "lang": "es",
+      "scroll": 1425,
+      "theme": "light",
+      "url": "/es/",
+      "viewport": 1440,
+      "requestedTheme": "light"
+    },
+    {
+      "client": 375,
+      "cover": "/assets/images/portfolio/spotlight-explora.webp",
+      "hero": "I turn complex processes into clear, maintainable web products.\n\nI help companies and teams design and build applications, internal systems, and digital experiences that make their work simpler.\n\nLet's talk\nView case studies\n\nOpen to conversations about products, internal systems, and technical collaboration.\n\nExplore San Martín\n\n164 documented places with sources",
+      "lang": "en",
+      "scroll": 375,
+      "theme": "dark",
+      "url": "/en/",
+      "viewport": 390,
+      "requestedTheme": "dark"
+    },
+    {
+      "client": 375,
+      "cover": "/assets/images/portfolio/spotlight-explora.webp",
+      "hero": "I turn complex processes into clear, maintainable web products.\n\nI help companies and teams design and build applications, internal systems, and digital experiences that make their work simpler.\n\nLet's talk\nView case studies\n\nOpen to conversations about products, internal systems, and technical collaboration.\n\nExplore San Martín\n\n164 documented places with sources",
+      "lang": "en",
+      "scroll": 375,
+      "theme": "light",
+      "url": "/en/",
+      "viewport": 390,
+      "requestedTheme": "light"
+    },
+    {
+      "client": 753,
+      "cover": "/assets/images/portfolio/spotlight-explora.webp",
+      "hero": "I turn complex processes into clear, maintainable web products.\n\nI help companies and teams design and build applications, internal systems, and digital experiences that make their work simpler.\n\nLet's talk\nView case studies\n\nOpen to conversations about products, internal systems, and technical collaboration.\n\nExplore San Martín\n\n164 documented places with sources",
+      "lang": "en",
+      "scroll": 753,
+      "theme": "dark",
+      "url": "/en/",
+      "viewport": 768,
+      "requestedTheme": "dark"
+    },
+    {
+      "client": 753,
+      "cover": "/assets/images/portfolio/spotlight-explora.webp",
+      "hero": "I turn complex processes into clear, maintainable web products.\n\nI help companies and teams design and build applications, internal systems, and digital experiences that make their work simpler.\n\nLet's talk\nView case studies\n\nOpen to conversations about products, internal systems, and technical collaboration.\n\nExplore San Martín\n\n164 documented places with sources",
+      "lang": "en",
+      "scroll": 753,
+      "theme": "light",
+      "url": "/en/",
+      "viewport": 768,
+      "requestedTheme": "light"
+    },
+    {
+      "client": 1009,
+      "cover": "/assets/images/portfolio/spotlight-explora.webp",
+      "hero": "I turn complex processes into clear, maintainable web products.\n\nI help companies and teams design and build applications, internal systems, and digital experiences that make their work simpler.\n\nLet's talk\nView case studies\n\nOpen to conversations about products, internal systems, and technical collaboration.\n\nExplore San Martín\n\n164 documented places with sources",
+      "lang": "en",
+      "scroll": 1009,
+      "theme": "dark",
+      "url": "/en/",
+      "viewport": 1024,
+      "requestedTheme": "dark"
+    },
+    {
+      "client": 1009,
+      "cover": "/assets/images/portfolio/spotlight-explora.webp",
+      "hero": "I turn complex processes into clear, maintainable web products.\n\nI help companies and teams design and build applications, internal systems, and digital experiences that make their work simpler.\n\nLet's talk\nView case studies\n\nOpen to conversations about products, internal systems, and technical collaboration.\n\nExplore San Martín\n\n164 documented places with sources",
+      "lang": "en",
+      "scroll": 1009,
+      "theme": "light",
+      "url": "/en/",
+      "viewport": 1024,
+      "requestedTheme": "light"
+    },
+    {
+      "client": 1425,
+      "cover": "/assets/images/portfolio/spotlight-explora.webp",
+      "hero": "I turn complex processes into clear, maintainable web products.\n\nI help companies and teams design and build applications, internal systems, and digital experiences that make their work simpler.\n\nLet's talk\nView case studies\n\nOpen to conversations about products, internal systems, and technical collaboration.\n\nExplore San Martín\n\n164 documented places with sources",
+      "lang": "en",
+      "scroll": 1425,
+      "theme": "dark",
+      "url": "/en/",
+      "viewport": 1440,
+      "requestedTheme": "dark"
+    },
+    {
+      "client": 1425,
+      "cover": "/assets/images/portfolio/spotlight-explora.webp",
+      "hero": "I turn complex processes into clear, maintainable web products.\n\nI help companies and teams design and build applications, internal systems, and digital experiences that make their work simpler.\n\nLet's talk\nView case studies\n\nOpen to conversations about products, internal systems, and technical collaboration.\n\nExplore San Martín\n\n164 documented places with sources",
+      "lang": "en",
+      "scroll": 1425,
+      "theme": "light",
+      "url": "/en/",
+      "viewport": 1440,
+      "requestedTheme": "light"
+    },
+    {
+      "client": 375,
+      "fields": [
+        "name",
+        "email",
+        "organization",
+        "message",
+        "privacyConsent"
+      ],
+      "heading": "Cuéntame tu proyecto",
+      "lang": "es",
+      "required": [
+        {
+          "checked": false,
+          "name": "name"
+        },
+        {
+          "checked": false,
+          "name": "email"
+        },
+        {
+          "checked": false,
+          "name": "message"
+        },
+        {
+          "checked": false,
+          "name": "privacyConsent"
+        }
+      ],
+      "scroll": 375,
+      "theme": "dark",
+      "url": "/es/contacto",
+      "viewport": 390,
+      "requestedTheme": "dark"
+    },
+    {
+      "client": 375,
+      "fields": [
+        "name",
+        "email",
+        "organization",
+        "message",
+        "privacyConsent"
+      ],
+      "heading": "Cuéntame tu proyecto",
+      "lang": "es",
+      "required": [
+        {
+          "checked": false,
+          "name": "name"
+        },
+        {
+          "checked": false,
+          "name": "email"
+        },
+        {
+          "checked": false,
+          "name": "message"
+        },
+        {
+          "checked": false,
+          "name": "privacyConsent"
+        }
+      ],
+      "scroll": 375,
+      "theme": "light",
+      "url": "/es/contacto",
+      "viewport": 390,
+      "requestedTheme": "light"
+    },
+    {
+      "client": 753,
+      "fields": [
+        "name",
+        "email",
+        "organization",
+        "message",
+        "privacyConsent"
+      ],
+      "heading": "Cuéntame tu proyecto",
+      "lang": "es",
+      "required": [
+        {
+          "checked": false,
+          "name": "name"
+        },
+        {
+          "checked": false,
+          "name": "email"
+        },
+        {
+          "checked": false,
+          "name": "message"
+        },
+        {
+          "checked": false,
+          "name": "privacyConsent"
+        }
+      ],
+      "scroll": 753,
+      "theme": "dark",
+      "url": "/es/contacto",
+      "viewport": 768,
+      "requestedTheme": "dark"
+    },
+    {
+      "client": 753,
+      "fields": [
+        "name",
+        "email",
+        "organization",
+        "message",
+        "privacyConsent"
+      ],
+      "heading": "Cuéntame tu proyecto",
+      "lang": "es",
+      "required": [
+        {
+          "checked": false,
+          "name": "name"
+        },
+        {
+          "checked": false,
+          "name": "email"
+        },
+        {
+          "checked": false,
+          "name": "message"
+        },
+        {
+          "checked": false,
+          "name": "privacyConsent"
+        }
+      ],
+      "scroll": 753,
+      "theme": "light",
+      "url": "/es/contacto",
+      "viewport": 768,
+      "requestedTheme": "light"
+    },
+    {
+      "client": 1009,
+      "fields": [
+        "name",
+        "email",
+        "organization",
+        "message",
+        "privacyConsent"
+      ],
+      "heading": "Cuéntame tu proyecto",
+      "lang": "es",
+      "required": [
+        {
+          "checked": false,
+          "name": "name"
+        },
+        {
+          "checked": false,
+          "name": "email"
+        },
+        {
+          "checked": false,
+          "name": "message"
+        },
+        {
+          "checked": false,
+          "name": "privacyConsent"
+        }
+      ],
+      "scroll": 1009,
+      "theme": "dark",
+      "url": "/es/contacto",
+      "viewport": 1024,
+      "requestedTheme": "dark"
+    },
+    {
+      "client": 1009,
+      "fields": [
+        "name",
+        "email",
+        "organization",
+        "message",
+        "privacyConsent"
+      ],
+      "heading": "Cuéntame tu proyecto",
+      "lang": "es",
+      "required": [
+        {
+          "checked": false,
+          "name": "name"
+        },
+        {
+          "checked": false,
+          "name": "email"
+        },
+        {
+          "checked": false,
+          "name": "message"
+        },
+        {
+          "checked": false,
+          "name": "privacyConsent"
+        }
+      ],
+      "scroll": 1009,
+      "theme": "light",
+      "url": "/es/contacto",
+      "viewport": 1024,
+      "requestedTheme": "light"
+    },
+    {
+      "client": 1425,
+      "fields": [
+        "name",
+        "email",
+        "organization",
+        "message",
+        "privacyConsent"
+      ],
+      "heading": "Cuéntame tu proyecto",
+      "lang": "es",
+      "required": [
+        {
+          "checked": false,
+          "name": "name"
+        },
+        {
+          "checked": false,
+          "name": "email"
+        },
+        {
+          "checked": false,
+          "name": "message"
+        },
+        {
+          "checked": false,
+          "name": "privacyConsent"
+        }
+      ],
+      "scroll": 1425,
+      "theme": "dark",
+      "url": "/es/contacto",
+      "viewport": 1440,
+      "requestedTheme": "dark"
+    },
+    {
+      "client": 1425,
+      "fields": [
+        "name",
+        "email",
+        "organization",
+        "message",
+        "privacyConsent"
+      ],
+      "heading": "Cuéntame tu proyecto",
+      "lang": "es",
+      "required": [
+        {
+          "checked": false,
+          "name": "name"
+        },
+        {
+          "checked": false,
+          "name": "email"
+        },
+        {
+          "checked": false,
+          "name": "message"
+        },
+        {
+          "checked": false,
+          "name": "privacyConsent"
+        }
+      ],
+      "scroll": 1425,
+      "theme": "light",
+      "url": "/es/contacto",
+      "viewport": 1440,
+      "requestedTheme": "light"
+    },
+    {
+      "client": 375,
+      "fields": [
+        "name",
+        "email",
+        "organization",
+        "message",
+        "privacyConsent"
+      ],
+      "heading": "Tell me about your project",
+      "lang": "en",
+      "required": [
+        {
+          "checked": false,
+          "name": "name"
+        },
+        {
+          "checked": false,
+          "name": "email"
+        },
+        {
+          "checked": false,
+          "name": "message"
+        },
+        {
+          "checked": false,
+          "name": "privacyConsent"
+        }
+      ],
+      "scroll": 375,
+      "theme": "dark",
+      "url": "/en/contact",
+      "viewport": 390,
+      "requestedTheme": "dark"
+    },
+    {
+      "client": 375,
+      "fields": [
+        "name",
+        "email",
+        "organization",
+        "message",
+        "privacyConsent"
+      ],
+      "heading": "Tell me about your project",
+      "lang": "en",
+      "required": [
+        {
+          "checked": false,
+          "name": "name"
+        },
+        {
+          "checked": false,
+          "name": "email"
+        },
+        {
+          "checked": false,
+          "name": "message"
+        },
+        {
+          "checked": false,
+          "name": "privacyConsent"
+        }
+      ],
+      "scroll": 375,
+      "theme": "light",
+      "url": "/en/contact",
+      "viewport": 390,
+      "requestedTheme": "light"
+    },
+    {
+      "client": 753,
+      "fields": [
+        "name",
+        "email",
+        "organization",
+        "message",
+        "privacyConsent"
+      ],
+      "heading": "Tell me about your project",
+      "lang": "en",
+      "required": [
+        {
+          "checked": false,
+          "name": "name"
+        },
+        {
+          "checked": false,
+          "name": "email"
+        },
+        {
+          "checked": false,
+          "name": "message"
+        },
+        {
+          "checked": false,
+          "name": "privacyConsent"
+        }
+      ],
+      "scroll": 753,
+      "theme": "dark",
+      "url": "/en/contact",
+      "viewport": 768,
+      "requestedTheme": "dark"
+    },
+    {
+      "client": 753,
+      "fields": [
+        "name",
+        "email",
+        "organization",
+        "message",
+        "privacyConsent"
+      ],
+      "heading": "Tell me about your project",
+      "lang": "en",
+      "required": [
+        {
+          "checked": false,
+          "name": "name"
+        },
+        {
+          "checked": false,
+          "name": "email"
+        },
+        {
+          "checked": false,
+          "name": "message"
+        },
+        {
+          "checked": false,
+          "name": "privacyConsent"
+        }
+      ],
+      "scroll": 753,
+      "theme": "light",
+      "url": "/en/contact",
+      "viewport": 768,
+      "requestedTheme": "light"
+    },
+    {
+      "client": 1009,
+      "fields": [
+        "name",
+        "email",
+        "organization",
+        "message",
+        "privacyConsent"
+      ],
+      "heading": "Tell me about your project",
+      "lang": "en",
+      "required": [
+        {
+          "checked": false,
+          "name": "name"
+        },
+        {
+          "checked": false,
+          "name": "email"
+        },
+        {
+          "checked": false,
+          "name": "message"
+        },
+        {
+          "checked": false,
+          "name": "privacyConsent"
+        }
+      ],
+      "scroll": 1009,
+      "theme": "dark",
+      "url": "/en/contact",
+      "viewport": 1024,
+      "requestedTheme": "dark"
+    },
+    {
+      "client": 1009,
+      "fields": [
+        "name",
+        "email",
+        "organization",
+        "message",
+        "privacyConsent"
+      ],
+      "heading": "Tell me about your project",
+      "lang": "en",
+      "required": [
+        {
+          "checked": false,
+          "name": "name"
+        },
+        {
+          "checked": false,
+          "name": "email"
+        },
+        {
+          "checked": false,
+          "name": "message"
+        },
+        {
+          "checked": false,
+          "name": "privacyConsent"
+        }
+      ],
+      "scroll": 1009,
+      "theme": "light",
+      "url": "/en/contact",
+      "viewport": 1024,
+      "requestedTheme": "light"
+    },
+    {
+      "client": 1425,
+      "fields": [
+        "name",
+        "email",
+        "organization",
+        "message",
+        "privacyConsent"
+      ],
+      "heading": "Tell me about your project",
+      "lang": "en",
+      "required": [
+        {
+          "checked": false,
+          "name": "name"
+        },
+        {
+          "checked": false,
+          "name": "email"
+        },
+        {
+          "checked": false,
+          "name": "message"
+        },
+        {
+          "checked": false,
+          "name": "privacyConsent"
+        }
+      ],
+      "scroll": 1425,
+      "theme": "dark",
+      "url": "/en/contact",
+      "viewport": 1440,
+      "requestedTheme": "dark"
+    },
+    {
+      "client": 1425,
+      "fields": [
+        "name",
+        "email",
+        "organization",
+        "message",
+        "privacyConsent"
+      ],
+      "heading": "Tell me about your project",
+      "lang": "en",
+      "required": [
+        {
+          "checked": false,
+          "name": "name"
+        },
+        {
+          "checked": false,
+          "name": "email"
+        },
+        {
+          "checked": false,
+          "name": "message"
+        },
+        {
+          "checked": false,
+          "name": "privacyConsent"
+        }
+      ],
+      "scroll": 1425,
+      "theme": "light",
+      "url": "/en/contact",
+      "viewport": 1440,
+      "requestedTheme": "light"
+    }
+  ],
+  "screenshots": [
+    "/Users/arturovela/Documents/GitHub/Porta/.impeccable/review/portfolio/dev-es-390-dark.jpg",
+    "/Users/arturovela/Documents/GitHub/Porta/.impeccable/review/portfolio/dev-es-390-light.jpg",
+    "/Users/arturovela/Documents/GitHub/Porta/.impeccable/review/portfolio/dev-es-768-dark.jpg",
+    "/Users/arturovela/Documents/GitHub/Porta/.impeccable/review/portfolio/dev-es-768-light.jpg",
+    "/Users/arturovela/Documents/GitHub/Porta/.impeccable/review/portfolio/dev-en-390-dark.jpg",
+    "/Users/arturovela/Documents/GitHub/Porta/.impeccable/review/portfolio/dev-en-390-light.jpg",
+    "/Users/arturovela/Documents/GitHub/Porta/.impeccable/review/portfolio/dev-en-768-dark.jpg",
+    "/Users/arturovela/Documents/GitHub/Porta/.impeccable/review/portfolio/dev-en-768-light.jpg",
+    "/Users/arturovela/Documents/GitHub/Porta/.impeccable/review/portfolio/dev-es-1024-dark.jpg",
+    "/Users/arturovela/Documents/GitHub/Porta/.impeccable/review/portfolio/dev-es-1024-light.jpg",
+    "/Users/arturovela/Documents/GitHub/Porta/.impeccable/review/portfolio/dev-es-1440-dark.jpg",
+    "/Users/arturovela/Documents/GitHub/Porta/.impeccable/review/portfolio/dev-es-1440-light.jpg",
+    "/Users/arturovela/Documents/GitHub/Porta/.impeccable/review/portfolio/dev-en-1024-dark.jpg",
+    "/Users/arturovela/Documents/GitHub/Porta/.impeccable/review/portfolio/dev-en-1024-light.jpg",
+    "/Users/arturovela/Documents/GitHub/Porta/.impeccable/review/portfolio/dev-en-1440-dark.jpg",
+    "/Users/arturovela/Documents/GitHub/Porta/.impeccable/review/portfolio/dev-en-1440-light.jpg",
+    "/Users/arturovela/Documents/GitHub/Porta/.impeccable/review/portfolio/home-es-390-dark.jpg",
+    "/Users/arturovela/Documents/GitHub/Porta/.impeccable/review/portfolio/home-es-390-light.jpg",
+    "/Users/arturovela/Documents/GitHub/Porta/.impeccable/review/portfolio/home-es-1440-dark.jpg",
+    "/Users/arturovela/Documents/GitHub/Porta/.impeccable/review/portfolio/home-es-1440-light.jpg",
+    "/Users/arturovela/Documents/GitHub/Porta/.impeccable/review/portfolio/home-en-390-dark.jpg",
+    "/Users/arturovela/Documents/GitHub/Porta/.impeccable/review/portfolio/home-en-390-light.jpg",
+    "/Users/arturovela/Documents/GitHub/Porta/.impeccable/review/portfolio/home-en-1440-dark.jpg",
+    "/Users/arturovela/Documents/GitHub/Porta/.impeccable/review/portfolio/home-en-1440-light.jpg",
+    "/Users/arturovela/Documents/GitHub/Porta/.impeccable/review/portfolio/contact-es-390-dark.jpg",
+    "/Users/arturovela/Documents/GitHub/Porta/.impeccable/review/portfolio/contact-es-390-light.jpg",
+    "/Users/arturovela/Documents/GitHub/Porta/.impeccable/review/portfolio/contact-es-1440-dark.jpg",
+    "/Users/arturovela/Documents/GitHub/Porta/.impeccable/review/portfolio/contact-es-1440-light.jpg",
+    "/Users/arturovela/Documents/GitHub/Porta/.impeccable/review/portfolio/contact-en-390-dark.jpg",
+    "/Users/arturovela/Documents/GitHub/Porta/.impeccable/review/portfolio/contact-en-390-light.jpg",
+    "/Users/arturovela/Documents/GitHub/Porta/.impeccable/review/portfolio/contact-en-1440-dark.jpg",
+    "/Users/arturovela/Documents/GitHub/Porta/.impeccable/review/portfolio/contact-en-1440-light.jpg"
+  ],
+  "reflow": [
+    {
+      "client": 705,
+      "scroll": 705,
+      "url": "/es/",
+      "viewport": 720
+    },
+    {
+      "client": 705,
+      "scroll": 705,
+      "url": "/dev",
+      "viewport": 720
+    },
+    {
+      "client": 705,
+      "scroll": 705,
+      "url": "/es/contacto",
+      "viewport": 720
+    },
+    {
+      "client": 705,
+      "scroll": 705,
+      "url": "/en/",
+      "viewport": 720
+    },
+    {
+      "client": 705,
+      "scroll": 705,
+      "url": "/en/dev",
+      "viewport": 720
+    },
+    {
+      "client": 705,
+      "scroll": 705,
+      "url": "/en/contact",
+      "viewport": 720
+    }
+  ],
+  "zoomNote": "Native zoom shortcut did not change browser scale; 720px layout checks cover reflow equivalent to 1440px at 200%.",
+  "finalChecks": {
+    "testCommand": "pnpm check",
+    "testsPassed": 78,
+    "builds": {
+      "staging": "pass",
+      "production": "pass"
+    },
+    "dryRun": {
+      "staging": "pass",
+      "production": "pass"
+    },
+    "compiledPreview": {
+      "port": 4173,
+      "enCanonical": "https://velaarturo.com/en/dev",
+      "hreflang": [
+        "es",
+        "en",
+        "x-default"
+      ],
+      "appsInitial": 8,
+      "accentSearchCotiza": 1,
+      "clearRestores": 8,
+      "consoleErrors": 0
+    },
+    "missingCover": {
+      "httpError": 404,
+      "heroVisualRemoved": true,
+      "actionsRetained": true,
+      "globalOverflow": false,
+      "assetsRestoredWithMatchingHashes": true,
+      "capture": "home-missing-cover.jpg"
+    },
+    "vcfDownloadedAndValidated": true,
+    "qrDecodedLocally": [
+      "https://velaarturo.com/dev",
+      "https://velaarturo.com/en/dev"
+    ],
+    "reviewDisposition": "ship",
+    "reviewScope": "local UI, not remote staging",
+    "staging": {
+      "version": "4def7a55-ec4f-45d6-bed7-85cb5ecb58f0",
+      "previousVersion": "c3c96839-7b8a-4448-8008-b93d3f4e97f4",
+      "browserError": "net::ERR_BLOCKED_BY_CLIENT",
+      "httpStatus": 403,
+      "cloudflareError": 1010
+    },
+    "productionDeployed": false,
+    "notVerified": [
+      "real Formspree submission",
+      "VCF import on physical device",
+      "native browser zoom at 200%",
+      "remote staging UI and published Second Brain content"
+    ]
+  }
+}

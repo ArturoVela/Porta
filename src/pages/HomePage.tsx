@@ -2,51 +2,36 @@ import { Box, Button, Container, Flex, Grid, Heading, HStack, SimpleGrid, Stack,
 import { ArrowUpRight, Check } from "lucide-react";
 import { ContentLink as Link } from "@/components/ContentLink";
 import { ProjectFeature } from "@/components/ContentCards";
+import { HomeProductCarousel } from "@/components/HomeProductCarousel";
 import { SectionHeading } from "@/components/SectionHeading";
 import { useContent } from "@/content/context";
-import { selectSpotlightProjects } from "@/lib/spotlight";
+import { selectHomeProducts, selectSpotlightProjects } from "@/lib/spotlight";
 
 export function HomePage() {
-  const { content, copy } = useContent();
+  const { content, copy, locale } = useContent();
   const featured = selectSpotlightProjects(content.projects);
+  const products = selectHomeProducts(content.projects, locale);
 
   return (
     <>
       <Box as="section" className="home-hero" position="relative" overflow="hidden">
         <Box className="hero-grid" aria-hidden="true" />
-        <Container maxW="7xl" py={{ base: "14", md: "20" }} position="relative">
-          <Grid templateColumns={{ base: "1fr", lg: "1.45fr .55fr" }} gap={{ base: "10", lg: "16" }} alignItems="end">
-            <Stack gap={{ base: "7", md: "9" }} align="start">
-              <Heading
-                as="h1"
-                fontSize={{ base: "clamp(3.25rem, 15vw, 5.4rem)", md: "clamp(4.5rem, 7vw, 6.5rem)" }}
-                letterSpacing="-.07em"
-                lineHeight=".86"
-                maxW="13ch"
-              >
-                {content.site.headline}
-              </Heading>
+        <Container maxW="7xl" py={{ base: "10", md: "14", lg: "18" }} position="relative">
+          <Grid templateColumns={{ base: "1fr", lg: products.length ? "1.1fr 1fr" : "1fr" }} gap={{ base: "9", lg: "14" }} alignItems="center">
+            <Stack gap={{ base: "6", md: "7" }} align="start" maxW={products.length ? undefined : "52rem"}>
+              <Heading as="h1" fontSize={{ base: "clamp(2.75rem, 10vw, 4rem)", lg: "clamp(3.5rem, 4.6vw, 4.75rem)" }} letterSpacing="-.04em" lineHeight="1.02" textWrap="balance">{content.site.headline}</Heading>
+              <Text color="app.muted" fontSize={{ base: "md", md: "lg" }} maxW="52ch">{content.site.intro}</Text>
               <Flex gap="3" wrap="wrap">
-                <Button asChild minH="11" size="lg" bg="brand.600" color="white" borderRadius="0" px="7" _hover={{ bg: "brand.700" }}>
-                  <Link to="/proyectos">{copy.home.heroCases} <ArrowUpRight size={18} /></Link>
+                <Button asChild minH="11" size="lg" bg="app.signal" color="#160B08" borderRadius="0" px="7" _hover={{ bg: "app.text", color: "app.canvas" }}>
+                  <Link to="/contacto">{copy.home.heroContact} <ArrowUpRight size={18} aria-hidden="true" /></Link>
                 </Button>
-                <Button asChild minH="11" size="lg" variant="outline" borderColor="app.text" borderRadius="0" px="7" _hover={{ bg: "app.text", color: "app.canvas" }}>
-                  <Link to="/contacto">{copy.home.heroContact}</Link>
+                <Button asChild minH="11" size="lg" variant="outline" borderColor="app.border" borderRadius="0" px="7" _hover={{ bg: "app.surface" }}>
+                  <Link to="/proyectos">{copy.home.heroCases}</Link>
                 </Button>
               </Flex>
+              <HStack gap="3" align="start"><Box mt="2" w="2" h="2" borderRadius="full" bg="app.signal" flexShrink="0" /><Text color="app.muted" fontSize="sm" maxW="48ch">{content.site.availability}</Text></HStack>
             </Stack>
-
-            <Stack gap="7" borderTopWidth="1px" borderColor="app.text" pt="6">
-              <Text color="app.muted" fontSize={{ base: "lg", md: "xl" }} maxW="40ch">{content.site.intro}</Text>
-              <HStack gap="3" align="start">
-                <Box className="availability-pulse" mt="2" w="2.5" h="2.5" borderRadius="full" bg="app.signal" flexShrink="0" />
-                <Text fontWeight="650">{content.site.availability}</Text>
-              </HStack>
-              <Box className="hero-signature" aria-label={`${content.site.name}, ${content.site.location}`}>
-                <Text fontSize="sm" fontWeight="750">{content.site.name}</Text>
-                <Text fontSize="sm" color="app.muted">{content.site.location}</Text>
-              </Box>
-            </Stack>
+            {products.length > 0 && <HomeProductCarousel products={products} />}
           </Grid>
         </Container>
       </Box>
