@@ -101,6 +101,13 @@ export function localeCookie(locale: Locale) {
   return `portfolio_locale=${locale}; Path=/; Max-Age=31536000; SameSite=Lax; Secure`;
 }
 
+export function blogHref(path: string) {
+  const match = matchLocalizedRoute(path.split(/[?#]/)[0]);
+  return match?.name === "articles" || match?.name === "article"
+    ? `https://blog.velaarturo.com${path}`
+    : null;
+}
+
 export function preferredLocale(cookie: string | null, acceptLanguage: string | null): Locale {
   const cookieLocale = cookie?.match(/(?:^|;\s*)portfolio_locale=(es|en)(?:;|$)/)?.[1];
   if (isLocale(cookieLocale)) return cookieLocale;

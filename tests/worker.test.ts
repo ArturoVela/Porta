@@ -157,6 +157,21 @@ describe("contenido dinámico", () => {
 
 describe("rutas heredadas", () => {
   it.each([
+    ["/es/articulos", "/es/articulos"],
+    ["/en/articles/discord-para-negocios", "/en/articles/discord-para-negocios"],
+    ["/es/articulos/?category=Investigacion", "/es/articulos/?category=Investigacion"],
+    ["/articulos/discord-para-negocios", "/es/articulos/discord-para-negocios"],
+    ["/blog/Discord-Para-Negocios", "/es/articulos/discord-para-negocios"],
+    ["/en/feed.xml", "/en/feed.xml"],
+    ["/feed.xml", "/es/feed.xml"],
+  ])("traslada %s al blog con 301 sin consultar contenido", async (from, to) => {
+    for (const method of ["GET", "HEAD"]) {
+      const response = await worker.fetch(new Request(`https://velaarturo.com${from}`, { method }) as never, {} as Env, executionContext());
+      expect(response.status).toBe(301);
+      expect(response.headers.get("location")).toBe(`https://blog.velaarturo.com${to}`);
+    }
+  });
+  it.each([
     ["/project", "/es/proyectos"],
     ["/blog", "/es/articulos"],
     ["/about", "/es/perfil"],
@@ -188,7 +203,7 @@ describe("salidas bilingües", () => {
     expect(cache.put).toHaveBeenCalledTimes(2);
   });
 
-  it("genera sitemap y feed con URLs localizadas", async () => {
+  it("mantiene sitemap del portafolio y traslada feed al blog", async () => {
     stubContentCache();
     vi.spyOn(console, "warn").mockImplementation(() => undefined);
     const env = { SITE_KEY: "velaarturo", CANONICAL_ORIGIN: "https://velaarturo.com", BRAIN: { fetch: vi.fn() } } as unknown as Env;
@@ -199,11 +214,11 @@ describe("salidas bilingües", () => {
     expect(sitemap).toContain("https://velaarturo.com/es/legal");
     expect(sitemap).toContain("https://velaarturo.com/en/legal");
     expect(sitemap).toContain('hreflang="x-default"');
+    expect(sitemap).not.toContain("/es/articulos");
+    expect(sitemap).not.toContain("/en/articles");
     const feedResponse = await worker.fetch(new Request("https://velaarturo.com/en/feed.xml") as never, env, executionContext());
-    const feed = await feedResponse.text();
-    expect(feedResponse.headers.get("content-language")).toBe("en");
-    expect(feed).toContain('xml:lang="en"');
-    expect(feed).toContain("/en/articles/");
+    expect(feedResponse.status).toBe(301);
+    expect(feedResponse.headers.get("location")).toBe("https://blog.velaarturo.com/en/feed.xml");
   });
 });
 

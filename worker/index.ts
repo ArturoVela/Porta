@@ -1,6 +1,6 @@
 import { FALLBACK_ENVELOPE } from "../src/content/fallback";
 import { fallbackEnvelope, isPortfolioEnvelope } from "../src/lib/content";
-import { isLocale, localeFromPath, localizedPath, matchLocalizedRoute, preferredLocale, routePath, type Locale } from "../src/i18n";
+import { blogHref, isLocale, localeFromPath, localizedPath, matchLocalizedRoute, preferredLocale, routePath, type Locale } from "../src/i18n";
 import { projectDisplayCover } from "../src/lib/spotlight";
 import { withProjectCatalog } from "../src/lib/projectCatalog";
 import { PRIVACY_POLICY_VERSION } from "../src/lib/legal";
@@ -256,9 +256,8 @@ async function sitemap(env: Env, ctx: ExecutionContext) {
   const [es, en] = await Promise.all([loadContent(env, ctx, "es"), loadContent(env, ctx, "en")]);
   const origin = env.CANONICAL_ORIGIN.replace(/\/$/, "");
   const entries = ([{ locale: "es", manifest: es.envelope.data }, { locale: "en", manifest: en.envelope.data }] as const).flatMap(({ locale, manifest }) => [
-    { locale, name: "home" as const }, { locale, name: "projects" as const }, { locale, name: "profile" as const }, { locale, name: "articles" as const }, { locale, name: "contact" as const }, { locale, name: "legal" as const }, { locale, name: "dev" as const },
+    { locale, name: "home" as const }, { locale, name: "projects" as const }, { locale, name: "profile" as const }, { locale, name: "contact" as const }, { locale, name: "legal" as const }, { locale, name: "dev" as const },
     ...manifest.projects.map((item) => ({ locale, name: "project" as const, slug: item.slug })),
-    ...manifest.articles.map((item) => ({ locale, name: "article" as const, slug: item.slug })),
   ]);
   const body = `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">${entries.map((entry) => {
     const slug = "slug" in entry ? entry.slug : undefined;
@@ -268,14 +267,6 @@ async function sitemap(env: Env, ctx: ExecutionContext) {
     return `<url><loc>${escapeXml(`${origin}${path}`)}</loc><xhtml:link rel="alternate" hreflang="es" href="${escapeXml(`${origin}${esPath}`)}"/><xhtml:link rel="alternate" hreflang="en" href="${escapeXml(`${origin}${enPath}`)}"/><xhtml:link rel="alternate" hreflang="x-default" href="${escapeXml(`${origin}${esPath}`)}"/></url>`;
   }).join("")}<url><loc>${escapeXml(`${origin}/linktree`)}</loc></url></urlset>`;
   return new Response(body, { headers: { "content-type": "application/xml; charset=utf-8", "cache-control": "public, max-age=300" } });
-}
-
-async function feed(env: Env, ctx: ExecutionContext, locale: Locale) {
-  const { envelope } = await loadContent(env, ctx, locale);
-  const origin = env.CANONICAL_ORIGIN.replace(/\/$/, "");
-  const feedPath = `/${locale}/feed.xml`;
-  const body = `<?xml version="1.0" encoding="UTF-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="${locale}"><title>${escapeXml(envelope.data.site.name)}</title><id>${origin}${routePath(locale, "home")}</id><link href="${origin}${feedPath}" rel="self"/>${[...envelope.data.articles].sort((a, b) => b.publishedAt.localeCompare(a.publishedAt)).map((item) => { const path = routePath(locale, "article", item.slug); return `<entry><title>${escapeXml(item.title)}</title><id>${origin}${escapeXml(path)}</id><link href="${origin}${escapeXml(path)}"/><updated>${item.publishedAt}T12:00:00-05:00</updated><summary>${escapeXml(item.excerpt)}</summary></entry>`; }).join("")}</feed>`;
-  return new Response(body, { headers: { "content-type": "application/atom+xml; charset=utf-8", "content-language": locale, "cache-control": "public, max-age=300" } });
 }
 
 export function normalizeLegacyPath(pathname: string) {
@@ -406,7 +397,7 @@ async function html(request: Request, env: Env, ctx: ExecutionContext) {
     .on('link[data-hreflang="x-default"]', { element(element) { element.setAttribute("href", spanish); } })
     .on('link[data-hreflang]', { element(element) { if (meta.canonicalPath === "/linktree" || meta.canonicalPath === "/work" || workCompanyForPath(meta.canonicalPath)) element.remove(); } })
     .on('meta[name="theme-color"]', { element(element) { if (meta.canonicalPath === "/linktree") element.setAttribute("content", "#080B12"); } })
-    .on('link[data-localized-feed]', { element(element) { element.setAttribute("href", `/${locale}/feed.xml`); element.setAttribute("title", locale === "en" ? "Arturo Vela's articles" : "Artículos de Arturo Vela"); } })
+    .on('link[data-localized-feed]', { element(element) { element.setAttribute("href", `https://blog.velaarturo.com/${locale}/feed.xml`); element.setAttribute("title", locale === "en" ? "Arturo Vela's articles" : "Artículos de Arturo Vela"); } })
     .on("#portfolio-content", { element(element) { element.setInnerContent(safeEnvelope, { html: true }); } })
     .on("#structured-data", { element(element) { element.setInnerContent(safeStructuredData, { html: true }); } })
     .transform(shell);
@@ -414,12 +405,18 @@ async function html(request: Request, env: Env, ctx: ExecutionContext) {
 
 async function route(request: Request, env: Env, ctx: ExecutionContext) {
   const url = new URL(request.url);
+  const legacy = normalizeLegacyPath(url.pathname);
+  if (request.method === "GET" || request.method === "HEAD") {
+    const blog = blogHref(`${legacy ?? url.pathname}${url.search}`);
+    if (blog) return Response.redirect(blog, 301);
+    const feedPath = legacy ?? url.pathname;
+    if (feedPath === "/es/feed.xml" || feedPath === "/en/feed.xml") return Response.redirect(`https://blog.velaarturo.com${feedPath}${url.search}`, 301);
+  }
   if (url.hostname === "www.velaarturo.com") return Response.redirect(`https://velaarturo.com${url.pathname}${url.search}${url.hash}`, 301);
   if (url.pathname === "/" && (request.method === "GET" || request.method === "HEAD")) {
     const locale = preferredLocale(request.headers.get("cookie"), request.headers.get("accept-language"));
     return Response.redirect(new URL(routePath(locale, "home"), env.CANONICAL_ORIGIN).href, 302);
   }
-  const legacy = normalizeLegacyPath(url.pathname);
   if (legacy) return Response.redirect(new URL(`${legacy}${legacy.includes("#") ? "" : url.search}`, env.CANONICAL_ORIGIN).href, 301);
   if (url.pathname === "/api/health" && request.method === "GET") return json({ data: { ok: true, service: "velaarturo" } });
   if (url.pathname === "/api/uptime" && request.method === "GET") return uptimeApi(ctx);
@@ -430,8 +427,6 @@ async function route(request: Request, env: Env, ctx: ExecutionContext) {
   if (url.pathname.startsWith("/api/")) return json({ error: "Ruta no encontrada" }, 404);
   if (url.pathname.startsWith("/media/") && request.method === "GET") return media(request, env, ctx, url.pathname);
   if (url.pathname === "/sitemap.xml" && request.method === "GET") return sitemap(env, ctx);
-  if (url.pathname === "/es/feed.xml" && request.method === "GET") return feed(env, ctx, "es");
-  if (url.pathname === "/en/feed.xml" && request.method === "GET") return feed(env, ctx, "en");
   if (url.pathname === "/robots.txt" && request.method === "GET") return new Response(`User-agent: *\nAllow: /\nSitemap: ${env.CANONICAL_ORIGIN}/sitemap.xml\n`, { headers: { "content-type": "text/plain; charset=utf-8", "cache-control": "public, max-age=86400" } });
   if (isHtmlNavigation(request, url.pathname) || url.pathname === "/__preview") return html(request, env, ctx);
   return env.ASSETS.fetch(request);
