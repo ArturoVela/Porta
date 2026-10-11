@@ -6,7 +6,7 @@ import { useContent } from "@/content/context";
 import { CV_URL } from "@/lib/links";
 
 export function SiteFooter() {
-  const { content, copy } = useContent();
+  const { content, copy, locale } = useContent();
   const wordmark = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -38,6 +38,7 @@ export function SiteFooter() {
                 <Link to="/work">Work</Link>
                 <Link to="/articulos">{copy.nav.articles}</Link>
                 <Link to="/linktree">{copy.nav.linktree}</Link>
+                <a href={`https://store.velaarturo.com/${locale}/`}>Store</a>
               </div>
             </nav>
             <nav aria-label={copy.footer.connect}>

@@ -55,6 +55,7 @@ function NavigationLinks({ onNavigate }: { onNavigate?: () => void }) {
     { label: "Dev", to: "/dev" },
     { label: copy.nav.articles, to: "/articulos" },
     { label: copy.nav.linktree, to: "/linktree" },
+    { label: "Store", to: `https://store.velaarturo.com/${locale}/` },
   ];
   const pathname = location.pathname === "/__preview" ? new URLSearchParams(location.search).get("path") ?? "/" : location.pathname;
   return <>
