@@ -58,7 +58,7 @@ export function HomeProductCarousel({ products }: { products: ReturnType<typeof 
                 <ProjectPreview project={project ?? { title, excerpt: devAppDescription(app, locale, content.projects), liveUrl: `https://${app.domain}` }} imageSrc={image?.src} onOpen={() => setPaused(true)}>
                 <Box className="home-product-visual" data-project-image={project?.slug} data-project-art={image?.src} data-brand={!cover || undefined} aspectRatio="16 / 9" overflow="hidden" bg={cover ? "app.surface" : app.color}>
                   {!image ? <Flex h="100%" align="center" justify="center" bg="app.surface"><Text color="app.muted">{copy.home.imageUnavailable}</Text></Flex>
-                    : <ResponsiveImage image={image} loading={index === 0 ? "eager" : "lazy"} />}
+                    : <ResponsiveImage image={image} loading={index === 0 ? "eager" : "lazy"} sizes="(min-width: 80rem) 640px, (min-width: 64rem) 50vw, 100vw" />}
                 </Box>
                 </ProjectPreview>
                 <Stack as="figcaption" gap="2" pt="5" pb="4" minH={{ base: "11rem", md: "10rem" }}>

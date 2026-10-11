@@ -302,7 +302,7 @@ describe("SEO por ruta", () => {
     expect(project.status).toBe(200);
     expect(project.structuredData["@type"]).toBe("CreativeWork");
     const explora = metaForPath("/proyectos/explora-san-martin", FALLBACK_ENVELOPE.data, "https://velaarturo.com");
-    expect(explora.image).toBe("https://velaarturo.com/assets/images/portfolio/spotlight-explora.webp");
+    expect(explora.image).toBe("https://velaarturo.com/assets/images/project-covers/explora-home.webp");
     expect([explora.imageWidth, explora.imageHeight]).toEqual([1280, 720]);
     expect(article.type).toBe("article");
     expect(article.structuredData["@type"]).toBe("BlogPosting");

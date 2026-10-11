@@ -5,6 +5,7 @@ import { MemoryRouter, Route, Routes } from "react-router";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { ContentProvider } from "@/content/context";
 import { HomeProductCarousel } from "@/components/HomeProductCarousel";
+import { ResponsiveImage } from "@/components/ResponsiveImage";
 import { FALLBACK_ENVELOPE } from "@/content/fallback";
 import { HomePage } from "@/pages/HomePage";
 import { ProfilePage } from "@/pages/ProfilePage";
@@ -30,6 +31,22 @@ function renderContent(child: ReturnType<typeof createElement>, projects: Projec
 afterEach(() => vi.unstubAllGlobals());
 
 describe("imágenes editadas en Second Brain", () => {
+  it("ofrece variantes AVIF/WebP sin aplicar rutas generadas a imágenes del CMS", () => {
+    const markup = renderContent(createElement(ResponsiveImage, {
+      image: { src: "/assets/images/project-covers/divide-home.webp", alt: "Página de inicio de Divide", width: 1280, height: 720 },
+      sizes: "(min-width: 80rem) 400px, 100vw",
+    }));
+    for (const format of ["avif", "webp"]) {
+      for (const width of [640, 1280]) {
+        expect(markup).toContain(`/assets/images/project-covers/divide-home${width === 1280 ? "" : `-${width}`}.${format} ${width}w`);
+      }
+    }
+    expect(markup).toContain('sizes="(min-width: 80rem) 400px, 100vw"');
+    const cmsMarkup = renderContent(createElement(ResponsiveImage, { image: cover }));
+    expect(cmsMarkup).toContain('src="/media/2/cover?token=preview-token"');
+    expect(cmsMarkup).not.toContain("srcSet=");
+  });
+
   it("ubica hora local y uptime bajo disponibilidad sin bloquear el hero durante carga", () => {
     const markup = renderContent(createElement(HomePage));
     const availability = markup.indexOf(FALLBACK_ENVELOPE.data.site.availability);
@@ -89,12 +106,13 @@ describe("imágenes editadas en Second Brain", () => {
     expect(products.map(({ app }) => app.id)).toEqual(["explora", "coffee", "hub", "cotiza", "ventas", "finanzas", "bc", "tarjetas"]);
     expect(products.every(({ app }) => !app.private)).toBe(true);
     expect(new Set(products.map(({ app }) => app.id)).size).toBe(products.length);
-    expect(products[0].cover?.src).toContain('spotlight-explora');
+    expect(products[0].cover?.src).toContain('project-covers/explora');
     expect(products.find(({ app }) => app.id === 'ventas')?.cover).toBeUndefined();
     const markup = renderContent(createElement(HomePage), FALLBACK_ENVELOPE.data.projects);
     expect(markup).toContain('data-brand="true"');
     expect(markup).toContain('alt="Imagen de marca: Vela Ventas"');
     expect(markup).toContain('aria-label="Siguiente producto"');
+    expect(markup).toContain('sizes="(min-width: 80rem) 640px, (min-width: 64rem) 50vw, 100vw"');
     expect(markup.match(/<div\b(?=[^>]*data-part="item")(?=[^>]*inert="")[^>]*>/g)).toHaveLength(7);
     expect(markup.match(/aria-pressed="true"/g)).toHaveLength(1);
     expect(markup.match(/aria-pressed="false"/g)).toHaveLength(7);

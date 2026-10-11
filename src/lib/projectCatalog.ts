@@ -1,6 +1,7 @@
 import { WALLET_COLLECTIONS, WALLET_COPY_EN, WALLET_PROJECTS } from "@/lib/linktree";
 import { FALLBACK_ENVELOPE } from "@/content/fallback";
 import { FALLBACK_ENVELOPE_EN } from "@/content/fallback-en";
+import { projectDisplayCover } from "@/lib/spotlight";
 import type { Locale } from "@/i18n";
 import type { PortfolioEnvelope, ProjectContent } from "@/types/content";
 
@@ -40,7 +41,11 @@ export function withProjectCatalog(envelope: PortfolioEnvelope, locale: Locale):
         seo: { description },
       };
     });
-  return { ...envelope, data: { ...envelope.data, site: { ...envelope.data.site, email: envelope.data.site.email === "cv@velaarturo.com" ? bundled.data.site.email : envelope.data.site.email }, projects: [...projects, ...additions] } };
+  const catalog = [...projects, ...additions].map((project) => {
+    const cover = projectDisplayCover(project, locale);
+    return cover ? { ...project, cover } : project;
+  });
+  return { ...envelope, data: { ...envelope.data, site: { ...envelope.data.site, email: envelope.data.site.email === "cv@velaarturo.com" ? bundled.data.site.email : envelope.data.site.email }, projects: catalog } };
 }
 
 export function projectCatalogGroups(projects: ProjectContent[]) {

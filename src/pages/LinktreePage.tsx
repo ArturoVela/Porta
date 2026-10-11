@@ -1,8 +1,9 @@
 import { LayoutGroup, MotionConfig, motion, useReducedMotion } from "motion/react";
-import { Activity, ArrowLeft, ArrowUpRight, Check, ChevronRight, Copy, Divide, LockKeyhole, Search, WalletCards } from "lucide-react";
+import { Activity, ArrowUpRight, Check, ChevronRight, Copy, Divide, LockKeyhole, Search, WalletCards } from "lucide-react";
 import { useRef, useState, type CSSProperties, type TouchEvent } from "react";
 import { useSearchParams } from "react-router";
 import { ContentLink } from "@/components/ContentLink";
+import { SiteFooter } from "@/components/SiteFooter";
 import { useContent } from "@/content/context";
 import { WALLET_COLLECTIONS, WALLET_PROJECTS, walletCollections, type WalletProject } from "@/lib/linktree";
 import type { ProjectContent } from "@/types/content";
@@ -156,10 +157,8 @@ export function LinktreePage() {
           </LayoutGroup>
           {!groups.length ? <div className="wallet-empty"><Search size={28} aria-hidden="true" /><h2>No encontré ese proyecto</h2><p>Prueba otro nombre o busca en todas las colecciones.</p><button type="button" onClick={(event) => { setInstant(event.detail === 0); setPreview(null); setQuery(""); setCollection("todas"); }}>Ver todos los proyectos</button></div> : null}
         </main>
-
-        <footer className="wallet-footer"><ContentLink to="/"><ArrowLeft size={15} aria-hidden="true" /> Volver al portafolio</ContentLink><ContentLink to="/legal">Privacidad y condiciones</ContentLink><span>Hecho por Arturo Vela · Perú</span></footer>
       </div>
-
+      <SiteFooter />
     </div>
     </MotionConfig>
   );

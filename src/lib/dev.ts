@@ -11,7 +11,7 @@ export const DEV_APP_GROUPS = {
   exploration: ["explora", "coffee"],
 } as const;
 export type DevAppGroup = keyof typeof DEV_APP_GROUPS;
-export const DEV_APPS = WALLET_PROJECTS.filter((app) => !["principal", "cv", "brain", "status"].includes(app.id));
+export const DEV_APPS = WALLET_PROJECTS.filter((app) => !["principal", "cv", "brain", "status", "blog"].includes(app.id));
 
 export const DEV_COPY = {
   es: {

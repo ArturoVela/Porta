@@ -77,8 +77,8 @@ export function ProjectVisual({ project, compact = false, hero = false }: { proj
       ? <AspectRatio className="project-card__visual" data-project-image={project.slug} data-project-art="poster:compact" ratio={16 / 10} overflow="hidden"><AbstractProjectVisual project={project} compact /></AspectRatio>
       : <Box data-project-image={project.slug} data-project-art="poster:full" data-project-hero={hero || undefined} h="100%"><AbstractProjectVisual project={project} /></Box>
   ) : (
-    <AspectRatio className={compact ? "project-card__visual" : undefined} data-project-image={project.slug} data-project-art={cover.src} data-project-hero={hero || undefined} data-brand={brand ? "true" : undefined} ratio={compact ? 16 / 10 : cover.width / cover.height} overflow="hidden" borderRadius="0" bg={brand?.color ?? "app.surface"}>
-      <ResponsiveImage image={cover} loading={hero ? "eager" : "lazy"} />
+    <AspectRatio className={compact ? "project-card__visual" : undefined} data-project-image={project.slug} data-project-art={cover.src} data-project-hero={hero || undefined} data-brand={brand ? "true" : undefined} ratio={cover.src.startsWith("/assets/images/project-covers/") ? 16 / 9 : compact ? 16 / 10 : cover.width / cover.height} overflow="hidden" borderRadius="0" bg={brand?.color ?? "app.surface"}>
+      <ResponsiveImage image={cover} loading={hero ? "eager" : "lazy"} sizes={compact ? "(min-width: 80rem) 400px, (min-width: 48rem) 50vw, 100vw" : hero ? "(min-width: 80rem) 1280px, 100vw" : "(min-width: 80rem) 720px, (min-width: 64rem) 60vw, 100vw"} />
     </AspectRatio>
   );
   return <ProjectPreview project={project} imageSrc={cover?.src} to={hero ? undefined : `/proyectos/${project.slug}`}>{visual}</ProjectPreview>;

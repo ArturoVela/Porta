@@ -144,7 +144,7 @@ describe("trabajo destacado", () => {
 
   it("usa capturas públicas solo cuando el CMS no entrega una portada", () => {
     const coffee = FALLBACK_ENVELOPE.data.projects.find((project) => project.slug === "coffee")!;
-    expect(projectDisplayCover(coffee)?.src).toBe("/assets/images/portfolio/spotlight-coffee.webp");
+    expect(projectDisplayCover(coffee)?.src).toBe("/assets/images/project-covers/coffee-home.webp");
     const cmsCover = { src: "/media/2/cms-cover", alt: "Portada del CMS", width: 1200, height: 675 };
     expect(projectDisplayCover({ ...coffee, cover: cmsCover })).toEqual(cmsCover);
   });

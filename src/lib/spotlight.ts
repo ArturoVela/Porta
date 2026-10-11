@@ -12,17 +12,22 @@ export const SPOTLIGHT_DESTINATIONS = [
   { title: "Mi CV", category: "Trayectoria", description: "Experiencia, formación y habilidades", domain: "cv.velaarturo.com", url: CV_URL },
 ] as const;
 
-const spotlightCovers: Record<string, CoverImage> = {
-  "explora-san-martin": { src: "/assets/images/portfolio/spotlight-explora.webp", alt: "Mapa y destinos de Explora San Martín", width: 1280, height: 720 },
-  coffee: { src: "/assets/images/portfolio/spotlight-coffee.webp", alt: "Portada y búsqueda de Cafetero", width: 1280, height: 720 },
-};
+const homeCoverIds = new Set([
+  "torneo", "divide", "textos", "color", "cotiza", "cuando", "foto", "pdf", "qr",
+  "horas", "llevamos", "ruleta", "explora", "coffee", "formularios", "un-ramito", "hub", "cv",
+]);
+const homeCovers: Record<string, CoverImage> = Object.fromEntries(
+  WALLET_PROJECTS.filter((app) => homeCoverIds.has(app.id)).map((app) => [app.caseSlug ?? app.id, {
+    src: `/assets/images/project-covers/${app.id}-home.webp`, alt: `Página de inicio de ${app.name}`, width: 1280, height: 720,
+  }]),
+);
 
 export function projectDisplayCover(project: ProjectContent, locale: Locale = "es") {
-  if (project.cover) return project.cover;
-  const cover = spotlightCovers[project.slug];
+  const cover = homeCovers[project.slug];
+  const bundledCover = project.cover && /^\/assets\/images\/(?:pases-webs|project-covers)\//.test(project.cover.src);
+  if (project.cover && (!cover || !bundledCover)) return project.cover;
   if (!cover || locale === "es") return cover;
-  const alt = project.slug === "explora-san-martin" ? "Map and destinations in Explore San Martín" : "Cafetero home and search experience";
-  return { ...cover, alt };
+  return { ...cover, alt: `${project.title} home page` };
 }
 
 export function selectSpotlightProjects(projects: ProjectContent[], limit = 3) {
