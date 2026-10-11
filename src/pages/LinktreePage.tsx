@@ -1,5 +1,5 @@
 import { LayoutGroup, MotionConfig, motion, useReducedMotion } from "motion/react";
-import { ArrowLeft, ArrowUpRight, Check, ChevronRight, Copy, Divide, LockKeyhole, Search, WalletCards } from "lucide-react";
+import { Activity, ArrowLeft, ArrowUpRight, Check, ChevronRight, Copy, Divide, LockKeyhole, Search, WalletCards } from "lucide-react";
 import { useRef, useState, type CSSProperties, type TouchEvent } from "react";
 import { useSearchParams } from "react-router";
 import { ContentLink } from "@/components/ContentLink";
@@ -13,8 +13,8 @@ function PassArt({ project }: { project: WalletProject }) {
     <img className="wallet-pass__art" src={project.image} alt="" width="750" height="288" loading="lazy" decoding="async" />
   ) : (
     <div className="wallet-pass__custom" aria-hidden="true">
-      <div><strong>divide.</strong><span>Buenos momentos.<br />Cuentas claras.</span><small>{project.domain}</small></div>
-      <Divide size={54} strokeWidth={1.8} />
+      <div><strong>{project.id === "divide" ? "divide." : project.name}</strong><span>{project.id === "divide" ? <>Buenos momentos.<br />Cuentas claras.</> : project.features[0]}</span><small>{project.domain}</small></div>
+      {project.id === "divide" ? <Divide size={54} strokeWidth={1.8} /> : <Activity size={54} strokeWidth={1.8} />}
     </div>
   );
 }
@@ -46,12 +46,12 @@ function WalletCard({ project, detail, cardKey, expanded, preview, last, instant
       if (event.pointerType === "mouse" && matchMedia("(hover: hover) and (pointer: fine)").matches) onPreview(cardKey);
     }} onPointerLeave={(event) => { if (event.pointerType === "mouse") onPreview(null); }}>
       <motion.div initial={false} animate={{ transform: preview && !expanded && !instant ? "translateY(-6px) scale(1.012)" : "translateY(0px) scale(1)" }}>
-      <motion.article layout className="wallet-pass" style={{ "--pass-color": project.color, borderRadius: 17, boxShadow: "0 -3px 14px rgb(0 0 0 / 28%), inset 0 1px rgb(255 255 255 / 15%)" } as CSSProperties} onKeyDown={(event) => {
+      <motion.article layout className="wallet-pass" data-project-card={`wallet:${cardKey}`} style={{ "--pass-color": project.color, borderRadius: 17, boxShadow: "0 -3px 14px rgb(0 0 0 / 28%), inset 0 1px rgb(255 255 255 / 15%)" } as CSSProperties} onKeyDown={(event) => {
         if (event.key === "Escape" && expanded) { event.preventDefault(); buttonRef.current?.focus(); onToggle(true); }
       }}>
         <motion.button layout ref={buttonRef} className="wallet-pass__toggle" type="button" aria-label={`${expanded ? "Cerrar" : "Ver"} ${project.name}`} aria-expanded={expanded} aria-controls={`detail-${cardKey}`} onClick={(event) => { setFeedback(""); onToggle(event.detail === 0); }}>
           <motion.span layout="position" className="wallet-pass__label"><span>{project.name}</span><ChevronRight size={18} strokeWidth={1.8} aria-hidden="true" /></motion.span>
-          <motion.div layout className="wallet-pass__cover" style={{ height: expanded || last ? "auto" : preview ? 24 : 16 }}><motion.div layout="position"><PassArt project={project} /></motion.div></motion.div>
+          <motion.div layout className="wallet-pass__cover" data-project-image={detail?.slug} data-project-art={project.image ?? "wallet-art"} style={{ "--pass-color": project.color, height: expanded || last ? "auto" : preview ? 24 : 16 } as CSSProperties}><motion.div layout="position"><PassArt project={project} /></motion.div></motion.div>
         </motion.button>
         <motion.div layout id={`detail-${cardKey}`} className="wallet-detail" style={{ height: expanded ? "auto" : 0 }} inert={!expanded} aria-hidden={!expanded}>
           <motion.div layout="position" initial={false} animate={{ opacity: expanded ? 1 : 0 }} transition={{ opacity: { duration: instant ? 0 : .16 } }}>

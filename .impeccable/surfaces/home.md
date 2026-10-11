@@ -12,7 +12,7 @@ STORY: Understand Arturo's work, browse public products, try a product or read i
 
 FIRST VIEWPORT: Keep headline, introduction and orange contact button at left. At right, one 16:9 visual, product name, short evidence/description, public link, and previous/next controls with current position. Mobile keeps text and contact before slider.
 
-FORM: Explicit user-pinned slider replaces only the Explora figure. No seeded form exploration applies to this ordinary extension. Start with Explora, then Cafetero, Hub, Cotiza, Vela Ventas, Finanzas, Vela Entradas and Tarjetas Arturo. No autoplay; native horizontal scrolling and labelled keyboard controls.
+FORM: Explicit user-pinned slider replaces only the Explora figure. No seeded form exploration applies to this ordinary extension. Start with Explora, then Cafetero, Hub, Cotiza, Vela Ventas, Finanzas, Vela Entradas and Tarjetas Arturo. User subsequently selected elastic dots with automatic advancement every five seconds, pause/play and an infinite cycle. Retain native horizontal scrolling and labelled keyboard controls.
 
 FINISH: Independent fresh finish review returned `ship` for the local hero and next-section excerpt, with no material fixes. Implementation, provenance, verification and limits are recorded below. This ordinary extension preserves the absence of root `DESIGN.md` and `.impeccable/design.json`; it creates no global design authority.
 
@@ -37,3 +37,9 @@ After the finish review, local production preview on port 4173 passed the ES mis
 The slider has not been remotely deployed. The earlier staging Cloudflare 1010 block remains; production publication is pending. The finish verdict covers the local hero and next-section excerpt, not production or real-device touch. Physical touch, real 200% zoom and assistive technology hardware were not tested.
 
 The pre-existing decorative hero grid remains an advisory in `detector.json`; existing brand shadows remain outside this extension. Neither was repaired or promoted into a new design-system rule.
+
+## Elastic indicators and automatic loop
+
+User selected elastic dots after comparing four interactive concepts. Indicators have no boxes; the active capsule expands with transforms and fills over five seconds. Chakra's existing autoplay and loop handle rotation. Pause freezes the indicator; starting playback begins a fresh five-second interval. Pointer and keyboard interaction stop rotation, and offscreen carousels stop until visible again. Reduced motion starts paused and keeps manual navigation instant. At the loop boundary, native scroll jumps to the corresponding snap point instead of traversing every intervening card.
+
+Local evidence is in `.impeccable/review/home-carousel-elastic/qa.json`. The integrated browser confirmed automatic 8 → 1 after 5.3 seconds, keyboard navigation in both directions, pause, repeated resume, offscreen behavior, ES/EN labels, both themes and no horizontal overflow at 320px, 390px or desktop width. All 136 tests and the staging build passed. This refinement has not been deployed; physical touch was not tested.

@@ -6,7 +6,9 @@ import Vision
 
 let destination = URL(fileURLWithPath: "public/assets/images/portfolio", isDirectory: true)
 let context = CIContext()
-for (locale, path) in [("es", "/dev"), ("en", "/en/dev")] {
+for (filename, path) in [("dev-qr-es", "/dev"), ("dev-qr-en", "/en/dev"),
+                         ("work-qr-agromaf", "/work/agromaf"), ("work-qr-nieto", "/work/nieto"),
+                         ("work-qr-pachas", "/work/pachas"), ("work-qr-wasky", "/work/wasky")] {
     let url = "https://velaarturo.com" + path
     let filter = CIFilter(name: "CIQRCodeGenerator")!
     filter.setValue(Data(url.utf8), forKey: "inputMessage")
@@ -27,7 +29,7 @@ for (locale, path) in [("es", "/dev"), ("en", "/en/dev")] {
     check.symbologies = [.qr]
     try VNImageRequestHandler(cgImage: image).perform([check])
     precondition(check.results?.first?.payloadStringValue == url, "QR decode failed")
-    let file = destination.appendingPathComponent("dev-qr-\(locale).png")
+    let file = destination.appendingPathComponent("\(filename).png")
     let png = CGImageDestinationCreateWithURL(file as CFURL, "public.png" as CFString, 1, nil)!
     CGImageDestinationAddImage(png, image, [kCGImagePropertyPNGDictionary: [kCGImagePropertyPNGDescription:
         "Generated locally with CoreImage CIQRCodeGenerator. URL: \(url). Correction M; four-module quiet zone; verified with Vision."]] as CFDictionary)

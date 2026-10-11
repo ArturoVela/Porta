@@ -4,22 +4,24 @@ import {
   Container,
   Flex,
   HStack,
-  Grid,
   IconButton,
   Stack,
   Text,
 } from "@chakra-ui/react";
 import { ArrowUpRight, Menu, Moon, Sun, X } from "lucide-react";
+import { AnimatePresence, motion, useIsPresent, usePresenceData, useReducedMotion } from "motion/react";
 import { useTheme } from "next-themes";
 import { useEffect, useState, type ReactNode } from "react";
 import { Link as RouterLink, useLocation } from "react-router";
 import { ContentLink as Link } from "@/components/ContentLink";
+import { MOTION_EASE_OUT } from "@/components/PortfolioMotion";
+import { SiteFooter } from "@/components/SiteFooter";
 import { useContent } from "@/content/context";
 import { CV_URL } from "@/lib/links";
 import { contentHref } from "@/lib/preview";
 import { localeCookie, localizedPath, routePath, type LocaleCopy } from "@/i18n";
 
-function ThemeToggle({ copy }: { copy: LocaleCopy }) {
+export function ThemeToggle({ copy }: { copy: LocaleCopy }) {
   const { resolvedTheme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
@@ -32,8 +34,11 @@ function ThemeToggle({ copy }: { copy: LocaleCopy }) {
       bg="app.panel"
       color="app.text"
       borderRadius="0"
+      w="11"
+      h="11"
       minW="11"
       minH="11"
+      flexShrink="0"
       onClick={() => setTheme(dark ? "light" : "dark")}
     >
       {dark ? <Sun size={18} /> : <Moon size={18} />}
@@ -60,15 +65,17 @@ function NavigationLinks({ onNavigate }: { onNavigate?: () => void }) {
         <Link key={item.to} to={item.to} onClick={onNavigate} aria-current={active ? "page" : undefined}>
           <Text
             as="span"
-            display="block"
+            className="nav-item"
+            display="flex"
+            alignItems="center"
             px="3"
-            py="2.5"
+            h="11"
             minH="11"
             color={active ? "app.text" : "app.muted"}
             borderBottomWidth="2px"
-            borderColor={active ? "app.accent" : "transparent"}
+            borderColor="transparent"
             fontWeight="600"
-            _hover={{ color: "app.text", borderColor: "app.accent" }}
+            _hover={{ color: "app.text" }}
           >
             {item.label}
           </Text>
@@ -76,7 +83,7 @@ function NavigationLinks({ onNavigate }: { onNavigate?: () => void }) {
       );
     })}
     <a href={CV_URL} target="_blank" rel="noopener noreferrer" onClick={onNavigate}>
-      <Text as="span" display="flex" alignItems="center" minH="11" px="3" py="2" color="app.muted" borderBottomWidth="2px" borderColor="transparent" fontWeight="600" _hover={{ color: "app.text", borderColor: "app.accent" }}>{copy.common.cv}</Text>
+      <Text as="span" className="nav-item" display="flex" alignItems="center" h="11" minH="11" px="3" color="app.muted" borderBottomWidth="2px" borderColor="transparent" fontWeight="600" _hover={{ color: "app.text" }}>{copy.common.cv}</Text>
     </a>
   </>;
 }
@@ -85,8 +92,9 @@ function LanguageSwitch() {
   const { locale, copy, previewToken } = useContent();
   const location = useLocation();
   const currentPath = location.pathname === "/__preview" ? new URLSearchParams(location.search).get("path") ?? routePath(locale, "home") : location.pathname;
+  if (currentPath.replace(/\/$/, "") === "/work") return null;
   return (
-    <HStack role="group" aria-label={copy.common.language} gap="0" borderWidth="1px" borderColor="app.border" minH="11">
+    <HStack role="group" aria-label={copy.common.language} gap="0" h="11" flexShrink="0">
       {(["es", "en"] as const).map((target) => (
         <RouterLink
           key={target}
@@ -95,17 +103,38 @@ function LanguageSwitch() {
           aria-current={locale === target ? "page" : undefined}
           onClick={() => { document.cookie = localeCookie(target); }}
         >
-          <Text as="span" display="flex" alignItems="center" justifyContent="center" minW="11" minH="11" px="3" fontSize="sm" fontWeight="700" bg={locale === target ? "app.text" : "app.panel"} color={locale === target ? "app.canvas" : "app.muted"}>{target.toUpperCase()}</Text>
+          <Text as="span" className="language-option" display="flex" alignItems="center" justifyContent="center" minW="11" h="11" borderWidth="1px" borderInlineStartWidth={target === "en" ? "0" : "1px"} borderColor="app.border" px="3" fontSize="sm" fontWeight="700" bg={locale === target ? "app.text" : "app.panel"} color={locale === target ? "app.canvas" : "app.muted"}>{target.toUpperCase()}</Text>
         </RouterLink>
       ))}
     </HStack>
   );
 }
 
+function MobileNavigation({ onNavigate }: { onNavigate: () => void }) {
+  const { copy } = useContent();
+  const present = useIsPresent();
+  const instant = usePresenceData();
+  const closed = { opacity: 0, transform: instant ? "none" : "translateY(-6px)" };
+  return (
+    <Stack asChild display={{ lg: "none" }} p="4" gap="1" bg="app.panel" borderWidth="1px" borderTopWidth="0" borderColor="app.border">
+      <motion.nav id="mobile-navigation" aria-label={copy.footer.explore} inert={!present}
+        initial={closed} animate={{ opacity: 1, transform: "none" }} exit={closed}
+        transition={{ duration: instant ? 0 : 0.18, ease: MOTION_EASE_OUT }}>
+        <NavigationLinks onNavigate={onNavigate} />
+        <Button asChild mt="2" h="11" minH="11" bg="app.signal" color="#160B08" borderRadius="0">
+          <Link to="/contacto" onClick={onNavigate}>{copy.common.talk} <ArrowUpRight size={17} /></Link>
+        </Button>
+      </motion.nav>
+    </Stack>
+  );
+}
+
 export function SiteShell({ children }: { children: ReactNode }) {
-  const { content, copy, locale } = useContent();
+  const { content, copy } = useContent();
   const location = useLocation();
   const [open, setOpen] = useState(false);
+  const [menuInstant, setMenuInstant] = useState(false);
+  const reduced = useReducedMotion();
 
   useEffect(() => {
     if (!location.hash) window.scrollTo({ top: 0, behavior: "instant" });
@@ -131,92 +160,53 @@ export function SiteShell({ children }: { children: ReactNode }) {
         <a href="#contenido">{copy.common.skip}</a>
       </Box>
       <Box as="header" position="sticky" top="0" zIndex="sticky" bg="app.canvas/88" backdropFilter="blur(18px)" py="3">
-        <Container maxW="7xl">
-          <Flex minH="15" align="center" justify="space-between" gap="4" bg="app.panel/92" borderWidth="1px" borderColor="app.border" px={{ base: "3", md: "5" }} boxShadow="0 8px 30px rgba(8, 11, 18, .06)">
-            <Link to="/">
+        <Container maxW="7xl" px={{ base: "2", md: "4" }}>
+          <Flex className="site-header-bar" minH="16" align="center" justify="space-between" gap={{ base: "2", md: "4" }} bg="app.panel/92" borderWidth="1px" borderColor="app.border" px={{ base: "2", md: "5" }} py="2" boxShadow="0 8px 30px rgba(8, 11, 18, .06)">
+            <Link to="/" aria-label={content.site.name} className="site-header-brand">
               <HStack gap="3">
-                <Flex className="brand-mark" w="11" h="11" bg="brand.600" color="white" align="center" justify="center" fontWeight="850">A/</Flex>
+                <Flex className="brand-mark" w="11" h="11" flexShrink="0" bg="brand.600" color="white" align="center" justify="center" fontWeight="850">A/</Flex>
                 <Stack gap="0" display={{ base: "none", xl: "flex" }}>
                   <Text fontWeight="750" letterSpacing="-.025em" lineHeight="1.1">{content.site.name}</Text>
                   <Text color="app.muted" fontSize="xs">{copy.common.brandSubtitle}</Text>
                 </Stack>
               </HStack>
             </Link>
-            <HStack display={{ base: "none", lg: "flex" }} gap="1">
+            <HStack display={{ base: "none", lg: "flex" }} gap="1" flexShrink="0">
               <NavigationLinks />
             </HStack>
-            <HStack gap="2">
+            <HStack gap="2" flexShrink="0">
               <LanguageSwitch />
               <ThemeToggle copy={copy} />
-              <Button asChild display={{ base: "none", sm: "inline-flex" }} minH="11" bg="app.signal" color="#160B08" borderRadius="0" px="5" _hover={{ transform: "translate(2px, -2px)" }}>
+              <Button asChild display={{ base: "none", sm: "inline-flex" }} h="11" minH="11" bg="app.signal" color="#160B08" borderRadius="0" px="5">
                 <Link to="/contacto">{copy.common.talk} <ArrowUpRight size={17} /></Link>
               </Button>
               <IconButton
                 display={{ base: "inline-flex", lg: "none" }}
                 aria-label={open ? copy.menu.close : copy.menu.open}
+                aria-expanded={open}
+                aria-controls="mobile-navigation"
                 variant="outline"
                 borderColor="app.border"
                 bg="app.panel"
                 borderRadius="0"
+                w="11"
+                h="11"
                 minW="11"
                 minH="11"
-                onClick={() => setOpen((value) => !value)}
+                flexShrink="0"
+                onClick={(event) => { setMenuInstant(event.detail === 0); setOpen((value) => !value); }}
               >
                 {open ? <X size={19} /> : <Menu size={19} />}
               </IconButton>
             </HStack>
           </Flex>
-          {open ? (
-            <Stack display={{ lg: "none" }} p="4" gap="1" bg="app.panel" borderWidth="1px" borderTopWidth="0" borderColor="app.border">
-              <NavigationLinks onNavigate={() => setOpen(false)} />
-              <Button asChild mt="2" minH="11" bg="app.signal" color="#160B08" borderRadius="0">
-                <Link to="/contacto">{copy.common.talk} <ArrowUpRight size={17} /></Link>
-              </Button>
-            </Stack>
-          ) : null}
+          <AnimatePresence initial={false} custom={menuInstant || reduced}>
+            {open && <MobileNavigation key="navigation" onNavigate={() => setOpen(false)} />}
+          </AnimatePresence>
         </Container>
       </Box>
       <Box as="main" id="contenido" flex="1">{children}</Box>
-      <Box as="footer" className="site-footer" bg="#080B12" color="#F7F9FC" py={{ base: "10", md: "14" }}>
-        <Container maxW="7xl">
-          <Grid templateColumns={{ base: "1fr", lg: "1.25fr 1fr" }} gap={{ base: "10", lg: "20" }}>
-            <Stack gap="5" align="start">
-              <Link to="/"><Text fontWeight="750" fontSize="lg">{content.site.name} <Text as="span" color="#AAB5C6" fontWeight="400">· {content.site.location}</Text></Text></Link>
-              <Text fontSize={{ base: "3xl", md: "4xl" }} maxW="22ch" fontWeight="750" letterSpacing="-.03em" lineHeight="1.1">{copy.footer.headline}</Text>
-              <a href={`mailto:${content.site.email}`} className="footer-contact">{content.site.email}<ArrowUpRight size={18} aria-hidden="true" /></a>
-              <Text color="#AAB5C6" fontSize="sm" maxW="48ch">{copy.footer.scope}</Text>
-            </Stack>
-            <Grid templateColumns="1fr 1fr" gap="6">
-              <Stack as="nav" aria-label={copy.footer.explore} gap="0" align="start">
-                <Text fontWeight="700" mb="3">{copy.footer.explore}</Text>
-                <Link to="/proyectos">{copy.nav.projects}</Link>
-                <Link to="/perfil">{copy.nav.profile}</Link>
-                <Link to="/dev">Dev</Link>
-                <Link to="/articulos">{copy.nav.articles}</Link>
-                <Link to="/linktree">{copy.nav.linktree}</Link>
-              </Stack>
-              <Stack as="nav" aria-label={copy.footer.connect} gap="0" align="start">
-                <Text fontWeight="700" mb="3">{copy.footer.connect}</Text>
-                <Link to="/contacto">{copy.common.talk}</Link>
-                {content.site.socials.map((social) => <a key={social.label} href={social.url} target="_blank" rel="noopener noreferrer">{social.label}<ArrowUpRight size={14} aria-hidden="true" /></a>)}
-                <a href={CV_URL} target="_blank" rel="noopener noreferrer">{copy.common.cv}<ArrowUpRight size={14} aria-hidden="true" /></a>
-              </Stack>
-            </Grid>
-          </Grid>
-          <Stack gap="4" mt="10" pt="5" borderTopWidth="1px" borderColor="#303B4B">
-            <Flex justify="space-between" align="start" gap="3" direction={{ base: "column", md: "row" }}>
-              <Text color="#AAB5C6" fontSize="sm" pt="3">© {new Date().getFullYear()} {content.site.name}</Text>
-              <HStack as="nav" aria-label={copy.footer.legal} gap={{ base: "4", md: "6" }} flexWrap="wrap" fontSize="sm">
-                <Link to="/legal#privacidad">{copy.footer.privacy}</Link>
-                <Link to="/legal#cookies">{copy.footer.cookies}</Link>
-                <Link to="/legal#condiciones">{copy.footer.terms}</Link>
-                <Link to="/legal#derechos">{copy.footer.rights}</Link>
-              </HStack>
-            </Flex>
-            <Text color="#AAB5C6" fontSize="xs">{copy.footer.copyright}</Text>
-          </Stack>
-        </Container>
-      </Box>
+      <SiteFooter />
     </Flex>
   );
 }

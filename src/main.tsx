@@ -5,7 +5,12 @@ import { BrowserRouter } from "react-router";
 import { ThemeProvider } from "next-themes";
 import { App } from "@/App";
 import { system } from "@/theme";
+import { listenForProjectHistory } from "@/components/PortfolioMotion";
 import "@/styles.css";
+
+// Register before BrowserRouter so history captures the outgoing visual.
+const stopProjectHistory = listenForProjectHistory();
+import.meta.hot?.dispose(stopProjectHistory);
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>

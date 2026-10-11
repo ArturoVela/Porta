@@ -1,6 +1,7 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { FALLBACK_ENVELOPE } from "@/content/fallback";
 import { FALLBACK_ENVELOPE_EN } from "@/content/fallback-en";
+import { withProjectCatalog } from "@/lib/projectCatalog";
 import { PRIVACY_POLICY_VERSION } from "@/lib/legal";
 import { routePath } from "@/i18n";
 import worker, { isSameOrigin, metaForPath, normalizeLegacyPath, parseCommentPayload } from "../worker/index";
@@ -103,7 +104,7 @@ describe("contenido dinámico", () => {
 
     expect(response.status).toBe(200);
     expect(response.headers.get("x-portfolio-source")).toBe("brain");
-    expect(await response.json()).toEqual(remoteEnvelope);
+    expect(await response.json()).toEqual(withProjectCatalog(remoteEnvelope, "es"));
     expect(brainFetch).toHaveBeenCalledTimes(1);
     const brainRequest = brainFetch.mock.calls[0]![0];
     expect(brainRequest.url).toBe("https://secondbrain.internal/internal/v1/portfolio/velaarturo/manifest?locale=es");
@@ -150,7 +151,7 @@ describe("contenido dinámico", () => {
 
     expect(response.status).toBe(200);
     expect(response.headers.get("x-portfolio-source")).toBe("bundled");
-    expect(await response.json()).toEqual(FALLBACK_ENVELOPE);
+    expect(await response.json()).toEqual(withProjectCatalog(FALLBACK_ENVELOPE, "es"));
   });
 });
 

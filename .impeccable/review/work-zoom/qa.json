@@ -1,0 +1,320 @@
+[
+  {
+    "name": "agromaf-desktop-light",
+    "canonical": "https://velaarturo.com/work/agromaf",
+    "dpr": 1,
+    "height": 1000,
+    "horizontalOverflow": false,
+    "images": [
+      "loaded",
+      "loaded"
+    ],
+    "logo": "/assets/images/logo/work-agromaf-light.png",
+    "logoBackground": "rgb(255, 255, 255)",
+    "ogImage": "https://velaarturo.com/assets/images/Me/Fototrabajo-agromaf.jpg",
+    "overflow": false,
+    "photo": {
+      "bottom": 632,
+      "height": 511,
+      "left": 121.5,
+      "right": 504.75,
+      "top": 121,
+      "width": 383.25,
+      "x": 121.5,
+      "y": 121
+    },
+    "photoCurrentSrc": "http://127.0.0.1:5173/assets/images/Me/Fototrabajo-agromaf-480.jpg",
+    "photoFit": "cover",
+    "photoNatural": [
+      384,
+      512
+    ],
+    "photoPosition": "50% 0px",
+    "photoSrc": "/assets/images/Me/Fototrabajo-agromaf.jpg",
+    "portrait": {
+      "bottom": 632,
+      "height": 511,
+      "left": 121.5,
+      "right": 504.75,
+      "top": 121,
+      "width": 383.25,
+      "x": 121.5,
+      "y": 121
+    },
+    "theme": "light",
+    "width": 1280
+  },
+  {
+    "name": "agromaf-mobile-light",
+    "canonical": "https://velaarturo.com/work/agromaf",
+    "dpr": 1,
+    "height": 1400,
+    "horizontalOverflow": false,
+    "images": [
+      "loaded",
+      "loaded"
+    ],
+    "logo": "/assets/images/logo/work-agromaf-light.png",
+    "logoBackground": "rgb(255, 255, 255)",
+    "ogImage": "https://velaarturo.com/assets/images/Me/Fototrabajo-agromaf.jpg",
+    "overflow": false,
+    "photo": {
+      "bottom": 462,
+      "height": 341,
+      "left": 17,
+      "right": 358,
+      "top": 121,
+      "width": 341,
+      "x": 17,
+      "y": 121
+    },
+    "photoCurrentSrc": "http://127.0.0.1:5173/assets/images/Me/Fototrabajo-agromaf-480.jpg",
+    "photoFit": "cover",
+    "photoNatural": [
+      342,
+      456
+    ],
+    "photoPosition": "50% 0px",
+    "photoSrc": "/assets/images/Me/Fototrabajo-agromaf.jpg",
+    "portrait": {
+      "bottom": 462,
+      "height": 341,
+      "left": 17,
+      "right": 358,
+      "top": 121,
+      "width": 341,
+      "x": 17,
+      "y": 121
+    },
+    "theme": "light",
+    "width": 390
+  },
+  {
+    "name": "agromaf-desktop-dark",
+    "fullPage": false,
+    "canonical": "https://velaarturo.com/work/agromaf",
+    "contributionsOpen": false,
+    "contributionsPresent": false,
+    "dpr": 1,
+    "emails": [
+      "mailto:arturo.vela@agromaf.pe",
+      "mailto:sistemas@agromaf.pe"
+    ],
+    "height": 1000,
+    "horizontalOverflow": false,
+    "images": [
+      "loaded",
+      "loaded"
+    ],
+    "logo": "/assets/images/logo/work-agromaf-dark.png",
+    "logoBackground": "rgb(14, 20, 32)",
+    "ogImage": "https://velaarturo.com/assets/images/Me/Fototrabajo-agromaf.jpg",
+    "opacity": [
+      "1",
+      "1"
+    ],
+    "overflow": false,
+    "photo": {
+      "bottom": 632,
+      "height": 511,
+      "left": 121.5,
+      "right": 504.75,
+      "top": 121,
+      "width": 383.25,
+      "x": 121.5,
+      "y": 121
+    },
+    "photoCurrentSrc": "http://127.0.0.1:5173/assets/images/Me/Fototrabajo-agromaf-480.jpg",
+    "photoFit": "cover",
+    "photoNatural": [
+      384,
+      512
+    ],
+    "photoPosition": "50% 0px",
+    "photoSrc": "/assets/images/Me/Fototrabajo-agromaf.jpg",
+    "portrait": {
+      "bottom": 632,
+      "height": 511,
+      "left": 121.5,
+      "right": 504.75,
+      "top": 121,
+      "width": 383.25,
+      "x": 121.5,
+      "y": 121
+    },
+    "projectLinks": [],
+    "theme": "dark",
+    "width": 1280
+  },
+  {
+    "name": "agromaf-mobile-dark",
+    "fullPage": false,
+    "canonical": "https://velaarturo.com/work/agromaf",
+    "contributionsOpen": false,
+    "contributionsPresent": false,
+    "dpr": 1,
+    "emails": [
+      "mailto:arturo.vela@agromaf.pe",
+      "mailto:sistemas@agromaf.pe"
+    ],
+    "height": 1400,
+    "horizontalOverflow": false,
+    "images": [
+      "loaded",
+      "loaded"
+    ],
+    "logo": "/assets/images/logo/work-agromaf-dark.png",
+    "logoBackground": "rgb(14, 20, 32)",
+    "ogImage": "https://velaarturo.com/assets/images/Me/Fototrabajo-agromaf.jpg",
+    "opacity": [
+      "1",
+      "1"
+    ],
+    "overflow": false,
+    "photo": {
+      "bottom": 462,
+      "height": 341,
+      "left": 17,
+      "right": 358,
+      "top": 121,
+      "width": 341,
+      "x": 17,
+      "y": 121
+    },
+    "photoCurrentSrc": "http://127.0.0.1:5173/assets/images/Me/Fototrabajo-agromaf-480.jpg",
+    "photoFit": "cover",
+    "photoNatural": [
+      342,
+      456
+    ],
+    "photoPosition": "50% 0px",
+    "photoSrc": "/assets/images/Me/Fototrabajo-agromaf.jpg",
+    "portrait": {
+      "bottom": 462,
+      "height": 341,
+      "left": 17,
+      "right": 358,
+      "top": 121,
+      "width": 341,
+      "x": 17,
+      "y": 121
+    },
+    "projectLinks": [],
+    "theme": "dark",
+    "width": 390
+  },
+  {
+    "name": "agromaf-zoom-equivalent-320-dark",
+    "fullPage": false,
+    "canonical": "https://velaarturo.com/work/agromaf",
+    "contributionsOpen": false,
+    "contributionsPresent": false,
+    "dpr": 1,
+    "emails": [
+      "mailto:arturo.vela@agromaf.pe",
+      "mailto:sistemas@agromaf.pe"
+    ],
+    "height": 1500,
+    "horizontalOverflow": false,
+    "images": [
+      "loaded",
+      "loaded"
+    ],
+    "logo": "/assets/images/logo/work-agromaf-dark.png",
+    "logoBackground": "rgb(14, 20, 32)",
+    "ogImage": "https://velaarturo.com/assets/images/Me/Fototrabajo-agromaf.jpg",
+    "opacity": [
+      "1",
+      "1"
+    ],
+    "overflow": false,
+    "photo": {
+      "bottom": 392,
+      "height": 271,
+      "left": 17,
+      "right": 288,
+      "top": 121,
+      "width": 271,
+      "x": 17,
+      "y": 121
+    },
+    "photoCurrentSrc": "http://127.0.0.1:5173/assets/images/Me/Fototrabajo-agromaf-480.jpg",
+    "photoFit": "cover",
+    "photoNatural": [
+      272,
+      362
+    ],
+    "photoPosition": "50% 0px",
+    "photoSrc": "/assets/images/Me/Fototrabajo-agromaf.jpg",
+    "portrait": {
+      "bottom": 392,
+      "height": 271,
+      "left": 17,
+      "right": 288,
+      "top": 121,
+      "width": 271,
+      "x": 17,
+      "y": 121
+    },
+    "projectLinks": [],
+    "theme": "dark",
+    "width": 320
+  },
+  {
+    "name": "agromaf-tablet-dark",
+    "fullPage": false,
+    "canonical": "https://velaarturo.com/work/agromaf",
+    "contributionsOpen": false,
+    "contributionsPresent": false,
+    "dpr": 1,
+    "emails": [
+      "mailto:arturo.vela@agromaf.pe",
+      "mailto:sistemas@agromaf.pe"
+    ],
+    "height": 1100,
+    "horizontalOverflow": false,
+    "images": [
+      "loaded",
+      "loaded"
+    ],
+    "logo": "/assets/images/logo/work-agromaf-dark.png",
+    "logoBackground": "rgb(14, 20, 32)",
+    "ogImage": "https://velaarturo.com/assets/images/Me/Fototrabajo-agromaf.jpg",
+    "opacity": [
+      "1",
+      "1"
+    ],
+    "overflow": false,
+    "photo": {
+      "bottom": 496.5,
+      "height": 375.5,
+      "left": 17,
+      "right": 298.625,
+      "top": 121,
+      "width": 281.625,
+      "x": 17,
+      "y": 121
+    },
+    "photoCurrentSrc": "http://127.0.0.1:5173/assets/images/Me/Fototrabajo-agromaf-480.jpg",
+    "photoFit": "cover",
+    "photoNatural": [
+      304,
+      405
+    ],
+    "photoPosition": "50% 0px",
+    "photoSrc": "/assets/images/Me/Fototrabajo-agromaf.jpg",
+    "portrait": {
+      "bottom": 496.5,
+      "height": 375.5,
+      "left": 17,
+      "right": 298.625,
+      "top": 121,
+      "width": 281.625,
+      "x": 17,
+      "y": 121
+    },
+    "projectLinks": [],
+    "theme": "dark",
+    "width": 800
+  }
+]

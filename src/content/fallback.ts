@@ -14,7 +14,7 @@ export const FALLBACK_ENVELOPE: PortfolioEnvelope = {
       availability: "Abierto a conversar sobre productos, sistemas internos y colaboración técnica.",
       location: "Perú",
       bio: "Trabajo entre producto, interfaz e ingeniería. Me interesa entender primero el proceso real, reducir fricción y entregar sistemas que las personas puedan usar y mantener con confianza.",
-      email: "cv@velaarturo.com",
+      email: "dev@velaarturo.com",
       phone: "+51 963 653 154",
       cvUrl: CV_URL,
       socials: [

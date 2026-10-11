@@ -44,7 +44,7 @@ export function AllProjectsPage() {
           {projects.map((project) => {
             const availability = projectAvailabilityLabel(project, locale);
             return (
-              <article className="all-projects__item" key={project.id}>
+              <article className="all-projects__item" key={project.id} data-project-card="all" data-project-image={project.slug} data-project-art="text">
                 <div className="all-projects__meta"><span>{project.category}</span><span>{project.year}</span></div>
                 <h2><Link to={`/proyectos/${project.slug}`}>{project.title}</Link></h2>
                 <p className="all-projects__excerpt">{project.excerpt}</p>

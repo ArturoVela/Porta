@@ -5,9 +5,14 @@ export function publicDevUrl(locale: Locale) {
   return `https://velaarturo.com${locale === "en" ? "/en/dev" : "/dev"}`;
 }
 
-export function contactVCard(site: Pick<SiteContent, "name" | "email">, locale: Locale) {
+export function contactVCard(site: Pick<SiteContent, "name" | "email">, locale: Locale, details: { organization?: string; title?: string; alternateEmail?: string; additionalEmails?: readonly string[]; url?: string } = {}) {
   const escape = (value: string) => value.replace(/\\/g, "\\\\").replace(/\r\n|\r|\n/g, "\\n").replace(/;/g, "\\;").replace(/,/g, "\\,");
-  const lines = ["BEGIN:VCARD", "VERSION:3.0", `N:;${escape(site.name)};;;`, `FN:${escape(site.name)}`, `EMAIL:${escape(site.email)}`, `URL:${publicDevUrl(locale)}`, "END:VCARD"];
+  const lines = ["BEGIN:VCARD", "VERSION:3.0", `N:;${escape(site.name)};;;`, `FN:${escape(site.name)}`, `EMAIL:${escape(site.email)}`];
+  if (details.alternateEmail) lines.push(`EMAIL;TYPE=WORK:${escape(details.alternateEmail)}`);
+  for (const email of details.additionalEmails ?? []) lines.push(`EMAIL;TYPE=WORK:${escape(email)}`);
+  if (details.organization) lines.push(`ORG:${escape(details.organization)}`);
+  if (details.title) lines.push(`TITLE:${escape(details.title)}`);
+  lines.push(`URL:${escape(details.url ?? publicDevUrl(locale))}`, "END:VCARD");
   return lines.map((line) => {
     let folded = "", bytes = 0;
     for (const character of line) {
@@ -27,14 +32,14 @@ export async function copyText(value: string): Promise<"copied" | "blocked"> {
   } catch { return "blocked"; }
 }
 
-export async function shareDevCard(name: string, locale: Locale): Promise<"shared" | "copied" | "blocked" | "cancelled"> {
+export async function shareDevCard(name: string, locale: Locale, url = publicDevUrl(locale)): Promise<"shared" | "copied" | "blocked" | "cancelled"> {
   if (typeof navigator.share === "function") {
     try {
-      await navigator.share({ title: name, url: publicDevUrl(locale) });
+      await navigator.share({ title: name, url });
       return "shared";
     } catch (error) {
       if (error instanceof DOMException && error.name === "AbortError") return "cancelled";
     }
   }
-  return copyText(publicDevUrl(locale));
+  return copyText(url);
 }

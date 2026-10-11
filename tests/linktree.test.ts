@@ -9,16 +9,17 @@ import { LinktreePage } from "@/pages/LinktreePage";
 import { WALLET_COLLECTIONS, WALLET_PROJECTS, walletCollections } from "@/lib/linktree";
 import { localizedPath } from "@/i18n";
 import { FALLBACK_ENVELOPE } from "@/content/fallback";
+import { fallbackEnvelope } from "@/lib/content";
 import { metaForPath } from "../worker/index";
 
 describe("tarjetero de proyectos", () => {
   it("separa herramientas y proyectos, conservando las otras listas y sus pases", () => {
-    expect(WALLET_PROJECTS).toHaveLength(26);
-    expect(new Set(WALLET_PROJECTS.map((project) => project.id)).size).toBe(26);
-    expect(WALLET_COLLECTIONS.map((group) => group.projects.length)).toEqual([15, 3, 3, 1, 6]);
+    expect(WALLET_PROJECTS).toHaveLength(27);
+    expect(new Set(WALLET_PROJECTS.map((project) => project.id)).size).toBe(27);
+    expect(WALLET_COLLECTIONS.map((group) => group.projects.length)).toEqual([15, 3, 4, 1, 6]);
     expect(WALLET_COLLECTIONS[0]).toMatchObject({ id: "herramientas", name: "Herramientas" });
-    expect(WALLET_COLLECTIONS[1]).toEqual({ id: "proyectos", name: "Proyectos", projects: ["coffee", "explora", "un-ramito"] });
-    expect(WALLET_COLLECTIONS[2].projects).toEqual(["brain", "hub", "cv"]);
+    expect(WALLET_COLLECTIONS[1]).toEqual({ id: "proyectos", name: "Proyectos", nameEn: "Projects", projects: ["coffee", "explora", "un-ramito"] });
+    expect(WALLET_COLLECTIONS[2].projects).toEqual(["brain", "status", "hub", "cv"]);
     expect(WALLET_COLLECTIONS[0].projects).toContain("hub");
     expect(WALLET_COLLECTIONS[0].projects).toContain("cv");
     for (const group of WALLET_COLLECTIONS) {
@@ -28,7 +29,7 @@ describe("tarjetero de proyectos", () => {
       expect(new URL(`https://${project.domain}`).protocol).toBe("https:");
       expect(project.description.length).toBeGreaterThan(20);
       if (project.image) expect(existsSync(resolve("public", project.image.slice(1)))).toBe(true);
-      if (project.caseSlug) expect(FALLBACK_ENVELOPE.data.projects.some((item) => item.slug === project.caseSlug)).toBe(true);
+      if (project.caseSlug) expect(fallbackEnvelope("es").data.projects.some((item) => item.slug === project.caseSlug)).toBe(true);
     }
     expect(WALLET_PROJECTS.find((project) => project.id === "bc")?.domain).toBe("bc.velaarturo.com");
     expect(WALLET_PROJECTS.find((project) => project.id === "coffee")?.domain).toBe("cafetero.velaarturo.com");
@@ -63,8 +64,15 @@ describe("tarjetero de proyectos", () => {
       expect(html.match(/aria-expanded="true"/g)).toHaveLength(1);
       expect(html).toContain(`aria-expanded="true" aria-controls="detail-${group}-hub"`);
       expect(html.match(/aria-hidden="false"/g)).toHaveLength(1);
-      expect(html.match(/class="wallet-detail" inert=""/g)).toHaveLength(27);
+      expect(html.match(/class="wallet-detail" inert=""/g)).toHaveLength(28);
       expect(html).not.toContain("<dialog");
     }
+  });
+
+  it("muestra la identidad de Status sin reutilizar el arte de Divide", () => {
+    const html = renderToStaticMarkup(createElement(MemoryRouter, { initialEntries: ["/linktree?project=status&group=personal"] }, createElement(ContentProvider, null, createElement(LinktreePage))));
+    expect(html).toContain("<strong>Status</strong>");
+    expect(html).toContain('aria-expanded="true" aria-controls="detail-personal-status"');
+    expect(html.match(/<strong>divide\.<\/strong>/g)).toHaveLength(1);
   });
 });

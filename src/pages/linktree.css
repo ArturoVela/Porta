@@ -64,7 +64,7 @@
 .wallet-pass__cover, .wallet-detail { overflow: hidden; }
 .wallet-detail > div { padding-bottom: 28px; }
 .wallet-pass__art { display: block; width: 100%; height: auto; aspect-ratio: 750 / 288; object-fit: cover; }
-.wallet-pass__custom { display: flex; align-items: center; justify-content: space-between; gap: 18px; width: 100%; aspect-ratio: 750 / 288; padding: 16px 24px; background: #087f78; color: #fff; }
+.wallet-pass__custom { display: flex; align-items: center; justify-content: space-between; gap: 18px; width: 100%; aspect-ratio: 750 / 288; padding: 16px 24px; background: var(--pass-color); color: #fff; }
 .wallet-pass__custom strong { display: block; font-size: 23px; font-weight: 800; line-height: 1; }
 .wallet-pass__custom span { display: block; margin-top: 7px; font-size: 15px; line-height: 1.15; font-weight: 700; }
 .wallet-pass__custom small { display: block; margin-top: 9px; font-size: 11px; color: #e0f1ed; }

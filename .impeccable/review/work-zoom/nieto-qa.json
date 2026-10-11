@@ -1,0 +1,53 @@
+{
+  "canonical": "https://velaarturo.com/work/nieto",
+  "contributionsOpen": false,
+  "contributionsPresent": true,
+  "emails": [
+    "mailto:arturo.vela@nietoimport.com",
+    "mailto:sistemas@nietoimport.com",
+    "mailto:marketing@nietoimport.com"
+  ],
+  "height": 1200,
+  "images": [
+    "loaded",
+    "loaded"
+  ],
+  "logo": "/assets/images/logo/Logo Nieto Import Blanco.png",
+  "logoBackground": "rgb(14, 20, 32)",
+  "name": "nieto-final-current",
+  "ogImage": "https://velaarturo.com/assets/images/Me/Fototrabajo-nieto.jpg",
+  "opacity": [
+    "1",
+    "1"
+  ],
+  "overflow": false,
+  "photo": {
+    "bottom": 496.5,
+    "height": 375.5,
+    "left": 17,
+    "right": 298.625,
+    "top": 121,
+    "width": 281.625,
+    "x": 17,
+    "y": 121
+  },
+  "photoCurrentSrc": "http://127.0.0.1:5173/assets/images/Me/Fototrabajo-nieto-480.jpg",
+  "photoPosition": "50% 0px",
+  "portrait": {
+    "bottom": 496.5,
+    "height": 375.5,
+    "left": 17,
+    "right": 298.625,
+    "top": 121,
+    "width": 281.625,
+    "x": 17,
+    "y": 121
+  },
+  "projectLinks": [
+    "https://portal.nietoimport.com/",
+    "https://nieto.velaarturo.com/",
+    "https://db.nieto.velaarturo.com/"
+  ],
+  "theme": "dark",
+  "width": 800
+}

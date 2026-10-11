@@ -1,0 +1,482 @@
+[
+  {
+    "name": "pachas-desktop-light",
+    "fullPage": false,
+    "alternates": 0,
+    "canonical": "https://velaarturo.com/work/pachas",
+    "expanded": false,
+    "footerWork": "Work",
+    "height": 1100,
+    "images": [
+      {
+        "currentSrc": "http://127.0.0.1:5173/assets/images/logo/work-pachas-light.png",
+        "loaded": true,
+        "src": "/assets/images/logo/work-pachas-light.png",
+        "state": "loaded"
+      },
+      {
+        "currentSrc": "http://127.0.0.1:5173/assets/images/Me/Fototrabajo-pachas-480.jpg",
+        "loaded": true,
+        "src": "/assets/images/Me/Fototrabajo-pachas.jpg",
+        "state": "loaded"
+      }
+    ],
+    "overflow": false,
+    "periods": [
+      "Experiencia anteriorMarzo — mayo de 2024 · 3 meses"
+    ],
+    "robots": "noindex,nofollow",
+    "scrollHeight": 1100,
+    "theme": "light",
+    "title": "Arturo Vela — Desarrollador Web · Pacha’s Café",
+    "url": "http://127.0.0.1:5173/work/pachas",
+    "width": 1280,
+    "emails": [
+      {
+        "href": "mailto:dev@velaarturo.com",
+        "text": "dev@velaarturo.com"
+      }
+    ],
+    "primary": "mailto:dev@velaarturo.com"
+  },
+  {
+    "name": "pachas-desktop-dark",
+    "fullPage": false,
+    "alternates": 0,
+    "canonical": "https://velaarturo.com/work/pachas",
+    "expanded": false,
+    "footerWork": "Work",
+    "height": 1100,
+    "images": [
+      {
+        "currentSrc": "http://127.0.0.1:5173/assets/images/logo/work-pachas-dark.png",
+        "loaded": true,
+        "src": "/assets/images/logo/work-pachas-dark.png",
+        "state": "loaded"
+      },
+      {
+        "currentSrc": "http://127.0.0.1:5173/assets/images/Me/Fototrabajo-pachas-480.jpg",
+        "loaded": true,
+        "src": "/assets/images/Me/Fototrabajo-pachas.jpg",
+        "state": "loaded"
+      }
+    ],
+    "overflow": false,
+    "periods": [
+      "Experiencia anteriorMarzo — mayo de 2024 · 3 meses"
+    ],
+    "robots": "noindex,nofollow",
+    "scrollHeight": 1100,
+    "theme": "dark",
+    "title": "Arturo Vela — Desarrollador Web · Pacha’s Café",
+    "url": "http://127.0.0.1:5173/work/pachas",
+    "width": 1280,
+    "emails": [
+      {
+        "href": "mailto:dev@velaarturo.com",
+        "text": "dev@velaarturo.com"
+      }
+    ],
+    "primary": "mailto:dev@velaarturo.com"
+  },
+  {
+    "name": "pachas-mobile-light",
+    "fullPage": false,
+    "alternates": 0,
+    "canonical": "https://velaarturo.com/work/pachas",
+    "expanded": false,
+    "footerWork": "Work",
+    "height": 1400,
+    "images": [
+      {
+        "currentSrc": "http://127.0.0.1:5173/assets/images/logo/work-pachas-light.png",
+        "loaded": true,
+        "src": "/assets/images/logo/work-pachas-light.png",
+        "state": "loaded"
+      },
+      {
+        "currentSrc": "http://127.0.0.1:5173/assets/images/Me/Fototrabajo-pachas-480.jpg",
+        "loaded": true,
+        "src": "/assets/images/Me/Fototrabajo-pachas.jpg",
+        "state": "loaded"
+      }
+    ],
+    "overflow": false,
+    "periods": [
+      "Experiencia anteriorMarzo — mayo de 2024 · 3 meses"
+    ],
+    "robots": "noindex,nofollow",
+    "scrollHeight": 1400,
+    "theme": "light",
+    "title": "Arturo Vela — Desarrollador Web · Pacha’s Café",
+    "url": "http://127.0.0.1:5173/work/pachas",
+    "width": 390,
+    "emails": [
+      {
+        "href": "mailto:dev@velaarturo.com",
+        "text": "dev@velaarturo.com"
+      }
+    ],
+    "primary": "mailto:dev@velaarturo.com"
+  },
+  {
+    "name": "pachas-mobile-dark",
+    "fullPage": false,
+    "alternates": 0,
+    "canonical": "https://velaarturo.com/work/pachas",
+    "expanded": false,
+    "footerWork": "Work",
+    "height": 1400,
+    "images": [
+      {
+        "currentSrc": "http://127.0.0.1:5173/assets/images/logo/work-pachas-dark.png",
+        "loaded": true,
+        "src": "/assets/images/logo/work-pachas-dark.png",
+        "state": "loaded"
+      },
+      {
+        "currentSrc": "http://127.0.0.1:5173/assets/images/Me/Fototrabajo-pachas-480.jpg",
+        "loaded": true,
+        "src": "/assets/images/Me/Fototrabajo-pachas.jpg",
+        "state": "loaded"
+      }
+    ],
+    "overflow": false,
+    "periods": [
+      "Experiencia anteriorMarzo — mayo de 2024 · 3 meses"
+    ],
+    "robots": "noindex,nofollow",
+    "scrollHeight": 1400,
+    "theme": "dark",
+    "title": "Arturo Vela — Desarrollador Web · Pacha’s Café",
+    "url": "http://127.0.0.1:5173/work/pachas",
+    "width": 390,
+    "emails": [
+      {
+        "href": "mailto:dev@velaarturo.com",
+        "text": "dev@velaarturo.com"
+      }
+    ],
+    "primary": "mailto:dev@velaarturo.com"
+  },
+  {
+    "name": "pachas-320-dark",
+    "fullPage": true,
+    "alternates": 0,
+    "canonical": "https://velaarturo.com/work/pachas",
+    "expanded": false,
+    "footerWork": "Work",
+    "height": 900,
+    "images": [
+      {
+        "currentSrc": "http://127.0.0.1:5173/assets/images/logo/work-pachas-dark.png",
+        "loaded": true,
+        "src": "/assets/images/logo/work-pachas-dark.png",
+        "state": "loaded"
+      },
+      {
+        "currentSrc": "http://127.0.0.1:5173/assets/images/Me/Fototrabajo-pachas-480.jpg",
+        "loaded": true,
+        "src": "/assets/images/Me/Fototrabajo-pachas.jpg",
+        "state": "loaded"
+      }
+    ],
+    "overflow": false,
+    "periods": [
+      "Experiencia anteriorMarzo — mayo de 2024 · 3 meses"
+    ],
+    "robots": "noindex,nofollow",
+    "scrollHeight": 1342,
+    "theme": "dark",
+    "title": "Arturo Vela — Desarrollador Web · Pacha’s Café",
+    "url": "http://127.0.0.1:5173/work/pachas",
+    "width": 320,
+    "emails": [
+      {
+        "href": "mailto:dev@velaarturo.com",
+        "text": "dev@velaarturo.com"
+      }
+    ],
+    "primary": "mailto:dev@velaarturo.com"
+  },
+  {
+    "name": "pachas-work-open-mobile-light",
+    "fullPage": true,
+    "alternates": 0,
+    "canonical": "https://velaarturo.com/work/pachas",
+    "expanded": true,
+    "footerWork": "Work",
+    "height": 900,
+    "images": [
+      {
+        "currentSrc": "http://127.0.0.1:5173/assets/images/logo/work-pachas-light.png",
+        "loaded": true,
+        "src": "/assets/images/logo/work-pachas-light.png",
+        "state": "loaded"
+      },
+      {
+        "currentSrc": "http://127.0.0.1:5173/assets/images/Me/Fototrabajo-pachas-480.jpg",
+        "loaded": true,
+        "src": "/assets/images/Me/Fototrabajo-pachas.jpg",
+        "state": "loaded"
+      }
+    ],
+    "overflow": false,
+    "periods": [
+      "Experiencia anteriorMarzo — mayo de 2024 · 3 meses"
+    ],
+    "robots": "noindex,nofollow",
+    "scrollHeight": 1442,
+    "theme": "light",
+    "title": "Arturo Vela — Desarrollador Web · Pacha’s Café",
+    "url": "http://127.0.0.1:5173/work/pachas",
+    "width": 390,
+    "emails": [
+      {
+        "href": "mailto:dev@velaarturo.com",
+        "text": "dev@velaarturo.com"
+      }
+    ],
+    "primary": "mailto:dev@velaarturo.com"
+  },
+  {
+    "name": "wasky-desktop-light",
+    "fullPage": false,
+    "alternates": 0,
+    "canonical": "https://velaarturo.com/work/wasky",
+    "expanded": false,
+    "footerWork": "Work",
+    "height": 1100,
+    "images": [
+      {
+        "currentSrc": "http://127.0.0.1:5173/assets/images/logo/work-wasky-light.png",
+        "loaded": true,
+        "src": "/assets/images/logo/work-wasky-light.png",
+        "state": "loaded"
+      },
+      {
+        "currentSrc": "http://127.0.0.1:5173/assets/images/Me/Fototrabajo-wasky-480.jpg",
+        "loaded": true,
+        "src": "/assets/images/Me/Fototrabajo-wasky.jpg",
+        "state": "loaded"
+      }
+    ],
+    "overflow": false,
+    "periods": [
+      "Experiencia anteriorJunio — agosto de 2024 · 3 meses"
+    ],
+    "robots": "noindex,nofollow",
+    "scrollHeight": 1100,
+    "theme": "light",
+    "title": "Arturo Vela — Desarrollador Web · Caña Wasky",
+    "url": "http://127.0.0.1:5173/work/wasky",
+    "width": 1280,
+    "emails": [
+      {
+        "href": "mailto:dev@velaarturo.com",
+        "text": "dev@velaarturo.com"
+      }
+    ],
+    "primary": "mailto:dev@velaarturo.com"
+  },
+  {
+    "name": "wasky-desktop-dark",
+    "fullPage": false,
+    "alternates": 0,
+    "canonical": "https://velaarturo.com/work/wasky",
+    "expanded": false,
+    "footerWork": "Work",
+    "height": 1100,
+    "images": [
+      {
+        "currentSrc": "http://127.0.0.1:5173/assets/images/logo/work-wasky-dark.png",
+        "loaded": true,
+        "src": "/assets/images/logo/work-wasky-dark.png",
+        "state": "loaded"
+      },
+      {
+        "currentSrc": "http://127.0.0.1:5173/assets/images/Me/Fototrabajo-wasky-480.jpg",
+        "loaded": true,
+        "src": "/assets/images/Me/Fototrabajo-wasky.jpg",
+        "state": "loaded"
+      }
+    ],
+    "overflow": false,
+    "periods": [
+      "Experiencia anteriorJunio — agosto de 2024 · 3 meses"
+    ],
+    "robots": "noindex,nofollow",
+    "scrollHeight": 1100,
+    "theme": "dark",
+    "title": "Arturo Vela — Desarrollador Web · Caña Wasky",
+    "url": "http://127.0.0.1:5173/work/wasky",
+    "width": 1280,
+    "emails": [
+      {
+        "href": "mailto:dev@velaarturo.com",
+        "text": "dev@velaarturo.com"
+      }
+    ],
+    "primary": "mailto:dev@velaarturo.com"
+  },
+  {
+    "name": "wasky-mobile-light",
+    "fullPage": false,
+    "alternates": 0,
+    "canonical": "https://velaarturo.com/work/wasky",
+    "expanded": false,
+    "footerWork": "Work",
+    "height": 1400,
+    "images": [
+      {
+        "currentSrc": "http://127.0.0.1:5173/assets/images/logo/work-wasky-light.png",
+        "loaded": true,
+        "src": "/assets/images/logo/work-wasky-light.png",
+        "state": "loaded"
+      },
+      {
+        "currentSrc": "http://127.0.0.1:5173/assets/images/Me/Fototrabajo-wasky-480.jpg",
+        "loaded": true,
+        "src": "/assets/images/Me/Fototrabajo-wasky.jpg",
+        "state": "loaded"
+      }
+    ],
+    "overflow": false,
+    "periods": [
+      "Experiencia anteriorJunio — agosto de 2024 · 3 meses"
+    ],
+    "robots": "noindex,nofollow",
+    "scrollHeight": 1400,
+    "theme": "light",
+    "title": "Arturo Vela — Desarrollador Web · Caña Wasky",
+    "url": "http://127.0.0.1:5173/work/wasky",
+    "width": 390,
+    "emails": [
+      {
+        "href": "mailto:dev@velaarturo.com",
+        "text": "dev@velaarturo.com"
+      }
+    ],
+    "primary": "mailto:dev@velaarturo.com"
+  },
+  {
+    "name": "wasky-mobile-dark",
+    "fullPage": false,
+    "alternates": 0,
+    "canonical": "https://velaarturo.com/work/wasky",
+    "expanded": false,
+    "footerWork": "Work",
+    "height": 1400,
+    "images": [
+      {
+        "currentSrc": "http://127.0.0.1:5173/assets/images/logo/work-wasky-dark.png",
+        "loaded": true,
+        "src": "/assets/images/logo/work-wasky-dark.png",
+        "state": "loaded"
+      },
+      {
+        "currentSrc": "http://127.0.0.1:5173/assets/images/Me/Fototrabajo-wasky-480.jpg",
+        "loaded": true,
+        "src": "/assets/images/Me/Fototrabajo-wasky.jpg",
+        "state": "loaded"
+      }
+    ],
+    "overflow": false,
+    "periods": [
+      "Experiencia anteriorJunio — agosto de 2024 · 3 meses"
+    ],
+    "robots": "noindex,nofollow",
+    "scrollHeight": 1400,
+    "theme": "dark",
+    "title": "Arturo Vela — Desarrollador Web · Caña Wasky",
+    "url": "http://127.0.0.1:5173/work/wasky",
+    "width": 390,
+    "emails": [
+      {
+        "href": "mailto:dev@velaarturo.com",
+        "text": "dev@velaarturo.com"
+      }
+    ],
+    "primary": "mailto:dev@velaarturo.com"
+  },
+  {
+    "name": "wasky-320-dark",
+    "fullPage": true,
+    "alternates": 0,
+    "canonical": "https://velaarturo.com/work/wasky",
+    "expanded": false,
+    "footerWork": "Work",
+    "height": 900,
+    "images": [
+      {
+        "currentSrc": "http://127.0.0.1:5173/assets/images/logo/work-wasky-dark.png",
+        "loaded": true,
+        "src": "/assets/images/logo/work-wasky-dark.png",
+        "state": "loaded"
+      },
+      {
+        "currentSrc": "http://127.0.0.1:5173/assets/images/Me/Fototrabajo-wasky-480.jpg",
+        "loaded": true,
+        "src": "/assets/images/Me/Fototrabajo-wasky.jpg",
+        "state": "loaded"
+      }
+    ],
+    "overflow": false,
+    "periods": [
+      "Experiencia anteriorJunio — agosto de 2024 · 3 meses"
+    ],
+    "robots": "noindex,nofollow",
+    "scrollHeight": 1342,
+    "theme": "dark",
+    "title": "Arturo Vela — Desarrollador Web · Caña Wasky",
+    "url": "http://127.0.0.1:5173/work/wasky",
+    "width": 320,
+    "emails": [
+      {
+        "href": "mailto:dev@velaarturo.com",
+        "text": "dev@velaarturo.com"
+      }
+    ],
+    "primary": "mailto:dev@velaarturo.com"
+  },
+  {
+    "name": "wasky-work-open-mobile-dark",
+    "fullPage": true,
+    "alternates": 0,
+    "canonical": "https://velaarturo.com/work/wasky",
+    "expanded": true,
+    "footerWork": "Work",
+    "height": 900,
+    "images": [
+      {
+        "currentSrc": "http://127.0.0.1:5173/assets/images/logo/work-wasky-dark.png",
+        "loaded": true,
+        "src": "/assets/images/logo/work-wasky-dark.png",
+        "state": "loaded"
+      },
+      {
+        "currentSrc": "http://127.0.0.1:5173/assets/images/Me/Fototrabajo-wasky-480.jpg",
+        "loaded": true,
+        "src": "/assets/images/Me/Fototrabajo-wasky.jpg",
+        "state": "loaded"
+      }
+    ],
+    "overflow": false,
+    "periods": [
+      "Experiencia anteriorJunio — agosto de 2024 · 3 meses"
+    ],
+    "robots": "noindex,nofollow",
+    "scrollHeight": 1418,
+    "theme": "dark",
+    "title": "Arturo Vela — Desarrollador Web · Caña Wasky",
+    "url": "http://127.0.0.1:5173/work/wasky",
+    "width": 390,
+    "emails": [
+      {
+        "href": "mailto:dev@velaarturo.com",
+        "text": "dev@velaarturo.com"
+      }
+    ],
+    "primary": "mailto:dev@velaarturo.com"
+  }
+]

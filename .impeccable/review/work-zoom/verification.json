@@ -1,0 +1,15 @@
+{
+  "scope": "Local work cards: responsive portrait/theme corrections, company-branded portraits, Nieto marketing contact and expandable work section",
+  "typecheck": "passed",
+  "tests": { "result": "passed", "count": 103, "files": 11 },
+  "build": { "command": "pnpm build:staging", "result": "passed" },
+  "diffCheck": "passed",
+  "browser": "Codex integrated browser",
+  "keyboard": { "control": "Nieto work summary", "openAndCloseWithEnter": "passed", "focusVisible": true, "outlineWidth": "3px" },
+  "download": { "file": "/Users/arturovela/Downloads/arturo-vela-nieto (1).vcf", "emails": ["arturo.vela@nietoimport.com", "sistemas@nietoimport.com", "marketing@nietoimport.com"], "inspection": "passed" },
+  "responsiveEvidence": { "files": "captures.json", "count": 16, "manualValidation": "Each final capture opened and inspected", "domSamples": ["qa.json", "nieto-qa.json"] },
+  "zoom": "320px reflow tested. Native zoom shortcuts did not change reported viewport; actual browser magnification not certified.",
+  "detector": "Empty output before later work-disclosure request; final addition requires independent manual review.",
+  "limits": ["No physical device", "No throttled-network benchmark", "No native OS share sheet", "No deployment", "Image error fallback reviewed in code, not forced through network interception"],
+  "existingWarnings": ["BRAIN_CONTENT_TOKEN missing locally; fallback content used", "Main client bundle exceeds 500KB"]
+}

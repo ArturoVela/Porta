@@ -1,0 +1,43 @@
+{
+  "scope": "Pacha’s Café and Caña Wasky cards, Work directory, employment periods and footer navigation",
+  "typecheck": "passed",
+  "tests": {
+    "result": "passed",
+    "count": 121,
+    "files": 12,
+    "log": "check.log"
+  },
+  "build": {
+    "command": "pnpm build:staging",
+    "result": "passed",
+    "log": "build.log"
+  },
+  "diffCheck": "passed",
+  "browser": "Codex integrated browser only",
+  "keyboard": "Enter follows card footer Work link, opens Pachas card from list, opens/closes work summary. Focus-visible true; outline 3px.",
+  "downloads": [
+    "/Users/arturovela/Downloads/arturo-vela-pachas (1).vcf",
+    "/Users/arturovela/Downloads/arturo-vela-wasky (1).vcf"
+  ],
+  "vcfInspection": "Both final UI downloads contain Arturo Vela, dev@velaarturo.com, correct organization, Desarrollador Web and public card URL. Earlier CV-email downloads are historical and superseded. No company email, phone or photo invented.",
+  "qr": "Static QR script generated and Vision decoded exact public URLs for both new cards.",
+  "rasters": "Both company portrait edits made with builtin image_gen.imagegen. Full 1086x1448 and mobile 480x640 JPEGs saved in public/assets/images/Me; embedded COM prompts match image-prompts.json exactly. Four native PNG logo derivatives carry supplied PDF provenance.",
+  "responsiveEvidence": "21 native JPEG captures, plus persisted DOM samples. Actual dimensions recorded in captures.json. All final files opened and inspected.",
+  "captureLimits": "Native full-page requests can return viewport-sized rasters; capture dimensions are authoritative. Expanded captures include keyboard-visible skip link; portraits are unobstructed in closed-state captures. No manual crop or rescale. Temporary viewport controls apply to selected tab; initial captures from inactive tab were replaced. Default final DOM viewport recorded separately.",
+  "detector": "Ran once on WorkPage.tsx, WorkIndexPage.tsx, work.css, WorkImage.tsx; empty findings.",
+  "preservation": "Existing Nieto marketing activities and concurrent global footer/UI changes preserved; not authored as part of this request.",
+  "limits": [
+    "No physical device",
+    "320px reflow, not actual browser magnification",
+    "No throttled-network benchmark",
+    "No native OS share sheet",
+    "No deployment",
+    "Image error fallback reviewed in source, not forced via network interception"
+  ],
+  "existingWarnings": [
+    "BRAIN_CONTENT_TOKEN missing locally; fallback content used",
+    "Main client bundle exceeds 500KB"
+  ],
+  "contactResolution": "Human explicitly chose dev@velaarturo.com for both past cards after concurrent change. Source, tests and surface contract agree. All 12 affected captures refreshed in identical final viewports/states; all opened and inspected. DOM contact rows persisted in qa-contact-fix.json.",
+  "provenanceScan": "29 rasters scanned, 0 missing. Added origin metadata/sidecars to five pre-existing repository assets flagged by scan; no visual edit or new external-origin claim."
+}

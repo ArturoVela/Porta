@@ -1,0 +1,200 @@
+[
+  {
+    "animation": "none",
+    "background": "rgb(36, 83, 244)",
+    "decorativeHidden": true,
+    "font": "Satoshi, ui-sans-serif, system-ui, sans-serif",
+    "overflow": false,
+    "sectionHeight": 959.984375,
+    "steps": [
+      {
+        "width": 272,
+        "x": 17,
+        "y": 1355.703125
+      },
+      {
+        "width": 272,
+        "x": 17,
+        "y": 1554.6875
+      },
+      {
+        "width": 272,
+        "x": 17,
+        "y": 1779.265625
+      }
+    ],
+    "theme": "dark",
+    "width": 320
+  },
+  {
+    "animation": "none",
+    "background": "rgb(36, 83, 244)",
+    "decorativeHidden": true,
+    "font": "Satoshi, ui-sans-serif, system-ui, sans-serif",
+    "overflow": false,
+    "sectionHeight": 934.390625,
+    "steps": [
+      {
+        "width": 342,
+        "x": 17,
+        "y": 1283.0625
+      },
+      {
+        "width": 342,
+        "x": 17,
+        "y": 1482.046875
+      },
+      {
+        "width": 342,
+        "x": 17,
+        "y": 1681.03125
+      }
+    ],
+    "theme": "dark",
+    "width": 390
+  },
+  {
+    "animation": "process-scan-sweep",
+    "background": "rgb(36, 83, 244)",
+    "decorativeHidden": true,
+    "font": "Satoshi, ui-sans-serif, system-ui, sans-serif",
+    "overflow": false,
+    "sectionHeight": 603.78125,
+    "steps": [
+      {
+        "width": 234.65625,
+        "x": 25,
+        "y": 2006.09375
+      },
+      {
+        "width": 234.671875,
+        "x": 259.65625,
+        "y": 2006.09375
+      },
+      {
+        "width": 234.671875,
+        "x": 494.328125,
+        "y": 2006.09375
+      }
+    ],
+    "theme": "dark",
+    "width": 768
+  },
+  {
+    "animation": "process-scan-sweep",
+    "background": "rgb(36, 83, 244)",
+    "decorativeHidden": true,
+    "font": "Satoshi, ui-sans-serif, system-ui, sans-serif",
+    "overflow": false,
+    "sectionHeight": 606.578125,
+    "steps": [
+      {
+        "width": 314.65625,
+        "x": 33,
+        "y": 365.140625
+      },
+      {
+        "width": 314.671875,
+        "x": 347.65625,
+        "y": 365.140625
+      },
+      {
+        "width": 314.65625,
+        "x": 662.328125,
+        "y": 365.140625
+      }
+    ],
+    "theme": "dark",
+    "width": 1024
+  },
+  {
+    "animation": "process-scan-sweep",
+    "background": "rgb(36, 83, 244)",
+    "decorativeHidden": true,
+    "font": "Satoshi, ui-sans-serif, system-ui, sans-serif",
+    "overflow": false,
+    "sectionHeight": 550.1875,
+    "steps": [
+      {
+        "width": 405,
+        "x": 105.5,
+        "y": 309.203125
+      },
+      {
+        "width": 405,
+        "x": 510.5,
+        "y": 309.203125
+      },
+      {
+        "width": 405,
+        "x": 915.5,
+        "y": 309.203125
+      }
+    ],
+    "theme": "dark",
+    "width": 1440
+  },
+  {
+    "animation": "none",
+    "background": "rgb(36, 83, 244)",
+    "containedText": true,
+    "overflow": false,
+    "stepCount": 3,
+    "theme": "light",
+    "width": 320
+  },
+  {
+    "animation": "none",
+    "background": "rgb(36, 83, 244)",
+    "containedText": true,
+    "overflow": false,
+    "stepCount": 3,
+    "theme": "light",
+    "width": 390
+  },
+  {
+    "animation": "process-scan-sweep",
+    "background": "rgb(36, 83, 244)",
+    "containedText": true,
+    "overflow": false,
+    "stepCount": 3,
+    "theme": "light",
+    "width": 768
+  },
+  {
+    "animation": "process-scan-sweep",
+    "background": "rgb(36, 83, 244)",
+    "containedText": true,
+    "overflow": false,
+    "stepCount": 3,
+    "theme": "light",
+    "width": 1024
+  },
+  {
+    "animation": "process-scan-sweep",
+    "background": "rgb(36, 83, 244)",
+    "containedText": true,
+    "overflow": false,
+    "stepCount": 3,
+    "theme": "light",
+    "width": 1440
+  },
+  {
+    "locale": "en",
+    "overflow": false,
+    "playbackOutsideViewport": "running",
+    "stepCount": 3,
+    "title": "Understand before building",
+    "visible": "false",
+    "width": 390
+  },
+  {
+    "locale": "en",
+    "overflow": false,
+    "playbackOutsideViewport": "paused",
+    "stepCount": 3,
+    "title": "Understand before building",
+    "visible": "false",
+    "width": 1440
+  }
+]

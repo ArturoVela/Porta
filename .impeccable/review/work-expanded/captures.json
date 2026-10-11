@@ -1,0 +1,182 @@
+[
+  {
+    "file": "agromaf-regression-desktop-dark.jpg",
+    "captureWidth": 1280,
+    "captureHeight": 1100,
+    "domWidth": 1280,
+    "domHeight": 1100,
+    "requestedFullPage": false
+  },
+  {
+    "file": "index-320-dark.jpg",
+    "captureWidth": 305,
+    "captureHeight": 2280,
+    "domWidth": 320,
+    "domHeight": 1500,
+    "requestedFullPage": true
+  },
+  {
+    "file": "index-desktop-dark.jpg",
+    "captureWidth": 1265,
+    "captureHeight": 1373,
+    "domWidth": 1280,
+    "domHeight": 1100,
+    "requestedFullPage": true
+  },
+  {
+    "file": "index-desktop-light.jpg",
+    "captureWidth": 1265,
+    "captureHeight": 1373,
+    "domWidth": 1280,
+    "domHeight": 1100,
+    "requestedFullPage": true
+  },
+  {
+    "file": "index-mobile-dark.jpg",
+    "captureWidth": 375,
+    "captureHeight": 2236,
+    "domWidth": 390,
+    "domHeight": 1400,
+    "requestedFullPage": true
+  },
+  {
+    "file": "index-mobile-light.jpg",
+    "captureWidth": 375,
+    "captureHeight": 2236,
+    "domWidth": 390,
+    "domHeight": 1400,
+    "requestedFullPage": true
+  },
+  {
+    "file": "index-tablet-dark.jpg",
+    "captureWidth": 785,
+    "captureHeight": 1717,
+    "domWidth": 800,
+    "domHeight": 1200,
+    "requestedFullPage": true
+  },
+  {
+    "file": "index-user-default-dark.jpg",
+    "captureWidth": 1289,
+    "captureHeight": 1373,
+    "domWidth": 1304,
+    "domHeight": 889,
+    "requestedFullPage": true
+  },
+  {
+    "file": "nieto-regression-desktop-dark.jpg",
+    "captureWidth": 1280,
+    "captureHeight": 1100,
+    "domWidth": 1280,
+    "domHeight": 1100,
+    "requestedFullPage": false
+  },
+  {
+    "file": "pachas-320-dark.jpg",
+    "captureWidth": 305,
+    "captureHeight": 1342,
+    "domWidth": 320,
+    "domHeight": 900,
+    "requestedFullPage": true,
+    "revision": "Contact fix: user confirmed dev@velaarturo.com"
+  },
+  {
+    "file": "pachas-desktop-dark.jpg",
+    "captureWidth": 1280,
+    "captureHeight": 1100,
+    "domWidth": 1280,
+    "domHeight": 1100,
+    "requestedFullPage": false,
+    "revision": "Contact fix: user confirmed dev@velaarturo.com"
+  },
+  {
+    "file": "pachas-desktop-light.jpg",
+    "captureWidth": 1280,
+    "captureHeight": 1100,
+    "domWidth": 1280,
+    "domHeight": 1100,
+    "requestedFullPage": false,
+    "revision": "Contact fix: user confirmed dev@velaarturo.com"
+  },
+  {
+    "file": "pachas-mobile-dark.jpg",
+    "captureWidth": 390,
+    "captureHeight": 1281,
+    "domWidth": 390,
+    "domHeight": 1400,
+    "requestedFullPage": false,
+    "revision": "Contact fix: user confirmed dev@velaarturo.com"
+  },
+  {
+    "file": "pachas-mobile-light.jpg",
+    "captureWidth": 390,
+    "captureHeight": 1281,
+    "domWidth": 390,
+    "domHeight": 1400,
+    "requestedFullPage": false,
+    "revision": "Contact fix: user confirmed dev@velaarturo.com"
+  },
+  {
+    "file": "pachas-work-open-mobile-light.jpg",
+    "captureWidth": 375,
+    "captureHeight": 1442,
+    "domWidth": 390,
+    "domHeight": 900,
+    "requestedFullPage": true,
+    "revision": "Contact fix: user confirmed dev@velaarturo.com"
+  },
+  {
+    "file": "wasky-320-dark.jpg",
+    "captureWidth": 305,
+    "captureHeight": 1342,
+    "domWidth": 320,
+    "domHeight": 900,
+    "requestedFullPage": true,
+    "revision": "Contact fix: user confirmed dev@velaarturo.com"
+  },
+  {
+    "file": "wasky-desktop-dark.jpg",
+    "captureWidth": 1280,
+    "captureHeight": 1100,
+    "domWidth": 1280,
+    "domHeight": 1100,
+    "requestedFullPage": false,
+    "revision": "Contact fix: user confirmed dev@velaarturo.com"
+  },
+  {
+    "file": "wasky-desktop-light.jpg",
+    "captureWidth": 1280,
+    "captureHeight": 1100,
+    "domWidth": 1280,
+    "domHeight": 1100,
+    "requestedFullPage": false,
+    "revision": "Contact fix: user confirmed dev@velaarturo.com"
+  },
+  {
+    "file": "wasky-mobile-dark.jpg",
+    "captureWidth": 390,
+    "captureHeight": 1281,
+    "domWidth": 390,
+    "domHeight": 1400,
+    "requestedFullPage": false,
+    "revision": "Contact fix: user confirmed dev@velaarturo.com"
+  },
+  {
+    "file": "wasky-mobile-light.jpg",
+    "captureWidth": 390,
+    "captureHeight": 1281,
+    "domWidth": 390,
+    "domHeight": 1400,
+    "requestedFullPage": false,
+    "revision": "Contact fix: user confirmed dev@velaarturo.com"
+  },
+  {
+    "file": "wasky-work-open-mobile-dark.jpg",
+    "captureWidth": 375,
+    "captureHeight": 1418,
+    "domWidth": 390,
+    "domHeight": 900,
+    "requestedFullPage": true,
+    "revision": "Contact fix: user confirmed dev@velaarturo.com"
+  }
+]

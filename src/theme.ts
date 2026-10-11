@@ -44,6 +44,7 @@ const config = defineConfig({
           text: { value: { base: "#0A0D14", _dark: "#F7F9FC" } },
           muted: { value: { base: "#596476", _dark: "#AAB5C6" } },
           border: { value: { base: "#CED5E0", _dark: "#2B3545" } },
+          "control-border": { value: { base: "#778397", _dark: "#7A879B" } },
           accent: { value: { base: "{colors.brand.600}", _dark: "{colors.brand.400}" } },
           "accent-subtle": { value: { base: "{colors.brand.50}", _dark: "{colors.brand.950}" } },
           signal: { value: { base: "{colors.signal}", _dark: "#FF7657" } },

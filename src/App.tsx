@@ -4,12 +4,16 @@ import { Box, Text } from "@chakra-ui/react";
 import { ContentProvider } from "@/content/context";
 import { useContent } from "@/content/context";
 import { SiteShell } from "@/components/SiteShell";
+import { PageTransition } from "@/components/PortfolioMotion";
 import { HomePage } from "@/pages/HomePage";
+import { workCompanyForPath } from "@/lib/work";
 
 const ProjectsPage = lazy(() => import("@/pages/ProjectsPage").then((module) => ({ default: module.ProjectsPage })));
 const AllProjectsPage = lazy(() => import("@/pages/AllProjectsPage").then((module) => ({ default: module.AllProjectsPage })));
 const LinktreePage = lazy(() => import("@/pages/LinktreePage").then((module) => ({ default: module.LinktreePage })));
 const DevPage = lazy(() => import("@/pages/DevPage").then((module) => ({ default: module.DevPage })));
+const WorkPage = lazy(() => import("@/pages/WorkPage").then((module) => ({ default: module.WorkPage })));
+const WorkIndexPage = lazy(() => import("@/pages/WorkIndexPage").then((module) => ({ default: module.WorkIndexPage })));
 const ProjectPage = lazy(() => import("@/pages/ProjectPage").then((module) => ({ default: module.ProjectPage })));
 const ProfilePage = lazy(() => import("@/pages/ProfilePage").then((module) => ({ default: module.ProfilePage })));
 const ArticlesPage = lazy(() => import("@/pages/ArticlesPage").then((module) => ({ default: module.ArticlesPage })));
@@ -35,6 +39,11 @@ function PortfolioRoutes() {
         <Route path="/linktree" element={<LinktreePage />} />
         <Route path="/dev" element={<DevPage />} />
         <Route path="/en/dev" element={<DevPage />} />
+        <Route path="/work/agromaf" element={<WorkPage companyId="agromaf" />} />
+        <Route path="/work/nieto" element={<WorkPage companyId="nieto" />} />
+        <Route path="/work/pachas" element={<WorkPage companyId="pachas" />} />
+        <Route path="/work/wasky" element={<WorkPage companyId="wasky" />} />
+        <Route path="/work" element={<WorkIndexPage />} />
         <Route path="/es/proyectos/:slug" element={<ProjectPage />} />
         <Route path="/en/projects/:slug" element={<ProjectPage />} />
         <Route path="/es/perfil" element={<ProfilePage />} />
@@ -65,6 +74,6 @@ function LocalizedRoutes() {
   const { copy } = useContent();
   const location = useLocation();
   const path = location.pathname === "/__preview" ? new URLSearchParams(location.search).get("path") ?? "/" : location.pathname;
-  const routes = <Suspense fallback={<div className="route-loading" role="status">{copy.common.loading}</div>}><PortfolioRoutes /></Suspense>;
-  return path.replace(/\/$/, "") === "/linktree" ? routes : <SiteShell>{routes}</SiteShell>;
+  const routes = <Suspense fallback={<div className="route-loading" role="status">{copy.common.loading}</div>}><PageTransition routeKey={path}><PortfolioRoutes /></PageTransition></Suspense>;
+  return path.replace(/\/$/, "") === "/linktree" || workCompanyForPath(path) ? routes : <SiteShell>{routes}</SiteShell>;
 }

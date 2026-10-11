@@ -1,5 +1,6 @@
 import { FALLBACK_ENVELOPE } from "@/content/fallback";
 import { FALLBACK_ENVELOPE_EN } from "@/content/fallback-en";
+import { withProjectCatalog } from "@/lib/projectCatalog";
 import type { Locale } from "@/i18n";
 import type { PortfolioEnvelope, PortfolioManifest } from "@/types/content";
 
@@ -127,11 +128,11 @@ export async function fetchManifest(locale: Locale, signal?: AbortSignal, previe
   if (!response.ok) throw new Error(locale === "en" ? "Content could not be refreshed" : "No se pudo actualizar el contenido");
   const value: unknown = await response.json();
   if (!isPortfolioEnvelope(value)) throw new Error(locale === "en" ? "Received content does not match the v1 contract" : "El contenido recibido no cumple el contrato v1");
-  return value;
+  return previewToken ? value : withProjectCatalog(value, locale);
 }
 
 export function fallbackEnvelope(locale: Locale) {
-  return locale === "en" ? FALLBACK_ENVELOPE_EN : FALLBACK_ENVELOPE;
+  return withProjectCatalog(locale === "en" ? FALLBACK_ENVELOPE_EN : FALLBACK_ENVELOPE, locale);
 }
 
 export function initialManifest(locale: Locale): PortfolioManifest {

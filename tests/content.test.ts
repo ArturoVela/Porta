@@ -12,7 +12,7 @@ describe("vista previa del editor", () => {
   it("actualiza desde el borrador privado sin reemplazarlo con el manifiesto publicado", async () => {
     const fetchMock = vi.fn(async () => Response.json(FALLBACK_ENVELOPE));
     vi.stubGlobal("fetch", fetchMock);
-    await fetchManifest("es", undefined, "private/preview+token");
+    expect(await fetchManifest("es", undefined, "private/preview+token")).toEqual(FALLBACK_ENVELOPE);
     expect(fetchMock).toHaveBeenCalledOnce();
     expect(fetchMock).toHaveBeenCalledWith("/api/content/preview?locale=es&token=private%2Fpreview%2Btoken", expect.objectContaining({ cache: "no-store" }));
   });

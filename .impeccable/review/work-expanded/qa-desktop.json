@@ -1,0 +1,275 @@
+[
+  {
+    "name": "index-desktop-light",
+    "fullPage": true,
+    "alternates": 0,
+    "canonical": "https://velaarturo.com/work",
+    "footerWork": "Work",
+    "height": 1100,
+    "images": [
+      {
+        "currentSrc": "http://127.0.0.1:5173/assets/images/logo/work-agromaf-light.png",
+        "loaded": true,
+        "src": "/assets/images/logo/work-agromaf-light.png",
+        "state": "loaded"
+      },
+      {
+        "currentSrc": "http://127.0.0.1:5173/assets/images/logo/Logo%20Nieto%20Import.png",
+        "loaded": true,
+        "src": "/assets/images/logo/Logo Nieto Import.png",
+        "state": "loaded"
+      },
+      {
+        "currentSrc": "http://127.0.0.1:5173/assets/images/logo/work-pachas-light.png",
+        "loaded": true,
+        "src": "/assets/images/logo/work-pachas-light.png",
+        "state": "loaded"
+      },
+      {
+        "currentSrc": "http://127.0.0.1:5173/assets/images/logo/work-wasky-light.png",
+        "loaded": true,
+        "src": "/assets/images/logo/work-wasky-light.png",
+        "state": "loaded"
+      }
+    ],
+    "overflow": false,
+    "periods": [
+      "Experiencia actualAgosto de 2025 — actualidad",
+      "Experiencia actualAgosto de 2025 — actualidad",
+      "Experiencia anteriorMarzo — mayo de 2024 · 3 meses",
+      "Experiencia anteriorJunio — agosto de 2024 · 3 meses"
+    ],
+    "robots": "noindex,nofollow",
+    "scrollHeight": 1373,
+    "theme": "light",
+    "title": "Work — Arturo Vela",
+    "url": "http://127.0.0.1:5173/work",
+    "width": 1280
+  },
+  {
+    "name": "index-desktop-dark",
+    "fullPage": true,
+    "alternates": 0,
+    "canonical": "https://velaarturo.com/work",
+    "footerWork": "Work",
+    "height": 1100,
+    "images": [
+      {
+        "currentSrc": "http://127.0.0.1:5173/assets/images/logo/work-agromaf-dark.png",
+        "loaded": true,
+        "src": "/assets/images/logo/work-agromaf-dark.png",
+        "state": "loaded"
+      },
+      {
+        "currentSrc": "http://127.0.0.1:5173/assets/images/logo/Logo%20Nieto%20Import%20Blanco.png",
+        "loaded": true,
+        "src": "/assets/images/logo/Logo Nieto Import Blanco.png",
+        "state": "loaded"
+      },
+      {
+        "currentSrc": "http://127.0.0.1:5173/assets/images/logo/work-pachas-dark.png",
+        "loaded": true,
+        "src": "/assets/images/logo/work-pachas-dark.png",
+        "state": "loaded"
+      },
+      {
+        "currentSrc": "http://127.0.0.1:5173/assets/images/logo/work-wasky-dark.png",
+        "loaded": true,
+        "src": "/assets/images/logo/work-wasky-dark.png",
+        "state": "loaded"
+      }
+    ],
+    "overflow": false,
+    "periods": [
+      "Experiencia actualAgosto de 2025 — actualidad",
+      "Experiencia actualAgosto de 2025 — actualidad",
+      "Experiencia anteriorMarzo — mayo de 2024 · 3 meses",
+      "Experiencia anteriorJunio — agosto de 2024 · 3 meses"
+    ],
+    "robots": "noindex,nofollow",
+    "scrollHeight": 1373,
+    "theme": "dark",
+    "title": "Work — Arturo Vela",
+    "url": "http://127.0.0.1:5173/work",
+    "width": 1280
+  },
+  {
+    "name": "pachas-desktop-light",
+    "fullPage": false,
+    "alternates": 0,
+    "canonical": "https://velaarturo.com/work/pachas",
+    "expanded": false,
+    "footerWork": "Work",
+    "height": 1100,
+    "images": [
+      {
+        "currentSrc": "http://127.0.0.1:5173/assets/images/logo/work-pachas-light.png",
+        "loaded": true,
+        "src": "/assets/images/logo/work-pachas-light.png",
+        "state": "loaded"
+      },
+      {
+        "currentSrc": "http://127.0.0.1:5173/assets/images/Me/Fototrabajo-pachas-480.jpg",
+        "loaded": true,
+        "src": "/assets/images/Me/Fototrabajo-pachas.jpg",
+        "state": "loaded"
+      }
+    ],
+    "overflow": false,
+    "periods": [
+      "Experiencia anteriorMarzo — mayo de 2024 · 3 meses"
+    ],
+    "robots": "noindex,nofollow",
+    "scrollHeight": 1100,
+    "theme": "light",
+    "title": "Arturo Vela — Desarrollador Web · Pacha’s Café",
+    "url": "http://127.0.0.1:5173/work/pachas",
+    "width": 1280
+  },
+  {
+    "name": "pachas-desktop-dark",
+    "fullPage": false,
+    "alternates": 0,
+    "canonical": "https://velaarturo.com/work/pachas",
+    "expanded": false,
+    "footerWork": "Work",
+    "height": 1100,
+    "images": [
+      {
+        "currentSrc": "http://127.0.0.1:5173/assets/images/logo/work-pachas-dark.png",
+        "loaded": true,
+        "src": "/assets/images/logo/work-pachas-dark.png",
+        "state": "loaded"
+      },
+      {
+        "currentSrc": "http://127.0.0.1:5173/assets/images/Me/Fototrabajo-pachas-480.jpg",
+        "loaded": true,
+        "src": "/assets/images/Me/Fototrabajo-pachas.jpg",
+        "state": "loaded"
+      }
+    ],
+    "overflow": false,
+    "periods": [
+      "Experiencia anteriorMarzo — mayo de 2024 · 3 meses"
+    ],
+    "robots": "noindex,nofollow",
+    "scrollHeight": 1100,
+    "theme": "dark",
+    "title": "Arturo Vela — Desarrollador Web · Pacha’s Café",
+    "url": "http://127.0.0.1:5173/work/pachas",
+    "width": 1280
+  },
+  {
+    "name": "wasky-desktop-light",
+    "fullPage": false,
+    "alternates": 0,
+    "canonical": "https://velaarturo.com/work/wasky",
+    "expanded": false,
+    "footerWork": "Work",
+    "height": 1100,
+    "images": [
+      {
+        "currentSrc": "http://127.0.0.1:5173/assets/images/logo/work-wasky-light.png",
+        "loaded": true,
+        "src": "/assets/images/logo/work-wasky-light.png",
+        "state": "loaded"
+      },
+      {
+        "currentSrc": "http://127.0.0.1:5173/assets/images/Me/Fototrabajo-wasky-480.jpg",
+        "loaded": true,
+        "src": "/assets/images/Me/Fototrabajo-wasky.jpg",
+        "state": "loaded"
+      }
+    ],
+    "overflow": false,
+    "periods": [
+      "Experiencia anteriorJunio — agosto de 2024 · 3 meses"
+    ],
+    "robots": "noindex,nofollow",
+    "scrollHeight": 1100,
+    "theme": "light",
+    "title": "Arturo Vela — Desarrollador Web · Caña Wasky",
+    "url": "http://127.0.0.1:5173/work/wasky",
+    "width": 1280
+  },
+  {
+    "name": "wasky-desktop-dark",
+    "fullPage": false,
+    "alternates": 0,
+    "canonical": "https://velaarturo.com/work/wasky",
+    "expanded": false,
+    "footerWork": "Work",
+    "height": 1100,
+    "images": [
+      {
+        "currentSrc": "http://127.0.0.1:5173/assets/images/logo/work-wasky-dark.png",
+        "loaded": true,
+        "src": "/assets/images/logo/work-wasky-dark.png",
+        "state": "loaded"
+      },
+      {
+        "currentSrc": "http://127.0.0.1:5173/assets/images/Me/Fototrabajo-wasky-480.jpg",
+        "loaded": true,
+        "src": "/assets/images/Me/Fototrabajo-wasky.jpg",
+        "state": "loaded"
+      }
+    ],
+    "overflow": false,
+    "periods": [
+      "Experiencia anteriorJunio — agosto de 2024 · 3 meses"
+    ],
+    "robots": "noindex,nofollow",
+    "scrollHeight": 1100,
+    "theme": "dark",
+    "title": "Arturo Vela — Desarrollador Web · Caña Wasky",
+    "url": "http://127.0.0.1:5173/work/wasky",
+    "width": 1280
+  },
+  {
+    "name": "index-tablet-dark",
+    "fullPage": true,
+    "alternates": 0,
+    "canonical": "https://velaarturo.com/work",
+    "footerWork": "Work",
+    "height": 1200,
+    "images": [
+      {
+        "currentSrc": "http://127.0.0.1:5173/assets/images/logo/work-agromaf-dark.png",
+        "loaded": true,
+        "src": "/assets/images/logo/work-agromaf-dark.png",
+        "state": "loaded"
+      },
+      {
+        "currentSrc": "http://127.0.0.1:5173/assets/images/logo/Logo%20Nieto%20Import%20Blanco.png",
+        "loaded": true,
+        "src": "/assets/images/logo/Logo Nieto Import Blanco.png",
+        "state": "loaded"
+      },
+      {
+        "currentSrc": "http://127.0.0.1:5173/assets/images/logo/work-pachas-dark.png",
+        "loaded": true,
+        "src": "/assets/images/logo/work-pachas-dark.png",
+        "state": "loaded"
+      },
+      {
+        "currentSrc": "http://127.0.0.1:5173/assets/images/logo/work-wasky-dark.png",
+        "loaded": true,
+        "src": "/assets/images/logo/work-wasky-dark.png",
+        "state": "loaded"
+      }
+    ],
+    "overflow": false,
+    "periods": [
+      "Experiencia actualAgosto de 2025 — actualidad",
+      "Experiencia actualAgosto de 2025 — actualidad",
+      "Experiencia anteriorMarzo — mayo de 2024 · 3 meses",
+      "Experiencia anteriorJunio — agosto de 2024 · 3 meses"
+    ],
+    "robots": "noindex,nofollow",
+    "scrollHeight": 1717,
+    "theme": "dark",
+    "title": "Work — Arturo Vela",
+    "url": "http://127.0.0.1:5173/work",
+    "width": 800
+  }
+]

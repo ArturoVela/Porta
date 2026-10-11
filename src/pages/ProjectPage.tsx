@@ -46,12 +46,12 @@ export function ProjectPage() {
         </Stack>
       </Grid>
 
-      <ProjectVisual project={project} />
+      <ProjectVisual project={project} hero />
 
       <Grid templateColumns={{ base: "1fr", lg: "1.2fr .8fr" }} gap={{ base: "12", lg: "20" }} py={{ base: "12", md: "20" }}>
         <MarkdownBody>{project.body}</MarkdownBody>
         <Stack gap="10">
-          <Box><Text fontSize="sm" color="app.muted" mb="4">{copy.project.technology}</Text><Flex gap="2" wrap="wrap">{project.stack.map((item) => <Text key={item} borderWidth="1px" borderColor="app.border" px="3" py="1.5" fontSize="sm">{item}</Text>)}</Flex></Box>
+          {project.stack.length ? <Box><Text fontSize="sm" color="app.muted" mb="4">{copy.project.technology}</Text><Flex gap="2" wrap="wrap">{project.stack.map((item) => <Text key={item} borderWidth="1px" borderColor="app.border" px="3" py="1.5" fontSize="sm">{item}</Text>)}</Flex></Box> : null}
           <Box><Text fontSize="sm" color="app.muted" mb="4">{copy.project.scope}</Text><Stack gap="0">{project.outcomes.map((outcome) => <HStack key={outcome} align="start" py="4" borderTopWidth="1px" borderColor="app.border"><Box mt="2" w="2" h="2" borderRadius="full" bg="brand.500" flexShrink="0" /><Text>{outcome}</Text></HStack>)}</Stack></Box>
         </Stack>
       </Grid>

@@ -1,6 +1,6 @@
 import type { Locale } from "@/i18n";
 import { FALLBACK_ENVELOPE_EN } from "@/content/fallback-en";
-import { WALLET_PROJECTS, type WalletProject } from "@/lib/linktree";
+import { WALLET_COPY_EN, WALLET_PROJECTS, type WalletProject } from "@/lib/linktree";
 import type { ProjectContent } from "@/types/content";
 
 export const DEV_APP_GROUPS = {
@@ -11,7 +11,7 @@ export const DEV_APP_GROUPS = {
   exploration: ["explora", "coffee"],
 } as const;
 export type DevAppGroup = keyof typeof DEV_APP_GROUPS;
-export const DEV_APPS = WALLET_PROJECTS.filter((app) => !["principal", "cv", "brain"].includes(app.id));
+export const DEV_APPS = WALLET_PROJECTS.filter((app) => !["principal", "cv", "brain", "status"].includes(app.id));
 
 export const DEV_COPY = {
   es: {
@@ -34,24 +34,11 @@ export const DEV_COPY = {
   },
 } as const;
 
-const appDescriptionsEn: Record<string, string> = {
-  torneo: "Create balanced teams, organize tournaments, and share schedules and results without accounts.",
-  textos: "Count, transform, sort and compare text directly in your browser.",
-  formularios: "Create registrations, surveys and requests at your own pace, without accounts.",
-  divide: "Split expenses for a meal, trip or household and find out who owes whom.",
-  finanzas: "Organize accounts, transactions and goals for yourself and your household.",
-  ventas: "Sales, purchasing, branch inventory and daily cash management for Peruvian businesses.",
-  agua: "AquaVigía. A water platform with data access reserved for authorized accounts.",
-  agro: "Your farm, your accounts. A protected agricultural workspace with private access.",
-  bc: "Discover events and digital tickets, with tools for attendees and organizers.",
-  tarjetas: "Create digital loyalty cards for your business and turn every visit into a reward.",
-};
-
 export function devAppDescription(app: WalletProject, locale: Locale, projects: ProjectContent[]) {
   if (locale === "es") return app.description;
   return projects.find((project) => project.slug === app.caseSlug)?.excerpt
     ?? FALLBACK_ENVELOPE_EN.data.projects.find((project) => project.slug === app.caseSlug)?.excerpt
-    ?? appDescriptionsEn[app.id] ?? app.description;
+    ?? WALLET_COPY_EN[app.id]?.description ?? app.description;
 }
 
 export function filterDevApps(query: string, group: DevAppGroup | "all", locale: Locale, projects: ProjectContent[]) {

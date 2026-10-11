@@ -40,14 +40,30 @@ export const WALLET_PROJECTS: WalletProject[] = [
   { id: "agro", name: "Agro Vela", domain: "agro.velaarturo.com", image: pass("22-agro"), color: "#336244", private: true, description: "Tu campo, tus cuentas. Espacio de Agro Vela protegido con acceso privado.", features: ["Espacio de trabajo agrícola", "Acceso protegido"] },
   { id: "bc", name: "Vela Entradas", domain: "bc.velaarturo.com", image: pass("bc-750x288"), color: "#315745", description: "Encuentra eventos y entradas digitales; una plataforma para asistentes y organizadores.", features: ["Cartelera de eventos", "Entradas digitales", "Herramientas para organizadores"] },
   { id: "tarjetas", name: "Tarjetas Arturo", domain: "tarjetas.velaarturo.com", image: pass("https-::tarjetas.velaarturo.com:"), color: "#307b6e", description: "Crea tarjetas digitales de fidelización para tu negocio y convierte cada visita en una recompensa.", features: ["Tarjetas personalizadas de sellos, cashback y membresías", "Registro de visitas y recompensas con QR", "Clientes, sucursales, campañas y reportes"] },
-];
+  { id: "status", name: "Status", domain: "status.velaarturo.com", color: "#192640", description: "Consulta el estado, la disponibilidad y las incidencias de mis servicios con contexto de cada comprobación.", features: ["Estado de los servicios", "Historial de comprobaciones e incidencias", "Actualizaciones y feed de incidencias"] },
+].map((project) => ({ ...project, caseSlug: project.caseSlug ?? project.id }));
+
+export const WALLET_COPY_EN: Record<string, { description: string; features: string[] }> = {
+  torneo: { description: "Create balanced teams, organize tournaments, and share schedules and results without accounts.", features: ["Teams balanced by skill and position", "Knockout brackets and round-robin schedules", "Separate viewing and organizer links"] },
+  textos: { description: "Count, transform, sort and compare text directly in your browser.", features: ["Word and character counts", "Text and list cleanup", "Text comparison and Lorem generation"] },
+  formularios: { description: "Create registrations, surveys and requests at your own pace, without accounts.", features: ["Form editor and preview", "Drafts saved in the browser", "Publishing and JSON backups"] },
+  divide: { description: "Split expenses for a meal, trip or household and find out who owes whom.", features: ["Quick splits or shared groups", "Contributions and payments in one account", "Soles and dollars without registration"] },
+  cv: { description: "My professional background: experience, education and work across product and web engineering.", features: ["Professional experience", "Education and skills", "Contact information"] },
+  status: { description: "Check service status, availability and incidents with context for each recorded check.", features: ["Current service status", "Checks and incident history", "Updates and incident feed"] },
+  finanzas: { description: "Organize accounts, transactions and goals for yourself and your household.", features: ["Income, expenses and transfers", "Budgets and goals", "Personal and shared spaces"] },
+  ventas: { description: "Sales, purchasing, branch inventory and daily cash management for Peruvian businesses.", features: ["Sales and purchases connected to stock", "Cash management by branch", "Reports and transaction traceability"] },
+  agua: { description: "AquaVigía. A water platform with data access reserved for authorized accounts.", features: ["Account-based access", "Data access according to permissions"] },
+  agro: { description: "Your farm, your accounts. A protected agricultural workspace with private access.", features: ["An agricultural workspace", "Protected access"] },
+  bc: { description: "Discover events and digital tickets, with tools for attendees and organizers.", features: ["Event listings", "Digital tickets", "Tools for organizers"] },
+  tarjetas: { description: "Create digital loyalty cards for your business and turn every visit into a reward.", features: ["Stamp, cashback and membership cards", "Visits and rewards recorded through QR", "Customers, branches, campaigns and reports"] },
+};
 
 export const WALLET_COLLECTIONS = [
-  { id: "herramientas", name: "Herramientas", projects: ["torneo", "textos", "color", "cotiza", "cuando", "foto", "pdf", "qr", "horas", "llevamos", "ruleta", "formularios", "divide", "hub", "cv"] },
-  { id: "proyectos", name: "Proyectos", projects: ["coffee", "explora", "un-ramito"] },
-  { id: "personal", name: "Personal", projects: ["brain", "hub", "cv"] },
-  { id: "principal", name: "Principal", projects: ["principal"] },
-  { id: "saas", name: "SaaS", projects: ["finanzas", "ventas", "agua", "agro", "bc", "tarjetas"] },
+  { id: "herramientas", name: "Herramientas", nameEn: "Tools", projects: ["torneo", "textos", "color", "cotiza", "cuando", "foto", "pdf", "qr", "horas", "llevamos", "ruleta", "formularios", "divide", "hub", "cv"] },
+  { id: "proyectos", name: "Proyectos", nameEn: "Projects", projects: ["coffee", "explora", "un-ramito"] },
+  { id: "personal", name: "Personal", nameEn: "Personal", projects: ["brain", "status", "hub", "cv"] },
+  { id: "principal", name: "Principal", nameEn: "Main", projects: ["principal"] },
+  { id: "saas", name: "SaaS", nameEn: "SaaS", projects: ["finanzas", "ventas", "agua", "agro", "bc", "tarjetas"] },
 ];
 
 export function walletCollections(query: string, collection = "todas") {

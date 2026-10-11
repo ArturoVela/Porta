@@ -56,7 +56,7 @@ describe("catálogo y traducción de /dev", () => {
 
 describe("contacto público", () => {
   it("exporta solo nombre, correo y web con escape y CRLF", () => {
-    const card = contactVCard({ name: "Vela, Arturo; \\\nTEL:privado", email: "cv@velaarturo.com" }, "es");
+    const card = contactVCard({ name: "Vela, Arturo; \\\nTEL:privado", email: "dev@velaarturo.com" }, "es");
     expect(card).toContain("VERSION:3.0\r\n");
     expect(card).toContain("FN:Vela\\, Arturo\\; \\\\\\nTEL:privado\r\n");
     expect(card).not.toMatch(/^TEL:|^PHOTO:|^NOTE:/m);
@@ -66,16 +66,16 @@ describe("contacto público", () => {
 
   it("pliega líneas UTF-8 sin cortar caracteres ni exceder 75 bytes", () => {
     const name = "Arturo áéñ 😀 ".repeat(12);
-    const card = contactVCard({ name, email: "cv@velaarturo.com" }, "en");
+    const card = contactVCard({ name, email: "dev@velaarturo.com" }, "en");
     expect(card.split("\r\n").every((line) => new TextEncoder().encode(line).length <= 75)).toBe(true);
     expect(card.replace(/\r\n /g, "")).toContain(`FN:${name}`);
   });
 
   it("ofrece recuperación si portapapeles no existe o permiso falla", async () => {
     vi.stubGlobal("navigator", {});
-    expect(await copyText("cv@velaarturo.com")).toBe("blocked");
+    expect(await copyText("dev@velaarturo.com")).toBe("blocked");
     vi.stubGlobal("navigator", { clipboard: { writeText: vi.fn().mockRejectedValue(new Error("Denied")) } });
-    expect(await copyText("cv@velaarturo.com")).toBe("blocked");
+    expect(await copyText("dev@velaarturo.com")).toBe("blocked");
   });
 
   it("comparte URL pública y trata cancelación como acción neutral", async () => {

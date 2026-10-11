@@ -45,8 +45,7 @@ html:has(.dev-page) { scrollbar-gutter: stable; }
 .dev-text-link { flex-shrink: 0; text-decoration: underline; text-underline-offset: .35rem; text-decoration-color: var(--chakra-colors-app-border); }
 .dev-featured { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.5rem; }
 .dev-project { min-width: 0; }
-.dev-project-visual { aspect-ratio: 16 / 10; overflow: hidden; background: var(--chakra-colors-app-surface); }
-.dev-project-visual > * { height: 100%; min-height: 0; }
+.dev-project-visual { min-width: 0; }
 .dev-project-title { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-top: 1rem; }
 .dev-project-title h3 { font-size: 1.25rem; letter-spacing: -.02em; }
 .dev-project:hover .dev-project-title { color: var(--chakra-colors-app-accent); }
@@ -142,7 +141,7 @@ button.dev-day:hover { outline: 1px solid var(--chakra-colors-app-text); outline
 @media (max-width: 640px) {
   .dev-app-filters, .dev-technology-list { grid-template-columns: 1fr; }.dev-technology-list a { flex-wrap: wrap; gap: .5rem 1rem; }.dev-technology-list span { text-align: left; }
   .dev-page { width: min(100% - 2rem, 76rem); padding-top: 1.5rem; }.dev-card { grid-template-columns: 1fr; }.dev-portrait { min-height: 0; aspect-ratio: 1.35; }.dev-portrait > img { object-position: 50% 32%; }.dev-portrait-caption { padding: .75rem 1rem; }.dev-introduction { padding: 1.5rem; }.dev-page h1 { padding-top: 1.25rem; font-size: clamp(2.75rem, 11vw, 4rem); }.dev-role { font-size: 1.75rem; }.dev-role br { display: none; }.dev-identity { font-size: .8125rem; }.dev-bio { font-size: 1rem; }.dev-actions { width: 100%; }.dev-actions .dev-button-primary { flex-grow: 1; }.dev-index { gap: .25rem 1.25rem; }.dev-index a { font-size: .8125rem; }.dev-index a svg { display: none; }
-  .dev-featured, .dev-app-list, .dev-data-grid { grid-template-columns: 1fr; }.dev-featured { gap: 2rem; }.dev-project-visual { aspect-ratio: 16 / 9; }.dev-app { grid-template-columns: 4rem minmax(0, 1fr) 1.125rem; gap: 1rem; }.dev-app-icon { height: 3.5rem; }
+  .dev-featured, .dev-app-list, .dev-data-grid { grid-template-columns: 1fr; }.dev-featured { gap: 2rem; }.dev-app { grid-template-columns: 4rem minmax(0, 1fr) 1.125rem; gap: 1rem; }.dev-app-icon { height: 3.5rem; }
   .dev-calendar-panel, .dev-performance, .dev-languages { padding: 1.25rem; }.dev-calendar-heading { flex-direction: column; align-items: start; }.dev-languages { border-left: 0; border-top: 1px solid var(--chakra-colors-app-border); }.dev-languages ul { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .75rem 1rem; }.dev-close { flex-direction: column; align-items: start; margin-top: 3.5rem; }.dev-close .dev-button { width: 100%; }
 }
 @media (prefers-reduced-motion: reduce) { .dev-button { transition: none; } }

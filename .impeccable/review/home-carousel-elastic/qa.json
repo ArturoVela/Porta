@@ -1,0 +1,22 @@
+{
+  "date": "2026-10-10",
+  "browser": "Codex integrated browser",
+  "localUrl": "http://127.0.0.1:5173/es/",
+  "checks": {
+    "tests": { "passed": 136, "files": 12 },
+    "typecheck": "passed",
+    "stagingBuild": "passed",
+    "autoplayLoop": { "before": "8 de 8", "waitMs": 5300, "after": "1 de 8", "scrollLeft": 0 },
+    "keyboardLoop": "1 to 8 and 8 to 1 passed",
+    "pause": "stops playback and freezes progress",
+    "resume": "repeated pause/play cycles restart five-second playback, including a stale visibility observation",
+    "offscreen": "stops outside viewport and resumes when visible",
+    "overflow": "none at 320, 390 and desktop widths",
+    "locales": ["es", "en"],
+    "themes": ["light", "dark"],
+    "contrast": { "activeDark": 3.5, "activeLight": 3.17, "inactiveDark": 5.4, "inactiveLight": 3.57 }
+  },
+  "limits": ["Not deployed", "No physical touch device tested", "Reduced-motion default checked through SSR and CSS; OS preference not toggled"],
+  "buildWarnings": ["BRAIN_CONTENT_TOKEN missing; local fallback content", "Existing chunk-size warning"],
+  "screenshots": ["home-desktop.jpg"]
+}

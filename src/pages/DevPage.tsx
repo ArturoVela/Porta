@@ -200,9 +200,9 @@ export function DevPage() {
 
     <section className="dev-projects" id="proyectos" aria-labelledby="projects-title">
       <div className="dev-section-heading"><div><h2 id="projects-title">{c.projectsTitle}</h2><p>{c.projectsIntro}</p></div><Link className="dev-text-link" to="/proyectos">{c.allProjects} <ArrowUpRight size={17} aria-hidden="true" /></Link></div>
-      <div className="dev-featured">{featured.map((project) => <div key={project.id} className="dev-project">
+      <div className="dev-featured">{featured.map((project) => <div key={project.id} className="dev-project" data-project-card="dev">
+        <div className="dev-project-visual"><ProjectVisual project={project} compact /></div>
         <Link to={`/proyectos/${project.slug}`}>
-          <div className="dev-project-visual"><ProjectVisual project={project} compact /></div>
           <div className="dev-project-title"><h3>{project.title}</h3><ArrowUpRight size={21} aria-hidden="true" /></div>
         </Link>
         <p>{project.excerpt}</p>

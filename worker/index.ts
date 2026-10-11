@@ -2,8 +2,11 @@ import { FALLBACK_ENVELOPE } from "../src/content/fallback";
 import { fallbackEnvelope, isPortfolioEnvelope } from "../src/lib/content";
 import { isLocale, localeFromPath, localizedPath, matchLocalizedRoute, preferredLocale, routePath, type Locale } from "../src/i18n";
 import { projectDisplayCover } from "../src/lib/spotlight";
+import { withProjectCatalog } from "../src/lib/projectCatalog";
 import { PRIVACY_POLICY_VERSION } from "../src/lib/legal";
+import { workCompanyForPath, workDescription } from "../src/lib/work";
 import { githubApi } from "./github";
+import { uptimeApi } from "./uptime";
 import type { PortfolioEnvelope, PortfolioManifest, PublicComment } from "../src/types/content";
 
 const JSON_HEADERS = { "content-type": "application/json; charset=utf-8", "cache-control": "no-store", "x-content-type-options": "nosniff" };
@@ -132,7 +135,7 @@ async function loadContent(env: Env, ctx: ExecutionContext, locale: Locale = "es
   const path = `/internal/v1/portfolio/${encodeURIComponent(siteKey)}/manifest?locale=${locale}`;
   const currentKey = cacheKey(path, "current");
   const current = await readCachedEnvelope(currentKey);
-  if (current) return { envelope: current, source: "cache" };
+  if (current) return { envelope: withProjectCatalog(current, locale), source: "cache" };
 
   try {
     const envelope = await fetchBrainEnvelope(env, path);
@@ -140,11 +143,11 @@ async function loadContent(env: Env, ctx: ExecutionContext, locale: Locale = "es
       defaultCache().put(currentKey, cacheResponse(envelope, CACHE_TTL_SECONDS)),
       defaultCache().put(cacheKey(path, "backup"), cacheResponse(envelope, BACKUP_TTL_SECONDS)),
     ]));
-    return { envelope, source: "brain" };
+    return { envelope: withProjectCatalog(envelope, locale), source: "brain" };
   } catch (error) {
     console.warn(JSON.stringify({ event: "content_fallback", reason: error instanceof Error ? error.message : String(error) }));
     const backup = await readCachedEnvelope(cacheKey(path, "backup"));
-    if (backup) return { envelope: backup, source: "backup" };
+    if (backup) return { envelope: withProjectCatalog(backup, locale), source: "backup" };
     if (isBrainIntegrationConfigured(env)) throw error;
     return { envelope: fallbackEnvelope(locale), source: "bundled" };
   }
@@ -295,8 +298,10 @@ export function metaForPath(pathname: string, manifest: PortfolioManifest, origi
   const match = matchLocalizedRoute(pathname) ?? matchLocalizedRoute(localizedPath(pathname, "es"));
   const locale = match?.locale ?? localeFromPath(pathname) ?? "es";
   const wallet = pathname.replace(/\/$/, "") === "/linktree";
+  const work = workCompanyForPath(pathname);
+  const workIndex = pathname.replace(/\/$/, "") === "/work";
   const dev = match?.name === "dev";
-  const canonicalPath = wallet ? "/linktree" : match ? routePath(locale, match.name, match.slug) : pathname;
+  const canonicalPath = wallet ? "/linktree" : workIndex ? "/work" : work ? work.path : match ? routePath(locale, match.name, match.slug) : pathname;
   const baseImage = new URL(manifest.site.seo.ogImage ?? "/og-card.svg", origin).href;
   const base = {
     image: baseImage,
@@ -316,6 +321,11 @@ export function metaForPath(pathname: string, manifest: PortfolioManifest, origi
       address: { "@type": "PostalAddress", addressCountry: "PE" },
     },
   };
+  if (workIndex) return { ...base, title: "Work — Arturo Vela", description: "Tarjetas de presentación y experiencia laboral de Arturo Vela: empresas, cargos y periodos de trabajo.", canonicalPath, noindex: true };
+  if (work) {
+    const organization = { "@type": "Organization", name: work.name, ...("website" in work ? { url: work.website } : {}) };
+    return { ...base, title: `Arturo Vela — ${work.role} · ${work.name}`, description: workDescription(work), canonicalPath, noindex: true, image: new URL(work.portrait.src, origin).href, imageWidth: work.portrait.width, imageHeight: work.portrait.height, structuredData: { ...base.structuredData, name: "Arturo Vela", email: work.email, jobTitle: work.role, url: new URL(canonicalPath, origin).href, image: new URL(work.portrait.src, origin).href, ...(work.current ? { worksFor: organization } : { affiliation: organization }) } };
+  }
   if (match?.name === "home") return { ...base, title: manifest.site.seo.title, description: manifest.site.seo.description, canonicalPath };
   if (match?.name === "projects") return { ...base, title: `${locale === "en" ? "Projects" : "Proyectos"} — ${manifest.site.name}`, description: locale === "en" ? "Web products, internal systems, and digital experiences built by Arturo Vela." : "Productos web, sistemas internos y experiencias digitales construidas por Arturo Vela.", canonicalPath };
   if (match?.name === "allProjects") return { ...base, title: `${locale === "en" ? "All projects" : "Todos los proyectos"} — ${manifest.site.name}`, description: locale === "en" ? "Quick access to every project by Arturo Vela." : "Acceso rápido a todos los proyectos de Arturo Vela.", canonicalPath, noindex: true, structuredData: {} };
@@ -394,7 +404,7 @@ async function html(request: Request, env: Env, ctx: ExecutionContext) {
     .on('link[data-hreflang="es"]', { element(element) { element.setAttribute("href", spanish); } })
     .on('link[data-hreflang="en"]', { element(element) { element.setAttribute("href", english); } })
     .on('link[data-hreflang="x-default"]', { element(element) { element.setAttribute("href", spanish); } })
-    .on('link[data-hreflang]', { element(element) { if (meta.canonicalPath === "/linktree") element.remove(); } })
+    .on('link[data-hreflang]', { element(element) { if (meta.canonicalPath === "/linktree" || meta.canonicalPath === "/work" || workCompanyForPath(meta.canonicalPath)) element.remove(); } })
     .on('meta[name="theme-color"]', { element(element) { if (meta.canonicalPath === "/linktree") element.setAttribute("content", "#080B12"); } })
     .on('link[data-localized-feed]', { element(element) { element.setAttribute("href", `/${locale}/feed.xml`); element.setAttribute("title", locale === "en" ? "Arturo Vela's articles" : "Artículos de Arturo Vela"); } })
     .on("#portfolio-content", { element(element) { element.setInnerContent(safeEnvelope, { html: true }); } })
@@ -412,6 +422,7 @@ async function route(request: Request, env: Env, ctx: ExecutionContext) {
   const legacy = normalizeLegacyPath(url.pathname);
   if (legacy) return Response.redirect(new URL(`${legacy}${legacy.includes("#") ? "" : url.search}`, env.CANONICAL_ORIGIN).href, 301);
   if (url.pathname === "/api/health" && request.method === "GET") return json({ data: { ok: true, service: "velaarturo" } });
+  if (url.pathname === "/api/uptime" && request.method === "GET") return uptimeApi(ctx);
   if ((url.pathname === "/api/github" || url.pathname === "/api/github/contributions") && request.method === "GET") return githubApi(request, ctx);
   if (url.pathname === "/api/comments" && request.method === "GET") return listComments(request, env);
   if (url.pathname === "/api/comments" && request.method === "POST") return createComment(request, env, ctx);

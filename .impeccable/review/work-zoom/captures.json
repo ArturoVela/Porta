@@ -1,0 +1,98 @@
+[
+  {
+    "file": "agromaf-desktop-dark.jpg",
+    "captureWidth": 1280,
+    "captureHeight": 1000,
+    "captureNote": "Raw Codex integrated-browser JPEG, no manual crop or rescale. Captures at named responsive widths; 320px cases simulate browser-zoom reflow. Expanded work captures are full-page."
+  },
+  {
+    "file": "agromaf-desktop-light.jpg",
+    "captureWidth": 1280,
+    "captureHeight": 1000,
+    "captureNote": "Raw Codex integrated-browser JPEG, no manual crop or rescale. Captures at named responsive widths; 320px cases simulate browser-zoom reflow. Expanded work captures are full-page."
+  },
+  {
+    "file": "agromaf-mobile-dark.jpg",
+    "captureWidth": 390,
+    "captureHeight": 1400,
+    "captureNote": "Raw Codex integrated-browser JPEG, no manual crop or rescale. Captures at named responsive widths; 320px cases simulate browser-zoom reflow. Expanded work captures are full-page."
+  },
+  {
+    "file": "agromaf-mobile-light.jpg",
+    "captureWidth": 390,
+    "captureHeight": 1400,
+    "captureNote": "Raw Codex integrated-browser JPEG, no manual crop or rescale. Captures at named responsive widths; 320px cases simulate browser-zoom reflow. Expanded work captures are full-page."
+  },
+  {
+    "file": "agromaf-tablet-dark.jpg",
+    "captureWidth": 800,
+    "captureHeight": 1100,
+    "captureNote": "Raw Codex integrated-browser JPEG, no manual crop or rescale. Captures at named responsive widths; 320px cases simulate browser-zoom reflow. Expanded work captures are full-page."
+  },
+  {
+    "file": "agromaf-zoom-equivalent-320-dark.jpg",
+    "captureWidth": 320,
+    "captureHeight": 1500,
+    "captureNote": "Raw Codex integrated-browser JPEG, no manual crop or rescale. Captures at named responsive widths; 320px cases simulate browser-zoom reflow. Expanded work captures are full-page."
+  },
+  {
+    "file": "nieto-desktop-dark.jpg",
+    "captureWidth": 1280,
+    "captureHeight": 1100,
+    "captureNote": "Raw Codex integrated-browser JPEG, no manual crop or rescale. Captures at named responsive widths; 320px cases simulate browser-zoom reflow. Expanded work captures are full-page."
+  },
+  {
+    "file": "nieto-desktop-light.jpg",
+    "captureWidth": 1280,
+    "captureHeight": 1100,
+    "captureNote": "Raw Codex integrated-browser JPEG, no manual crop or rescale. Captures at named responsive widths; 320px cases simulate browser-zoom reflow. Expanded work captures are full-page."
+  },
+  {
+    "file": "nieto-mobile-dark.jpg",
+    "captureWidth": 390,
+    "captureHeight": 1500,
+    "captureNote": "Raw Codex integrated-browser JPEG, no manual crop or rescale. Captures at named responsive widths; 320px cases simulate browser-zoom reflow. Expanded work captures are full-page."
+  },
+  {
+    "file": "nieto-mobile-light.jpg",
+    "captureWidth": 390,
+    "captureHeight": 1500,
+    "captureNote": "Raw Codex integrated-browser JPEG, no manual crop or rescale. Captures at named responsive widths; 320px cases simulate browser-zoom reflow. Expanded work captures are full-page."
+  },
+  {
+    "file": "nieto-tablet-dark.jpg",
+    "captureWidth": 800,
+    "captureHeight": 1200,
+    "captureNote": "Raw Codex integrated-browser JPEG, no manual crop or rescale. Captures at named responsive widths; 320px cases simulate browser-zoom reflow. Expanded work captures are full-page."
+  },
+  {
+    "file": "nieto-user-800-dark.jpg",
+    "captureWidth": 800,
+    "captureHeight": 1200,
+    "captureNote": "Raw Codex integrated-browser JPEG, no manual crop or rescale. Captures at named responsive widths; 320px cases simulate browser-zoom reflow. Expanded work captures are full-page."
+  },
+  {
+    "file": "nieto-work-open-320-dark.jpg",
+    "captureWidth": 305,
+    "captureHeight": 2019,
+    "captureNote": "Raw Codex integrated-browser JPEG, no manual crop or rescale. Captures at named responsive widths; 320px cases simulate browser-zoom reflow. Expanded work captures are full-page."
+  },
+  {
+    "file": "nieto-work-open-desktop-dark.jpg",
+    "captureWidth": 1265,
+    "captureHeight": 1478,
+    "captureNote": "Raw Codex integrated-browser JPEG, no manual crop or rescale. Captures at named responsive widths; 320px cases simulate browser-zoom reflow. Expanded work captures are full-page."
+  },
+  {
+    "file": "nieto-work-open-mobile-light.jpg",
+    "captureWidth": 375,
+    "captureHeight": 1921,
+    "captureNote": "Raw Codex integrated-browser JPEG, no manual crop or rescale. Captures at named responsive widths; 320px cases simulate browser-zoom reflow. Expanded work captures are full-page."
+  },
+  {
+    "file": "nieto-zoom-equivalent-320-dark.jpg",
+    "captureWidth": 320,
+    "captureHeight": 1500,
+    "captureNote": "Raw Codex integrated-browser JPEG, no manual crop or rescale. Captures at named responsive widths; 320px cases simulate browser-zoom reflow. Expanded work captures are full-page."
+  }
+]

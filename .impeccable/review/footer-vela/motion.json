@@ -1,0 +1,12 @@
+{
+  "verifiedExit": {
+    "opacity": "0.3",
+    "transform": "matrix(1, 0, 0, 1, 0, 82.4863)",
+    "visible": "false"
+  },
+  "verifiedEntry": {
+    "opacity": "1",
+    "transform": "none",
+    "visible": "true"
+  }
+}

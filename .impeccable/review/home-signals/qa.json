@@ -1,0 +1,340 @@
+{
+  "cases": [
+    {
+      "name": "es-390-dark",
+      "background": "rgb(8, 11, 18)",
+      "bounds": {
+        "bottom": 738.8125,
+        "height": 44,
+        "left": 36,
+        "right": 359,
+        "top": 694.8125,
+        "width": 323,
+        "x": 36,
+        "y": 694.8125
+      },
+      "color": "rgb(170, 181, 198)",
+      "fontFamily": "Satoshi, ui-sans-serif, system-ui, sans-serif",
+      "fontSize": "12px",
+      "label": "Uptime medio: 99,91 % · 90 días",
+      "link": {
+        "bottom": 738.8125,
+        "height": 44,
+        "left": 161.734375,
+        "right": 347.875,
+        "top": 694.8125,
+        "width": 186.140625,
+        "x": 161.734375,
+        "y": 694.8125
+      },
+      "loading": "false",
+      "overflow": false,
+      "text": "Tu hora local 22:40Uptime medio99,91 % · 90 días",
+      "width": 390
+    },
+    {
+      "name": "es-1440-light",
+      "background": "rgb(245, 247, 250)",
+      "bounds": {
+        "bottom": 728.234375,
+        "height": 44,
+        "left": 124.5,
+        "right": 712.109375,
+        "top": 684.234375,
+        "width": 587.609375,
+        "x": 124.5,
+        "y": 684.234375
+      },
+      "color": "rgb(89, 100, 118)",
+      "fontFamily": "Satoshi, ui-sans-serif, system-ui, sans-serif",
+      "fontSize": "12px",
+      "label": "Uptime medio: 99,91 % · 90 días",
+      "link": {
+        "bottom": 728.234375,
+        "height": 44,
+        "left": 250.234375,
+        "right": 436.375,
+        "top": 684.234375,
+        "width": 186.140625,
+        "x": 250.234375,
+        "y": 684.234375
+      },
+      "loading": "false",
+      "overflow": false,
+      "text": "Tu hora local 22:42Uptime medio99,91 % · 90 días",
+      "width": 1440
+    },
+    {
+      "name": "loading-320",
+      "background": "rgb(8, 11, 18)",
+      "bounds": {
+        "bottom": 783.59375,
+        "height": 63.1875,
+        "left": 36,
+        "right": 289,
+        "top": 720.40625,
+        "width": 253,
+        "x": 36,
+        "y": 720.40625
+      },
+      "color": "rgb(170, 181, 198)",
+      "fontFamily": "Satoshi, ui-sans-serif, system-ui, sans-serif",
+      "fontSize": "12px",
+      "label": "Uptime medio: Consultando uptime… · 90 días",
+      "link": {
+        "bottom": 783.59375,
+        "height": 44,
+        "left": 36,
+        "right": 222.140625,
+        "top": 739.59375,
+        "width": 186.140625,
+        "x": 36,
+        "y": 739.59375
+      },
+      "loading": "true",
+      "overflow": false,
+      "text": "Tu hora local 22:40Uptime medio— · 90 días",
+      "width": 320
+    },
+    {
+      "name": "loaded-320",
+      "background": "rgb(8, 11, 18)",
+      "bounds": {
+        "bottom": 783.59375,
+        "height": 63.1875,
+        "left": 36,
+        "right": 289,
+        "top": 720.40625,
+        "width": 253,
+        "x": 36,
+        "y": 720.40625
+      },
+      "color": "rgb(170, 181, 198)",
+      "fontFamily": "Satoshi, ui-sans-serif, system-ui, sans-serif",
+      "fontSize": "12px",
+      "label": "Uptime medio: 99,91 % · 90 días",
+      "link": {
+        "bottom": 783.59375,
+        "height": 44,
+        "left": 36,
+        "right": 222.140625,
+        "top": 739.59375,
+        "width": 186.140625,
+        "x": 36,
+        "y": 739.59375
+      },
+      "loading": "false",
+      "overflow": false,
+      "text": "Tu hora local 22:40Uptime medio99,91 % · 90 días",
+      "width": 320
+    },
+    {
+      "name": "error-320",
+      "background": "rgb(8, 11, 18)",
+      "bounds": {
+        "bottom": 783.59375,
+        "height": 63.1875,
+        "left": 36,
+        "right": 289,
+        "top": 720.40625,
+        "width": 253,
+        "x": 36,
+        "y": 720.40625
+      },
+      "color": "rgb(170, 181, 198)",
+      "fontFamily": "Satoshi, ui-sans-serif, system-ui, sans-serif",
+      "fontSize": "12px",
+      "label": "Uptime medio: No disponible · 90 días",
+      "link": {
+        "bottom": 783.59375,
+        "height": 44,
+        "left": 36,
+        "right": 238.71875,
+        "top": 739.59375,
+        "width": 202.71875,
+        "x": 36,
+        "y": 739.59375
+      },
+      "loading": "false",
+      "overflow": false,
+      "text": "Tu hora local 22:40Uptime medioNo disponible · 90 días",
+      "width": 320
+    },
+    {
+      "name": "empty-320",
+      "background": "rgb(8, 11, 18)",
+      "bounds": {
+        "bottom": 783.59375,
+        "height": 63.1875,
+        "left": 36,
+        "right": 289,
+        "top": 720.40625,
+        "width": 253,
+        "x": 36,
+        "y": 720.40625
+      },
+      "color": "rgb(170, 181, 198)",
+      "fontFamily": "Satoshi, ui-sans-serif, system-ui, sans-serif",
+      "fontSize": "12px",
+      "label": "Uptime medio: Sin datos · 90 días",
+      "link": {
+        "bottom": 783.59375,
+        "height": 44,
+        "left": 36,
+        "right": 222.140625,
+        "top": 739.59375,
+        "width": 186.140625,
+        "x": 36,
+        "y": 739.59375
+      },
+      "loading": "false",
+      "overflow": false,
+      "text": "Tu hora local 22:40Uptime medioSin datos · 90 días",
+      "width": 320
+    },
+    {
+      "name": "stale-320",
+      "background": "rgb(8, 11, 18)",
+      "bounds": {
+        "bottom": 783.59375,
+        "height": 63.1875,
+        "left": 36,
+        "right": 289,
+        "top": 720.40625,
+        "width": 253,
+        "x": 36,
+        "y": 720.40625
+      },
+      "color": "rgb(170, 181, 198)",
+      "fontFamily": "Satoshi, ui-sans-serif, system-ui, sans-serif",
+      "fontSize": "12px",
+      "label": "Uptime medio: 99,91 % · 90 días · Sin actualizar",
+      "link": {
+        "bottom": 783.59375,
+        "height": 44,
+        "left": 36,
+        "right": 289,
+        "top": 739.59375,
+        "width": 253,
+        "x": 36,
+        "y": 739.59375
+      },
+      "loading": "false",
+      "overflow": false,
+      "text": "Tu hora local 22:40Uptime medio99,91 % · 90 días · Sin actualizar",
+      "width": 320
+    },
+    {
+      "name": "es-768-light",
+      "background": "rgb(245, 247, 250)",
+      "bounds": {
+        "bottom": 618.171875,
+        "height": 44,
+        "left": 44,
+        "right": 729,
+        "top": 574.171875,
+        "width": 685,
+        "x": 44,
+        "y": 574.171875
+      },
+      "color": "rgb(89, 100, 118)",
+      "fontFamily": "Satoshi, ui-sans-serif, system-ui, sans-serif",
+      "fontSize": "12px",
+      "label": "Uptime medio: 99,91 % · 90 días",
+      "link": {
+        "bottom": 618.171875,
+        "height": 44,
+        "left": 169.734375,
+        "right": 355.875,
+        "top": 574.171875,
+        "width": 186.140625,
+        "x": 169.734375,
+        "y": 574.171875
+      },
+      "loading": "false",
+      "overflow": false,
+      "text": "Tu hora local 22:41Uptime medio99,91 % · 90 días",
+      "width": 768
+    },
+    {
+      "name": "en-320-light",
+      "background": "rgb(245, 247, 250)",
+      "bounds": {
+        "bottom": 761.109375,
+        "height": 63.1875,
+        "left": 36,
+        "right": 289,
+        "top": 697.921875,
+        "width": 253,
+        "x": 36,
+        "y": 697.921875
+      },
+      "color": "rgb(89, 100, 118)",
+      "fontFamily": "Satoshi, ui-sans-serif, system-ui, sans-serif",
+      "fontSize": "12px",
+      "label": "Average uptime: 99.91% · 90 days",
+      "link": {
+        "bottom": 761.109375,
+        "height": 44,
+        "left": 36,
+        "right": 233.375,
+        "top": 717.109375,
+        "width": 197.375,
+        "x": 36,
+        "y": 717.109375
+      },
+      "loading": "false",
+      "overflow": false,
+      "text": "Your local time 10:41 PMAverage uptime99.91% · 90 days",
+      "width": 320
+    },
+    {
+      "name": "en-1024-light",
+      "background": "rgb(245, 247, 250)",
+      "bounds": {
+        "bottom": 686.859375,
+        "height": 44,
+        "left": 52,
+        "right": 497.65625,
+        "top": 642.859375,
+        "width": 445.65625,
+        "x": 52,
+        "y": 642.859375
+      },
+      "color": "rgb(89, 100, 118)",
+      "fontFamily": "Satoshi, ui-sans-serif, system-ui, sans-serif",
+      "fontSize": "12px",
+      "label": "Average uptime: 99.91% · 90 days",
+      "link": {
+        "bottom": 686.859375,
+        "height": 44,
+        "left": 208.1875,
+        "right": 405.5625,
+        "top": 642.859375,
+        "width": 197.375,
+        "x": 208.1875,
+        "y": 642.859375
+      },
+      "loading": "false",
+      "overflow": false,
+      "text": "Your local time 10:41 PMAverage uptime99.91% · 90 days",
+      "width": 1024
+    }
+  ],
+  "keyboard": {
+    "href": "https://status.velaarturo.com/",
+    "outlineWidth": "3px"
+  },
+  "loadingLayoutShift": 0,
+  "contrast": {
+    "light": 5.58,
+    "dark": 9.5
+  },
+  "fixtureStates": [
+    "loading",
+    "error",
+    "empty",
+    "stale"
+  ],
+  "source": "Real Worker /api/uptime except explicitly named local fixture states"
+}

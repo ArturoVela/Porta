@@ -1,0 +1,14 @@
+{
+  "src/lib/work.ts": "9d06a3f93255f35d2af0fbdef50bebc29d0a8fcef7bca8495acd6272fd40dc8b",
+  "src/pages/WorkPage.tsx": "32933a53fc31e5ca3932d396305385ffa7adba38fa6cb71cccb2231c29108589",
+  "src/pages/WorkIndexPage.tsx": "6fc4424398a1355eef4c2961b557656fdaaa069c20ff4d7ef98d7d17cf6c3200",
+  "src/pages/work.css": "4fa8727a69a86c979db36f9f653b68e2f9da76e6b46571b66fdcc777576284b7",
+  "src/components/WorkImage.tsx": "8cad88bed9110582e90a242f7cbb3486f598b7f7272f1fa42f176dcafe35a1f4",
+  "src/components/SiteShell.tsx": "68b0b4e67e12712d5859eb659afad5696627a718d48e05a9af033c6041a4a07f",
+  "src/components/SiteFooter.tsx": "e6c23c97d3d570918e162116ec2208d702a4d5b385bf20f9c118e1772e9bf51d",
+  "src/App.tsx": "d281b76eb58b59f2cf47658e09c5ae07b41d0b53b3bf2954547bcadfe0b622c4",
+  "src/lib/contact.ts": "3264eaff4dd338701366298c8dd4a2e9279d4caafabe85f7214b1d8ec8323b55",
+  "worker/index.ts": "eeb849323302939a498eb45faf6d39413365d629f9532fb60e0ddcfd40574392",
+  "tests/work.test.ts": "fe22370edc57f16160ab494f98409dad2b6b290b3ea610d14970946578776f4b",
+  "scripts/generate-dev-qr.swift": "b0fac81c54320ca7e5908ea1b7dd20bbc0f25cc8b78f9743e4e20b6698a31441"
+}

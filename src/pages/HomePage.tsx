@@ -1,9 +1,13 @@
 import { Box, Button, Container, Flex, Grid, Heading, HStack, SimpleGrid, Stack, Text } from "@chakra-ui/react";
 import { ArrowUpRight, Check } from "lucide-react";
+import { useInView } from "motion/react";
+import { useRef } from "react";
 import { ContentLink as Link } from "@/components/ContentLink";
 import { ProjectFeature } from "@/components/ContentCards";
 import { HomeProductCarousel } from "@/components/HomeProductCarousel";
+import { HomeSignals } from "@/components/HomeSignals";
 import { SectionHeading } from "@/components/SectionHeading";
+import { ScrollReveal } from "@/components/PortfolioMotion";
 import { useContent } from "@/content/context";
 import { selectHomeProducts, selectSpotlightProjects } from "@/lib/spotlight";
 
@@ -11,6 +15,8 @@ export function HomePage() {
   const { content, copy, locale } = useContent();
   const featured = selectSpotlightProjects(content.projects);
   const products = selectHomeProducts(content.projects, locale);
+  const processRef = useRef<HTMLDivElement>(null);
+  const processInView = useInView(processRef, { amount: 0.15 });
 
   return (
     <>
@@ -29,9 +35,12 @@ export function HomePage() {
                   <Link to="/proyectos">{copy.home.heroCases}</Link>
                 </Button>
               </Flex>
-              <HStack gap="3" align="start"><Box mt="2" w="2" h="2" borderRadius="full" bg="app.signal" flexShrink="0" /><Text color="app.muted" fontSize="sm" maxW="48ch">{content.site.availability}</Text></HStack>
+              <Stack gap="1" w="full">
+                <HStack gap="3" align="start"><Box mt="2" w="2" h="2" borderRadius="full" bg="app.signal" flexShrink="0" /><Text color="app.muted" fontSize="sm" maxW="48ch">{content.site.availability}</Text></HStack>
+                <HomeSignals />
+              </Stack>
             </Stack>
-            {products.length > 0 && <HomeProductCarousel products={products} />}
+            {products.length > 0 && <ScrollReveal delay={0.06}><HomeProductCarousel products={products} /></ScrollReveal>}
           </Grid>
         </Container>
       </Box>
@@ -47,18 +56,19 @@ export function HomePage() {
         </Container>
       </Box>
 
-      <Box as="section" bg="brand.600" color="white" py={{ base: "14", md: "20" }} id="enfoque">
-        <Container maxW="7xl">
+      <Box as="section" ref={processRef} className="home-process" data-scan-visible={processInView} bg="brand.600" color="white" py={{ base: "14", md: "20" }} id="enfoque">
+        <Box className="process-scan" aria-hidden="true" />
+        <Container maxW="7xl" position="relative" zIndex="1">
           <Grid templateColumns={{ base: "1fr", lg: ".7fr 1.3fr" }} gap={{ base: "7", lg: "16" }} mb={{ base: "9", md: "12" }} alignItems="end">
             <Text fontWeight="750" color="brand.100">{copy.home.processLabel}</Text>
-            <Stack gap="4"><Heading as="h2" fontSize={{ base: "4xl", md: "6xl" }} letterSpacing="-.055em" lineHeight=".94">{copy.home.processTitle}</Heading><Text color="brand.100" fontSize={{ md: "lg" }} maxW="54ch">{copy.home.processDescription}</Text></Stack>
+            <Stack asChild gap="4"><ScrollReveal><Heading as="h2" fontSize={{ base: "4xl", md: "6xl" }} letterSpacing="-.055em" lineHeight=".94">{copy.home.processTitle}</Heading><Text color="brand.100" fontSize={{ md: "lg" }} maxW="54ch">{copy.home.processDescription}</Text></ScrollReveal></Stack>
           </Grid>
-          <SimpleGrid columns={{ base: 1, md: 3 }} borderTopWidth="1px" borderLeftWidth="1px" borderColor="whiteAlpha.400">
+          <SimpleGrid columns={{ base: 1, md: 3 }} bg="brand.600" borderTopWidth="1px" borderLeftWidth="1px" borderColor="whiteAlpha.400">
             {copy.home.processSteps.map((step, index) => (
-              <Stack key={step.title} minH={{ md: "15rem" }} justify="space-between" gap="8" p={{ base: "6", md: "7" }} borderRightWidth="1px" borderBottomWidth="1px" borderColor="whiteAlpha.400">
+              <Stack asChild key={step.title} minH={{ md: "15rem" }} justify="space-between" gap="8" p={{ base: "6", md: "7" }} borderRightWidth="1px" borderBottomWidth="1px" borderColor="whiteAlpha.400"><ScrollReveal delay={index * 0.05}>
                 <Text color="brand.100" fontSize="lg">0{index + 1}</Text>
                 <Stack gap="2"><Heading as="h3" fontSize={{ base: "2xl", md: "3xl" }} letterSpacing="-.035em">{step.title}</Heading><Text color="brand.100">{step.description}</Text></Stack>
-              </Stack>
+              </ScrollReveal></Stack>
             ))}
           </SimpleGrid>
         </Container>
@@ -72,11 +82,11 @@ export function HomePage() {
           </Grid>
           <Stack gap="0">
             {content.services.map((service, index) => (
-              <Grid key={service.id} templateColumns={{ base: "3rem 1fr", md: "3rem .7fr 1.3fr" }} gap={{ base: "4", md: "6" }} py={{ base: "6", md: "7" }} borderTopWidth="1px" borderColor="app.border">
+              <Grid asChild key={service.id} templateColumns={{ base: "3rem 1fr", md: "3rem .7fr 1.3fr" }} gap={{ base: "4", md: "6" }} py={{ base: "6", md: "7" }} borderTopWidth="1px" borderColor="app.border"><ScrollReveal>
                 <Text color="app.muted">0{index + 1}</Text>
                 <Heading as="h3" fontSize={{ base: "2xl", md: "3xl" }} letterSpacing="-.03em">{service.title}</Heading>
                 <Stack gap="4" gridColumn={{ base: "2", md: "auto" }}><Text color="app.muted">{service.description}</Text><Flex wrap="wrap" gap="3">{service.capabilities.map((item) => <HStack key={item} gap="2" fontSize="sm"><Check size={14} color="var(--chakra-colors-app-accent)" /><Text>{item}</Text></HStack>)}</Flex></Stack>
-              </Grid>
+              </ScrollReveal></Grid>
             ))}
           </Stack>
         </Container>
@@ -84,10 +94,10 @@ export function HomePage() {
 
       <Box as="section" bg="app.signal" color="#160B08">
         <Container maxW="7xl" py={{ base: "12", md: "18" }}>
-          <Grid templateColumns={{ base: "1fr", md: "1.4fr .6fr" }} gap="10" alignItems="end">
+          <Grid asChild templateColumns={{ base: "1fr", md: "1.4fr .6fr" }} gap="10" alignItems="end"><ScrollReveal>
             <Stack gap="4"><Text fontWeight="750">{copy.home.ctaLabel}</Text><Heading as="h2" fontSize={{ base: "4xl", md: "7xl", lg: "8xl" }} letterSpacing="-.07em" lineHeight=".86" maxW="12ch">{copy.home.ctaTitle}</Heading></Stack>
             <Stack gap="6" align={{ base: "start", md: "end" }}><Text maxW="36ch" textAlign={{ md: "right" }}>{copy.home.ctaDescription}</Text><Button asChild minH="11" size="lg" bg="#160B08" color="white" borderRadius="0" px="7"><Link to="/contacto">{copy.home.ctaButton} <ArrowUpRight size={18} /></Link></Button></Stack>
-          </Grid>
+          </ScrollReveal></Grid>
         </Container>
       </Box>
     </>

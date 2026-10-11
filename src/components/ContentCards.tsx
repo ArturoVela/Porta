@@ -1,17 +1,21 @@
 import { AspectRatio, Box, Flex, Grid, Heading, HStack, Stack, Text } from "@chakra-ui/react";
-import type { CSSProperties } from "react";
+import { useRef, type CSSProperties } from "react";
+import { useInView } from "motion/react";
 import { ArrowUpRight } from "lucide-react";
 import { ContentLink as Link } from "@/components/ContentLink";
 import type { ArticleContent, ProjectContent } from "@/types/content";
 import { ResponsiveImage } from "@/components/ResponsiveImage";
+import { ProjectPreview } from "@/components/ProjectPreview";
+import { ScrollReveal } from "@/components/PortfolioMotion";
 import { useContent } from "@/content/context";
 import { projectAvailabilityLabel } from "@/lib/projectAvailability";
 import { projectDisplayCover } from "@/lib/spotlight";
+import { WALLET_PROJECTS } from "@/lib/linktree";
 
-const visualCopy: Record<string, string[]> = {
-  hub: ["39 utilidades", "Local-first", "Carga modular"],
-  "un-ramito": ["Diseña", "Cifra", "Comparte"],
-  "security-lab": ["V1", "V2", "V3", "V4"],
+const visualCopy: Record<string, { es: string[]; en: string[] }> = {
+  hub: { es: ["39 utilidades", "Local-first", "Carga modular"], en: ["39 tools", "Local-first", "Modular loading"] },
+  "un-ramito": { es: ["Diseña", "Cifra", "Comparte"], en: ["Design", "Encrypt", "Share"] },
+  "security-lab": { es: ["V1", "V2", "V3", "V4"], en: ["V1", "V2", "V3", "V4"] },
 };
 
 const posterPalettes = [
@@ -43,46 +47,50 @@ function posterPalette(slug: string) {
 }
 
 function AbstractProjectVisual({ project, compact = false }: { project: ProjectContent; compact?: boolean }) {
-  const labels = visualCopy[project.slug] ?? project.stack.slice(0, 3);
+  const { locale } = useContent();
+  const ref = useRef<HTMLDivElement>(null);
+  const visible = useInView(ref);
+  const labels = visualCopy[project.slug]?.[locale] ?? (project.stack.length ? project.stack.slice(0, 3) : [project.category]);
   const monogram = project.title.split(/\s+/).map((word) => word[0]).join("").slice(0, 2);
   const palette = posterPalette(project.slug);
   const posterStyle = {
     "--poster-background": palette.background,
     "--poster-foreground": palette.foreground,
+    alignItems: "stretch", justifyContent: "space-between",
   } as CSSProperties;
   return (
-    <Flex className="project-poster" style={posterStyle} h="100%" minH={compact ? "0" : { base: "20rem", md: "27rem" }} p={compact ? "5" : { base: "6", md: "8" }} direction="column" justify="space-between" position="relative" overflow="hidden">
-      <HStack justify="space-between" position="relative" zIndex="1"><Text fontWeight="750">{project.type}</Text><Text opacity=".7">{project.year}</Text></HStack>
-      <Text className="project-poster__monogram" data-compact={compact || undefined} aria-hidden="true">{monogram}</Text>
+    <Flex ref={ref} className="project-poster" data-in-view={visible || undefined} style={posterStyle} h="100%" minH={compact ? "0" : { base: "20rem", md: "27rem" }} p={compact ? "5" : { base: "6", md: "8" }} direction="column" position="relative" overflow="hidden">
+      <Box className="project-poster__art" aria-hidden="true"><Text className="project-poster__monogram" data-compact={compact || undefined}>{monogram}</Text></Box>
+      <Flex className="project-poster__meta" justify="space-between" gap="2" wrap="wrap" position="relative" zIndex="1"><Text fontWeight="750">{project.type}</Text><Text>{project.year}</Text></Flex>
       <Stack gap="2" align="start" position="relative" zIndex="1">
-        {labels.map((label, index) => <Text key={label} display={compact && index > 1 ? "none" : "block"} borderWidth="1px" borderColor="currentColor" bg={index === 1 ? "currentColor" : "transparent"} color={index === 1 ? "var(--poster-background)" : "currentColor"} px="3" py="1" fontSize={compact ? "sm" : "md"} fontWeight="650">{label}</Text>)}
+        {labels.map((label, index) => <Text key={label} display={compact && index > 1 ? "none" : "block"} borderWidth="1px" borderColor="var(--poster-foreground)" bg={index === 1 ? "var(--poster-foreground)" : "var(--poster-background)"} color={index === 1 ? "var(--poster-background)" : "var(--poster-foreground)"} px="3" py="1" fontSize={compact ? "sm" : "md"} fontWeight="650">{label}</Text>)}
       </Stack>
     </Flex>
   );
 }
 
-export function ProjectVisual({ project, compact = false }: { project: ProjectContent; compact?: boolean }) {
+export function ProjectVisual({ project, compact = false, hero = false }: { project: ProjectContent; compact?: boolean; hero?: boolean }) {
   const { locale } = useContent();
   const cover = projectDisplayCover(project, locale);
-  if (!cover) {
-    return compact
-      ? <AspectRatio className="project-card__visual" ratio={16 / 10} overflow="hidden"><AbstractProjectVisual project={project} compact /></AspectRatio>
-      : <AbstractProjectVisual project={project} />;
-  }
-  return (
-    <AspectRatio className={compact ? "project-card__visual" : undefined} ratio={cover.width / cover.height} overflow="hidden" borderRadius="0" bg="app.surface">
-      <ResponsiveImage image={cover} />
+  const brand = cover?.src.startsWith("/assets/images/pases-webs/") ? WALLET_PROJECTS.find((app) => app.caseSlug === project.slug) : undefined;
+  const visual = !cover ? (compact
+      ? <AspectRatio className="project-card__visual" data-project-image={project.slug} data-project-art="poster:compact" ratio={16 / 10} overflow="hidden"><AbstractProjectVisual project={project} compact /></AspectRatio>
+      : <Box data-project-image={project.slug} data-project-art="poster:full" data-project-hero={hero || undefined} h="100%"><AbstractProjectVisual project={project} /></Box>
+  ) : (
+    <AspectRatio className={compact ? "project-card__visual" : undefined} data-project-image={project.slug} data-project-art={cover.src} data-project-hero={hero || undefined} data-brand={brand ? "true" : undefined} ratio={compact ? 16 / 10 : cover.width / cover.height} overflow="hidden" borderRadius="0" bg={brand?.color ?? "app.surface"}>
+      <ResponsiveImage image={cover} loading={hero ? "eager" : "lazy"} />
     </AspectRatio>
   );
+  return <ProjectPreview project={project} imageSrc={cover?.src} to={hero ? undefined : `/proyectos/${project.slug}`}>{visual}</ProjectPreview>;
 }
 
-export function ProjectArchiveCard({ project }: { project: ProjectContent }) {
+export function ProjectArchiveCard({ project, collection = "all" }: { project: ProjectContent; collection?: string }) {
   const { copy, locale } = useContent();
   return (
-    <Link to={`/proyectos/${project.slug}`} className="project-card">
-      <Stack h="100%" gap="0">
+    <Box className="project-card" data-project-card={`archive:${collection}`}>
+      <Stack asChild h="100%" gap="0"><ScrollReveal>
         <ProjectVisual project={project} compact />
-        <Stack className="project-card__body" flex="1" borderWidth="1px" borderTopWidth="0" borderColor="app.border" p={{ base: "5", md: "6" }} gap="4">
+        <Stack asChild className="project-card__body" flex="1" borderWidth="1px" borderTopWidth="0" borderColor="app.border" p={{ base: "5", md: "6" }} gap="4"><Link to={`/proyectos/${project.slug}`}>
           <Flex justify="space-between" gap="4" color="app.muted" fontSize="sm"><Text>{project.year}</Text><Text textAlign="right">{projectAvailabilityLabel(project, locale)}</Text></Flex>
           <Stack gap="2">
             <Text color="app.accent" fontWeight="700" fontSize="sm">{project.category}</Text>
@@ -90,9 +98,9 @@ export function ProjectArchiveCard({ project }: { project: ProjectContent }) {
           </Stack>
           <Text color="app.muted">{project.excerpt}</Text>
           <HStack className="project-card__action" minH="11" mt="auto" pt="3" justify="space-between" fontWeight="750"><Text>{copy.cards.viewCase}</Text><ArrowUpRight size={17} /></HStack>
-        </Stack>
-      </Stack>
-    </Link>
+        </Link></Stack>
+      </ScrollReveal></Stack>
+    </Box>
   );
 }
 
@@ -100,7 +108,7 @@ export function ProjectFeature({ project, reverse = false, index = 0 }: { projec
   const { copy, locale } = useContent();
   const evidence = project.outcomes.find((outcome) => /\d|dos empresas|two companies/i.test(outcome)) ?? project.outcomes[0];
   return (
-    <Box className="project-feature" borderTopWidth="1px" borderColor="app.border" py={{ base: "9", md: "14" }}>
+    <Box asChild className="project-feature" data-project-card="feature" borderTopWidth="1px" borderColor="app.border" py={{ base: "9", md: "14" }}><ScrollReveal>
       <Grid templateColumns={{ base: "1fr", lg: reverse ? ".72fr 1.28fr" : "1.28fr .72fr" }} gap={{ base: "7", lg: "12" }} alignItems="stretch">
         <Box gridColumn={{ lg: reverse ? "2" : "1" }} gridRow={{ lg: "1" }}><ProjectVisual project={project} /></Box>
         <Stack gridColumn={{ lg: reverse ? "1" : "2" }} gridRow={{ lg: "1" }} justify="space-between" align="start" gap="8" py={{ lg: "2" }}>
@@ -120,7 +128,7 @@ export function ProjectFeature({ project, reverse = false, index = 0 }: { projec
           </Link>
         </Stack>
       </Grid>
-    </Box>
+    </ScrollReveal></Box>
   );
 }
 
@@ -128,12 +136,12 @@ export function ArticleCard({ article, index = 0 }: { article: ArticleContent; i
   const { locale, copy } = useContent();
   return (
     <Link to={`/articulos/${article.slug}`}>
-      <Stack className="article-card" h="100%" borderTopWidth="1px" borderColor="app.text" pt="5" pb="3" gap="4" transition="transform .18s ease, border-color .18s ease" _hover={{ transform: "translateY(-4px)", borderColor: "app.accent" }}>
+      <ScrollReveal style={{ height: "100%" }}><Stack className="article-card" h="100%" borderTopWidth="1px" borderColor="app.text" pt="5" pb="3" gap="4">
         <HStack justify="space-between" color="app.muted" fontSize="sm"><Text>0{index + 1} · {article.category}</Text><Text>{new Intl.DateTimeFormat(locale === "en" ? "en-US" : "es-PE", { year: "numeric", month: "short", day: "numeric", timeZone: "America/Lima" }).format(new Date(`${article.publishedAt}T12:00:00-05:00`))}</Text></HStack>
         <Heading as="h3" fontSize={{ base: "xl", md: "2xl" }} letterSpacing="-.025em" lineHeight="1.15">{article.title}</Heading>
         <Text color="app.muted">{article.excerpt}</Text>
         <HStack mt="auto" pt="5" minH="11" fontWeight="650" justify="space-between"><Text>{article.readingMinutes} {copy.articles.reading}</Text><Flex className="article-card__arrow" w="9" h="9" align="center" justify="center" bg="app.accent-subtle"><ArrowUpRight size={16} /></Flex></HStack>
-      </Stack>
+      </Stack></ScrollReveal>
     </Link>
   );
 }
