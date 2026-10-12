@@ -21,12 +21,12 @@ function renderWallet(path: string) {
 
 describe("tarjetero de proyectos", () => {
   it("separa herramientas y proyectos, conservando las otras listas y sus pases", () => {
-    expect(WALLET_PROJECTS).toHaveLength(28);
-    expect(new Set(WALLET_PROJECTS.map((project) => project.id)).size).toBe(28);
-    expect(WALLET_COLLECTIONS.map((group) => group.projects.length)).toEqual([15, 3, 5, 1, 6]);
+    expect(WALLET_PROJECTS).toHaveLength(30);
+    expect(new Set(WALLET_PROJECTS.map((project) => project.id)).size).toBe(30);
+    expect(WALLET_COLLECTIONS.map((group) => group.projects.length)).toEqual([15, 3, 7, 1, 6]);
     expect(WALLET_COLLECTIONS[0]).toMatchObject({ id: "herramientas", name: "Herramientas" });
     expect(WALLET_COLLECTIONS[1]).toEqual({ id: "proyectos", name: "Proyectos", nameEn: "Projects", projects: ["coffee", "explora", "un-ramito"] });
-    expect(WALLET_COLLECTIONS[2].projects).toEqual(["brain", "blog", "status", "hub", "cv"]);
+    expect(WALLET_COLLECTIONS[2].projects).toEqual(["brain", "dash", "store", "blog", "status", "hub", "cv"]);
     expect(WALLET_COLLECTIONS[0].projects).toContain("hub");
     expect(WALLET_COLLECTIONS[0].projects).toContain("cv");
     for (const group of WALLET_COLLECTIONS) {
@@ -43,7 +43,7 @@ describe("tarjetero de proyectos", () => {
   });
 
   it("filtra nombre, dominio y función sin distinguir acentos", () => {
-    expect(walletCollections("  cotización  ").flatMap((group) => group.projects).map((project) => project.id)).toEqual(["cotiza"]);
+    expect(walletCollections("  cotización  ").flatMap((group) => group.projects).map((project) => project.id)).toEqual(["cotiza", "store"]);
     expect(walletCollections("bc.velaarturo.com", "saas")[0].projects[0].id).toBe("bc");
     expect(walletCollections("tarjetas.velaarturo.com", "saas")[0].projects[0]).toMatchObject({ id: "tarjetas", image: "/assets/images/pases-webs/https-::tarjetas.velaarturo.com:.png" });
     expect(walletCollections("fidelización", "saas")[0].projects.map((project) => project.id)).toEqual(["tarjetas"]);
@@ -72,7 +72,7 @@ describe("tarjetero de proyectos", () => {
       expect(html.match(/aria-expanded="true"/g)).toHaveLength(1);
       expect(html).toContain(`aria-expanded="true" aria-controls="detail-${group}-hub"`);
       expect(html.match(/aria-hidden="false"/g)).toHaveLength(1);
-      expect(html.match(/class="wallet-detail" inert=""/g)).toHaveLength(29);
+      expect(html.match(/class="wallet-detail" inert=""/g)).toHaveLength(31);
       expect(html).not.toContain("<dialog");
     }
   });
@@ -89,6 +89,16 @@ describe("tarjetero de proyectos", () => {
     expect(html).toContain('aria-expanded="true" aria-controls="detail-personal-blog"');
     expect(html).toContain('href="https://blog.velaarturo.com"');
     expect(html).toContain("Lectura en español e inglés");
+  });
+
+  it.each(["dash", "store", "blog"])("abre %s en Personal con el pase aportado y su acceso correcto", (id) => {
+    const project = WALLET_PROJECTS.find((item) => item.id === id)!;
+    const html = renderWallet(`/linktree?project=${id}&group=personal`);
+    expect(walletCollections(project.domain, "personal")[0].projects.map((item) => item.id)).toEqual([id]);
+    expect(html).toContain(`aria-expanded="true" aria-controls="detail-personal-${id}"`);
+    expect(html).toContain(`href="https://${project.domain}"`);
+    expect(project.image).toBe(`/assets/images/pases-webs/${id === "blog" ? "blog.velaarturo.com 2" : project.domain}.png`);
+    expect(project.private ?? false).toBe(id === "dash");
   });
 
   it("ofrece el footer del home con contacto y navegación fuera del contenido principal", () => {

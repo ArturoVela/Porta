@@ -41,7 +41,9 @@ export const WALLET_PROJECTS: WalletProject[] = [
   { id: "bc", name: "Vela Entradas", domain: "bc.velaarturo.com", image: pass("bc-750x288"), color: "#315745", description: "Encuentra eventos y entradas digitales; una plataforma para asistentes y organizadores.", features: ["Cartelera de eventos", "Entradas digitales", "Herramientas para organizadores"] },
   { id: "tarjetas", name: "Tarjetas Arturo", domain: "tarjetas.velaarturo.com", image: pass("https-::tarjetas.velaarturo.com:"), color: "#307b6e", description: "Crea tarjetas digitales de fidelización para tu negocio y convierte cada visita en una recompensa.", features: ["Tarjetas personalizadas de sellos, cashback y membresías", "Registro de visitas y recompensas con QR", "Clientes, sucursales, campañas y reportes"] },
   { id: "status", name: "Status", domain: "status.velaarturo.com", color: "#192640", description: "Consulta el estado, la disponibilidad y las incidencias de mis servicios con contexto de cada comprobación.", features: ["Estado de los servicios", "Historial de comprobaciones e incidencias", "Actualizaciones y feed de incidencias"] },
-  { id: "blog", name: "Blog", domain: "blog.velaarturo.com", image: "/assets/images/pases-webs/blog.webp", color: "#0b0e10", description: "Notas sobre investigación, producto, comunidades y las decisiones que aparecen mientras construyo.", features: ["Artículos sobre mis proyectos", "Búsqueda y categorías", "Lectura en español e inglés"] },
+  { id: "dash", name: "Dash", domain: "dash.velaarturo.com", image: pass("dash.velaarturo.com"), color: "#1f50f5", private: true, description: "Mi inventario privado de infraestructura Cloudflare: Workers, bases D1 y buckets R2 conectados en un solo lugar.", features: ["Inventario y relaciones entre Workers, D1 y R2", "Despliegues y versiones con tráfico", "Organización con grupos y etiquetas"] },
+  { id: "store", name: "Store / Vela", domain: "store.velaarturo.com", image: pass("store.velaarturo.com"), color: "#1f50f5", description: "Explora mis apps y recursos digitales, consulta sus funciones y solicita servicios web o servidores Discord a medida.", features: ["Directorio de apps y recursos digitales", "Catálogo en español e inglés", "Servicios web y Discord por cotización"] },
+  { id: "blog", name: "Blog", domain: "blog.velaarturo.com", image: pass("blog.velaarturo.com 2"), color: "#1f50f5", description: "Notas sobre investigación, producto, comunidades y las decisiones que aparecen mientras construyo.", features: ["Artículos sobre mis proyectos", "Búsqueda y categorías", "Lectura en español e inglés"] },
 ].map((project) => ({ ...project, caseSlug: project.caseSlug ?? project.id }));
 
 export const WALLET_COPY_EN: Record<string, { description: string; features: string[] }> = {
@@ -52,6 +54,8 @@ export const WALLET_COPY_EN: Record<string, { description: string; features: str
   cv: { description: "My professional background: experience, education and work across product and web engineering.", features: ["Professional experience", "Education and skills", "Contact information"] },
   status: { description: "Check service status, availability and incidents with context for each recorded check.", features: ["Current service status", "Checks and incident history", "Updates and incident feed"] },
   blog: { description: "Notes on research, product, communities and the decisions that come up while I build.", features: ["Articles about my projects", "Search and categories", "Reading in Spanish and English"] },
+  dash: { description: "My private Cloudflare infrastructure inventory: Workers, D1 databases and R2 buckets connected in one place.", features: ["Inventory and relationships across Workers, D1 and R2", "Deployments and versions receiving traffic", "Organization with groups and tags"] },
+  store: { description: "Explore my apps and digital resources, learn about their features and request custom websites or Discord servers.", features: ["Directory of apps and digital resources", "Catalog in Spanish and English", "Web and Discord services by quotation"] },
   finanzas: { description: "Organize accounts, transactions and goals for yourself and your household.", features: ["Income, expenses and transfers", "Budgets and goals", "Personal and shared spaces"] },
   ventas: { description: "Sales, purchasing, branch inventory and daily cash management for Peruvian businesses.", features: ["Sales and purchases connected to stock", "Cash management by branch", "Reports and transaction traceability"] },
   agua: { description: "AquaVigía. A water platform with data access reserved for authorized accounts.", features: ["Account-based access", "Data access according to permissions"] },
@@ -63,7 +67,7 @@ export const WALLET_COPY_EN: Record<string, { description: string; features: str
 export const WALLET_COLLECTIONS = [
   { id: "herramientas", name: "Herramientas", nameEn: "Tools", projects: ["torneo", "textos", "color", "cotiza", "cuando", "foto", "pdf", "qr", "horas", "llevamos", "ruleta", "formularios", "divide", "hub", "cv"] },
   { id: "proyectos", name: "Proyectos", nameEn: "Projects", projects: ["coffee", "explora", "un-ramito"] },
-  { id: "personal", name: "Personal", nameEn: "Personal", projects: ["brain", "blog", "status", "hub", "cv"] },
+  { id: "personal", name: "Personal", nameEn: "Personal", projects: ["brain", "dash", "store", "blog", "status", "hub", "cv"] },
   { id: "principal", name: "Principal", nameEn: "Main", projects: ["principal"] },
   { id: "saas", name: "SaaS", nameEn: "SaaS", projects: ["finanzas", "ventas", "agua", "agro", "bc", "tarjetas"] },
 ];

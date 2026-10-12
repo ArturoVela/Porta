@@ -52,9 +52,9 @@ describe("catálogo compartido de proyectos", () => {
     const envelope = withProjectCatalog(source, locale);
     const projects = envelope.data.projects;
     expect(isPortfolioEnvelope(envelope)).toBe(true);
-    expect(projects).toHaveLength(41);
-    expect(new Set(projects.map((project) => project.slug)).size).toBe(41);
-    expect(new Set(projects.map((project) => project.order)).size).toBe(41);
+    expect(projects).toHaveLength(43);
+    expect(new Set(projects.map((project) => project.slug)).size).toBe(43);
+    expect(new Set(projects.map((project) => project.order)).size).toBe(43);
     for (const app of WALLET_PROJECTS) {
       expect(projects.find((project) => project.slug === app.caseSlug)?.liveUrl).toBe(`https://${app.domain}`);
     }
@@ -84,12 +84,12 @@ describe("catálogo compartido de proyectos", () => {
       );
     }
     expect(groups.find((group) => group.id === "otros")?.projects.map((project) => project.slug)).toContain("nieto-import");
-    expect(new Set(groups.flatMap((group) => group.projects.map((project) => project.id))).size).toBe(41);
+    expect(new Set(groups.flatMap((group) => group.projects.map((project) => project.id))).size).toBe(43);
   });
 
   it("mantiene acceso restringido y metadatos válidos para fichas nuevas", () => {
     const { data } = withProjectCatalog(FALLBACK_ENVELOPE_EN, "en");
-    for (const slug of ["agua", "agro", "second-brain"]) {
+    for (const slug of ["agua", "agro", "second-brain", "dash"]) {
       expect(projectAvailabilityLabel(data.projects.find((project) => project.slug === slug)!, "en")).toBe("Restricted access");
     }
     expect(metaForPath("/en/projects/status", data, "https://velaarturo.com")).toMatchObject({ status: 200, noindex: false });
