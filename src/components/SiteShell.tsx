@@ -8,13 +8,12 @@ import {
   Stack,
   Text,
 } from "@chakra-ui/react";
-import { ArrowUpRight, Menu, Moon, Sun, X } from "lucide-react";
-import { AnimatePresence, motion, useIsPresent, usePresenceData, useReducedMotion } from "motion/react";
+import { ArrowUpRight, Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import { Link as RouterLink, useLocation } from "react-router";
 import { ContentLink as Link } from "@/components/ContentLink";
-import { MOTION_EASE_OUT } from "@/components/PortfolioMotion";
+import { portfolioNavigation, SiteNavigation } from "@/components/SiteNavigation";
 import { SiteFooter } from "@/components/SiteFooter";
 import { useContent } from "@/content/context";
 import { CV_URL } from "@/lib/links";
@@ -48,14 +47,7 @@ export function ThemeToggle({ copy }: { copy: LocaleCopy }) {
 function NavigationLinks({ onNavigate }: { onNavigate?: () => void }) {
   const location = useLocation();
   const { copy, locale } = useContent();
-  const navigation = [
-    { label: copy.nav.projects, to: "/proyectos" },
-    { label: copy.nav.profile, to: "/perfil" },
-    { label: "Dev", to: "/dev" },
-    { label: copy.nav.articles, to: "/articulos" },
-    { label: copy.nav.linktree, to: "/linktree" },
-    { label: "Store", to: `https://store.velaarturo.com/${locale}/` },
-  ];
+  const navigation = portfolioNavigation(copy, locale);
   const pathname = location.pathname === "/__preview" ? new URLSearchParams(location.search).get("path") ?? "/" : location.pathname;
   return <>
     {navigation.map((item) => {
@@ -111,57 +103,12 @@ function LanguageSwitch() {
   );
 }
 
-function MobileNavigation({ onNavigate }: { onNavigate: () => void }) {
-  const { copy } = useContent();
-  const present = useIsPresent();
-  const instant = usePresenceData();
-  const closed = { opacity: 0, transform: instant ? "none" : "translateY(-6px)" };
-  return (
-    <Stack asChild className="mobile-navigation" display={{ lg: "none" }} position="absolute" top="100%" right={{ base: "5", md: "8" }} w="calc(100% - 2.5rem)" maxW="20rem" maxH="calc(100dvh - 5.5rem)" overflowY="auto" p="2" gap="0" bg="app.panel" borderWidth="1px" borderColor="app.border">
-      <motion.nav id="mobile-navigation" aria-label={copy.footer.explore} inert={!present}
-        initial={closed} animate={{ opacity: 1, transform: "none" }} exit={closed}
-        transition={{ duration: instant ? 0 : 0.18, ease: MOTION_EASE_OUT }}>
-        <NavigationLinks onNavigate={onNavigate} />
-        <Button asChild display={{ base: "inline-flex", sm: "none" }} mt="2" h="11" minH="11" w="full" bg="app.signal" color="#18221B" borderRadius="0">
-          <Link to="/contacto" onClick={onNavigate}>{copy.common.talk} <ArrowUpRight size={17} /></Link>
-        </Button>
-      </motion.nav>
-    </Stack>
-  );
-}
-
 export function SiteShell({ children }: { children: ReactNode }) {
   const { content, copy } = useContent();
   const location = useLocation();
-  const [open, setOpen] = useState(false);
-  const [menuInstant, setMenuInstant] = useState(false);
-  const reduced = useReducedMotion();
-  const headerRef = useRef<HTMLDivElement>(null);
-  const menuButtonRef = useRef<HTMLButtonElement>(null);
-
   useEffect(() => {
     if (!location.hash) window.scrollTo({ top: 0, behavior: "instant" });
-    setOpen(false);
   }, [location.pathname, location.search]);
-
-  useEffect(() => {
-    if (!open) return;
-    const onPointerDown = (event: PointerEvent) => {
-      if (!headerRef.current?.contains(event.target as Node)) setOpen(false);
-    };
-    const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        setOpen(false);
-        menuButtonRef.current?.focus();
-      }
-    };
-    document.addEventListener("pointerdown", onPointerDown);
-    document.addEventListener("keydown", onKeyDown);
-    return () => {
-      document.removeEventListener("pointerdown", onPointerDown);
-      document.removeEventListener("keydown", onKeyDown);
-    };
-  }, [open]);
 
   return (
     <Flex minH="100vh" direction="column">
@@ -182,8 +129,9 @@ export function SiteShell({ children }: { children: ReactNode }) {
         <a href="#contenido">{copy.common.skip}</a>
       </Box>
       <Box as="header" className="site-header" position="sticky" top="0" zIndex="sticky" bg="app.canvas/94" backdropFilter="blur(18px)" borderBottomWidth="1px" borderColor="app.border">
-        <Container ref={headerRef} position="relative" maxW="7xl" px={{ base: "5", md: "8" }}>
+        <Container position="relative" maxW="7xl" px={{ base: "5", md: "8" }}>
           <Flex className="site-header-bar" minH="20" align="center" justify="space-between" gap={{ base: "2", md: "4" }} py="2">
+            <SiteNavigation />
             <Link to="/" aria-label={content.site.name} className="site-header-brand">
               <HStack gap="3">
                 <Flex className="brand-mark" w="10" h="10" flexShrink="0" bg="app.text" color="app.canvas" align="center" justify="center" fontWeight="850">A/</Flex>
@@ -202,29 +150,8 @@ export function SiteShell({ children }: { children: ReactNode }) {
               <Button asChild display={{ base: "none", sm: "inline-flex" }} h="11" minH="11" bg="app.signal" color="#18221B" borderRadius="0" px="5">
                 <Link to="/contacto">{copy.common.talk} <ArrowUpRight size={17} /></Link>
               </Button>
-              <IconButton
-                ref={menuButtonRef}
-                display={{ base: "inline-flex", lg: "none" }}
-                aria-label={open ? copy.menu.close : copy.menu.open}
-                aria-expanded={open}
-                aria-controls="mobile-navigation"
-                variant="plain"
-                bg="transparent"
-                borderRadius="0"
-                w="11"
-                h="11"
-                minW="11"
-                minH="11"
-                flexShrink="0"
-                onClick={(event) => { setMenuInstant(event.detail === 0); setOpen((value) => !value); }}
-              >
-                {open ? <X size={19} /> : <Menu size={19} />}
-              </IconButton>
             </HStack>
           </Flex>
-          <AnimatePresence initial={false} custom={menuInstant || reduced}>
-            {open && <MobileNavigation key="navigation" onNavigate={() => setOpen(false)} />}
-          </AnimatePresence>
         </Container>
       </Box>
       <Box as="main" id="contenido" flex="1">{children}</Box>

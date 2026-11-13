@@ -35,7 +35,8 @@ La escala completa `brand.50–950` está en `src/theme.ts`; `brand.600` es el v
 
 ## Componentes
 
-- **Cabecera:** barra plana, borde inferior y navegación accesible. Conservar selector de idioma, tema, contacto y menú móvil. Identidad `A/` en bloque de alto contraste.
+- **Cabecera:** barra plana, borde inferior y navegación accesible. Conservar selector de idioma, tema y contacto. Identidad `A/` en bloque de alto contraste.
+- **Navegación lateral:** el botón de menú abre un panel desde la izquierda en escritorio y móvil. Cabecera con identidad, enlaces propios con icono y página activa, selector de apariencia y pie contextual. Respetar el color de cada aplicación; mantener foco dentro del panel y devolverlo al cerrar con Escape. No añadir cuenta ni acciones que la aplicación no tenga.
 - **Botones:** rectangulares, altura mínima 44 px. Acción principal con fondo `app.text`/texto `app.canvas` o `app.signal`/texto oscuro; secundaria con borde y fondo transparente. Etiquetas describen la acción.
 - **Enlaces y filas:** usar texto y separadores; indicar foco con un contorno visible. Mantener áreas táctiles de al menos 44 px.
 - **Proyectos:** mostrar las capturas reales, información y enlaces existentes. Usar composición editorial y alternancia, no una cuadrícula repetitiva de iconos.

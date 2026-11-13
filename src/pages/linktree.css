@@ -25,12 +25,14 @@ html:has(.wallet-page) { scroll-behavior: auto; }
 .wallet-skip { position: fixed; top: 12px; left: 12px; z-index: 10; padding: 10px 16px; background: var(--wallet-text); color: var(--wallet-canvas); transform: translateY(-180%); }
 .wallet-skip:focus { transform: translateY(0); }
 .wallet-header { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.wallet-header .site-drawer-trigger { color: var(--wallet-text); background: var(--wallet-surface); }
 .wallet-profile { display: flex; align-items: center; gap: 12px; min-height: 44px; }
 .wallet-avatar { display: block; width: 48px; height: 48px; flex-shrink: 0; object-fit: cover; object-position: 50% 25%; border: 1px solid var(--wallet-line); border-radius: 50%; }
 .wallet-profile strong { display: block; font-size: 15px; font-weight: 750; }
 .wallet-profile small { display: block; color: var(--wallet-muted); font-size: 12px; margin-top: 1px; }
 .wallet-icon-button { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; flex-shrink: 0; border: 0; border-radius: 50%; background: var(--wallet-surface); color: var(--wallet-text); transition: transform 140ms ease-out, background-color 140ms ease; }
 .wallet-icon-button:active { transform: scale(.95); }
+@media (max-width: 359px) { .wallet-header { gap: 8px; } .wallet-profile small { display: none; } }
 .wallet-intro { margin: 34px 0 24px; }
 .wallet-intro > div { display: flex; justify-content: space-between; align-items: center; gap: 16px; }
 .wallet-intro h1 { margin: 0; font-size: clamp(30px, 8vw, 36px); font-weight: 800; letter-spacing: -.035em; line-height: 1.15; }

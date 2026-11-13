@@ -36,6 +36,7 @@ describe("tarjetas laborales", () => {
     expect(html).toContain(company.portrait.src);
     expect(html).toContain("Guardar contacto");
     expect(html).toContain("Compartir tarjeta");
+    expect(html).toContain("Abrir navegación");
     expect(html).toContain("<summary>Mostrar QR</summary>");
     const smallPortrait = company.portrait.srcSet.split(",")[0].trim().split(" ")[0];
     for (const asset of [company.logo, company.darkLogo, company.portrait.src, smallPortrait, `/assets/images/portfolio/work-qr-${id}.png`]) {
@@ -115,7 +116,6 @@ describe("tarjetas laborales", () => {
     const html = renderToStaticMarkup(createElement(MemoryRouter, { initialEntries: [path] },
       createElement(ChakraProvider, { value: system, children: createElement(App) })));
     expect(html).not.toContain('class="site-footer"');
-    expect(html).not.toContain("Abrir navegación");
     expect(html).not.toContain("portfolio_locale");
   });
 

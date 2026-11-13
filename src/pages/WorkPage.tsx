@@ -3,6 +3,7 @@ import { ArrowLeft, ArrowUpRight, ChevronDown, Download, Mail, Megaphone, Monito
 import { useTheme } from "next-themes";
 import { ContentLink } from "@/components/ContentLink";
 import { ThemeToggle } from "@/components/SiteShell";
+import { SiteNavigation } from "@/components/SiteNavigation";
 import { WorkImage } from "@/components/WorkImage";
 import { useContent } from "@/content/context";
 import { contactVCard, shareDevCard } from "@/lib/contact";
@@ -48,6 +49,7 @@ export function WorkPage({ companyId }: { companyId: WorkCompanyId }) {
   return <div className="dev-page work-page" data-company={companyId} style={{ "--work-accent": company.accent, "--work-accent-text": company.accentText ?? "#080B12" } as CSSProperties}>
     <a className="work-skip" href="#contenido">Saltar al contenido</a>
     <header className="work-header">
+      <SiteNavigation />
       {company.website ? <a className="work-logo" href={company.website} target="_blank" rel="noopener noreferrer" aria-label={`Visitar web de ${company.name}`}>
         <WorkImage key={logo} src={logo} alt={company.name} width={240} height={72} />
       </a> : <div className="work-logo"><WorkImage key={logo} src={logo} alt={company.name} width={240} height={72} /></div>}

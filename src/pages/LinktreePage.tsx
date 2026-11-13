@@ -5,6 +5,7 @@ import { lazy, Suspense, useEffect, useRef, useState, type CSSProperties, type T
 import { useSearchParams } from "react-router";
 import { ContentLink } from "@/components/ContentLink";
 import { SiteFooter } from "@/components/SiteFooter";
+import { SiteNavigation } from "@/components/SiteNavigation";
 import { useContent } from "@/content/context";
 import { WALLET_COLLECTIONS, WALLET_PROJECTS, walletCollections, type WalletProject } from "@/lib/linktree";
 import type { ProjectContent } from "@/types/content";
@@ -163,6 +164,7 @@ export function LinktreePage() {
       <a className="wallet-skip" href="#contenido">Saltar al contenido</a>
       <div className="wallet-container">
         <header className="wallet-header">
+          <SiteNavigation />
           <ContentLink to="/" className="wallet-profile" aria-label="Arturo Vela, ir al portafolio">
             <img className="wallet-avatar" src="/assets/images/Me/Fototech.jpg" alt="" width="48" height="48" decoding="async" />
             <span><strong>Arturo Vela</strong><small>Producto e ingeniería web</small></span>
