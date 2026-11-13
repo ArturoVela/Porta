@@ -1,7 +1,7 @@
 import { LayoutGroup, MotionConfig, motion, useReducedMotion } from "motion/react";
 import { ScrollReveal } from "@/components/PortfolioMotion";
 import { Activity, ArrowUpRight, Check, ChevronRight, Copy, Divide, LockKeyhole, Search, WalletCards } from "lucide-react";
-import { lazy, Suspense, useRef, useState, type CSSProperties, type TouchEvent } from "react";
+import { lazy, Suspense, useEffect, useRef, useState, type CSSProperties, type TouchEvent } from "react";
 import { useSearchParams } from "react-router";
 import { ContentLink } from "@/components/ContentLink";
 import { SiteFooter } from "@/components/SiteFooter";
@@ -20,15 +20,15 @@ function PassArt({ project }: { project: WalletProject }) {
   ) : (
     <div className="wallet-pass__custom" aria-hidden="true">
       <div><strong>{project.id === "divide" ? "divide." : project.name}</strong><span>{project.id === "divide" ? <>Buenos momentos.<br />Cuentas claras.</> : project.features[0]}</span><small>{project.domain}</small></div>
-      {project.id === "divide" ? <Divide size={54} strokeWidth={1.8} /> : <Activity size={54} strokeWidth={1.8} />}
+      {project.id === "divide" ? <Divide size={54} strokeWidth={1.8} /> : project.id === "sphere" ? <img className="wallet-pass__custom-icon" src="/assets/images/sphere-icon.svg" alt="" width="54" height="54" /> : <Activity size={54} strokeWidth={1.8} />}
     </div>
   );
 }
 
-// A broad card expansion gets the Apple-style spring from the Animate skill.
-const walletSpring = { type: "spring", duration: .5, bounce: .2 } as const;
+// A restrained spring keeps the stack responsive when its direction changes.
+const walletSpring = { type: "spring", duration: .4, bounce: 0 } as const;
 
-function WalletCard({ project, detail, cardKey, expanded, preview, last, instant, onToggle, onPreview }: {
+function WalletCard({ project, detail, cardKey, expanded, preview, last, instant, replacingOpen, onToggle, onPreview }: {
   project: WalletProject;
   detail?: ProjectContent;
   cardKey: string;
@@ -36,32 +36,79 @@ function WalletCard({ project, detail, cardKey, expanded, preview, last, instant
   preview: boolean;
   last: boolean;
   instant: boolean;
+  replacingOpen: boolean;
   onToggle: (keyboard: boolean) => void;
   onPreview: (key: string | null) => void;
 }) {
   const buttonRef = useRef<HTMLButtonElement>(null);
+  const revealAfterSwitch = useRef(false);
   const [feedback, setFeedback] = useState("");
-  const url = `https://${project.domain}`;
+  const url = project.href ?? `https://${project.domain}`;
+  const personalColor = cardKey.startsWith("personal-") ? project.personalColor : undefined;
+  const color = personalColor ?? project.color;
 
   async function copyLink() {
     try { await navigator.clipboard.writeText(url); setFeedback("Enlace copiado"); }
     catch { setFeedback("No se pudo copiar. Selecciona el enlace que aparece arriba."); }
   }
 
+  function keepSelectedCardVisible() {
+    const label = buttonRef.current?.querySelector(".wallet-pass__label")?.getBoundingClientRect();
+    const controlsBottom = Math.max(0, document.querySelector(".wallet-controls")?.getBoundingClientRect().bottom ?? 0);
+    if (!label) return;
+    const offset = label.top < controlsBottom + 12 ? label.top - controlsBottom - 12
+      : label.bottom > window.innerHeight - 12 ? label.bottom - window.innerHeight + 12 : 0;
+    if (offset) window.scrollBy({ top: offset, behavior: "instant" });
+  }
+
+  function finishSelection() {
+    if (!instant && expanded && revealAfterSwitch.current) {
+      keepSelectedCardVisible();
+      revealAfterSwitch.current = false;
+    }
+  }
+
+  useEffect(() => {
+    if (!expanded || !revealAfterSwitch.current) return;
+    let frame = 0;
+    const stopFollowing = () => {
+      revealAfterSwitch.current = false;
+      cancelAnimationFrame(frame);
+      window.removeEventListener("wheel", stopFollowing);
+      window.removeEventListener("touchmove", stopFollowing);
+      window.removeEventListener("pointerdown", stopFollowing);
+      window.removeEventListener("keydown", stopFollowing);
+    };
+    const follow = () => {
+      if (!revealAfterSwitch.current) { stopFollowing(); return; }
+      keepSelectedCardVisible();
+      if (instant) stopFollowing();
+      else frame = requestAnimationFrame(follow);
+    };
+    frame = requestAnimationFrame(() => {
+      window.addEventListener("keydown", stopFollowing);
+      frame = requestAnimationFrame(follow);
+    });
+    window.addEventListener("wheel", stopFollowing, { passive: true });
+    window.addEventListener("touchmove", stopFollowing, { passive: true });
+    window.addEventListener("pointerdown", stopFollowing, { passive: true });
+    return stopFollowing;
+  }, [expanded, instant]);
+
   return (
     <motion.li layout="position" className="wallet-slot" data-expanded={expanded || undefined} data-last={last || undefined} data-preview={preview || undefined} data-wallet-key={cardKey} onPointerEnter={(event) => {
       if (event.pointerType === "mouse" && matchMedia("(hover: hover) and (pointer: fine)").matches) onPreview(cardKey);
     }} onPointerLeave={(event) => { if (event.pointerType === "mouse") onPreview(null); }}>
-      <motion.div initial={false} animate={{ transform: preview && !expanded && !instant ? "translateY(-6px)" : "translateY(0px)" }}>
-      <motion.article layout className="wallet-pass" data-project-card={`wallet:${cardKey}`} style={{ "--pass-color": project.color, borderRadius: 17, boxShadow: "0 -3px 14px rgb(0 0 0 / 28%), inset 0 1px rgb(255 255 255 / 15%)" } as CSSProperties} onKeyDown={(event) => {
+      <motion.div initial={false} animate={{ transform: !instant && (preview || expanded) ? "translateY(-4px)" : "translateY(0px)" }}>
+      <motion.article layout="position" className="wallet-pass" data-project-card={`wallet:${cardKey}`} style={{ "--pass-color": color, borderRadius: 17, boxShadow: "0 -3px 14px rgb(0 0 0 / 28%), inset 0 1px rgb(255 255 255 / 15%)" } as CSSProperties} onKeyDown={(event) => {
         if (event.key === "Escape" && expanded) { event.preventDefault(); buttonRef.current?.focus(); onToggle(true); }
       }}>
-        <motion.button layout ref={buttonRef} className="wallet-pass__toggle" type="button" aria-label={`${expanded ? "Cerrar" : "Ver"} ${project.name}`} aria-expanded={expanded} aria-controls={`detail-${cardKey}`} onClick={(event) => { setFeedback(""); onToggle(event.detail === 0); }}>
-          <motion.span layout="position" className="wallet-pass__label"><span>{project.name}</span><ChevronRight size={18} strokeWidth={1.8} aria-hidden="true" /></motion.span>
-          <motion.div layout className="wallet-pass__cover" data-project-image={detail?.slug} data-project-art={project.image ?? "wallet-art"} style={{ "--pass-color": project.color, height: expanded || last ? "auto" : preview ? 24 : 16 } as CSSProperties}><motion.div layout="position"><PassArt project={project} /></motion.div></motion.div>
-        </motion.button>
-        <motion.div layout id={`detail-${cardKey}`} className="wallet-detail" style={{ height: expanded ? "auto" : 0 }} inert={!expanded} aria-hidden={!expanded}>
-          <motion.div layout="position" initial={false} animate={{ opacity: expanded ? 1 : 0 }} transition={{ opacity: { duration: instant ? 0 : .16 } }}>
+        <button ref={buttonRef} className="wallet-pass__toggle" type="button" aria-label={`${expanded ? "Cerrar" : "Ver"} ${project.name}`} aria-expanded={expanded} aria-controls={`detail-${cardKey}`} onClick={(event) => { setFeedback(""); revealAfterSwitch.current = !expanded && replacingOpen; onToggle(event.detail === 0); }}>
+          <span className="wallet-pass__label"><span>{project.name}</span><ChevronRight size={18} strokeWidth={1.8} aria-hidden="true" /></span>
+          <motion.div className="wallet-pass__cover" data-project-image={detail?.slug} data-project-art={project.image ?? "wallet-art"} initial={false} animate={{ height: expanded || last ? "auto" : preview ? 24 : 16 }}><div className={personalColor && project.image ? "wallet-pass__art-tinted" : undefined}><PassArt project={project} /></div></motion.div>
+        </button>
+        <motion.div id={`detail-${cardKey}`} className="wallet-detail" initial={false} animate={{ height: expanded ? "auto" : 0 }} onAnimationComplete={finishSelection} inert={!expanded} aria-hidden={!expanded}>
+          <motion.div initial={false} animate={{ opacity: expanded ? 1 : 0 }} transition={{ opacity: { duration: instant ? 0 : .16 } }}>
             <div className="wallet-detail__body">
               {project.private ? <span className="wallet-detail__private"><LockKeyhole size={13} aria-hidden="true" /> Acceso privado</span> : null}
               <a className="wallet-detail__domain" href={url} target="_blank" rel="noopener noreferrer">{project.domain}<ArrowUpRight size={14} aria-hidden="true" /></a>
@@ -152,7 +199,7 @@ export function LinktreePage() {
                   {group.projects.map((project, index) => {
                     const cardKey = `${group.id}-${project.id}`;
                     const expanded = params.get("project") === project.id && activeGroup === group.id;
-                    return <WalletCard key={project.id} project={project} detail={content.projects.find((item) => item.slug === project.caseSlug)} cardKey={cardKey} expanded={expanded} preview={preview === cardKey} last={index === group.projects.length - 1} instant={instant || !!reduced} onPreview={peekCard} onToggle={(keyboard) => {
+                    return <WalletCard key={project.id} project={project} detail={content.projects.find((item) => item.slug === project.caseSlug)} cardKey={cardKey} expanded={expanded} preview={preview === cardKey} last={index === group.projects.length - 1} instant={instant || !!reduced} replacingOpen={!!params.get("project") && !expanded} onPreview={peekCard} onToggle={(keyboard) => {
                       setInstant(keyboard);
                       setPreview(null);
                       setParams((current) => {

@@ -39,6 +39,7 @@ La escala completa `brand.50–950` está en `src/theme.ts`; `brand.600` es el v
 - **Botones:** rectangulares, altura mínima 44 px. Acción principal con fondo `app.text`/texto `app.canvas` o `app.signal`/texto oscuro; secundaria con borde y fondo transparente. Etiquetas describen la acción.
 - **Enlaces y filas:** usar texto y separadores; indicar foco con un contorno visible. Mantener áreas táctiles de al menos 44 px.
 - **Proyectos:** mostrar las capturas reales, información y enlaces existentes. Usar composición editorial y alternancia, no una cuadrícula repetitiva de iconos.
+- **Tarjetero:** los pases de Personal pueden usar el `personalColor` de cada aplicación definido en `src/lib/linktree.ts`; la portada conserva su ilustración y se adapta a ese color. El texto sobre el pase debe mantener al menos 4.5:1 de contraste.
 - **Formularios:** fondo `app.panel`, borde `app.control-border`, etiquetas persistentes y mensajes de error visibles. No sacrificar consentimiento ni validación.
 - **Pie:** fondo `#111C16`, texto `#F2F4EC`, secundarios `#B2C0B2`, divisores `#34463A`; mantener contacto, navegación y enlaces legales.
 
@@ -46,6 +47,7 @@ La escala completa `brand.50–950` está en `src/theme.ts`; `brand.600` es el v
 
 - Entrada inicial y revelado al desplazar: opacidad y desplazamiento corto, con curva `cubic-bezier(0.23, 1, 0.32, 1)`; usar el componente `ScrollReveal` existente cuando corresponda.
 - Controles: transiciones de 160–250 ms; movimiento de hover solo con puntero preciso. No animar datos que una persona está leyendo.
+- Pases: abrir y cerrar como una pila continua, con una transición interrumpible. Mantener la tarjeta seleccionada visible al cambiar entre pases; las acciones de teclado y el movimiento reducido son instantáneos.
 - Respetar `prefers-reduced-motion`; permitir pausar cualquier carrusel y conservar navegación por teclado, foco visible y semántica accesible.
 - Probar claro y oscuro, español e inglés, escritorio y móvil; no usar color como única señal.
 

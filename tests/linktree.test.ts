@@ -21,12 +21,12 @@ function renderWallet(path: string) {
 
 describe("tarjetero de proyectos", () => {
   it("separa herramientas y proyectos, conservando las otras listas y sus pases", () => {
-    expect(WALLET_PROJECTS).toHaveLength(34);
-    expect(new Set(WALLET_PROJECTS.map((project) => project.id)).size).toBe(34);
-    expect(WALLET_COLLECTIONS.map((group) => group.projects.length)).toEqual([15, 3, 11, 1, 6]);
+    expect(WALLET_PROJECTS).toHaveLength(35);
+    expect(new Set(WALLET_PROJECTS.map((project) => project.id)).size).toBe(35);
+    expect(WALLET_COLLECTIONS.map((group) => group.projects.length)).toEqual([15, 3, 12, 1, 6]);
     expect(WALLET_COLLECTIONS[0]).toMatchObject({ id: "herramientas", name: "Herramientas" });
     expect(WALLET_COLLECTIONS[1]).toEqual({ id: "proyectos", name: "Proyectos", nameEn: "Projects", projects: ["coffee", "explora", "un-ramito"] });
-    expect(WALLET_COLLECTIONS[2].projects).toEqual(["brain", "crm", "dash", "store", "blog", "support", "docs", "updates", "status", "hub", "cv"]);
+    expect(WALLET_COLLECTIONS[2].projects).toEqual(["brain", "crm", "dash", "store", "blog", "support", "docs", "updates", "status", "sphere", "hub", "cv"]);
     expect(WALLET_COLLECTIONS[0].projects).toContain("hub");
     expect(WALLET_COLLECTIONS[0].projects).toContain("cv");
     for (const group of WALLET_COLLECTIONS) {
@@ -72,7 +72,7 @@ describe("tarjetero de proyectos", () => {
       expect(html.match(/aria-expanded="true"/g)).toHaveLength(1);
       expect(html).toContain(`aria-expanded="true" aria-controls="detail-${group}-hub"`);
       expect(html.match(/aria-hidden="false"/g)).toHaveLength(1);
-      expect(html.match(/class="wallet-detail" inert=""/g)).toHaveLength(35);
+      expect(html.match(/class="wallet-detail" inert=""/g)).toHaveLength(36);
       expect(html).not.toContain("<dialog");
     }
   });
@@ -93,6 +93,14 @@ describe("tarjetero de proyectos", () => {
     expect(html).toContain("Lectura en español e inglés");
   });
 
+  it("abre Sphere desde Personal con su biblioteca y su icono", () => {
+    const html = renderWallet("/linktree?project=sphere&group=personal");
+    expect(walletCollections("sphere.velaarturo.com", "personal")[0].projects.map((project) => project.id)).toEqual(["sphere"]);
+    expect(html).toContain('aria-expanded="true" aria-controls="detail-personal-sphere"');
+    expect(html).toContain('href="https://sphere.velaarturo.com/#/library"');
+    expect(html).toContain('src="/assets/images/sphere-icon.svg"');
+  });
+
   it("incluye los nueve dominios personales sin duplicados y abre CRM con acceso privado", () => {
     const personal = walletCollections("", "personal")[0].projects;
     for (const id of ["brain", "status", "store", "crm", "dash", "docs", "updates", "blog", "support"]) {
@@ -102,6 +110,26 @@ describe("tarjetero de proyectos", () => {
     expect(html).toContain('aria-expanded="true" aria-controls="detail-personal-crm"');
     expect(html).toContain('href="https://crm.velaarturo.com"');
     expect(personal.find((project) => project.id === "crm")?.private).toBe(true);
+  });
+
+  it("mantiene los colores personales legibles y acordes a cada web", () => {
+    const colors: Record<string, string> = {
+      brain: "#050505", crm: "#087187", dash: "#383d49", store: "#995300", blog: "#8c3e68",
+      support: "#14756f", docs: "#4e59a3", updates: "#b44321", status: "#177649", sphere: "#2453f4",
+    };
+    const luminance = (hex: string) => {
+      const [r, g, b] = hex.slice(1).match(/../g)!.map((part) => {
+        const value = parseInt(part, 16) / 255;
+        return value <= .04045 ? value / 12.92 : ((value + .055) / 1.055) ** 2.4;
+      });
+      return .2126 * r + .7152 * g + .0722 * b;
+    };
+    const html = renderWallet("/linktree?project=blog&group=personal");
+    for (const [id, color] of Object.entries(colors)) {
+      const card = html.match(new RegExp(`<article[^>]*data-project-card="wallet:personal-${id}"[^>]*>`))?.[0];
+      expect(card).toContain(`--pass-color:${color}`);
+      expect((luminance("#f7f9fc") + .05) / (luminance(color) + .05)).toBeGreaterThanOrEqual(4.5);
+    }
   });
 
   it.each([

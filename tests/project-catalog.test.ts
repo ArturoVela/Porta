@@ -10,11 +10,11 @@ import { appDisplayCover } from "@/lib/spotlight";
 import { metaForPath } from "../worker/index";
 
 describe("catálogo compartido de proyectos", () => {
-  it.each(["es", "en"] as const)("comparte capturas de apps y usa marcadores para las privadas sin captura en %s", (locale) => {
+  it.each(["es", "en"] as const)("comparte capturas de apps y conserva marcadores para las que aún no tienen captura en %s", (locale) => {
     for (const app of WALLET_PROJECTS) {
       const image = appDisplayCover(app, undefined, locale);
       if (!image) {
-        expect(["brain", "crm", "dash"], app.id).toContain(app.id);
+        expect(["brain", "crm", "dash", "sphere"], app.id).toContain(app.id);
         continue;
       }
       expect(existsSync(new URL(`../public${image.src}`, import.meta.url)), app.id).toBe(true);
@@ -84,9 +84,9 @@ describe("catálogo compartido de proyectos", () => {
     const envelope = withProjectCatalog(source, locale);
     const projects = envelope.data.projects;
     expect(isPortfolioEnvelope(envelope)).toBe(true);
-    expect(projects).toHaveLength(47);
-    expect(new Set(projects.map((project) => project.slug)).size).toBe(47);
-    expect(new Set(projects.map((project) => project.order)).size).toBe(47);
+    expect(projects).toHaveLength(48);
+    expect(new Set(projects.map((project) => project.slug)).size).toBe(48);
+    expect(new Set(projects.map((project) => project.order)).size).toBe(48);
     for (const app of WALLET_PROJECTS) {
       expect(projects.find((project) => project.slug === app.caseSlug)?.liveUrl).toBe(`https://${app.domain}`);
     }
@@ -116,7 +116,7 @@ describe("catálogo compartido de proyectos", () => {
       );
     }
     expect(groups.find((group) => group.id === "otros")?.projects.map((project) => project.slug)).toContain("nieto-import");
-    expect(new Set(groups.flatMap((group) => group.projects.map((project) => project.id))).size).toBe(47);
+    expect(new Set(groups.flatMap((group) => group.projects.map((project) => project.id))).size).toBe(48);
   });
 
   it("mantiene acceso restringido y metadatos válidos para fichas nuevas", () => {
