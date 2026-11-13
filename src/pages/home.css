@@ -1,0 +1,126 @@
+.home-hero {
+  overflow: hidden;
+}
+
+.home-hero__topline {
+  padding-block: 1.25rem;
+  border-bottom: 1px solid var(--chakra-colors-app-border);
+  color: var(--chakra-colors-app-muted);
+  font-size: .75rem;
+  font-weight: 650;
+  letter-spacing: .025em;
+}
+
+.home-hero__topline span {
+  padding-inline: .45rem;
+  color: var(--chakra-colors-app-accent);
+}
+
+.home-hero__layout {
+  padding-block: clamp(3rem, 6vw, 6rem);
+}
+
+.home-hero__title {
+  max-width: 24ch;
+  font-weight: 650;
+}
+
+.home-hero__status {
+  max-width: 35rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--chakra-colors-app-border);
+}
+
+.home-showcase {
+  min-width: 0;
+  padding: clamp(1rem, 2vw, 1.5rem);
+  background: var(--chakra-colors-app-surface);
+  border: 1px solid var(--chakra-colors-app-border);
+}
+
+.home-showcase__heading {
+  min-height: 2rem;
+  margin-bottom: 1rem;
+  color: var(--chakra-colors-app-muted);
+  font-size: .75rem;
+  font-weight: 700;
+}
+
+.home-showcase .home-product-visual {
+  border: 1px solid var(--chakra-colors-app-border);
+}
+
+.home-showcase .home-product-carousel figcaption {
+  min-height: 8rem;
+  padding-block: 1rem .5rem;
+}
+
+.home-showcase .home-product-indicator-dot {
+  width: min(100%, 2rem);
+}
+
+.home-section-heading > p:first-child {
+  align-self: start;
+  font-size: .8rem;
+}
+
+.home-work .project-feature {
+  border-color: var(--chakra-colors-app-border);
+}
+
+.home-work .project-feature [data-project-image] {
+  border: 1px solid var(--chakra-colors-app-border);
+}
+
+.home-process .process-scan {
+  opacity: .3;
+}
+
+.home-process__steps > div > p:first-child {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+.home-contact {
+  overflow: hidden;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .home-hero__title {
+    animation: home-intro .6s var(--ease-out) both;
+  }
+
+  @keyframes home-intro {
+    from { opacity: .8; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .home-showcase .home-product-visual img {
+    transition: transform .25s var(--ease-out);
+  }
+
+  .home-showcase .home-product-visual:hover img {
+    transform: scale(1.02);
+  }
+}
+
+@media (max-width: 63.99rem) {
+  .home-showcase {
+    max-width: 46rem;
+  }
+}
+
+@media (max-width: 30rem) {
+  .home-hero__topline {
+    font-size: .6875rem;
+  }
+
+  .home-hero__actions {
+    width: 100%;
+  }
+
+  .home-hero__actions > a {
+    flex: 1 1 auto;
+  }
+}

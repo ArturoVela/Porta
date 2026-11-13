@@ -21,7 +21,7 @@ export function SiteFooter() {
 
   return (
     <footer className="site-footer">
-      <Container maxW="7xl">
+      <Container maxW="7xl" px={{ base: "5", md: "8" }}>
         <div className="footer-main">
           <div className="footer-intro">
             <Link to="/" className="footer-name">{content.site.name}<span>· {content.site.location}</span></Link>
