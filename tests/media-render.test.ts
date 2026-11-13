@@ -11,8 +11,9 @@ import { HomePage } from "@/pages/HomePage";
 import { ProfilePage } from "@/pages/ProfilePage";
 import { ProjectPage } from "@/pages/ProjectPage";
 import { ProjectsPage } from "@/pages/ProjectsPage";
+import { DevPage } from "@/pages/DevPage";
 import { selectHomeProducts, selectSpotlightProjects } from "@/lib/spotlight";
-import { projectCatalogGroups } from "@/lib/projectCatalog";
+import { projectCatalogGroups, withProjectCatalog } from "@/lib/projectCatalog";
 import { system } from "@/theme";
 import type { ProjectContent } from "@/types/content";
 
@@ -31,6 +32,15 @@ function renderContent(child: ReturnType<typeof createElement>, projects: Projec
 afterEach(() => vi.unstubAllGlobals());
 
 describe("imágenes editadas en Second Brain", () => {
+  it("reutiliza capturas responsive en las ocho apps iniciales de Dev", () => {
+    const markup = renderContent(createElement(DevPage));
+    for (const id of ["torneo", "textos", "color", "cotiza", "cuando", "foto", "pdf", "qr"]) {
+      expect(markup).toContain(`src="/assets/images/project-covers/${id}-home.webp"`);
+      expect(markup).toContain(`/assets/images/project-covers/${id}-home-640.avif 640w`);
+    }
+    expect(markup).toContain('sizes="84px"');
+  });
+
   it("ofrece variantes AVIF/WebP sin aplicar rutas generadas a imágenes del CMS", () => {
     const markup = renderContent(createElement(ResponsiveImage, {
       image: { src: "/assets/images/project-covers/divide-home.webp", alt: "Página de inicio de Divide", width: 1280, height: 720 },
@@ -101,16 +111,18 @@ describe("imágenes editadas en Second Brain", () => {
     expect(withoutCases).not.toContain('path=%2Fes%2Fproyectos%2Fexplora-san-martin');
   });
 
-  it("elige ocho productos públicos únicos, incluidos SaaS, y reutiliza marca sin inventar capturas", () => {
-    const products = selectHomeProducts(FALLBACK_ENVELOPE.data.projects);
+  it("elige ocho productos públicos únicos, incluidos SaaS, y muestra sus capturas reales", () => {
+    const projects = withProjectCatalog(FALLBACK_ENVELOPE, "es").data.projects;
+    const products = selectHomeProducts(projects);
     expect(products.map(({ app }) => app.id)).toEqual(["explora", "coffee", "hub", "cotiza", "ventas", "finanzas", "bc", "tarjetas"]);
     expect(products.every(({ app }) => !app.private)).toBe(true);
     expect(new Set(products.map(({ app }) => app.id)).size).toBe(products.length);
     expect(products[0].cover?.src).toContain('project-covers/explora');
-    expect(products.find(({ app }) => app.id === 'ventas')?.cover).toBeUndefined();
-    const markup = renderContent(createElement(HomePage), FALLBACK_ENVELOPE.data.projects);
-    expect(markup).toContain('data-brand="true"');
-    expect(markup).toContain('alt="Imagen de marca: Vela Ventas"');
+    expect(products.find(({ app }) => app.id === 'ventas')?.cover?.src).toContain('project-covers/ventas-home');
+    const markup = renderContent(createElement(HomePage), projects);
+    expect(markup).not.toContain('data-brand="true"');
+    expect(markup).toContain('alt="Página de inicio de Vela Ventas"');
+    expect(renderContent(createElement(HomePage), FALLBACK_ENVELOPE.data.projects)).toContain('alt="Página de inicio de Vela Ventas"');
     expect(markup).toContain('aria-label="Siguiente producto"');
     expect(markup).toContain('sizes="(min-width: 80rem) 640px, (min-width: 64rem) 50vw, 100vw"');
     expect(markup.match(/<div\b(?=[^>]*data-part="item")(?=[^>]*inert="")[^>]*>/g)).toHaveLength(7);

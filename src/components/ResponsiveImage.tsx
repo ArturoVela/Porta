@@ -1,4 +1,5 @@
 import { Image } from "@chakra-ui/react";
+import type { ReactEventHandler } from "react";
 import type { CoverImage } from "@/types/content";
 
 function alternateSource(src: string, extension: "avif" | "webp") {
@@ -13,7 +14,7 @@ function responsiveSources(src: string) {
     : src;
 }
 
-export function ResponsiveImage({ image, loading = "lazy", sizes = "(min-width: 80rem) 1280px, 100vw" }: { image: CoverImage; loading?: "eager" | "lazy"; sizes?: string }) {
+export function ResponsiveImage({ image, loading = "lazy", sizes = "(min-width: 80rem) 1280px, 100vw", onLoad, onError }: { image: CoverImage; loading?: "eager" | "lazy"; sizes?: string; onLoad?: ReactEventHandler<HTMLImageElement>; onError?: ReactEventHandler<HTMLImageElement> }) {
   const avif = alternateSource(image.src, "avif");
   const webp = alternateSource(image.src, "webp");
   return (
@@ -29,6 +30,8 @@ export function ResponsiveImage({ image, loading = "lazy", sizes = "(min-width: 
         height={image.height}
         loading={loading}
         fetchPriority={loading === "eager" ? "high" : "auto"}
+        onLoad={onLoad}
+        onError={onError}
         w="100%"
         h="100%"
         objectFit="cover"

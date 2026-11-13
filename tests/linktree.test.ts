@@ -21,12 +21,12 @@ function renderWallet(path: string) {
 
 describe("tarjetero de proyectos", () => {
   it("separa herramientas y proyectos, conservando las otras listas y sus pases", () => {
-    expect(WALLET_PROJECTS).toHaveLength(30);
-    expect(new Set(WALLET_PROJECTS.map((project) => project.id)).size).toBe(30);
-    expect(WALLET_COLLECTIONS.map((group) => group.projects.length)).toEqual([15, 3, 7, 1, 6]);
+    expect(WALLET_PROJECTS).toHaveLength(34);
+    expect(new Set(WALLET_PROJECTS.map((project) => project.id)).size).toBe(34);
+    expect(WALLET_COLLECTIONS.map((group) => group.projects.length)).toEqual([15, 3, 11, 1, 6]);
     expect(WALLET_COLLECTIONS[0]).toMatchObject({ id: "herramientas", name: "Herramientas" });
     expect(WALLET_COLLECTIONS[1]).toEqual({ id: "proyectos", name: "Proyectos", nameEn: "Projects", projects: ["coffee", "explora", "un-ramito"] });
-    expect(WALLET_COLLECTIONS[2].projects).toEqual(["brain", "dash", "store", "blog", "status", "hub", "cv"]);
+    expect(WALLET_COLLECTIONS[2].projects).toEqual(["brain", "crm", "dash", "store", "blog", "support", "docs", "updates", "status", "hub", "cv"]);
     expect(WALLET_COLLECTIONS[0].projects).toContain("hub");
     expect(WALLET_COLLECTIONS[0].projects).toContain("cv");
     for (const group of WALLET_COLLECTIONS) {
@@ -72,16 +72,18 @@ describe("tarjetero de proyectos", () => {
       expect(html.match(/aria-expanded="true"/g)).toHaveLength(1);
       expect(html).toContain(`aria-expanded="true" aria-controls="detail-${group}-hub"`);
       expect(html.match(/aria-hidden="false"/g)).toHaveLength(1);
-      expect(html.match(/class="wallet-detail" inert=""/g)).toHaveLength(31);
+      expect(html.match(/class="wallet-detail" inert=""/g)).toHaveLength(35);
       expect(html).not.toContain("<dialog");
     }
   });
 
-  it("muestra la identidad de Status sin reutilizar el arte de Divide", () => {
+  it("conserva los pases y las identidades originales del tarjetero", () => {
     const html = renderWallet("/linktree?project=status&group=personal");
+    for (const project of WALLET_PROJECTS.filter((item) => item.image)) expect(html).toContain(`src="${project.image}"`);
+    expect(html).not.toContain("/assets/images/project-covers/");
     expect(html).toContain("<strong>Status</strong>");
+    expect(html).toContain("<strong>divide.</strong>");
     expect(html).toContain('aria-expanded="true" aria-controls="detail-personal-status"');
-    expect(html.match(/<strong>divide\.<\/strong>/g)).toHaveLength(1);
   });
 
   it("abre Blog desde Personal con su enlace público", () => {
@@ -91,13 +93,33 @@ describe("tarjetero de proyectos", () => {
     expect(html).toContain("Lectura en español e inglés");
   });
 
-  it.each(["dash", "store", "blog"])("abre %s en Personal con el pase aportado y su acceso correcto", (id) => {
+  it("incluye los nueve dominios personales sin duplicados y abre CRM con acceso privado", () => {
+    const personal = walletCollections("", "personal")[0].projects;
+    for (const id of ["brain", "status", "store", "crm", "dash", "docs", "updates", "blog", "support"]) {
+      expect(personal.filter((project) => project.domain === `${id}.velaarturo.com`)).toHaveLength(1);
+    }
+    const html = renderWallet("/linktree?project=crm&group=personal");
+    expect(html).toContain('aria-expanded="true" aria-controls="detail-personal-crm"');
+    expect(html).toContain('href="https://crm.velaarturo.com"');
+    expect(personal.find((project) => project.id === "crm")?.private).toBe(true);
+  });
+
+  it.each([
+    ["dash", "dash.velaarturo.com"],
+    ["store", "store.velaarturo.com"],
+    ["blog", "blog.velaarturo.com 2"],
+    ["support", "support.velaarturo.com"],
+    ["docs", "docs.velarturo.com"],
+    ["updates", "update.velaarturo.com"],
+  ])("abre %s en Personal con su pase y acceso correcto", (id, image) => {
     const project = WALLET_PROJECTS.find((item) => item.id === id)!;
     const html = renderWallet(`/linktree?project=${id}&group=personal`);
     expect(walletCollections(project.domain, "personal")[0].projects.map((item) => item.id)).toEqual([id]);
     expect(html).toContain(`aria-expanded="true" aria-controls="detail-personal-${id}"`);
     expect(html).toContain(`href="https://${project.domain}"`);
-    expect(project.image).toBe(`/assets/images/pases-webs/${id === "blog" ? "blog.velaarturo.com 2" : project.domain}.png`);
+    expect(project.domain).toBe(`${id}.velaarturo.com`);
+    expect(project.image).toBe(`/assets/images/pases-webs/${image}.png`);
+    expect(html).toContain(`src="${project.image}"`);
     expect(project.private ?? false).toBe(id === "dash");
   });
 

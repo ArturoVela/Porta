@@ -42,8 +42,8 @@ export function withProjectCatalog(envelope: PortfolioEnvelope, locale: Locale):
       };
     });
   const catalog = [...projects, ...additions].map((project) => {
-    const cover = projectDisplayCover(project, locale);
-    return cover ? { ...project, cover } : project;
+    const cover = projectDisplayCover(project.cover ? project : { ...project, cover: bundled.data.projects.find((item) => item.slug === project.slug)?.cover }, locale);
+    return cover ? { ...project, cover } : project.cover?.src.startsWith("/assets/images/pases-webs/") ? { ...project, cover: undefined } : project;
   });
   return { ...envelope, data: { ...envelope.data, site: { ...envelope.data.site, email: envelope.data.site.email === "cv@velaarturo.com" ? bundled.data.site.email : envelope.data.site.email }, projects: catalog } };
 }

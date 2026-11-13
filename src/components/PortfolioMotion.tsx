@@ -136,11 +136,11 @@ export function ScrollReveal({ delay = 0, ...props }: HTMLAttributes<HTMLDivElem
     const stop = inView(element, () => {
       if (projectImageTransition) return;
       if (document.activeElement?.matches("input, textarea, select")) return;
-      const reduced = reducedMotion();
+      if (reducedMotion()) return;
       animation = animate(element, {
-        opacity: [0, 1],
-        transform: reduced ? ["none", "none"] : ["translateY(18px)", "none"],
-      }, { duration: reduced ? 0.12 : 0.42, delay: reduced ? 0 : delay, ease: MOTION_EASE_OUT });
+        opacity: [0.85, 1],
+        transform: ["translateY(10px)", "none"],
+      }, { duration: 0.4, delay, ease: MOTION_EASE_OUT });
     }, { margin: "0px 0px -32px 0px" });
 
     // Keep keyboard focus visible, even during an entrance or before intersection.
@@ -155,7 +155,7 @@ export function ScrollReveal({ delay = 0, ...props }: HTMLAttributes<HTMLDivElem
 
 export function PageTransition({ routeKey, children }: { routeKey: string; children: ReactNode }) {
   const ref = useRef<HTMLDivElement>(null);
-  const previousRoute = useRef(routeKey);
+  const previousRoute = useRef(renderedPath || routeKey);
 
   useLayoutEffect(() => { if (ref.current) finishProjectImageTransition(ref.current, routeKey); }, [routeKey]);
   useEffect(() => {

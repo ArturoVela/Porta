@@ -2,17 +2,28 @@ import { useEffect, useState, type CSSProperties } from "react";
 import { ArrowRight, ArrowUpRight, Code2, Download, Github, Mail, MapPin, Share2, Search } from "lucide-react";
 import { ContentLink as Link } from "@/components/ContentLink";
 import { ProjectVisual } from "@/components/ContentCards";
+import { ScrollReveal } from "@/components/PortfolioMotion";
+import { ResponsiveImage } from "@/components/ResponsiveImage";
 import { useContent } from "@/content/context";
 import { CV_URL } from "@/lib/links";
 import { DEV_APPS, DEV_APP_GROUPS, devAppDescription, filterDevApps, projectTechnologies, type DevAppGroup } from "@/lib/dev";
 import { contactVCard, publicDevUrl, shareDevCard } from "@/lib/contact";
 import { CopyEmail } from "@/components/CopyEmail";
 import { projectAvailabilityLabel } from "@/lib/projectAvailability";
-import { selectSpotlightProjects } from "@/lib/spotlight";
+import { appDisplayCover, selectSpotlightProjects } from "@/lib/spotlight";
 import { activityMetrics, contributionWeeks, GITHUB_URL, GITHUB_USERNAME, type GitHubCalendar, type GitHubSummary } from "@/lib/github";
+import type { CoverImage } from "@/types/content";
 import "./dev.css";
 
 const LANGUAGE_COLORS: Record<string, string> = { TypeScript: "#3178c6", JavaScript: "#c49d19", HTML: "#d84b2b", CSS: "#8055c3", PHP: "#777bb3", Java: "#ad6812", Python: "#387dab", Dart: "#168ca6", Shell: "#508329", SCSS: "#ba4686" };
+
+function AppThumbnail({ image }: { image?: CoverImage }) {
+  const [state, setState] = useState<"loading" | "ready" | "error">(image ? "loading" : "error");
+  return <div className="dev-app-icon" data-loading={state === "loading" || undefined} aria-hidden="true">
+    {state !== "ready" && <Code2 size={24} />}
+    {image && state !== "error" && <ResponsiveImage image={image} sizes="84px" onLoad={() => setState("ready")} onError={() => setState("error")} />}
+  </div>;
+}
 
 function useGitHub<T>(path: string) {
   const [state, setState] = useState<{ data: T | null; loading: boolean; error: boolean }>({ data: null, loading: true, error: false });
@@ -60,10 +71,10 @@ function Activity() {
   const selected = calendar.data?.days.find((day) => day.date === selectedDay);
 
   return <section className="dev-activity" id="actividad" aria-labelledby="activity-title">
-    <div className="dev-section-heading">
+    <ScrollReveal className="dev-section-heading">
       <div><h2 id="activity-title">{c.activityTitle}</h2><p>{c.activityIntro}</p></div>
       <a className="dev-text-link" href={GITHUB_URL} target="_blank" rel="noopener noreferrer">{c.github} <ArrowUpRight size={17} aria-hidden="true" /></a>
-    </div>
+    </ScrollReveal>
     <div className="dev-calendar-panel">
       <div className="dev-calendar-heading">
         <h3>{metrics ? <><strong>{number.format(metrics.total)}</strong> {c.contributions} <span>{year === "last" ? c.lastPeriod : `${c.inYear} ${year}`}</span></> : c.calendarTitle}</h3>
@@ -199,8 +210,8 @@ export function DevPage() {
     <nav className="dev-index" aria-label={c.index}><a href="#proyectos">{c.projects} <ArrowRight size={15} aria-hidden="true" /></a><a href="#apps">{c.apps} <ArrowRight size={15} aria-hidden="true" /></a><a href="#actividad">{c.activity} <ArrowRight size={15} aria-hidden="true" /></a></nav>
 
     <section className="dev-projects" id="proyectos" aria-labelledby="projects-title">
-      <div className="dev-section-heading"><div><h2 id="projects-title">{c.projectsTitle}</h2><p>{c.projectsIntro}</p></div><Link className="dev-text-link" to="/proyectos">{c.allProjects} <ArrowUpRight size={17} aria-hidden="true" /></Link></div>
-      <div className="dev-featured">{featured.map((project) => <div key={project.id} className="dev-project" data-project-card="dev">
+      <ScrollReveal className="dev-section-heading"><div><h2 id="projects-title">{c.projectsTitle}</h2><p>{c.projectsIntro}</p></div><Link className="dev-text-link" to="/proyectos">{c.allProjects} <ArrowUpRight size={17} aria-hidden="true" /></Link></ScrollReveal>
+      <div className="dev-featured">{featured.map((project) => <ScrollReveal key={project.id} className="dev-project" data-project-card="dev">
         <div className="dev-project-visual"><ProjectVisual project={project} compact /></div>
         <Link to={`/proyectos/${project.slug}`}>
           <div className="dev-project-title"><h3>{project.title}</h3><ArrowUpRight size={21} aria-hidden="true" /></div>
@@ -211,28 +222,30 @@ export function DevPage() {
         <div className="dev-project-links"><Link to={`/proyectos/${project.slug}`}>{c.viewCase} <ArrowRight size={15} aria-hidden="true" /></Link>
           {project.liveUrl && <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">{projectAvailabilityLabel(project) === "Acceso restringido" ? c.openAccess : c.openApp} <ArrowUpRight size={15} aria-hidden="true" /></a>}
         </div>
-      </div>)}</div>
+      </ScrollReveal>)}</div>
     </section>
 
     <section className="dev-apps" id="apps" aria-labelledby="apps-title">
-      <div className="dev-section-heading"><div><h2 id="apps-title">{c.appsTitle}</h2><p>{DEV_APPS.length} {c.appsIntro}</p></div><Link className="dev-text-link" to="/linktree">{c.wallet} <ArrowUpRight size={17} aria-hidden="true" /></Link></div>
+      <ScrollReveal className="dev-section-heading"><div><h2 id="apps-title">{c.appsTitle}</h2><p>{DEV_APPS.length} {c.appsIntro}</p></div><Link className="dev-text-link" to="/linktree">{c.wallet} <ArrowUpRight size={17} aria-hidden="true" /></Link></ScrollReveal>
       <div className="dev-app-filters">
         <label className="dev-search">{c.search}<span><Search size={18} aria-hidden="true" /><input type="search" value={query} placeholder={c.searchPlaceholder} onChange={(event) => { setQuery(event.target.value); setShowAllApps(false); }} /></span></label>
         <label className="dev-category">{c.category}<select aria-label={c.category} value={group} onChange={(event) => { setGroup(event.target.value as DevAppGroup | "all"); setShowAllApps(false); }}><option value="all">{c.all}</option>{(Object.keys(DEV_APP_GROUPS) as DevAppGroup[]).map((key) => <option key={key} value={key}>{c.groups[key]}</option>)}</select></label>
       </div>
       <div className="dev-filter-status"><p role="status">{apps.length} {apps.length === 1 ? c.resultSingular : c.results}</p>{(query || group !== "all") && <button type="button" onClick={clearFilters}>{c.clear}</button>}</div>
-      <div className="dev-app-list" id="dev-app-list">{apps.slice(0, showAllApps ? apps.length : 8).map((app) => <a className="dev-app" key={app.id} href={`https://${app.domain}`} target="_blank" rel="noopener noreferrer">
-        <div className="dev-app-icon" aria-hidden="true">{app.image ? <img src={app.image} alt="" width="750" height="288" loading="lazy" /> : <Code2 size={24} />}</div>
+      <div className="dev-app-list" id="dev-app-list">{apps.slice(0, showAllApps ? apps.length : 8).map((app) => {
+        const image = appDisplayCover(app, content.projects.find((project) => project.slug === app.caseSlug), locale);
+        return <a className="dev-app" key={app.id} href={`https://${app.domain}`} target="_blank" rel="noopener noreferrer">
+        <AppThumbnail key={image?.src} image={image} />
         <div><h3>{app.name}{app.private && <span>{c.private}</span>}</h3><p>{devAppDescription(app, locale, content.projects)}</p><span className="dev-app-domain">{app.domain}</span></div><ArrowUpRight size={18} aria-hidden="true" />
-      </a>)}</div>
+      </a>; })}</div>
       {!apps.length && <div className="dev-app-empty"><h3>{c.empty}</h3><p>{c.emptyHelp}</p><button type="button" onClick={clearFilters}>{c.clear} <ArrowRight size={16} aria-hidden="true" /></button></div>}
       {apps.length > 8 && <button className="dev-show-apps" type="button" aria-expanded={showAllApps} aria-controls="dev-app-list" onClick={() => setShowAllApps((value) => !value)}>{showAllApps ? c.showLess : `${c.showAll} (${apps.length})`} <ArrowRight size={17} aria-hidden="true" /></button>}
     </section>
 
-    {!!technologies.length && <section className="dev-technologies" aria-labelledby="technologies-title"><div className="dev-section-heading"><div><h2 id="technologies-title">{c.technologies}</h2><p>{c.technologiesIntro}</p></div></div><div className="dev-technology-list">{technologies.map(({ name, project }) => <Link key={name} to={`/proyectos/${project.slug}`}><strong>{name}</strong><span>{project.title} <ArrowUpRight size={16} aria-hidden="true" /></span></Link>)}</div></section>}
+    {!!technologies.length && <section className="dev-technologies" aria-labelledby="technologies-title"><ScrollReveal className="dev-section-heading"><div><h2 id="technologies-title">{c.technologies}</h2><p>{c.technologiesIntro}</p></div></ScrollReveal><div className="dev-technology-list">{technologies.map(({ name, project }) => <Link key={name} to={`/proyectos/${project.slug}`}><strong>{name}</strong><span>{project.title} <ArrowUpRight size={16} aria-hidden="true" /></span></Link>)}</div></section>}
 
     <Activity />
 
-    <section className="dev-close" aria-labelledby="contact-title"><div><h2 id="contact-title">{c.close}</h2><p>{content.site.availability}</p></div><Link className="dev-button dev-button-primary" to="/contacto">{c.contact} <ArrowUpRight size={19} aria-hidden="true" /></Link></section>
+    <section className="dev-close" aria-labelledby="contact-title"><ScrollReveal><h2 id="contact-title">{c.close}</h2><p>{content.site.availability}</p></ScrollReveal><Link className="dev-button dev-button-primary" to="/contacto">{c.contact} <ArrowUpRight size={19} aria-hidden="true" /></Link></section>
   </div>;
 }

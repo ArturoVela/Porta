@@ -35,9 +35,9 @@ export function ProjectPreview({ project, imageSrc, to, onOpen, children }: {
     <div className="project-preview-media" aria-busy={imageState === "loading"}
       onLoadCapture={() => setImageState("ready")} onErrorCapture={() => setImageState("error")}>
       {to ? <ContentLink to={to} className="project-preview-image-link" aria-label={project.title}>{children}</ContentLink> : children}
-      {imageState !== "ready" && <div className="project-preview-placeholder" data-error={imageState === "error" || undefined} role="status">
-        {imageState === "loading" ? copy.cards.loadingImage : copy.home.imageUnavailable}
-      </div>}
+      <div className="project-preview-placeholder" data-state={imageState} aria-hidden={imageState === "ready" || undefined} role={imageState === "ready" ? undefined : "status"}>
+        {imageState === "error" ? copy.home.imageUnavailable : copy.cards.loadingImage}
+      </div>
     </div>
     <div id={id} className="project-preview-panel" inert={!open} aria-hidden={!open}>
       <div className="project-preview-dots" aria-hidden="true"><i /><i /><i /></div>

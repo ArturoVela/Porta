@@ -5,6 +5,7 @@ import { ContentLink as Link } from "@/components/ContentLink";
 import { MarkdownBody } from "@/components/MarkdownBody";
 import { ProjectVisual } from "@/components/ContentCards";
 import { ResponsiveImage } from "@/components/ResponsiveImage";
+import { ScrollReveal } from "@/components/PortfolioMotion";
 import { useContent } from "@/content/context";
 import { projectAvailabilityLabel } from "@/lib/projectAvailability";
 import { selectSpotlightProjects } from "@/lib/spotlight";
@@ -59,16 +60,16 @@ export function ProjectPage() {
       {project.gallery?.length ? (
         <Box as="section" pb={{ base: "12", md: "20" }} aria-label={`${copy.project.screens} ${project.title}`}>
           <SimpleGrid columns={{ base: 1, md: 2 }} gap="6">
-            {project.gallery.map((image) => <Box as="figure" key={image.src}><AspectRatio ratio={image.width / image.height} overflow="hidden" bg="app.surface"><ResponsiveImage image={image} /></AspectRatio><Text as="figcaption" color="app.muted" fontSize="sm" mt="3">{image.alt}</Text></Box>)}
+            {project.gallery.map((image) => <Box as="figure" key={image.src}><ScrollReveal><AspectRatio ratio={image.width / image.height} overflow="hidden" bg="app.surface"><ResponsiveImage image={image} /></AspectRatio></ScrollReveal><Text as="figcaption" color="app.muted" fontSize="sm" mt="3">{image.alt}</Text></Box>)}
           </SimpleGrid>
         </Box>
       ) : null}
 
       <Box as="section" bg="brand.600" color="white" px={{ base: "6", md: "10" }} py={{ base: "9", md: "12" }} mb={{ base: "12", md: "20" }}>
-        <Grid templateColumns={{ base: "1fr", md: "1.35fr .65fr" }} gap="8" alignItems="end">
+        <Grid asChild templateColumns={{ base: "1fr", md: "1.35fr .65fr" }} gap="8" alignItems="end"><ScrollReveal>
           <Stack gap="3"><Heading as="h2" fontSize={{ base: "3xl", md: "5xl" }} letterSpacing="-.045em" lineHeight=".98">{copy.project.ctaTitle}</Heading><Text color="brand.100" fontSize={{ md: "lg" }} maxW="55ch">{copy.project.ctaDescription}</Text></Stack>
           <Button asChild minH="11" size="lg" bg="white" color="brand.800" borderRadius="0" justifySelf={{ md: "end" }} px="7" _hover={{ bg: "brand.50" }}><Link to="/contacto">{copy.project.ctaButton} <ArrowUpRight size={18} /></Link></Button>
-        </Grid>
+        </ScrollReveal></Grid>
       </Box>
 
       <Box borderTopWidth="1px" borderColor="app.border" pt="12">

@@ -2,6 +2,7 @@ import { AspectRatio, Box, Button, Container, Grid, Heading, HStack, Stack, Text
 import { ArrowUpRight } from "lucide-react";
 import { SectionHeading } from "@/components/SectionHeading";
 import { ResponsiveImage } from "@/components/ResponsiveImage";
+import { ScrollReveal } from "@/components/PortfolioMotion";
 import { useContent } from "@/content/context";
 import { CV_URL } from "@/lib/links";
 
@@ -22,8 +23,8 @@ export function ProfilePage() {
               <Text color="app.muted" fontSize="sm">{copy.profile.cvAvailable}</Text>
             </Stack>
           </Box>
-          <Box><Heading as="h2" fontSize="3xl" mb="6">{copy.profile.experience}</Heading>{copy.profile.experienceItems.map(([title, detail]) => <Grid key={title} templateColumns={{ base: "1fr", md: ".7fr 1.3fr" }} gap="5" py="6" borderTopWidth="1px" borderColor="app.border"><Heading as="h3" fontSize="xl">{title}</Heading><Text color="app.muted">{detail}</Text></Grid>)}</Box>
-          <Box><Heading as="h2" fontSize="3xl" mb="6">{copy.profile.work}</Heading>{copy.profile.workItems.map(([title, detail], index) => <HStack key={title} align="start" py="5" borderTopWidth="1px" borderColor="app.border" gap="5"><Text color="app.muted" minW="8">0{index + 1}</Text><Box><Heading as="h3" fontSize="xl">{title}</Heading><Text color="app.muted" mt="2">{detail}</Text></Box></HStack>)}</Box>
+          <ScrollReveal><Heading as="h2" fontSize="3xl" mb="6">{copy.profile.experience}</Heading>{copy.profile.experienceItems.map(([title, detail]) => <Grid key={title} templateColumns={{ base: "1fr", md: ".7fr 1.3fr" }} gap="5" py="6" borderTopWidth="1px" borderColor="app.border"><Heading as="h3" fontSize="xl">{title}</Heading><Text color="app.muted">{detail}</Text></Grid>)}</ScrollReveal>
+          <ScrollReveal><Heading as="h2" fontSize="3xl" mb="6">{copy.profile.work}</Heading>{copy.profile.workItems.map(([title, detail], index) => <HStack key={title} align="start" py="5" borderTopWidth="1px" borderColor="app.border" gap="5"><Text color="app.muted" minW="8">0{index + 1}</Text><Box><Heading as="h3" fontSize="xl">{title}</Heading><Text color="app.muted" mt="2">{detail}</Text></Box></HStack>)}</ScrollReveal>
         </Stack>
       </Grid>
     </Container>

@@ -2,6 +2,7 @@ import { createElement, type MouseEvent } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { finishProjectImageTransition, listenForProjectHistory, PageTransition, ScrollReveal, startProjectImageTransition, startProjectNavigation, returningProjectSlug } from "@/components/PortfolioMotion";
+import { carouselTransition } from "@/components/HomeProductCarousel";
 
 const animation = vi.hoisted(() => ({ stop: vi.fn(), then: vi.fn() }));
 vi.mock("motion/mini", () => ({ animate: vi.fn(() => animation) }));
@@ -162,6 +163,21 @@ describe("project visual route transition", () => {
 });
 
 describe("portfolio motion accessibility", () => {
+  it("crossfades only loaded images during programmatic carousel changes", () => {
+    const group = { scrollLeft: 0 };
+    const image = { complete: true, naturalWidth: 1280, currentSrc: "/cover-640.avif", src: "/cover.webp" };
+    const root = { querySelector: (selector: string) => selector.includes("item-group") ? group : image } as unknown as HTMLElement;
+
+    expect(carouselTransition(root, 0, 1, 400, false)).toEqual({ group, src: "/cover-640.avif" });
+    expect(carouselTransition(root, 0, 1, 400, true)).toEqual({ group, src: undefined });
+    image.naturalWidth = 0;
+    expect(carouselTransition(root, 0, 1, 400, false)).toEqual({ group, src: undefined });
+    group.scrollLeft = 400;
+    expect(carouselTransition(root, 0, 1, 400, false)).toBeUndefined();
+    expect(carouselTransition(root, 1, 1, 400, false)).toBeUndefined();
+    expect(carouselTransition(root, 0, 1, NaN, false)).toBeUndefined();
+  });
+
   it("keeps scroll content visible before observers or animations run", () => {
     const markup = renderToStaticMarkup(createElement(ScrollReveal, {
       className: "project-feature", delay: 0.05,

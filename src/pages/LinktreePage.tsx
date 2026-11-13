@@ -1,6 +1,7 @@
 import { LayoutGroup, MotionConfig, motion, useReducedMotion } from "motion/react";
+import { ScrollReveal } from "@/components/PortfolioMotion";
 import { Activity, ArrowUpRight, Check, ChevronRight, Copy, Divide, LockKeyhole, Search, WalletCards } from "lucide-react";
-import { useRef, useState, type CSSProperties, type TouchEvent } from "react";
+import { lazy, Suspense, useRef, useState, type CSSProperties, type TouchEvent } from "react";
 import { useSearchParams } from "react-router";
 import { ContentLink } from "@/components/ContentLink";
 import { SiteFooter } from "@/components/SiteFooter";
@@ -8,6 +9,10 @@ import { useContent } from "@/content/context";
 import { WALLET_COLLECTIONS, WALLET_PROJECTS, walletCollections, type WalletProject } from "@/lib/linktree";
 import type { ProjectContent } from "@/types/content";
 import "./linktree.css";
+
+const WalletQr = lazy(() => import("./WalletQr").catch(() => ({
+  default: () => <span role="status">No se pudo cargar el QR. Usa el botón «Abrir proyecto».</span>,
+})));
 
 function PassArt({ project }: { project: WalletProject }) {
   return project.image ? (
@@ -36,9 +41,10 @@ function WalletCard({ project, detail, cardKey, expanded, preview, last, instant
 }) {
   const buttonRef = useRef<HTMLButtonElement>(null);
   const [feedback, setFeedback] = useState("");
+  const url = `https://${project.domain}`;
 
   async function copyLink() {
-    try { await navigator.clipboard.writeText(`https://${project.domain}`); setFeedback("Enlace copiado"); }
+    try { await navigator.clipboard.writeText(url); setFeedback("Enlace copiado"); }
     catch { setFeedback("No se pudo copiar. Selecciona el enlace que aparece arriba."); }
   }
 
@@ -46,7 +52,7 @@ function WalletCard({ project, detail, cardKey, expanded, preview, last, instant
     <motion.li layout="position" className="wallet-slot" data-expanded={expanded || undefined} data-last={last || undefined} data-preview={preview || undefined} data-wallet-key={cardKey} onPointerEnter={(event) => {
       if (event.pointerType === "mouse" && matchMedia("(hover: hover) and (pointer: fine)").matches) onPreview(cardKey);
     }} onPointerLeave={(event) => { if (event.pointerType === "mouse") onPreview(null); }}>
-      <motion.div initial={false} animate={{ transform: preview && !expanded && !instant ? "translateY(-6px) scale(1.012)" : "translateY(0px) scale(1)" }}>
+      <motion.div initial={false} animate={{ transform: preview && !expanded && !instant ? "translateY(-6px)" : "translateY(0px)" }}>
       <motion.article layout className="wallet-pass" data-project-card={`wallet:${cardKey}`} style={{ "--pass-color": project.color, borderRadius: 17, boxShadow: "0 -3px 14px rgb(0 0 0 / 28%), inset 0 1px rgb(255 255 255 / 15%)" } as CSSProperties} onKeyDown={(event) => {
         if (event.key === "Escape" && expanded) { event.preventDefault(); buttonRef.current?.focus(); onToggle(true); }
       }}>
@@ -58,15 +64,22 @@ function WalletCard({ project, detail, cardKey, expanded, preview, last, instant
           <motion.div layout="position" initial={false} animate={{ opacity: expanded ? 1 : 0 }} transition={{ opacity: { duration: instant ? 0 : .16 } }}>
             <div className="wallet-detail__body">
               {project.private ? <span className="wallet-detail__private"><LockKeyhole size={13} aria-hidden="true" /> Acceso privado</span> : null}
-              <a className="wallet-detail__domain" href={`https://${project.domain}`} target="_blank" rel="noopener noreferrer">{project.domain}<ArrowUpRight size={14} aria-hidden="true" /></a>
+              <a className="wallet-detail__domain" href={url} target="_blank" rel="noopener noreferrer">{project.domain}<ArrowUpRight size={14} aria-hidden="true" /></a>
               <p className="wallet-detail__description">{detail?.excerpt ?? project.description}</p>
               <h3>Qué puedes hacer</h3>
               <ul className="wallet-detail__features">{(detail?.outcomes.length ? detail.outcomes : project.features).map((feature) => <li key={feature}><Check size={17} aria-hidden="true" /><span>{feature}</span></li>)}</ul>
               {detail?.stack.length ? <div className="wallet-detail__technology"><h3>Construido con</h3><p>{detail.stack.join(" · ")}</p></div> : null}
               {detail ? <ContentLink className="wallet-detail__case" to={`/proyectos/${detail.slug}`}>Ver caso de estudio <ArrowUpRight size={16} aria-hidden="true" /></ContentLink> : null}
             </div>
-            <div className="wallet-detail__actions"><a className="wallet-open" href={`https://${project.domain}`} target="_blank" rel="noopener noreferrer">Abrir proyecto<ArrowUpRight size={19} aria-hidden="true" /></a><button className="wallet-copy" type="button" aria-label={`Copiar enlace de ${project.name}`} onClick={copyLink}><Copy size={19} aria-hidden="true" /></button></div>
+            <div className="wallet-detail__actions"><a className="wallet-open" href={url} target="_blank" rel="noopener noreferrer">Abrir proyecto<ArrowUpRight size={19} aria-hidden="true" /></a><button className="wallet-copy" type="button" aria-label={`Copiar enlace de ${project.name}`} onClick={copyLink}><Copy size={19} aria-hidden="true" /></button></div>
             <p className="wallet-feedback" role="status">{feedback}</p>
+            <div className="wallet-qr">
+              <h3>Escanea para visitar</h3>
+              <p>Abre esta web en otro dispositivo.</p>
+              <div className="wallet-qr__code">
+                {expanded ? <Suspense fallback={<span role="status">Preparando QR…</span>}><WalletQr url={url} name={project.name} /></Suspense> : null}
+              </div>
+            </div>
           </motion.div>
         </motion.div>
       </motion.article>
@@ -134,7 +147,7 @@ export function LinktreePage() {
           <div className="wallet-collections">
             {groups.map((group) => (
               <motion.section layout="position" className="wallet-collection" key={group.id} aria-labelledby={`collection-${group.id}`}>
-                <div className="wallet-collection__heading"><h2 id={`collection-${group.id}`}>{group.name}</h2><span>{group.projects.length} {group.projects.length === 1 ? "tarjeta" : "tarjetas"}</span></div>
+                <ScrollReveal className="wallet-collection__heading"><h2 id={`collection-${group.id}`}>{group.name}</h2><span>{group.projects.length} {group.projects.length === 1 ? "tarjeta" : "tarjetas"}</span></ScrollReveal>
                 <ul className="wallet-stack" onTouchStart={touchPreview} onTouchMove={touchPreview} onTouchEnd={() => peekCard(null)} onTouchCancel={() => peekCard(null)}>
                   {group.projects.map((project, index) => {
                     const cardKey = `${group.id}-${project.id}`;

@@ -1,7 +1,7 @@
 import type { CoverImage, ProjectContent } from "@/types/content";
 import { CV_URL } from "@/lib/links";
 import type { Locale } from "@/i18n";
-import { WALLET_PROJECTS } from "@/lib/linktree";
+import { WALLET_PROJECTS, type WalletProject } from "@/lib/linktree";
 
 export const SPOTLIGHT_PROJECT_SLUGS = ["nieto-import", "explora-san-martin", "coffee"] as const;
 
@@ -15,19 +15,31 @@ export const SPOTLIGHT_DESTINATIONS = [
 const homeCoverIds = new Set([
   "torneo", "divide", "textos", "color", "cotiza", "cuando", "foto", "pdf", "qr",
   "horas", "llevamos", "ruleta", "explora", "coffee", "formularios", "un-ramito", "hub", "cv",
+  "principal", "store", "blog", "support", "docs", "updates", "status",
+  "finanzas", "ventas", "agua", "agro", "bc", "tarjetas",
 ]);
 const homeCovers: Record<string, CoverImage> = Object.fromEntries(
   WALLET_PROJECTS.filter((app) => homeCoverIds.has(app.id)).map((app) => [app.caseSlug ?? app.id, {
     src: `/assets/images/project-covers/${app.id}-home.webp`, alt: `Página de inicio de ${app.name}`, width: 1280, height: 720,
   }]),
 );
+homeCovers["nieto-hub"] = {
+  src: "/assets/images/project-covers/nieto-hub-home.webp", alt: "Página de inicio de NIETO Hub", width: 1280, height: 720,
+};
+homeCovers["nieto-import"] = {
+  src: "/assets/images/project-covers/nieto-import-home.webp", alt: "Página de inicio de sesión de Nieto Import", width: 1280, height: 720,
+};
 
-export function projectDisplayCover(project: ProjectContent, locale: Locale = "es") {
+export function projectDisplayCover(project: Pick<ProjectContent, "slug" | "title" | "cover">, locale: Locale = "es") {
   const cover = homeCovers[project.slug];
   const bundledCover = project.cover && /^\/assets\/images\/(?:pases-webs|project-covers)\//.test(project.cover.src);
-  if (project.cover && (!cover || !bundledCover)) return project.cover;
+  if (project.cover && (!bundledCover || (!cover && project.cover.src.startsWith("/assets/images/project-covers/")))) return project.cover;
   if (!cover || locale === "es") return cover;
   return { ...cover, alt: `${project.title} home page` };
+}
+
+export function appDisplayCover(app: WalletProject, project?: ProjectContent, locale: Locale = "es") {
+  return projectDisplayCover(project ?? { slug: app.caseSlug ?? app.id, title: app.name }, locale);
 }
 
 export function selectSpotlightProjects(projects: ProjectContent[], limit = 3) {
@@ -46,6 +58,6 @@ export function selectHomeProducts(projects: ProjectContent[], locale: Locale = 
     const app = WALLET_PROJECTS.find((item) => item.id === id && !item.private);
     if (!app) return [];
     const project = projects.find((item) => item.slug === app.caseSlug);
-    return [{ app, project, cover: project ? projectDisplayCover(project, locale) : undefined }];
+    return [{ app, project, cover: appDisplayCover(app, project, locale) }];
   });
 }

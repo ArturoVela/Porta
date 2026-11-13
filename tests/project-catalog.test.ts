@@ -6,14 +6,33 @@ import { isPortfolioEnvelope } from "@/lib/content";
 import { WALLET_COLLECTIONS, WALLET_PROJECTS } from "@/lib/linktree";
 import { projectCatalogGroups, withProjectCatalog } from "@/lib/projectCatalog";
 import { projectAvailabilityLabel } from "@/lib/projectAvailability";
+import { appDisplayCover } from "@/lib/spotlight";
 import { metaForPath } from "../worker/index";
 
 describe("catálogo compartido de proyectos", () => {
-  it.each(["es", "en"] as const)("ofrece 18 capturas 16:9 con archivos responsive disponibles en %s", (locale) => {
+  it.each(["es", "en"] as const)("comparte capturas de apps y usa marcadores para las privadas sin captura en %s", (locale) => {
+    for (const app of WALLET_PROJECTS) {
+      const image = appDisplayCover(app, undefined, locale);
+      if (!image) {
+        expect(["brain", "crm", "dash"], app.id).toContain(app.id);
+        continue;
+      }
+      expect(existsSync(new URL(`../public${image.src}`, import.meta.url)), app.id).toBe(true);
+      expect(image.src).toContain("/project-covers/");
+      expect(image).toMatchObject({ width: 1280, height: 720 });
+    }
+    const app = WALLET_PROJECTS.find((item) => item.id === "hub")!;
+    const project = FALLBACK_ENVELOPE.data.projects.find((item) => item.slug === app.caseSlug)!;
+    const cover = { src: "/media/app-custom", alt: "Portada CMS", width: 900, height: 600 };
+    expect(appDisplayCover(app, { ...project, cover }, locale)).toEqual(cover);
+  });
+
+  it.each(["es", "en"] as const)("ofrece 33 capturas reales 16:9 con archivos responsive disponibles en %s", (locale) => {
     const source = locale === "en" ? FALLBACK_ENVELOPE_EN : FALLBACK_ENVELOPE;
     const projects = withProjectCatalog(source, locale).data.projects;
     const captures = projects.filter((project) => project.cover?.src.startsWith("/assets/images/project-covers/"));
-    expect(captures).toHaveLength(18);
+    expect(captures).toHaveLength(33);
+    expect(projects.some((project) => project.cover?.src.startsWith("/assets/images/pases-webs/"))).toBe(false);
     for (const { cover } of captures) {
       expect(cover).toMatchObject({ width: 1280, height: 720 });
       expect(cover!.alt).toContain(locale === "en" ? "home page" : "Página de inicio");
@@ -24,7 +43,20 @@ describe("catálogo compartido de proyectos", () => {
         }
       }
     }
-    expect(projects.find((project) => project.slug === "status")?.cover).toBeUndefined();
+    for (const slug of ["porta", "store", "blog", "support", "docs", "updates", "status", "finanzas", "ventas", "agua", "agro", "bc", "tarjetas", "nieto-hub", "nieto-import"]) {
+      expect(projects.find((project) => project.slug === slug)?.cover?.src).toContain("/project-covers/");
+    }
+  });
+
+  it.each(["es", "en"] as const)("recupera la captura histórica omitida por el CMS sin reemplazar portadas editadas en %s", (locale) => {
+    const bundled = locale === "en" ? FALLBACK_ENVELOPE_EN : FALLBACK_ENVELOPE;
+    const historical = bundled.data.projects.find((project) => project.slug === "cana-wasky")!;
+    const source = { ...bundled, data: { ...bundled.data, projects: [{ ...historical, cover: undefined }] } };
+    expect(withProjectCatalog(source, locale).data.projects.find((project) => project.slug === historical.slug)?.cover).toEqual(historical.cover);
+    expect(source.data.projects[0].cover).toBeUndefined();
+    const custom = { src: "/media/custom-wasky", alt: "CMS", width: 1200, height: 800 };
+    const edited = { ...source, data: { ...source.data, projects: [{ ...historical, cover: custom }] } };
+    expect(withProjectCatalog(edited, locale).data.projects.find((project) => project.slug === historical.slug)?.cover).toEqual(custom);
   });
 
   it("actualiza capturas lejanas incluidas en manifiestos almacenados", () => {
@@ -52,9 +84,9 @@ describe("catálogo compartido de proyectos", () => {
     const envelope = withProjectCatalog(source, locale);
     const projects = envelope.data.projects;
     expect(isPortfolioEnvelope(envelope)).toBe(true);
-    expect(projects).toHaveLength(43);
-    expect(new Set(projects.map((project) => project.slug)).size).toBe(43);
-    expect(new Set(projects.map((project) => project.order)).size).toBe(43);
+    expect(projects).toHaveLength(47);
+    expect(new Set(projects.map((project) => project.slug)).size).toBe(47);
+    expect(new Set(projects.map((project) => project.order)).size).toBe(47);
     for (const app of WALLET_PROJECTS) {
       expect(projects.find((project) => project.slug === app.caseSlug)?.liveUrl).toBe(`https://${app.domain}`);
     }
@@ -84,7 +116,7 @@ describe("catálogo compartido de proyectos", () => {
       );
     }
     expect(groups.find((group) => group.id === "otros")?.projects.map((project) => project.slug)).toContain("nieto-import");
-    expect(new Set(groups.flatMap((group) => group.projects.map((project) => project.id))).size).toBe(43);
+    expect(new Set(groups.flatMap((group) => group.projects.map((project) => project.id))).size).toBe(47);
   });
 
   it("mantiene acceso restringido y metadatos válidos para fichas nuevas", () => {
