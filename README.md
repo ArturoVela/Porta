@@ -1,14 +1,38 @@
-# velaarturo.com
+# Porta · Arturo Vela
 
-Portafolio profesional de Arturo Vela. Es una SPA de React y Chakra UI servida junto con su API desde un único Cloudflare Worker.
+**Portafolio de ingeniería de producto con React, TypeScript y Cloudflare Workers.**
+
+Reúne productos, casos de estudio, experiencia y artículos en español e inglés. Una SPA de React y Chakra UI comparte Worker con su API; Second Brain publica el contenido y los medios mediante un enlace privado entre servicios.
+
+[Ver sitio](https://velaarturo.com/) · [Proyectos](https://velaarturo.com/es/proyectos) · [Desarrollo local](#desarrollo-local) · [Operación y despliegue](docs/OPERATIONS.md)
+
+<a href="https://velaarturo.com/">
+  <img src="docs/images/portfolio.jpg" width="100%" alt="Captura real de velaarturo.com: presentación de Arturo Vela y carrusel de productos destacados.">
+</a>
+
+<sub>Captura del sitio público tomada el 17 de noviembre de 2026. El contenido editorial se actualiza desde Second Brain.</sub>
+
+## Qué incluye
+
+| Superficie | Función |
+| --- | --- |
+| Portada y proyectos | Productos destacados, catálogo y casos con capturas y galerías. |
+| Perfil y contacto | Experiencia, servicios y formulario con consentimiento. |
+| Dev y tarjetero | Actividad de desarrollo, aplicaciones y accesos al ecosistema. |
+| Publicaciones | Artículos y comentarios protegidos con Turnstile. |
+| Idiomas y apariencia | Español e inglés, temas claro y oscuro y movimiento reducido. |
+| Publicación en el edge | HTML inicial con contenido y metadatos, sitemap, feed y redirecciones. |
 
 ## Arquitectura
 
-```text
-Second Brain Worker ── Service Binding ── Porta Worker
-       │                                      ├─ Vite SPA / Static Assets
-       └─ D1 secondbrain-core + R2 FILES      ├─ HTML, SEO, feed y sitemap
-                                              └─ D1 velaarturo-comments
+```mermaid
+flowchart LR
+    Browser["Navegador"] --> Porta["Porta Worker"]
+    Porta <-->|Service Binding privado| Brain["Second Brain"]
+    Porta --> Assets["React SPA y Static Assets"]
+    Porta --> Comments["D1 · comentarios"]
+    Brain --> Content["D1 · contenido"]
+    Brain --> Media["R2 · medios"]
 ```
 
 - React 19, TypeScript estricto, Vite y React Router en modo librería.
@@ -22,15 +46,17 @@ El contenido público usa el contrato versionado en [`contracts/portfolio-v1.exa
 
 ## Desarrollo local
 
-Requisitos: Node.js 22 o posterior y pnpm 11.
+Requisitos: **Node.js 22 o posterior** y **pnpm 11**. `package.json` fija `pnpm@11.20.0`.
 
 ```bash
-pnpm install
+git clone https://github.com/ArturoVela/Porta.git
+cd Porta
+pnpm install --frozen-lockfile
 cp .dev.vars.example .dev.vars
 cp .env.example .env.local
-pnpm types
-pnpm dev
 ```
+
+Edita las variables copiadas desde los ejemplos antes de iniciar. Para explorar el contenido empaquetado, deja `BRAIN_CONTENT_TOKEN` vacío; para consumir Second Brain, sustituye el marcador por el secreto real del entorno. El binding de desarrollo se configura como remoto en `wrangler.jsonc`: Cloudflare puede requerir autenticación para conectarlo.
 
 Variables privadas del Worker en `.dev.vars`:
 
@@ -41,7 +67,15 @@ Variable pública de Vite en `.env.local`:
 
 - `VITE_TURNSTILE_SITE_KEY`: clave pública del widget de Turnstile.
 
-No se deben confirmar archivos `.dev.vars` ni `.env.local`.
+No se deben confirmar archivos `.dev.vars` ni `.env.local`. Los comentarios requieren D1 y las claves de Turnstile; el formulario de contacto utiliza Formspree.
+
+```sh
+pnpm types
+pnpm db:migrate:local
+pnpm dev
+```
+
+Abre la URL que muestre Vite.
 
 ## Verificación
 
@@ -53,81 +87,29 @@ pnpm types:check
 pnpm deploy:dry
 ```
 
-Las pruebas cubren el contrato público, redirecciones, payloads de comentarios, mismo origen, metadatos y 404 de publicaciones.
+Las pruebas cubren el contrato público, redirecciones, payloads de comentarios, mismo origen, metadatos y 404 de publicaciones. `deploy:dry` comprueba el paquete del Worker sin publicarlo.
 
-## Información legal
+## Estructura del repositorio
 
-- `/es/legal` y `/en/legal` reúnen privacidad, cookies, condiciones de uso y el canal de derechos ARCO. El aviso cubre este portafolio; las aplicaciones enlazadas tienen sus propias políticas.
-- `PRIVACY_POLICY_VERSION`, en `src/lib/legal.ts`, es compartida por el aviso, los formularios y el Worker. El consentimiento empieza desmarcado; la API valida y guarda su versión en los comentarios nuevos.
-- Aplicar `migrations/0002_comment_privacy_consent.sql` antes de desplegar el Worker actualizado. Añade una columna nullable: conserva los comentarios existentes sin atribuirles consentimiento retroactivo. Los comandos `deploy:staging` y `deploy:production` ya aplican las migraciones antes del despliegue.
-- El aviso no acredita cumplimiento legal integral. Quedan por completar identidad y domicilio del responsable, fijar plazos de conservación y revisar el registro de bancos de datos y las obligaciones de los proveedores.
+| Ruta | Responsabilidad |
+| --- | --- |
+| [`src/pages/`](src/pages/) | Portada, proyectos, perfil, publicaciones, Dev y contacto. |
+| [`src/components/`](src/components/) | Interfaz, medios y controles compartidos. |
+| [`src/content/`](src/content/) | Proveedor de contenido y snapshots de respaldo. |
+| [`src/lib/`](src/lib/) | Contratos, rutas, idiomas y reglas de presentación. |
+| [`worker/`](worker/) | API, metadatos, redirecciones e integraciones del servidor. |
+| [`migrations/`](migrations/) | Esquema D1 de comentarios y consentimiento. |
+| [`tests/`](tests/) | Contratos y comportamiento de interfaz y Worker. |
+| [`docs/OPERATIONS.md`](docs/OPERATIONS.md) | Integración, migraciones, privacidad y despliegue por entorno. |
 
-## D1
+## Operación y documentación
 
-Las bases remotas configuradas son:
+La [guía de operación](docs/OPERATIONS.md) conserva los procedimientos para Second Brain, D1, privacidad, importación histórica y despliegue. Los scripts `deploy:staging` y `deploy:production` aplican migraciones remotas y publican el Worker.
 
-- Staging: `velaarturo-comments-staging`
-- Producción: `velaarturo-comments`
+La interfaz utiliza los tokens de [`src/theme.ts`](src/theme.ts) y los estilos de [`src/styles.css`](src/styles.css). Conserva esos patrones al añadir componentes. Las aplicaciones enlazadas tienen sus propias condiciones y configuración.
 
-Aplicar migraciones:
+## Autoría y licencia
 
-```bash
-pnpm db:migrate:local
-pnpm db:migrate:staging
-pnpm db:migrate:production
-```
+Desarrollado por [Arturo Vela](https://velaarturo.com/). Contacto: [dev@velaarturo.com](mailto:dev@velaarturo.com).
 
-La importación histórica desde Neon es separada e idempotente. Requiere proporcionar temporalmente `DATABASE_URL`; no se importa el correo de los comentarios antiguos.
-
-```bash
-DATABASE_URL='…' pnpm comments:migrate:neon -- --env staging --dry-run
-DATABASE_URL='…' pnpm comments:migrate:neon -- --env production
-```
-
-## Integración de contenido con Second Brain
-
-`wrangler.jsonc` declara `BRAIN_CONTENT_TOKEN` como secreto obligatorio y conecta el Service Binding `BRAIN` con:
-
-- Staging: `secondbrain-web-staging`.
-- Producción: `secondbrain`.
-
-El token debe existir por separado en ambos Workers de cada entorno. Usa el mismo valor dentro del par de staging y el mismo valor dentro del par de producción; los valores de staging y producción pueden ser distintos. Wrangler solicita el valor de forma interactiva, por lo que no debe pasarse como argumento ni guardarse en Git:
-
-```bash
-# Desde este repositorio (Porta)
-pnpm exec wrangler secret put BRAIN_CONTENT_TOKEN --env staging
-pnpm exec wrangler secret put BRAIN_CONTENT_TOKEN --env production
-
-# Desde el checkout de Second Brain
-pnpm exec wrangler secret put BRAIN_CONTENT_TOKEN --env staging
-pnpm exec wrangler secret put BRAIN_CONTENT_TOKEN --env production
-```
-
-Porta solicita `GET /internal/v1/portfolio/velaarturo/manifest` con `Authorization: Bearer <BRAIN_CONTENT_TOKEN>`, valida el envelope `{schemaVersion:"1",siteKey:"velaarturo",publishedRevision,generatedAt,data}` y nunca entrega el token al navegador.
-
-El editor permite cambiar textos y títulos, crear proyectos, reemplazar la portada de cada proyecto, añadir pantallas a su galería y actualizar el retrato del perfil. El contrato v1 admite `site.portrait` y `projects[].gallery` como campos opcionales de imagen `{src,alt,width,height}`; los manifiestos anteriores siguen siendo válidos. Las portadas también aparecen en el proyecto seleccionado de la portada del sitio.
-
-La vista previa mantiene el borrador al navegar y actualizar contenido. Sus imágenes usan el token temporal de vista previa y se sirven con `private, no-store`; Second Brain valida ese token antes de entregar medios aún no publicados.
-
-El catálogo dinámico se publica desde el sitio `velaarturo` de Second Brain. Para reflejar esta integración en producción, ese manifiesto debe contener NIETO Hub con `https://nieto.velaarturo.com` y Nieto Import con `https://portal.nietoimport.com`, conservando el contrato v1. Cambiar el snapshot empaquetado no sustituye esa publicación.
-
-Después de desplegar primero Second Brain y luego Porta, la cabecera permite comprobar el origen sin revelar el secreto:
-
-```bash
-curl -fsS -D - https://velaarturo.com/api/content/manifest -o /dev/null \
-  | tr -d '\r' \
-  | grep -Ei '^x-portfolio-source: (brain|cache)$'
-```
-
-`x-portfolio-source: backup` indica operación degradada con el último manifiesto válido. Una respuesta `503` indica que la integración está configurada pero no existe un manifiesto remoto ni un respaldo válido; producción no responde con `bundled` en ese caso.
-
-## Despliegue
-
-Antes de desplegar, deben existir los Workers destino, su API interna v1, los Service Bindings anteriores y el secreto compartido en ambos lados. Luego:
-
-```bash
-pnpm deploy:staging
-pnpm deploy:production
-```
-
-Producción usa Worker Routes sobre los registros DNS proxied existentes de `velaarturo.com` y `www.velaarturo.com`; `www` se redirige al dominio canónico. Los cambios de contenido publicados en Second Brain se reflejan sin reconstruir la SPA, con una caché máxima de 60 segundos.
+Este repositorio no declara una licencia general de reutilización. Las dependencias y los recursos de terceros conservan sus respectivas licencias.
